@@ -1,0 +1,8 @@
+C:\Users\Marc.COOPERSOFTWARE\Dropbox\Dissertation\Code\Dissertation\BusinessLayer\bin\Release\BusinessLayer.dll.config
+C:\Users\Marc.COOPERSOFTWARE\Dropbox\Dissertation\Code\Dissertation\BusinessLayer\bin\Release\BusinessLayer.dll
+C:\Users\Marc.COOPERSOFTWARE\Dropbox\Dissertation\Code\Dissertation\BusinessLayer\bin\Release\BusinessLayer.pdb
+C:\Users\Marc.COOPERSOFTWARE\Dropbox\Dissertation\Code\Dissertation\BusinessLayer\bin\Release\EntityFramework.dll
+C:\Users\Marc.COOPERSOFTWARE\Dropbox\Dissertation\Code\Dissertation\BusinessLayer\bin\Release\EntityFramework.xml
+C:\Users\Marc.COOPERSOFTWARE\Dropbox\Dissertation\Code\Dissertation\BusinessLayer\obj\Release\BusinessLayer.csprojResolveAssemblyReference.cache
+C:\Users\Marc.COOPERSOFTWARE\Dropbox\Dissertation\Code\Dissertation\BusinessLayer\obj\Release\BusinessLayer.dll
+C:\Users\Marc.COOPERSOFTWARE\Dropbox\Dissertation\Code\Dissertation\BusinessLayer\obj\Release\BusinessLayer.pdb

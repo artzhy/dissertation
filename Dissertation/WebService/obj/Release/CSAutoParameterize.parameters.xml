@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<parameters>
+  <parameter name="marcdissertation_dbEntities-Web.config Connection String" description="marcdissertation_dbEntities Connection String used in web.config by the application to access the database." defaultValue="metadata=res://*/DBModel.csdl|res://*/DBModel.ssdl|res://*/DBModel.msl;provider=System.Data.SqlClient;provider connection string=&quot;data source=tcp:rr2e48c8br.database.windows.net;initial catalog=marcdissertation_db;persist security info=True;user id=user@rr2e48c8br;password=Frank1ec;MultipleActiveResultSets=True;App=EntityFramework&quot;" tags="SqlConnectionString">
+    <parameterEntry kind="XmlFile" scope="C:\\Users\\Marc\.COOPERSOFTWARE\\Dropbox\\Dissertation\\Code\\Dissertation\\WebService\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='marcdissertation_dbEntities']/@connectionString" />
+  </parameter>
+</parameters>

@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="marcdissertation_dbModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+  <EntityContainer Name="marcdissertation_dbModelStoreContainer">
+    <EntitySet Name="User" EntityType="marcdissertation_dbModel.Store.User" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="UserDevice" EntityType="marcdissertation_dbModel.Store.UserDevice" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="UserFK" Association="marcdissertation_dbModel.Store.UserFK">
+      <End Role="User" EntitySet="User" />
+      <End Role="UserDevice" EntitySet="UserDevice" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="Username" />
+    </Key>
+    <Property Name="UserId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="Forename" Type="nvarchar" Nullable="false" MaxLength="50" />
+    <Property Name="Surname" Type="nvarchar" Nullable="false" MaxLength="50" />
+    <Property Name="Username" Type="nvarchar" Nullable="false" MaxLength="50" />
+    <Property Name="Password" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="UserDevice">
+    <Key>
+      <PropertyRef Name="DeviceId" />
+    </Key>
+    <Property Name="DeviceId" Type="int" Nullable="false" />
+    <Property Name="Username" Type="nvarchar" Nullable="false" MaxLength="50" />
+    <Property Name="DeviceType" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="DeviceMemoryResource" Type="int" Nullable="false" />
+    <Property Name="DeviceProcRating" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="UserFK">
+    <End Role="User" Type="marcdissertation_dbModel.Store.User" Multiplicity="1" />
+    <End Role="UserDevice" Type="marcdissertation_dbModel.Store.UserDevice" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="Username" />
+      </Principal>
+      <Dependent Role="UserDevice">
+        <PropertyRef Name="Username" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

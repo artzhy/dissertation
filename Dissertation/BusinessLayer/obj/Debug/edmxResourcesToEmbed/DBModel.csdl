@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="marcdissertation_dbModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+  <EntityContainer Name="marcdissertation_dbEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Users" EntityType="marcdissertation_dbModel.User" />
+    <EntitySet Name="UserDevices" EntityType="marcdissertation_dbModel.UserDevice" />
+    <AssociationSet Name="UserFK" Association="marcdissertation_dbModel.UserFK">
+      <End Role="User" EntitySet="Users" />
+      <End Role="UserDevice" EntitySet="UserDevices" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="Username" />
+    </Key>
+    <Property Type="Int32" Name="UserId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="String" Name="Forename" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="Surname" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="Username" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="Password" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="UserDevices" Relationship="marcdissertation_dbModel.UserFK" FromRole="User" ToRole="UserDevice" />
+  </EntityType>
+  <EntityType Name="UserDevice">
+    <Key>
+      <PropertyRef Name="DeviceId" />
+    </Key>
+    <Property Type="Int32" Name="DeviceId" Nullable="false" />
+    <Property Type="String" Name="Username" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="DeviceType" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Type="Int32" Name="DeviceMemoryResource" Nullable="false" />
+    <Property Type="Int32" Name="DeviceProcRating" Nullable="false" />
+    <NavigationProperty Name="User" Relationship="marcdissertation_dbModel.UserFK" FromRole="UserDevice" ToRole="User" />
+  </EntityType>
+  <Association Name="UserFK">
+    <End Type="marcdissertation_dbModel.User" Role="User" Multiplicity="1" />
+    <End Type="marcdissertation_dbModel.UserDevice" Role="UserDevice" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="Username" />
+      </Principal>
+      <Dependent Role="UserDevice">
+        <PropertyRef Name="Username" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

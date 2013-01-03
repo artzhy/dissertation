@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:tns="http://tempuri.org/" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="UserSvc" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://tempuri.org/Imports">
+      <xsd:import schemaLocation="http://192.168.1.65:58041/UserSvc.svc?xsd=xsd0" namespace="http://tempuri.org/" />
+      <xsd:import schemaLocation="http://192.168.1.65:58041/UserSvc.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import schemaLocation="http://192.168.1.65:58041/UserSvc.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/BusinessLayer" />
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="IUserSvc_AddUser_InputMessage">
+    <wsdl:part name="parameters" element="tns:AddUser" />
+  </wsdl:message>
+  <wsdl:message name="IUserSvc_AddUser_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AddUserResponse" />
+  </wsdl:message>
+  <wsdl:message name="IUserSvc_ModifyUser_InputMessage">
+    <wsdl:part name="parameters" element="tns:ModifyUser" />
+  </wsdl:message>
+  <wsdl:message name="IUserSvc_ModifyUser_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ModifyUserResponse" />
+  </wsdl:message>
+  <wsdl:message name="IUserSvc_AddUserDevice_InputMessage">
+    <wsdl:part name="parameters" element="tns:AddUserDevice" />
+  </wsdl:message>
+  <wsdl:message name="IUserSvc_AddUserDevice_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AddUserDeviceResponse" />
+  </wsdl:message>
+  <wsdl:message name="IUserSvc_DeleteUserDevice_InputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteUserDevice" />
+  </wsdl:message>
+  <wsdl:message name="IUserSvc_DeleteUserDevice_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteUserDeviceResponse" />
+  </wsdl:message>
+  <wsdl:portType name="IUserSvc">
+    <wsdl:operation name="AddUser">
+      <wsdl:input wsaw:Action="http://tempuri.org/IUserSvc/AddUser" message="tns:IUserSvc_AddUser_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IUserSvc/AddUserResponse" message="tns:IUserSvc_AddUser_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ModifyUser">
+      <wsdl:input wsaw:Action="http://tempuri.org/IUserSvc/ModifyUser" message="tns:IUserSvc_ModifyUser_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IUserSvc/ModifyUserResponse" message="tns:IUserSvc_ModifyUser_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AddUserDevice">
+      <wsdl:input wsaw:Action="http://tempuri.org/IUserSvc/AddUserDevice" message="tns:IUserSvc_AddUserDevice_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IUserSvc/AddUserDeviceResponse" message="tns:IUserSvc_AddUserDevice_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteUserDevice">
+      <wsdl:input wsaw:Action="http://tempuri.org/IUserSvc/DeleteUserDevice" message="tns:IUserSvc_DeleteUserDevice_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IUserSvc/DeleteUserDeviceResponse" message="tns:IUserSvc_DeleteUserDevice_OutputMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="BasicHttpBinding_IUserSvc" type="tns:IUserSvc">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="AddUser">
+      <soap:operation soapAction="http://tempuri.org/IUserSvc/AddUser" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ModifyUser">
+      <soap:operation soapAction="http://tempuri.org/IUserSvc/ModifyUser" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddUserDevice">
+      <soap:operation soapAction="http://tempuri.org/IUserSvc/AddUserDevice" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteUserDevice">
+      <soap:operation soapAction="http://tempuri.org/IUserSvc/DeleteUserDevice" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="UserSvc">
+    <wsdl:port name="BasicHttpBinding_IUserSvc" binding="tns:BasicHttpBinding_IUserSvc">
+      <soap:address location="http://192.168.1.65:58041/UserSvc.svc" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

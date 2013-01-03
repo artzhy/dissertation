@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="marcdissertation_dbModelStoreContainer" CdmEntityContainer="marcdissertation_dbEntities">
+    <EntitySetMapping Name="Users">
+      <EntityTypeMapping TypeName="marcdissertation_dbModel.User">
+        <MappingFragment StoreEntitySet="User">
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="Username" ColumnName="Username" />
+          <ScalarProperty Name="Surname" ColumnName="Surname" />
+          <ScalarProperty Name="Forename" ColumnName="Forename" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UserDevices">
+      <EntityTypeMapping TypeName="marcdissertation_dbModel.UserDevice">
+        <MappingFragment StoreEntitySet="UserDevice">
+          <ScalarProperty Name="DeviceProcRating" ColumnName="DeviceProcRating" />
+          <ScalarProperty Name="DeviceMemoryResource" ColumnName="DeviceMemoryResource" />
+          <ScalarProperty Name="DeviceType" ColumnName="DeviceType" />
+          <ScalarProperty Name="Username" ColumnName="Username" />
+          <ScalarProperty Name="DeviceId" ColumnName="DeviceId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>
