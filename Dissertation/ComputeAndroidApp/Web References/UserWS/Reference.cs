@@ -37,6 +37,10 @@ namespace ComputeAndroidApp.UserWS {
         
         private System.Threading.SendOrPostCallback DeleteUserDeviceOperationCompleted;
         
+        private System.Threading.SendOrPostCallback ModifyUserDeviceOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback GetDeviceIdOperationCompleted;
+        
         private bool useDefaultCredentialsSetExplicitly;
         
         /// <remarks/>
@@ -86,6 +90,12 @@ namespace ComputeAndroidApp.UserWS {
         
         /// <remarks/>
         public event DeleteUserDeviceCompletedEventHandler DeleteUserDeviceCompleted;
+        
+        /// <remarks/>
+        public event ModifyUserDeviceCompletedEventHandler ModifyUserDeviceCompleted;
+        
+        /// <remarks/>
+        public event GetDeviceIdCompletedEventHandler GetDeviceIdCompleted;
         
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/IUserSvc/AddUser", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
@@ -166,7 +176,7 @@ namespace ComputeAndroidApp.UserWS {
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/IUserSvc/AddUserDevice", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
         [return: System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public UserDevice AddUserDevice([System.Xml.Serialization.XmlElementAttribute(IsNullable=true)] string authUsername, [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)] string authPassword, [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)] string deviceType, int deviceMemoryResource, [System.Xml.Serialization.XmlIgnoreAttribute()] bool deviceMemoryResourceSpecified, int deviceProcRating, [System.Xml.Serialization.XmlIgnoreAttribute()] bool deviceProcRatingSpecified) {
+        public UserDevice AddUserDevice([System.Xml.Serialization.XmlElementAttribute(IsNullable=true)] string authUsername, [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)] string authPassword, [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)] string deviceType, int deviceMemoryResource, [System.Xml.Serialization.XmlIgnoreAttribute()] bool deviceMemoryResourceSpecified, int deviceProcRating, [System.Xml.Serialization.XmlIgnoreAttribute()] bool deviceProcRatingSpecified, [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)] string gcmCode) {
             object[] results = this.Invoke("AddUserDevice", new object[] {
                         authUsername,
                         authPassword,
@@ -174,17 +184,18 @@ namespace ComputeAndroidApp.UserWS {
                         deviceMemoryResource,
                         deviceMemoryResourceSpecified,
                         deviceProcRating,
-                        deviceProcRatingSpecified});
+                        deviceProcRatingSpecified,
+                        gcmCode});
             return ((UserDevice)(results[0]));
         }
         
         /// <remarks/>
-        public void AddUserDeviceAsync(string authUsername, string authPassword, string deviceType, int deviceMemoryResource, bool deviceMemoryResourceSpecified, int deviceProcRating, bool deviceProcRatingSpecified) {
-            this.AddUserDeviceAsync(authUsername, authPassword, deviceType, deviceMemoryResource, deviceMemoryResourceSpecified, deviceProcRating, deviceProcRatingSpecified, null);
+        public void AddUserDeviceAsync(string authUsername, string authPassword, string deviceType, int deviceMemoryResource, bool deviceMemoryResourceSpecified, int deviceProcRating, bool deviceProcRatingSpecified, string gcmCode) {
+            this.AddUserDeviceAsync(authUsername, authPassword, deviceType, deviceMemoryResource, deviceMemoryResourceSpecified, deviceProcRating, deviceProcRatingSpecified, gcmCode, null);
         }
         
         /// <remarks/>
-        public void AddUserDeviceAsync(string authUsername, string authPassword, string deviceType, int deviceMemoryResource, bool deviceMemoryResourceSpecified, int deviceProcRating, bool deviceProcRatingSpecified, object userState) {
+        public void AddUserDeviceAsync(string authUsername, string authPassword, string deviceType, int deviceMemoryResource, bool deviceMemoryResourceSpecified, int deviceProcRating, bool deviceProcRatingSpecified, string gcmCode, object userState) {
             if ((this.AddUserDeviceOperationCompleted == null)) {
                 this.AddUserDeviceOperationCompleted = new System.Threading.SendOrPostCallback(this.OnAddUserDeviceOperationCompleted);
             }
@@ -195,7 +206,8 @@ namespace ComputeAndroidApp.UserWS {
                         deviceMemoryResource,
                         deviceMemoryResourceSpecified,
                         deviceProcRating,
-                        deviceProcRatingSpecified}, this.AddUserDeviceOperationCompleted, userState);
+                        deviceProcRatingSpecified,
+                        gcmCode}, this.AddUserDeviceOperationCompleted, userState);
         }
         
         private void OnAddUserDeviceOperationCompleted(object arg) {
@@ -236,6 +248,76 @@ namespace ComputeAndroidApp.UserWS {
             if ((this.DeleteUserDeviceCompleted != null)) {
                 System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
                 this.DeleteUserDeviceCompleted(this, new System.ComponentModel.AsyncCompletedEventArgs(invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/IUserSvc/ModifyUserDevice", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public void ModifyUserDevice([System.Xml.Serialization.XmlElementAttribute(IsNullable=true)] string authUsername, [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)] string authPassword, [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)] string gcmCode, int deviceId, [System.Xml.Serialization.XmlIgnoreAttribute()] bool deviceIdSpecified) {
+            this.Invoke("ModifyUserDevice", new object[] {
+                        authUsername,
+                        authPassword,
+                        gcmCode,
+                        deviceId,
+                        deviceIdSpecified});
+        }
+        
+        /// <remarks/>
+        public void ModifyUserDeviceAsync(string authUsername, string authPassword, string gcmCode, int deviceId, bool deviceIdSpecified) {
+            this.ModifyUserDeviceAsync(authUsername, authPassword, gcmCode, deviceId, deviceIdSpecified, null);
+        }
+        
+        /// <remarks/>
+        public void ModifyUserDeviceAsync(string authUsername, string authPassword, string gcmCode, int deviceId, bool deviceIdSpecified, object userState) {
+            if ((this.ModifyUserDeviceOperationCompleted == null)) {
+                this.ModifyUserDeviceOperationCompleted = new System.Threading.SendOrPostCallback(this.OnModifyUserDeviceOperationCompleted);
+            }
+            this.InvokeAsync("ModifyUserDevice", new object[] {
+                        authUsername,
+                        authPassword,
+                        gcmCode,
+                        deviceId,
+                        deviceIdSpecified}, this.ModifyUserDeviceOperationCompleted, userState);
+        }
+        
+        private void OnModifyUserDeviceOperationCompleted(object arg) {
+            if ((this.ModifyUserDeviceCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.ModifyUserDeviceCompleted(this, new System.ComponentModel.AsyncCompletedEventArgs(invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/IUserSvc/GetDeviceId", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public void GetDeviceId([System.Xml.Serialization.XmlElementAttribute(IsNullable=true)] string authUsername, [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)] string authPassword, [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)] string gcmId, out int GetDeviceIdResult, [System.Xml.Serialization.XmlIgnoreAttribute()] out bool GetDeviceIdResultSpecified) {
+            object[] results = this.Invoke("GetDeviceId", new object[] {
+                        authUsername,
+                        authPassword,
+                        gcmId});
+            GetDeviceIdResult = ((int)(results[0]));
+            GetDeviceIdResultSpecified = ((bool)(results[1]));
+        }
+        
+        /// <remarks/>
+        public void GetDeviceIdAsync(string authUsername, string authPassword, string gcmId) {
+            this.GetDeviceIdAsync(authUsername, authPassword, gcmId, null);
+        }
+        
+        /// <remarks/>
+        public void GetDeviceIdAsync(string authUsername, string authPassword, string gcmId, object userState) {
+            if ((this.GetDeviceIdOperationCompleted == null)) {
+                this.GetDeviceIdOperationCompleted = new System.Threading.SendOrPostCallback(this.OnGetDeviceIdOperationCompleted);
+            }
+            this.InvokeAsync("GetDeviceId", new object[] {
+                        authUsername,
+                        authPassword,
+                        gcmId}, this.GetDeviceIdOperationCompleted, userState);
+        }
+        
+        private void OnGetDeviceIdOperationCompleted(object arg) {
+            if ((this.GetDeviceIdCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.GetDeviceIdCompleted(this, new GetDeviceIdCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
             }
         }
         
@@ -361,6 +443,8 @@ namespace ComputeAndroidApp.UserWS {
         
         private string deviceTypek__BackingFieldField;
         
+        private string gCMCodek__BackingFieldField;
+        
         private User userk__BackingFieldField;
         
         private string usernamek__BackingFieldField;
@@ -406,6 +490,17 @@ namespace ComputeAndroidApp.UserWS {
             }
             set {
                 this.deviceTypek__BackingFieldField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("<GCMCode>k__BackingField", IsNullable=true)]
+        public string GCMCodek__BackingField {
+            get {
+                return this.gCMCodek__BackingFieldField;
+            }
+            set {
+                this.gCMCodek__BackingFieldField = value;
             }
         }
         
@@ -491,6 +586,44 @@ namespace ComputeAndroidApp.UserWS {
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.17929")]
     public delegate void DeleteUserDeviceCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.17929")]
+    public delegate void ModifyUserDeviceCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.17929")]
+    public delegate void GetDeviceIdCompletedEventHandler(object sender, GetDeviceIdCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.17929")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class GetDeviceIdCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal GetDeviceIdCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public int GetDeviceIdResult {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((int)(this.results[0]));
+            }
+        }
+        
+        /// <remarks/>
+        public bool GetDeviceIdResultSpecified {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((bool)(this.results[1]));
+            }
+        }
+    }
 }
 
 #pragma warning restore 1591

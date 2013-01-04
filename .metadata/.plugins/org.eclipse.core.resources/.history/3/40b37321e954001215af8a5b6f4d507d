@@ -1,0 +1,9 @@
+package com.example.dissertationandroid;
+
+import org.json.JSONObject;
+
+public class RESTDataItem {
+	public String name;
+	public JSONObject data;
+	
+}

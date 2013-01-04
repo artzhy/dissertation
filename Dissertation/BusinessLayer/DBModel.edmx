@@ -27,11 +27,12 @@
           <Key>
             <PropertyRef Name="DeviceId" />
           </Key>
-          <Property Name="DeviceId" Type="int" Nullable="false" />
+          <Property Name="DeviceId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="Username" Type="nvarchar" Nullable="false" MaxLength="50" />
           <Property Name="DeviceType" Type="nvarchar(max)" Nullable="false" />
           <Property Name="DeviceMemoryResource" Type="int" Nullable="false" />
           <Property Name="DeviceProcRating" Type="int" Nullable="false" />
+          <Property Name="GCMCode" Type="nvarchar(max)" />
         </EntityType>
         <Association Name="UserFK">
           <End Role="User" Type="marcdissertation_dbModel.Store.User" Multiplicity="1" />
@@ -78,6 +79,7 @@
           <Property Type="Int32" Name="DeviceMemoryResource" Nullable="false" />
           <Property Type="Int32" Name="DeviceProcRating" Nullable="false" />
           <NavigationProperty Name="User" Relationship="marcdissertation_dbModel.UserFK" FromRole="UserDevice" ToRole="User" />
+          <Property Type="String" Name="GCMCode" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
         <Association Name="UserFK">
           <End Type="marcdissertation_dbModel.User" Role="User" Multiplicity="1" />
@@ -111,6 +113,7 @@
           <EntitySetMapping Name="UserDevices">
             <EntityTypeMapping TypeName="marcdissertation_dbModel.UserDevice">
               <MappingFragment StoreEntitySet="UserDevice">
+                <ScalarProperty Name="GCMCode" ColumnName="GCMCode" />
                 <ScalarProperty Name="DeviceProcRating" ColumnName="DeviceProcRating" />
                 <ScalarProperty Name="DeviceMemoryResource" ColumnName="DeviceMemoryResource" />
                 <ScalarProperty Name="DeviceType" ColumnName="DeviceType" />

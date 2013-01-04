@@ -15,6 +15,7 @@
     <EntitySetMapping Name="UserDevices">
       <EntityTypeMapping TypeName="marcdissertation_dbModel.UserDevice">
         <MappingFragment StoreEntitySet="UserDevice">
+          <ScalarProperty Name="GCMCode" ColumnName="GCMCode" />
           <ScalarProperty Name="DeviceProcRating" ColumnName="DeviceProcRating" />
           <ScalarProperty Name="DeviceMemoryResource" ColumnName="DeviceMemoryResource" />
           <ScalarProperty Name="DeviceType" ColumnName="DeviceType" />

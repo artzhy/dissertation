@@ -17,13 +17,29 @@ namespace BusinessLayer {
             }
         }
 
-        public static UserDevice AddUserDevice(string username, string deviceType, int deviceMemoryResource, int deviceProcRating) {
+        public static UserDevice Populate(String gcmId) {
             try {
+                return (from x in App.DbContext.UserDevices
+                        where x.GCMCode.Equals(gcmId)
+                        select x).First();
+            } catch {
+                throw new Exception("Device does not exist");
+            }
+        }
+
+        public static UserDevice AddUserDevice(string username, string deviceType, int deviceMemoryResource, int deviceProcRating, String gcmCode) {
+            try {
+
+                if (App.DbContext.UserDevices.Count(x => x.GCMCode == gcmCode) > 0) {
+                    throw new Exception("Device can only be assigned to single user. Assigned to: " + App.DbContext.UserDevices.First(x => x.GCMCode == gcmCode).User.Username);
+                }
+
                 UserDevice ud = new UserDevice();
                 ud.Username = username;
                 ud.DeviceType = deviceType;
                 ud.DeviceMemoryResource = deviceMemoryResource;
                 ud.DeviceProcRating = deviceProcRating;
+                ud.GCMCode = gcmCode;
 
                 ud = App.DbContext.UserDevices.Add(ud);
 

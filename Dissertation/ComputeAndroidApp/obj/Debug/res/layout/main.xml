@@ -1,1 +1,51 @@
-<LinearLayout android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="fill_parent" xmlns:android="http://schemas.android.com/apk/res/android"><TableRow android:minWidth="25px" android:minHeight="25px" android:layout_width="fill_parent" android:layout_height="wrap_content" android:id="@+id/tableRow1"><TextView android:text="Login" android:textAppearance="?android:attr/textAppearanceLarge" android:id="@+id/lblLogin" /></TableRow><TableRow android:minWidth="25px" android:minHeight="25px" android:layout_width="fill_parent" android:layout_height="wrap_content" android:id="@+id/tableRow2"><EditText android:id="@+id/txtUsername" android:hint="Username" /></TableRow><EditText android:inputType="textPassword" android:layout_width="fill_parent" android:layout_height="wrap_content" android:id="@+id/txtPassword" android:hint="Password" /><Button android:text="Login" android:layout_width="fill_parent" android:layout_height="wrap_content" android:id="@+id/btnLogin" /><Button android:text="Register" android:layout_width="fill_parent" android:layout_height="wrap_content" android:id="@+id/btnRegister" /><TableRow android:minWidth="25px" android:minHeight="25px" android:layout_width="fill_parent" android:layout_height="wrap_content" android:id="@+id/tableRow3"></TableRow></LinearLayout>
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
+    <TableRow
+        android:minWidth="25px"
+        android:minHeight="25px"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/tableRow1">
+        <TextView
+            android:text="Login"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:id="@+id/lblLogin" />
+    </TableRow>
+    <TableRow
+        android:minWidth="25px"
+        android:minHeight="25px"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/tableRow2">
+        <EditText
+            android:id="@+id/txtUsername"
+            android:hint="Username"
+            android:text="ma" />
+    </TableRow>
+    <EditText
+        android:inputType="textPassword"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/txtPassword"
+        android:hint="Password"
+        android:text="ma" />
+    <Button
+        android:text="Login"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/btnLogin" />
+    <Button
+        android:text="Register"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/btnRegister" />
+    <TableRow
+        android:minWidth="25px"
+        android:minHeight="25px"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/tableRow3" />
+</LinearLayout>

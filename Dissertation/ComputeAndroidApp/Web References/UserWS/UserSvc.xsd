@@ -43,6 +43,7 @@
         <xs:element minOccurs="0" name="deviceType" nillable="true" type="xs:string" />
         <xs:element minOccurs="0" name="deviceMemoryResource" type="xs:int" />
         <xs:element minOccurs="0" name="deviceProcRating" type="xs:int" />
+        <xs:element minOccurs="0" name="gcmCode" nillable="true" type="xs:string" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -65,6 +66,37 @@
   <xs:element name="DeleteUserDeviceResponse">
     <xs:complexType>
       <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ModifyUserDevice">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="authUsername" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="authPassword" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="gcmCode" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="deviceId" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ModifyUserDeviceResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetDeviceId">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="authUsername" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="authPassword" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="gcmId" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetDeviceIdResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="GetDeviceIdResult" type="xs:int" />
+      </xs:sequence>
     </xs:complexType>
   </xs:element>
 </xs:schema>

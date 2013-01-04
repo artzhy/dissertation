@@ -22,14 +22,16 @@
         android:id="@+id/tableRow2">
         <EditText
             android:id="@+id/txtUsername"
-            android:hint="Username" />
+            android:hint="Username"
+            android:text="ma" />
     </TableRow>
     <EditText
         android:inputType="textPassword"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:id="@+id/txtPassword"
-        android:hint="Password" />
+        android:hint="Password"
+        android:text="ma" />
     <Button
         android:text="Login"
         android:layout_width="fill_parent"
@@ -45,6 +47,5 @@
         android:minHeight="25px"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/tableRow3">
-    </TableRow>
+        android:id="@+id/tableRow3" />
 </LinearLayout>

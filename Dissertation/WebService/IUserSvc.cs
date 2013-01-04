@@ -20,12 +20,19 @@ namespace WebService {
 
         [OperationContract]
         [WebGet(UriTemplate = "AddUserDevice", ResponseFormat = WebMessageFormat.Json, RequestFormat = WebMessageFormat.Json)]
-        BusinessLayer.UserDevice AddUserDevice(string authUsername, String authPassword, string deviceType, int deviceMemoryResource, int deviceProcRating);
+        BusinessLayer.UserDevice AddUserDevice(string authUsername, String authPassword, string deviceType, int deviceMemoryResource, int deviceProcRating, String gcmCode);
 
         [OperationContract]
         [WebGet(UriTemplate = "DeleteUserDevice", ResponseFormat = WebMessageFormat.Json, RequestFormat = WebMessageFormat.Json)]
         void DeleteUserDevice(string authUsername, String authPassword, int deviceId);
 
+        [OperationContract]
+        [WebGet(UriTemplate = "ModifyUserDevice", ResponseFormat = WebMessageFormat.Json, RequestFormat = WebMessageFormat.Json)]
+        void ModifyUserDevice(string authUsername, String authPassword, String gcmCode, int deviceId = -1);
+
+        [OperationContract]
+        [WebGet(UriTemplate = "GetDeviceId", ResponseFormat = WebMessageFormat.Json, RequestFormat = WebMessageFormat.Json)]
+        int GetDeviceId(string authUsername, String authPassword, String gcmId);
     }
 
 

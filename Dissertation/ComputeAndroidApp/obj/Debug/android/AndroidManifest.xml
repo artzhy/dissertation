@@ -1,7 +1,22 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android" android:versionCode="1" android:versionName="1.0" package="ComputeAndroidApp.ComputeAndroidApp">
-  <uses-sdk android:minSdkVersion="8" android:targetSdkVersion="8" />
-  <application android:name="mono.android.app.Application" android:debuggable="true">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" android:versionCode="1" android:versionName="1.0" package="com.ComputeAndroidApp">
+  <uses-sdk android:minSdkVersion="10" />
+  <application android:label="PushSharp" android:name="mono.android.app.Application" android:debuggable="true">
+    <receiver android:permission="com.google.android.c2dm.permission.SEND" android:name="computeandroidapp.BroadcastReceiver">
+      <intent-filter>
+        <action android:name="com.google.android.c2dm.intent.REGISTRATION" />
+        <category android:name="com.ComputeAndroidApp" />
+      </intent-filter>
+      <intent-filter>
+        <action android:name="com.google.android.c2dm.intent.RECEIVE" />
+        <category android:name="com.ComputeAndroidApp" />
+      </intent-filter>
+      <intent-filter>
+        <action android:name="com.google.android.gcm.intent.RETRY" />
+        <category android:name="com.ComputeAndroidApp" />
+      </intent-filter>
+    </receiver>
+    <service android:name="computeandroidapp.GCMIntentService" />
     <activity android:label="Register" android:name="computeandroidapp.RegisterActivity" />
     <activity android:icon="@drawable/icon" android:label="ComputeAndroidApp" android:name="computeandroidapp.LogonActivity">
       <intent-filter>
@@ -9,14 +24,54 @@
         <category android:name="android.intent.category.LAUNCHER" />
       </intent-filter>
     </activity>
-    <provider android:name="mono.MonoRuntimeProvider" android:exported="false" android:initOrder="2147483647" android:authorities="ComputeAndroidApp.ComputeAndroidApp.mono.MonoRuntimeProvider.__mono_init__" />
+    <provider android:name="mono.MonoRuntimeProvider" android:exported="false" android:initOrder="2147483647" android:authorities="com.ComputeAndroidApp.mono.MonoRuntimeProvider.__mono_init__" />
     <receiver android:name="mono.android.Seppuku">
       <intent-filter>
         <action android:name="mono.android.intent.action.SEPPUKU" />
-        <category android:name="mono.android.intent.category.SEPPUKU.ComputeAndroidApp.ComputeAndroidApp" />
+        <category android:name="mono.android.intent.category.SEPPUKU.com.ComputeAndroidApp" />
       </intent-filter>
     </receiver>
   </application>
+  <permission android:name="com.ComputeAndroidApp.permission.C2D_MESSAGE" android:protectionLevel="signature" />
+  <uses-permission android:name="android.permission.GET_ACCOUNTS" />
   <uses-permission android:name="android.permission.INTERNET" />
+  <uses-permission android:name="com.ComputeAndroidApp.permission.C2D_MESSAGE" />
+  <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
+  <uses-permission android:name="android.permission.WAKE_LOCK" />
+  <!--<receiver
+				android:name="com.ComputeAndroidApp.BroadcastReciever"
+				android:permission="com.google.android.c2dm.permission.SEND" >
+		<intent-filter>
+			<action android:name="com.google.android.c2dm.intent.REGISTRATION" >
+			</action>
+
+			<category android:name="com.ComputeAndroidApp" />
+		</intent-filter>
+	</receiver>-->
   <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 </manifest>
+<!--<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" android:installLocation="internalOnly" package="com.ComputeAndroidApp.ComputeAndroidApp">
+  <uses-sdk android:targetSdkVersion="10" />
+  <application>
+  </application>
+	<permission android:name="com.ComputeAndroidApp.ComputeAndroidApp.permission.C2D_MESSAGE" android:protectionLevel="signature" />
+	<uses-permission android:name="android.permission.GET_ACCOUNTS" />
+	<uses-permission android:name="android.permission.INTERNET" />
+	<uses-permission android:name="com.ComputeAndroidApp.ComputeAndroidApp.permission.C2D_MESSAGE" />
+	<uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
+	<uses-permission android:name="com.google.android.c2dm.permission.SEND" />
+	<uses-permission android:name="android.permission.WAKE_LOCK" />
+
+
+	<receiver
+				android:name="com.ComputeAndroidApp.ComputeAndroidApp"
+				android:permission="com.google.android.c2dm.permission.SEND" >
+		<intent-filter>
+			<action android:name="com.google.android.c2dm.intent.REGISTRATION" >
+			</action>
+
+			<category android:name="com.ComputeAndroidApp.ComputeAndroidApp" />
+		</intent-filter>
+	</receiver>
+</manifest>-->

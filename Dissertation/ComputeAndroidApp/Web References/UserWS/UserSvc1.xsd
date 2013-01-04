@@ -23,6 +23,7 @@
       <xs:element name="_x003C_DeviceMemoryResource_x003E_k__BackingField" type="xs:int" />
       <xs:element name="_x003C_DeviceProcRating_x003E_k__BackingField" type="xs:int" />
       <xs:element name="_x003C_DeviceType_x003E_k__BackingField" nillable="true" type="xs:string" />
+      <xs:element name="_x003C_GCMCode_x003E_k__BackingField" nillable="true" type="xs:string" />
       <xs:element name="_x003C_User_x003E_k__BackingField" nillable="true" type="tns:User" />
       <xs:element name="_x003C_Username_x003E_k__BackingField" nillable="true" type="xs:string" />
     </xs:sequence>

@@ -15,6 +15,7 @@
     <AndroidApplication>true</AndroidApplication>
     <AndroidResgenFile>Resources\Resource.Designer.cs</AndroidResgenFile>
     <GenerateSerializationAssemblies>Off</GenerateSerializationAssemblies>
+    <AndroidManifest>Properties\AndroidManifest.xml</AndroidManifest>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -50,6 +51,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App.cs" />
+    <Compile Include="BroadcastReciever.cs" />
     <Compile Include="RegisterActivity.cs" />
     <Compile Include="LogonActivity.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />
@@ -148,6 +150,15 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Web References\AuthWS\AuthSvc.disco" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\PushSharp\PushSharp.Client\PushSharp.Client.MonoForAndroid.Gcm\PushSharp.Client.MonoForAndroid.Gcm.csproj">
+      <Project>{1466d096-69fa-4b75-bbb6-533ffaf5d4eb}</Project>
+      <Name>PushSharp.Client.MonoForAndroid.Gcm</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Properties\AndroidManifest.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Novell\Novell.MonoDroid.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

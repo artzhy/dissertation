@@ -31,6 +31,18 @@
   <wsdl:message name="IUserSvc_DeleteUserDevice_OutputMessage">
     <wsdl:part name="parameters" element="tns:DeleteUserDeviceResponse" />
   </wsdl:message>
+  <wsdl:message name="IUserSvc_ModifyUserDevice_InputMessage">
+    <wsdl:part name="parameters" element="tns:ModifyUserDevice" />
+  </wsdl:message>
+  <wsdl:message name="IUserSvc_ModifyUserDevice_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ModifyUserDeviceResponse" />
+  </wsdl:message>
+  <wsdl:message name="IUserSvc_GetDeviceId_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetDeviceId" />
+  </wsdl:message>
+  <wsdl:message name="IUserSvc_GetDeviceId_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetDeviceIdResponse" />
+  </wsdl:message>
   <wsdl:portType name="IUserSvc">
     <wsdl:operation name="AddUser">
       <wsdl:input wsaw:Action="http://tempuri.org/IUserSvc/AddUser" message="tns:IUserSvc_AddUser_InputMessage" />
@@ -47,6 +59,14 @@
     <wsdl:operation name="DeleteUserDevice">
       <wsdl:input wsaw:Action="http://tempuri.org/IUserSvc/DeleteUserDevice" message="tns:IUserSvc_DeleteUserDevice_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IUserSvc/DeleteUserDeviceResponse" message="tns:IUserSvc_DeleteUserDevice_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ModifyUserDevice">
+      <wsdl:input wsaw:Action="http://tempuri.org/IUserSvc/ModifyUserDevice" message="tns:IUserSvc_ModifyUserDevice_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IUserSvc/ModifyUserDeviceResponse" message="tns:IUserSvc_ModifyUserDevice_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetDeviceId">
+      <wsdl:input wsaw:Action="http://tempuri.org/IUserSvc/GetDeviceId" message="tns:IUserSvc_GetDeviceId_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IUserSvc/GetDeviceIdResponse" message="tns:IUserSvc_GetDeviceId_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_IUserSvc" type="tns:IUserSvc">
@@ -80,6 +100,24 @@
     </wsdl:operation>
     <wsdl:operation name="DeleteUserDevice">
       <soap:operation soapAction="http://tempuri.org/IUserSvc/DeleteUserDevice" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ModifyUserDevice">
+      <soap:operation soapAction="http://tempuri.org/IUserSvc/ModifyUserDevice" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDeviceId">
+      <soap:operation soapAction="http://tempuri.org/IUserSvc/GetDeviceId" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

@@ -7,6 +7,7 @@ using Android.Views;
 using Android.Widget;
 using Android.OS;
 using Android.Preferences;
+using Android.Util;
 
 namespace ComputeAndroidApp {
     [Activity(Label = "ComputeAndroidApp", MainLauncher = true, Icon = "@drawable/icon")]
@@ -27,39 +28,46 @@ namespace ComputeAndroidApp {
                 
             };
 
-
             Button buttonLogin = FindViewById<Button>(Resource.Id.btnLogin);
             buttonLogin.Click += buttonLogin_Click;
-          
-       /*     SharedPreferences userDetails = context.getSharedPreferences("userdetails", MODE_PRIVATE);
-            Editor edit = userDetails.edit();
-            edit.clear();
-            edit.putString("username", txtUname.getText().toString().trim());
-            edit.putString("password", txtPass.getText().toString().trim());
-            edit.commit();*/
-
         }
 
         void buttonLogin_Click(object sender, EventArgs e) {
-            String username = FindViewById<EditText>(Resource.Id.txtUsername).Text;
-            String password = FindViewById<EditText>(Resource.Id.txtPassword).Text;
+            try {
+                String username = FindViewById<EditText>(Resource.Id.txtUsername).Text;
+                String password = FindViewById<EditText>(Resource.Id.txtPassword).Text;
 
-            Boolean success, success1;
+                Boolean success, success1;
 
-            new AuthWS.AuthSvc().AuthenticateUser(username, password, out success, out  success1);
+                new AuthWS.AuthSvc().AuthenticateUser(username, password, out success, out  success1);
 
-            if (success) {
+                if (success) {
+                    if (username != App.GetUsername(this) || password != App.GetPassword(this)) {
+                        App.setUsername(this, username);
+                        App.setPassword(this, password);
+                        App.setDeviceId(this, -1);
+                        App.RegisterDevice(this);
+                    } else if (App.GetGCMCode(this) == "") {
+                        App.setUsername(this, username);
+                        App.setPassword(this, password);
+                        App.RegisterDevice(this);
+                    } else if (App.GetDeviceId(this) == -1) {
+                        App.setUsername(this, username);
+                        App.setPassword(this, password);
+                        App.RegisterDevice(this);
+                    }
 
-                ISharedPreferences prefs = this.GetSharedPreferences(this.ApplicationContext.PackageName, FileCreationMode.Private);
+                    App.ShowDialog("ID", App.GetGCMCode(this), this);
 
-                prefs.Edit().PutString("Username", username).Commit();
-                prefs.Edit().PutString("Password", password).Commit();
+                } else {
+                    App.ShowDialog("Invalid login", "Invalid login details.", this);
+                }
 
-
-            } else {
-                App.ShowDialog("Invalid login", "Invalid login details.", this);
+            } catch (Exception ex) {
+                App.ShowDialog("Exception", ex.Message, this);
+                Log.Error("Logon", ex.Message + "   " + ex.InnerException);
             }
-
+           
         }
     }
 }

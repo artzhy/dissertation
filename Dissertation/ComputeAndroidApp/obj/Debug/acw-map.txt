@@ -1,2 +1,6 @@
+ComputeAndroidApp.BroadcastReceiver;computeandroidapp.BroadcastReceiver
+ComputeAndroidApp.GCMIntentService;computeandroidapp.GCMIntentService
 ComputeAndroidApp.RegisterActivity;computeandroidapp.RegisterActivity
 ComputeAndroidApp.LogonActivity;computeandroidapp.LogonActivity
+GCMSharp.Client.GCMBaseIntentService;gcmsharp.client.GCMBaseIntentService
+GCMSharp.Client.GCMBroadcastReceiver`1;gcmsharp.client.GCMBroadcastReceiver_1

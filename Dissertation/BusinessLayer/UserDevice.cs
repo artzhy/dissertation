@@ -19,6 +19,7 @@ namespace BusinessLayer
         public string DeviceType { get; set; }
         public int DeviceMemoryResource { get; set; }
         public int DeviceProcRating { get; set; }
+        public string GCMCode { get; set; }
     
         public virtual User User { get; set; }
     }

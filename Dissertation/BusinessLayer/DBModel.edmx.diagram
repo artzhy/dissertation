@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="67e2fcf437644f518038f685638a80ef" Name="Diagram1" ZoomLevel="74">
+      <Diagram DiagramId="67e2fcf437644f518038f685638a80ef" Name="Diagram1" ZoomLevel="55">
         <EntityTypeShape EntityType="marcdissertation_dbModel.User" Width="1.5" PointX="8.9532504477320476" PointY="10.848174651548348" />
         <EntityTypeShape EntityType="marcdissertation_dbModel.UserDevice" Width="1.5" PointX="6" PointY="10.875" />
         <AssociationConnector Association="marcdissertation_dbModel.UserFK" />
