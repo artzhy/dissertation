@@ -1,7 +1,0 @@
-C:\Users\Marc.COOPERSOFTWARE\Dropbox\Dissertation\Code\Dissertation\TestHarness\bin\Debug\TestHarness.exe
-C:\Users\Marc.COOPERSOFTWARE\Dropbox\Dissertation\Code\Dissertation\TestHarness\bin\Debug\TestHarness.pdb
-C:\Users\Marc.COOPERSOFTWARE\Dropbox\Dissertation\Code\Dissertation\TestHarness\obj\Debug\TestHarness.csprojResolveAssemblyReference.cache
-C:\Users\Marc.COOPERSOFTWARE\Dropbox\Dissertation\Code\Dissertation\TestHarness\obj\Debug\TestHarness.Properties.Resources.resources
-C:\Users\Marc.COOPERSOFTWARE\Dropbox\Dissertation\Code\Dissertation\TestHarness\obj\Debug\TestHarness.csproj.GenerateResource.Cache
-C:\Users\Marc.COOPERSOFTWARE\Dropbox\Dissertation\Code\Dissertation\TestHarness\obj\Debug\TestHarness.exe
-C:\Users\Marc.COOPERSOFTWARE\Dropbox\Dissertation\Code\Dissertation\TestHarness\obj\Debug\TestHarness.pdb

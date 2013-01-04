@@ -1,0 +1,4 @@
+C:\Users\Marc.COOPERSOFTWARE\Dropbox\Dissertation\Code\Dissertation\PushCommunicator\bin\Debug\PushCommunicator.dll
+C:\Users\Marc.COOPERSOFTWARE\Dropbox\Dissertation\Code\Dissertation\PushCommunicator\bin\Debug\PushCommunicator.pdb
+C:\Users\Marc.COOPERSOFTWARE\Dropbox\Dissertation\Code\Dissertation\PushCommunicator\obj\Debug\PushCommunicator.dll
+C:\Users\Marc.COOPERSOFTWARE\Dropbox\Dissertation\Code\Dissertation\PushCommunicator\obj\Debug\PushCommunicator.pdb
