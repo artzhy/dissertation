@@ -1,1 +1,0 @@
-AndroidApp.Activity1;androidapp.Activity1
