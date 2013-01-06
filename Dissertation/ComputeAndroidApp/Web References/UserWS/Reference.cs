@@ -41,6 +41,8 @@ namespace ComputeAndroidApp.UserWS {
         
         private System.Threading.SendOrPostCallback GetDeviceIdOperationCompleted;
         
+        private System.Threading.SendOrPostCallback SendTestNotificationOperationCompleted;
+        
         private bool useDefaultCredentialsSetExplicitly;
         
         /// <remarks/>
@@ -96,6 +98,9 @@ namespace ComputeAndroidApp.UserWS {
         
         /// <remarks/>
         public event GetDeviceIdCompletedEventHandler GetDeviceIdCompleted;
+        
+        /// <remarks/>
+        public event SendTestNotificationCompletedEventHandler SendTestNotificationCompleted;
         
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/IUserSvc/AddUser", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
@@ -318,6 +323,36 @@ namespace ComputeAndroidApp.UserWS {
             if ((this.GetDeviceIdCompleted != null)) {
                 System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
                 this.GetDeviceIdCompleted(this, new GetDeviceIdCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/IUserSvc/SendTestNotification", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public void SendTestNotification(int deviceId, [System.Xml.Serialization.XmlIgnoreAttribute()] bool deviceIdSpecified) {
+            this.Invoke("SendTestNotification", new object[] {
+                        deviceId,
+                        deviceIdSpecified});
+        }
+        
+        /// <remarks/>
+        public void SendTestNotificationAsync(int deviceId, bool deviceIdSpecified) {
+            this.SendTestNotificationAsync(deviceId, deviceIdSpecified, null);
+        }
+        
+        /// <remarks/>
+        public void SendTestNotificationAsync(int deviceId, bool deviceIdSpecified, object userState) {
+            if ((this.SendTestNotificationOperationCompleted == null)) {
+                this.SendTestNotificationOperationCompleted = new System.Threading.SendOrPostCallback(this.OnSendTestNotificationOperationCompleted);
+            }
+            this.InvokeAsync("SendTestNotification", new object[] {
+                        deviceId,
+                        deviceIdSpecified}, this.SendTestNotificationOperationCompleted, userState);
+        }
+        
+        private void OnSendTestNotificationOperationCompleted(object arg) {
+            if ((this.SendTestNotificationCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.SendTestNotificationCompleted(this, new System.ComponentModel.AsyncCompletedEventArgs(invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
             }
         }
         
@@ -624,6 +659,10 @@ namespace ComputeAndroidApp.UserWS {
             }
         }
     }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.17929")]
+    public delegate void SendTestNotificationCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
 }
 
 #pragma warning restore 1591

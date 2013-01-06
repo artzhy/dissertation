@@ -10,7 +10,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebService", "WebService\We
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BusinessLayer", "BusinessLayer\BusinessLayer.csproj", "{174CFFBA-30CD-431C-A6A8-5026247B9266}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ComputeAndroidApp", "ComputeAndroidApp\ComputeAndroidApp.csproj", "{BB306A1D-7CD6-4967-B0E0-C69B69B5ED8D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ComputeAndroidAppUI", "ComputeAndroidApp\ComputeAndroidAppUI.csproj", "{BB306A1D-7CD6-4967-B0E0-C69B69B5ED8D}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "External DLLs", "External DLLs", "{0FA15A9F-5020-42C5-96B8-DED227A29EEF}"
 	ProjectSection(SolutionItems) = preProject
@@ -47,6 +47,10 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PushSharp.Client.MonoForAndroid.Gcm", "PushSharp\PushSharp.Client\PushSharp.Client.MonoForAndroid.Gcm\PushSharp.Client.MonoForAndroid.Gcm.csproj", "{1466D096-69FA-4B75-BBB6-533FFAF5D4EB}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PushCommunicator", "PushCommunicator\PushCommunicator.csproj", "{266850FE-45CC-47F4-82B6-A3AF6793BAA1}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ProjectApps", "ProjectApps", "{1590B877-8101-45C8-8653-C33008EF90B1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AppTemplate", "AppTemplate\AppTemplate.csproj", "{34E7FE81-0873-4C28-B8AF-852FA6BDBA16}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -202,6 +206,20 @@ Global
 		{266850FE-45CC-47F4-82B6-A3AF6793BAA1}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{266850FE-45CC-47F4-82B6-A3AF6793BAA1}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{266850FE-45CC-47F4-82B6-A3AF6793BAA1}.Release|x86.ActiveCfg = Release|Any CPU
+		{34E7FE81-0873-4C28-B8AF-852FA6BDBA16}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{34E7FE81-0873-4C28-B8AF-852FA6BDBA16}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{34E7FE81-0873-4C28-B8AF-852FA6BDBA16}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{34E7FE81-0873-4C28-B8AF-852FA6BDBA16}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{34E7FE81-0873-4C28-B8AF-852FA6BDBA16}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{34E7FE81-0873-4C28-B8AF-852FA6BDBA16}.Debug|Mixed Platforms.Deploy.0 = Debug|Any CPU
+		{34E7FE81-0873-4C28-B8AF-852FA6BDBA16}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{34E7FE81-0873-4C28-B8AF-852FA6BDBA16}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{34E7FE81-0873-4C28-B8AF-852FA6BDBA16}.Release|Any CPU.Build.0 = Release|Any CPU
+		{34E7FE81-0873-4C28-B8AF-852FA6BDBA16}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{34E7FE81-0873-4C28-B8AF-852FA6BDBA16}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{34E7FE81-0873-4C28-B8AF-852FA6BDBA16}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{34E7FE81-0873-4C28-B8AF-852FA6BDBA16}.Release|Mixed Platforms.Deploy.0 = Release|Any CPU
+		{34E7FE81-0873-4C28-B8AF-852FA6BDBA16}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -219,6 +237,7 @@ Global
 		{71E27C37-FBBF-481B-934B-1F7DBDE3C5D6} = {C09BBA3E-9CF3-4479-A4C3-3006820E2046}
 		{0EC3A31E-B869-4465-ABDC-90C2E3CCC17D} = {C09BBA3E-9CF3-4479-A4C3-3006820E2046}
 		{1B9A3A8B-3690-4435-BF9C-B557BF2713DB} = {04A9AE38-795E-4CB5-A9AD-C1FA83DC342C}
+		{34E7FE81-0873-4C28-B8AF-852FA6BDBA16} = {1590B877-8101-45C8-8653-C33008EF90B1}
 	EndGlobalSection
 	GlobalSection(MonoDevelopProperties) = preSolution
 		StartupItem = PushSharp.Sample\PushSharp.Sample.csproj

@@ -1,0 +1,14 @@
+C:\Users\Marc.COOPERSOFTWARE\Dropbox\Dissertation\Code\Dissertation\AppTemplate\bin\Debug\Newtonsoft.Json.dll
+C:\Users\Marc.COOPERSOFTWARE\Dropbox\Dissertation\Code\Dissertation\AppTemplate\obj\Debug\res\layout\main.xml
+C:\Users\Marc.COOPERSOFTWARE\Dropbox\Dissertation\Code\Dissertation\AppTemplate\obj\Debug\res\values\strings.xml
+C:\Users\Marc.COOPERSOFTWARE\Dropbox\Dissertation\Code\Dissertation\AppTemplate\obj\Debug\res\drawable\icon.png
+C:\Users\Marc.COOPERSOFTWARE\Dropbox\Dissertation\Code\Dissertation\AppTemplate\obj\Debug\R.cs.flag
+C:\Users\Marc.COOPERSOFTWARE\Dropbox\Dissertation\Code\Dissertation\AppTemplate\obj\Debug\uploadflags.txt
+C:\Users\Marc.COOPERSOFTWARE\Dropbox\Dissertation\Code\Dissertation\AppTemplate\bin\Debug\com.AppTemplate.dll
+C:\Users\Marc.COOPERSOFTWARE\Dropbox\Dissertation\Code\Dissertation\AppTemplate\bin\Debug\com.AppTemplate.pdb
+C:\Users\Marc.COOPERSOFTWARE\Dropbox\Dissertation\Code\Dissertation\AppTemplate\bin\Debug\com.AppTemplate.dll.mdb
+C:\Users\Marc.COOPERSOFTWARE\Dropbox\Dissertation\Code\Dissertation\AppTemplate\bin\Debug\com.AppTemplate.apk
+C:\Users\Marc.COOPERSOFTWARE\Dropbox\Dissertation\Code\Dissertation\AppTemplate\bin\Debug\com.AppTemplate-Signed.apk
+C:\Users\Marc.COOPERSOFTWARE\Dropbox\Dissertation\Code\Dissertation\AppTemplate\obj\Debug\com.AppTemplate.dll
+C:\Users\Marc.COOPERSOFTWARE\Dropbox\Dissertation\Code\Dissertation\AppTemplate\obj\Debug\com.AppTemplate.pdb
+C:\Users\Marc.COOPERSOFTWARE\Dropbox\Dissertation\Code\Dissertation\AppTemplate\obj\Debug\android\bin\com.AppTemplate.apk

@@ -10,10 +10,12 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 
+using Android.Util;
+
 namespace ComputeAndroidApp {
     class App {
         public const String GCM_SENDER_ID = "348279368873";
-        private static UserWS.UserSvc _userWS;
+       
 
         /// <summary>
         ///  
@@ -84,15 +86,7 @@ namespace ComputeAndroidApp {
             prefs.Edit().PutString("GCMCode", GCMCode).Commit();
         }
 
-        public static UserWS.UserSvc UserWS {
-            get { 
-                if(_userWS == null) {
-                    _userWS = new UserWS.UserSvc();
-                }
-                
-                return _userWS;
-            }
-        }
+       
         
         public static void ShowDialog(String title, String message, Context context) {
             AlertDialog.Builder builder = new AlertDialog.Builder(context);
@@ -107,6 +101,22 @@ namespace ComputeAndroidApp {
                 alert.Show();
         }
 
+        public static void HandleException(Exception e, Context context, Boolean showDialog = true) {
+            if (showDialog) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                builder.SetCancelable(true);
+                builder.SetTitle("Error Logged");
+                builder.SetInverseBackgroundForced(true);
+                builder.SetMessage(e.Message);
+                builder.SetPositiveButton("OK", delegate {
+                });
+                AlertDialog alert = builder.Create();
+                alert.Show();
+            }
+           
+            Log.Error(e.Source, e.Message + " \n   " + e.InnerException);
+        }
+
         public static String RegisterDevice(Context context) {
             // do GCM registration
             GCMSharp.Client.GCMRegistrar.CheckDevice(context);
@@ -115,16 +125,16 @@ namespace ComputeAndroidApp {
             String gcmRegId = GCMSharp.Client.GCMRegistrar.GetRegistrationId(context);
             setGCMCode(context, gcmRegId);
 
-            int deviceId;
-            bool outDeviceId;
+            int deviceId = -1;
+            bool outDeviceId = false;
             // do compue app registration
-            new UserWS.UserSvc().GetDeviceId(GetUsername(context), GetPassword(context), gcmRegId, out deviceId, out outDeviceId);
-
-            if (outDeviceId == false || deviceId == null) {
-                setDeviceId(context, -1);
-            } else {
-                setDeviceId(context, deviceId);
+            try {
+                new UserWS.UserSvc().GetDeviceId(GetUsername(context), GetPassword(context), gcmRegId, out deviceId, out outDeviceId);
+            } catch (Exception ex) {
+                // Ignore excptions thrown hfrom ehre
             }
+            
+             setDeviceId(context, deviceId);
 
             if (GetDeviceId(context) == -1) {
                 
@@ -135,6 +145,19 @@ namespace ComputeAndroidApp {
             
             return gcmRegId;
             
+        }
+
+        public static void DeregisterDevice(Context context) {
+            try {
+                new UserWS.UserSvc().DeleteUserDevice(App.GetUsername(context), App.GetPassword(context), App.GetDeviceId(context), true);
+                App.setGCMCode(context, "");
+                App.setDeviceId(context, -1);
+
+                context.StartActivity(typeof(LogonActivity));
+            } catch (Exception ex) {
+                App.HandleException(ex, context);
+
+            }
         }
     }
 }

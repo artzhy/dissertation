@@ -16,11 +16,11 @@ using Android.Util;
 namespace ComputeAndroidApp {
     [BroadcastReceiver(Permission = GCMConstants.PERMISSION_GCM_INTENTS)]
     [IntentFilter(new string[] { GCMConstants.INTENT_FROM_GCM_MESSAGE },
-        Categories = new string[] { "com.ComputeAndroidApp" })]
+        Categories = new string[] { "ComputeAndroidApp" })]
     [IntentFilter(new string[] { GCMConstants.INTENT_FROM_GCM_REGISTRATION_CALLBACK },
-        Categories = new string[] { "com.ComputeAndroidApp" })]
+        Categories = new string[] { "ComputeAndroidApp" })]
     [IntentFilter(new string[] { GCMConstants.INTENT_FROM_GCM_LIBRARY_RETRY },
-        Categories = new string[] { "com.ComputeAndroidApp" })]
+        Categories = new string[] { "ComputeAndroidApp" })]
     public class BroadcastReceiver : GCMBroadcastReceiver<GCMIntentService> {
         //IMPORTANT: Change this to your own Sender ID!
         //The SENDER_ID is your Google API Console App Project ID.

@@ -1,21 +1,33 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android" android:versionCode="1" android:versionName="1.0" package="com.ComputeAndroidApp">
-  <uses-sdk android:minSdkVersion="10" />
-  <application android:label="PushSharp" android:name="mono.android.app.Application" android:debuggable="true">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" android:versionCode="1" android:versionName="1.0" android:installLocation="internalOnly" package="com.ComputeAndroidApp">
+  <application android:name="mono.android.app.Application" android:debuggable="true">
+    <!--<receiver android:name=".computeandroidapp.backgroundservice.servicereceiver3453">
+			<intent-filter>
+				<action android:name="android.intent.action.BOOT_COMPLETED" />
+			</intent-filter>
+		</receiver> -->
+    <service android:name="computeandroidapp.backgroundservice.ControllerService" />
     <receiver android:permission="com.google.android.c2dm.permission.SEND" android:name="computeandroidapp.BroadcastReceiver">
       <intent-filter>
-        <action android:name="com.google.android.c2dm.intent.REGISTRATION" />
-        <category android:name="com.ComputeAndroidApp" />
+        <action android:name="com.google.android.gcm.intent.RETRY" />
+        <category android:name="ComputeAndroidApp" />
       </intent-filter>
       <intent-filter>
         <action android:name="com.google.android.c2dm.intent.RECEIVE" />
-        <category android:name="com.ComputeAndroidApp" />
+        <category android:name="ComputeAndroidApp" />
       </intent-filter>
       <intent-filter>
-        <action android:name="com.google.android.gcm.intent.RETRY" />
-        <category android:name="com.ComputeAndroidApp" />
+        <action android:name="com.google.android.c2dm.intent.REGISTRATION" />
+        <category android:name="ComputeAndroidApp" />
       </intent-filter>
     </receiver>
+    <receiver android:name="computeandroidapp.backgroundservice.ServiceReceiver">
+      <intent-filter>
+        <action android:name="android.intent.action.BOOT_COMPLETED" />
+        <category android:name="android.intent.category.HOME" />
+      </intent-filter>
+    </receiver>
+    <activity android:label="Overview" android:name="computeandroidapp.OverviewActivity" />
     <service android:name="computeandroidapp.GCMIntentService" />
     <activity android:label="Register" android:name="computeandroidapp.RegisterActivity" />
     <activity android:icon="@drawable/icon" android:label="ComputeAndroidApp" android:name="computeandroidapp.LogonActivity">
@@ -35,43 +47,45 @@
   <permission android:name="com.ComputeAndroidApp.permission.C2D_MESSAGE" android:protectionLevel="signature" />
   <uses-permission android:name="android.permission.GET_ACCOUNTS" />
   <uses-permission android:name="android.permission.INTERNET" />
-  <uses-permission android:name="com.ComputeAndroidApp.permission.C2D_MESSAGE" />
+  <uses-permission android:name="ComputeAndroidApp.permission.C2D_MESSAGE" />
   <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
   <uses-permission android:name="android.permission.WAKE_LOCK" />
+  <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+  <uses-sdk android:minSdkVersion="8" android:targetSdkVersion="8" />
   <!--<receiver
-				android:name="com.ComputeAndroidApp.BroadcastReciever"
+				android:name="ComputeAndroidApp.BroadcastReciever"
 				android:permission="com.google.android.c2dm.permission.SEND" >
 		<intent-filter>
 			<action android:name="com.google.android.c2dm.intent.REGISTRATION" >
 			</action>
 
-			<category android:name="com.ComputeAndroidApp" />
+			<category android:name="ComputeAndroidApp" />
 		</intent-filter>
 	</receiver>-->
   <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 </manifest>
 <!--<?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android" android:installLocation="internalOnly" package="com.ComputeAndroidApp.ComputeAndroidApp">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" android:installLocation="internalOnly" package="ComputeAndroidApp.ComputeAndroidApp">
   <uses-sdk android:targetSdkVersion="10" />
   <application>
   </application>
-	<permission android:name="com.ComputeAndroidApp.ComputeAndroidApp.permission.C2D_MESSAGE" android:protectionLevel="signature" />
+	<permission android:name="ComputeAndroidApp.ComputeAndroidApp.permission.C2D_MESSAGE" android:protectionLevel="signature" />
 	<uses-permission android:name="android.permission.GET_ACCOUNTS" />
 	<uses-permission android:name="android.permission.INTERNET" />
-	<uses-permission android:name="com.ComputeAndroidApp.ComputeAndroidApp.permission.C2D_MESSAGE" />
+	<uses-permission android:name="ComputeAndroidApp.ComputeAndroidApp.permission.C2D_MESSAGE" />
 	<uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
 	<uses-permission android:name="com.google.android.c2dm.permission.SEND" />
 	<uses-permission android:name="android.permission.WAKE_LOCK" />
 
 
 	<receiver
-				android:name="com.ComputeAndroidApp.ComputeAndroidApp"
+				android:name="ComputeAndroidApp.ComputeAndroidApp"
 				android:permission="com.google.android.c2dm.permission.SEND" >
 		<intent-filter>
 			<action android:name="com.google.android.c2dm.intent.REGISTRATION" >
 			</action>
 
-			<category android:name="com.ComputeAndroidApp.ComputeAndroidApp" />
+			<category android:name="ComputeAndroidApp.ComputeAndroidApp" />
 		</intent-filter>
 	</receiver>
 </manifest>-->

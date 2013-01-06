@@ -1,2 +1,3 @@
 C:\Users\Marc.COOPERSOFTWARE\Dropbox\Dissertation\Code\Dissertation\ComputeAndroidApp\bin\Debug\ComputeAndroidApp.dll
 C:\Users\Marc.COOPERSOFTWARE\Dropbox\Dissertation\Code\Dissertation\ComputeAndroidApp\bin\Debug\PushSharp.Client.MonoForAndroid.dll
+C:\Users\Marc.COOPERSOFTWARE\Dropbox\Dissertation\Code\Dissertation\External DLLs\Newtonsoft.Json.dll

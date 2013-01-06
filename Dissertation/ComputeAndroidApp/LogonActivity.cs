@@ -57,15 +57,16 @@ namespace ComputeAndroidApp {
                         App.RegisterDevice(this);
                     }
 
-                    App.ShowDialog("ID", App.GetGCMCode(this), this);
+                    StartActivity(typeof(OverviewActivity));
+                    StartService(new Intent(this, typeof(BackgroundService.ControllerService)));
 
                 } else {
                     App.ShowDialog("Invalid login", "Invalid login details.", this);
                 }
 
             } catch (Exception ex) {
-                App.ShowDialog("Exception", ex.Message, this);
-                Log.Error("Logon", ex.Message + "   " + ex.InnerException);
+                App.HandleException(ex, this);
+                
             }
            
         }

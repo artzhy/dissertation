@@ -5,6 +5,7 @@ using System.Runtime.Serialization;
 using System.ServiceModel;
 using System.ServiceModel.Web;
 using System.Text;
+using PushCommunicator;
 
 namespace WebService {
     public class UserSvc : IUserSvc {
@@ -34,9 +35,10 @@ namespace WebService {
         }
 
         public void DeleteUserDevice(string authUsername, String authPassword, int deviceId) {
-            AuthUser(authUsername, authPassword, deviceId);
             BusinessLayer.UserDevice ud = BusinessLayer.UserDevice.Populate(deviceId);
 
+            AuthUser(authUsername, authPassword, ud.User.UserId);
+            
             if (ud.User.Username.Equals(authUsername)) {
                 ud.Delete();
             }
@@ -66,22 +68,24 @@ namespace WebService {
             return ud.DeviceId;
         }
 
+        public void SendTestNotification(int deviceId) {
+            Pusher push = new Pusher();
+
+            push.SendNotification(BusinessLayer.UserDevice.Populate(deviceId).GCMCode, "{\"alert\":\"Alert Text!\",\"badge\":\"7\"}");
+
+        }
+
         private void AuthUser(String authUsername, string authPassword, int userId = -1) {
             if (BusinessLayer.User.AuthenticateUser(authUsername, authPassword)) {
                 if (userId != -1) {
                     if (BusinessLayer.User.Populate(authUsername).UserId != userId) {
                         throw new Exception("You many only modify your own user");
-                    } else {
-                        throw new Exception("Authentication required");
-                    }
-                } else {
-                    
-                }
+                    } 
+                } 
             } else {
                 throw new Exception("Authentication required");
             }
         }
-
     }
 
 

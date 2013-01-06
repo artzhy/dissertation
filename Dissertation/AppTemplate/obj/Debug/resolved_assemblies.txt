@@ -1,0 +1,2 @@
+C:\Users\Marc.COOPERSOFTWARE\Dropbox\Dissertation\Code\Dissertation\AppTemplate\bin\Debug\com.AppTemplate.dll
+C:\Users\Marc.COOPERSOFTWARE\Dropbox\Dissertation\Code\Dissertation\AppTemplate\bin\Debug\Newtonsoft.Json.dll

@@ -104,6 +104,10 @@
       <Project>{174cffba-30cd-431c-a6a8-5026247b9266}</Project>
       <Name>BusinessLayer</Name>
     </ProjectReference>
+    <ProjectReference Include="..\PushCommunicator\PushCommunicator.csproj">
+      <Project>{266850fe-45cc-47f4-82b6-a3af6793baa1}</Project>
+      <Name>PushCommunicator</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

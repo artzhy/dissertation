@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<workbench progressCount="33" version="2.0">
+<workbench progressCount="34" version="2.0">
 <workbenchAdvisor/>
 <window height="728" maximized="true" width="1024" x="100" y="0">
 <fastViewData fastViewLocation="1024"/>
@@ -30,7 +30,7 @@
 <coolItem id="group.help" itemType="typeGroupMarker"/>
 <coolItem id="org.eclipse.ui.workbench.help" itemType="typeToolBarContribution" x="-1" y="-1"/>
 </coolbarLayout>
-<page aggregateWorkingSetId="Aggregate for window 1357074807674" focus="true" label="Workspace - Java">
+<page aggregateWorkingSetId="Aggregate for window 1357074807674" focus="true" label="Workspace - Debug">
 <editors>
 <editorArea activeWorkbook="DefaultEditorWorkbook">
 <info part="DefaultEditorWorkbook">
@@ -43,16 +43,17 @@
 <part id="4"/>
 <part id="5"/>
 <part id="6"/>
+<part id="7"/>
+<part id="8"/>
+<part id="9"/>
+<part id="10"/>
+<part id="11"/>
 </presentation>
 </folder>
 </info>
 </editorArea>
 <editor id="com.android.ide.eclipse.editors.CommonXmlEditor" name="activity_main.xml" partName="activity_main.xml" path="C:/Users/Marc.COOPERSOFTWARE/Dropbox/Dissertation/Code/DissertationAndroid/res/layout/activity_main.xml" title="activity_main.xml" tooltip="DissertationAndroid/res/layout/activity_main.xml" workbook="DefaultEditorWorkbook">
 <input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/DissertationAndroid/res/layout/activity_main.xml"/>
-</editor>
-<editor activePart="true" focus="true" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="MainActivity.java" partName="MainActivity.java" path="C:/Users/Marc.COOPERSOFTWARE/Dropbox/Dissertation/Code/DissertationAndroid/src/com/example/dissertationandroid/MainActivity.java" title="MainActivity.java" tooltip="DissertationAndroid/src/com/example/dissertationandroid/MainActivity.java" workbook="DefaultEditorWorkbook">
-<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/DissertationAndroid/src/com/example/dissertationandroid/MainActivity.java"/>
-<editorState selectionHorizontalPixel="0" selectionLength="23" selectionOffset="482" selectionTopPixel="0"/>
 </editor>
 <editor id="com.android.ide.eclipse.editors.manifest.ManifestEditor" name="AndroidManifest.xml" partName="DissertationAndroid Manifest" path="C:/Users/Marc.COOPERSOFTWARE/Dropbox/Dissertation/Code/DissertationAndroid/AndroidManifest.xml" title="DissertationAndroid Manifest" tooltip="DissertationAndroid/AndroidManifest.xml" workbook="DefaultEditorWorkbook">
 <input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/DissertationAndroid/AndroidManifest.xml"/>
@@ -72,6 +73,27 @@
 <input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/DissertationAndroid/src/com/example/dissertationandroid/RESTDataItem.java"/>
 <editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="150" selectionTopPixel="0"/>
 </editor>
+<editor id="com.android.ide.eclipse.editors.CommonXmlEditor" name="fractalscreen.xml" partName="fractalscreen.xml" path="C:/Users/Marc.COOPERSOFTWARE/Dropbox/Dissertation/Code/Dissertation/MandelbrotMapsAndroid/res/layout/fractalscreen.xml" title="fractalscreen.xml" tooltip="FractalActivity/res/layout/fractalscreen.xml" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/FractalActivity/res/layout/fractalscreen.xml"/>
+</editor>
+<editor id="com.android.ide.eclipse.editors.CommonXmlEditor" name="detailcontrol.xml" partName="detailcontrol.xml" path="C:/Users/Marc.COOPERSOFTWARE/Dropbox/Dissertation/Code/Dissertation/MandelbrotMapsAndroid/res/layout/detailcontrol.xml" title="detailcontrol.xml" tooltip="FractalActivity/res/layout/detailcontrol.xml" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/FractalActivity/res/layout/detailcontrol.xml"/>
+</editor>
+<editor id="com.android.ide.eclipse.editors.CommonXmlEditor" name="main.xml" partName="land\main.xml" path="C:/Users/Marc.COOPERSOFTWARE/Dropbox/Dissertation/Code/Dissertation/MandelbrotMapsAndroid/res/layout-land/main.xml" title="land\main.xml" tooltip="FractalActivity/res/layout-land/main.xml" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/FractalActivity/res/layout-land/main.xml"/>
+</editor>
+<editor id="org.eclipse.jdt.ui.CompilationUnitEditor" name="AbstractFractalView.java" partName="AbstractFractalView.java" path="C:/Users/Marc.COOPERSOFTWARE/Dropbox/Dissertation/Code/Dissertation/MandelbrotMapsAndroid/src/uk/ac/ed/inf/mandelbrotmaps/AbstractFractalView.java" title="AbstractFractalView.java" tooltip="FractalActivity/src/uk/ac/ed/inf/mandelbrotmaps/AbstractFractalView.java" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/FractalActivity/src/uk/ac/ed/inf/mandelbrotmaps/AbstractFractalView.java"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="7807" selectionTopPixel="5712"/>
+</editor>
+<editor id="org.eclipse.jdt.ui.CompilationUnitEditor" name="DetailControl.java" partName="DetailControl.java" path="C:/Users/Marc.COOPERSOFTWARE/Dropbox/Dissertation/Code/Dissertation/MandelbrotMapsAndroid/src/uk/ac/ed/inf/mandelbrotmaps/DetailControl.java" title="DetailControl.java" tooltip="FractalActivity/src/uk/ac/ed/inf/mandelbrotmaps/DetailControl.java" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/FractalActivity/src/uk/ac/ed/inf/mandelbrotmaps/DetailControl.java"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="3106" selectionTopPixel="1008"/>
+</editor>
+<editor activePart="true" focus="true" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="MandelbrotFractalView.java" partName="MandelbrotFractalView.java" path="C:/Users/Marc.COOPERSOFTWARE/Dropbox/Dissertation/Code/Dissertation/MandelbrotMapsAndroid/src/uk/ac/ed/inf/mandelbrotmaps/MandelbrotFractalView.java" title="MandelbrotFractalView.java" tooltip="FractalActivity/src/uk/ac/ed/inf/mandelbrotmaps/MandelbrotFractalView.java" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/FractalActivity/src/uk/ac/ed/inf/mandelbrotmaps/MandelbrotFractalView.java"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="656" selectionTopPixel="4271"/>
+</editor>
 </editors>
 <views>
 <view id="com.android.ide.eclipse.ddms.views.LogCatView" partName="LogCat">
@@ -83,7 +105,7 @@
 <view id="org.eclipse.ui.views.ProblemView" partName="Problems">
 <viewState PRIMARY_SORT_FIELD="org.eclipse.ui.ide.severityAndDescriptionField" categoryGroup="org.eclipse.ui.ide.severity" markerContentGenerator="org.eclipse.ui.ide.problemsGenerator" partName="Problems">
 <expanded>
-<category IMemento.internal.id="Warnings (15 items)"/>
+<category IMemento.internal.id="Warnings (28 items)"/>
 </expanded>
 <columnWidths org.eclipse.ui.ide.locationField="90" org.eclipse.ui.ide.markerType="90" org.eclipse.ui.ide.pathField="120" org.eclipse.ui.ide.resourceField="90" org.eclipse.ui.ide.severityAndDescriptionField="300"/>
 <visible IMemento.internal.id="org.eclipse.ui.ide.severityAndDescriptionField"/>
@@ -155,7 +177,7 @@
 <view id="org.eclipse.jdt.ui.SourceView" partName="Declaration"/>
 <view id="org.eclipse.jdt.ui.JavadocView" partName="Javadoc"/>
 </views>
-<perspectives activePart="org.eclipse.jdt.ui.CompilationUnitEditor" activePerspective="org.eclipse.jdt.ui.JavaPerspective">
+<perspectives activePart="org.eclipse.jdt.ui.CompilationUnitEditor" activePerspective="org.eclipse.debug.ui.DebugPerspective">
 <perspective editorAreaTrimState="2" editorAreaVisible="1" fixed="0" version="0.016">
 <descriptor class="org.eclipse.jdt.internal.ui.JavaPerspectiveFactory" id="org.eclipse.jdt.ui.JavaPerspective" label="Java"/>
 <alwaysOnActionSet id="org.eclipse.egit.ui.navigation"/>
@@ -341,47 +363,66 @@
 <view id="org.eclipse.ui.views.ContentOutline"/>
 <view id="com.android.ide.eclipse.ddms.views.LogCatView"/>
 <fastViewBars/>
-<layout>&#x0A;<mainWindow>&#x0A;<info folder="true" part="org.eclipse.debug.internal.ui.NavigatorFolderView">&#x0A;<folder activePageID="org.eclipse.debug.ui.DebugView" appearance="2" expanded="2">&#x0A;<page content="org.eclipse.debug.ui.DebugView" label="Debug"/>
+<layout>
+<mainWindow>
+<info folder="true" part="org.eclipse.debug.internal.ui.NavigatorFolderView">
+<folder activePageID="org.eclipse.debug.ui.DebugView" appearance="2" expanded="2">
+<page content="org.eclipse.debug.ui.DebugView" label="Debug"/>
 <page content="org.eclipse.ui.views.ResourceNavigator" label="LabelNotFound"/>
 <page content="org.eclipse.jdt.ui.PackageExplorer" label="LabelNotFound"/>
 <page content="org.eclipse.jdt.ui.TypeHierarchy" label="LabelNotFound"/>
-<presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory">&#x0A;<part id="0"/>
+<presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory">
+<part id="0"/>
 </presentation>
 </folder>
 </info>
-<info folder="true" part="stickyFolderRight" ratio="0.7496318" ratioLeft="1018" ratioRight="340" relationship="2" relative="org.eclipse.debug.internal.ui.NavigatorFolderView">&#x0A;<folder appearance="2" expanded="2">&#x0A;<page content="org.eclipse.help.ui.HelpView" label="LabelNotFound"/>
+<info folder="true" part="stickyFolderRight" ratio="0.7496318" ratioLeft="1018" ratioRight="340" relationship="2" relative="org.eclipse.debug.internal.ui.NavigatorFolderView">
+<folder appearance="2" expanded="2">
+<page content="org.eclipse.help.ui.HelpView" label="LabelNotFound"/>
 <page content="org.eclipse.ui.internal.introview" label="LabelNotFound"/>
 <page content="org.eclipse.ui.cheatsheets.views.CheatSheetView" label="LabelNotFound"/>
 </folder>
 </info>
-<info folder="true" part="org.eclipse.debug.internal.ui.ConsoleFolderView" ratio="0.74959874" ratioLeft="467" ratioRight="156" relationship="4" relative="org.eclipse.debug.internal.ui.NavigatorFolderView">&#x0A;<folder activePageID="org.eclipse.ui.console.ConsoleView" appearance="2" expanded="2">&#x0A;<page content="org.eclipse.ui.console.ConsoleView" label="Console"/>
+<info folder="true" part="org.eclipse.debug.internal.ui.ConsoleFolderView" ratio="0.74959874" ratioLeft="467" ratioRight="156" relationship="4" relative="org.eclipse.debug.internal.ui.NavigatorFolderView">
+<folder activePageID="org.eclipse.ui.console.ConsoleView" appearance="2" expanded="2">
+<page content="org.eclipse.ui.console.ConsoleView" label="Console"/>
 <page content="org.eclipse.ui.views.TaskList" label="Tasks"/>
 <page content="org.eclipse.ui.views.BookmarkView" label="LabelNotFound"/>
 <page content="org.eclipse.ui.views.PropertySheet" label="LabelNotFound"/>
 <page content="org.eclipse.jdt.debug.ui.DisplayView" label="LabelNotFound"/>
 <page content="org.eclipse.search.SearchResultView" label="LabelNotFound"/>
-<presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory">&#x0A;<part id="0"/>
+<presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory">
+<part id="0"/>
 <part id="1"/>
 </presentation>
 </folder>
 </info>
-<info folder="true" part="org.eclipse.ui.internal.ViewStack@5021a959" ratio="0.5" ratioLeft="679" ratioRight="679" relationship="2" relative="org.eclipse.debug.internal.ui.ConsoleFolderView">&#x0A;<folder activePageID="com.android.ide.eclipse.ddms.views.LogCatView" appearance="2" expanded="2">&#x0A;<page content="com.android.ide.eclipse.ddms.views.LogCatView" label="LogCat"/>
-<presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory">&#x0A;<part id="0"/>
+<info folder="true" part="org.eclipse.ui.internal.ViewStack@5021a959" ratio="0.5" ratioLeft="679" ratioRight="679" relationship="2" relative="org.eclipse.debug.internal.ui.ConsoleFolderView">
+<folder activePageID="com.android.ide.eclipse.ddms.views.LogCatView" appearance="2" expanded="2">
+<page content="com.android.ide.eclipse.ddms.views.LogCatView" label="LogCat"/>
+<presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory">
+<part id="0"/>
 </presentation>
 </folder>
 </info>
 <info part="org.eclipse.ui.editorss" ratio="0.4496788" ratioLeft="210" ratioRight="257" relationship="4" relative="org.eclipse.debug.internal.ui.NavigatorFolderView"/>
-<info folder="true" part="org.eclipse.debug.internal.ui.OutlineFolderView" ratio="0.7496318" ratioLeft="1018" ratioRight="340" relationship="2" relative="org.eclipse.ui.editorss">&#x0A;<folder activePageID="org.eclipse.ui.views.ContentOutline" appearance="2" expanded="2">&#x0A;<page content="org.eclipse.ui.views.ContentOutline" label="Outline"/>
+<info folder="true" part="org.eclipse.debug.internal.ui.OutlineFolderView" ratio="0.7496318" ratioLeft="1018" ratioRight="340" relationship="2" relative="org.eclipse.ui.editorss">
+<folder activePageID="org.eclipse.ui.views.ContentOutline" appearance="2" expanded="2">
+<page content="org.eclipse.ui.views.ContentOutline" label="Outline"/>
 <page content="org.eclipse.ant.ui.views.AntView" label="LabelNotFound"/>
-<presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory">&#x0A;<part id="0"/>
+<presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory">
+<part id="0"/>
 </presentation>
 </folder>
 </info>
-<info folder="true" part="org.eclipse.debug.internal.ui.ToolsFolderView" ratio="0.5" ratioLeft="679" ratioRight="679" relationship="2" relative="org.eclipse.debug.internal.ui.NavigatorFolderView">&#x0A;<folder activePageID="org.eclipse.debug.ui.VariableView" appearance="2" expanded="2">&#x0A;<page content="org.eclipse.debug.ui.VariableView" label="Variables"/>
+<info folder="true" part="org.eclipse.debug.internal.ui.ToolsFolderView" ratio="0.5" ratioLeft="679" ratioRight="679" relationship="2" relative="org.eclipse.debug.internal.ui.NavigatorFolderView">
+<folder activePageID="org.eclipse.debug.ui.VariableView" appearance="2" expanded="2">
+<page content="org.eclipse.debug.ui.VariableView" label="Variables"/>
 <page content="org.eclipse.debug.ui.BreakpointView" label="Breakpoints"/>
 <page content="org.eclipse.debug.ui.ExpressionView" label="LabelNotFound"/>
 <page content="org.eclipse.debug.ui.RegisterView" label="LabelNotFound"/>
-<presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory">&#x0A;<part id="0"/>
+<presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory">
+<part id="0"/>
 <part id="1"/>
 </presentation>
 </folder>
@@ -397,79 +438,19 @@
 <editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/DissertationAndroid/src/com/example/dissertationandroid/RESTRequest.java"/>
 <editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/DissertationAndroid/src/com/example/dissertationandroid/RESTDataItem.java"/>
 <editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/DissertationAndroid/src/com/example/dissertationandroid/MainActivity.java"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/FractalActivity/src/DetailControl.java"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/FractalActivity/src/mandelbrotmaps/DetailControl.java"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/FractalActivity/src/AbstractFractalView.java"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/FractalActivity/src/FractalActivity.java"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/FractalActivity/src/mandelbrotmaps/FractalActivity.java"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/FractalActivity/src/mandelbrotmaps/AbstractFractalView.java"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="com.android.ide.eclipse.editors.CommonXmlEditor" path="/FractalActivity/res/layout/fractalscreen.xml"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="com.android.ide.eclipse.editors.CommonXmlEditor" path="/FractalActivity/res/layout/detailcontrol.xml"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="com.android.ide.eclipse.editors.CommonXmlEditor" path="/FractalActivity/res/layout-land/main.xml"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/FractalActivity/src/uk/ac/ed/inf/mandelbrotmaps/AbstractFractalView.java"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/FractalActivity/src/uk/ac/ed/inf/mandelbrotmaps/DetailControl.java"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/FractalActivity/src/uk/ac/ed/inf/mandelbrotmaps/MandelbrotFractalView.java"/>
 </editors>
-<item historyLabel="RESTRequest.java" index="1">
-<position info="not_deleted" x="0" y="0"/>
-</item>
-<item historyLabel="RESTRequest.java" index="1">
-<position/>
-</item>
-<item historyLabel="RESTDataItem.java" index="2">
-<position info="not_deleted" x="0" y="0"/>
-</item>
-<item historyLabel="RESTRequest.java" index="1">
-<position info="not_deleted" x="44" y="0"/>
-</item>
-<item historyLabel="RESTDataItem.java" index="2">
-<position info="not_deleted" x="0" y="0"/>
-</item>
-<item historyLabel="RESTDataItem.java" index="2">
-<position info="not_deleted" x="182" y="0"/>
-</item>
-<item historyLabel="RESTDataItem.java" index="2">
-<position info="not_deleted" x="182" y="0"/>
-</item>
-<item historyLabel="RESTRequest.java" index="1">
-<position info="not_deleted" x="444" y="0"/>
-</item>
-<item historyLabel="RESTRequest.java" index="1">
-<position info="not_deleted" x="702" y="6"/>
-</item>
-<item historyLabel="RESTRequest.java" index="1">
-<position info="not_deleted" x="795" y="0"/>
-</item>
-<item historyLabel="RESTRequest.java" index="1">
-<position info="not_deleted" x="484" y="9"/>
-</item>
-<item historyLabel="RESTRequest.java" index="1">
-<position info="not_deleted" x="543" y="0"/>
-</item>
-<item historyLabel="RESTRequest.java" index="1">
-<position info="not_deleted" x="1682" y="0"/>
-</item>
-<item historyLabel="RESTRequest.java" index="1">
-<position info="not_deleted" x="605" y="10"/>
-</item>
-<item historyLabel="RESTRequest.java" index="1">
-<position/>
-</item>
-<item historyLabel="RESTRequest.java" index="1">
-<position info="not_deleted" x="490" y="0"/>
-</item>
-<item historyLabel="RESTDataItem.java" index="2">
-<position info="not_deleted" x="182" y="0"/>
-</item>
-<item historyLabel="RESTRequest.java" index="1">
-<position info="not_deleted" x="1513" y="0"/>
-</item>
-<item historyLabel="RESTRequest.java" index="1">
-<position info="not_deleted" x="1525" y="0"/>
-</item>
-<item historyLabel="RESTRequest.java" index="1">
-<position info="not_deleted" x="900" y="13"/>
-</item>
-<item historyLabel="RESTRequest.java" index="1">
-<position info="not_deleted" x="887" y="1"/>
-</item>
-<item historyLabel="RESTRequest.java" index="1">
-<position info="not_deleted" x="1778" y="0"/>
-</item>
-<item historyLabel="RESTDataItem.java" index="2">
-<position info="not_deleted" x="150" y="0"/>
-</item>
-<item historyLabel="RESTRequest.java" index="1">
-<position info="not_deleted" x="1778" y="0"/>
-</item>
 <item historyLabel="RESTRequest.java" index="1">
 <position info="not_deleted" x="870" y="0"/>
 </item>
@@ -545,8 +526,70 @@
 <item historyLabel="RegisterUserActivity.java" index="0">
 <position info="not_deleted" x="731" y="1"/>
 </item>
-<item active="true" historyLabel="MainActivity.java" index="3">
+<item historyLabel="MainActivity.java" index="3">
 <position info="not_deleted" x="746" y="0"/>
+</item>
+<item historyLabel="DetailControl.java" index="4">
+<position info="not_deleted" x="0" y="0"/>
+</item>
+<item historyLabel="DetailControl.java" index="4">
+<position/>
+</item>
+<item historyLabel="DetailControl.java" index="4">
+<position/>
+</item>
+<item historyLabel="DetailControl.java" index="5">
+<position info="not_deleted" x="623" y="1"/>
+</item>
+<item historyLabel="AbstractFractalView.java" index="6">
+<position info="not_deleted" x="0" y="0"/>
+</item>
+<item historyLabel="AbstractFractalView.java" index="6">
+<position info="not_deleted" x="8" y="0"/>
+</item>
+<item historyLabel="FractalActivity.java" index="7">
+<position info="not_deleted" x="0" y="0"/>
+</item>
+<item historyLabel="FractalActivity.java" index="7">
+<position info="not_deleted" x="1474" y="0"/>
+</item>
+<item historyLabel="FractalActivity.java" index="7">
+<position info="not_deleted" x="8" y="14"/>
+</item>
+<item historyLabel="FractalActivity.java" index="8">
+<position info="not_deleted" x="8" y="14"/>
+</item>
+<item historyLabel="AbstractFractalView.java" index="6">
+<position info="not_deleted" x="8" y="0"/>
+</item>
+<item historyLabel="AbstractFractalView.java" index="9">
+<position info="not_deleted" x="8" y="14"/>
+</item>
+<item historyLabel="AbstractFractalView.java" index="9">
+<position info="not_deleted" x="172" y="0"/>
+</item>
+<item historyLabel="MainActivity.java" index="3">
+<position info="not_deleted" x="0" y="0"/>
+</item>
+<item historyLabel="fractalscreen.xml" index="10"/>
+<item historyLabel="detailcontrol.xml" index="11"/>
+<item historyLabel="land\main.xml" index="12"/>
+<item historyLabel="detailcontrol.xml" index="11"/>
+<item historyLabel="AbstractFractalView.java" index="13">
+<position info="not_deleted" x="1368" y="0"/>
+</item>
+<item historyLabel="DetailControl.java" index="14">
+<position info="not_deleted" x="3106" y="0"/>
+</item>
+<item historyLabel="fractalscreen.xml" index="10"/>
+<item historyLabel="MandelbrotFractalView.java" index="15">
+<position info="not_deleted" x="656" y="0"/>
+</item>
+<item historyLabel="AbstractFractalView.java" index="13">
+<position info="not_deleted" x="7807" y="0"/>
+</item>
+<item active="true" historyLabel="MandelbrotFractalView.java" index="15">
+<position info="not_deleted" x="656" y="0"/>
 </item>
 </navigationHistory>
 <input factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/" type="8"/>
@@ -566,6 +609,33 @@
 </trimLayout>
 </window>
 <mruList>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="MandelbrotFractalView.java" tooltip="FractalActivity/src/uk/ac/ed/inf/mandelbrotmaps/MandelbrotFractalView.java">
+<persistable path="/FractalActivity/src/uk/ac/ed/inf/mandelbrotmaps/MandelbrotFractalView.java"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="DetailControl.java" tooltip="FractalActivity/src/uk/ac/ed/inf/mandelbrotmaps/DetailControl.java">
+<persistable path="/FractalActivity/src/uk/ac/ed/inf/mandelbrotmaps/DetailControl.java"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="AbstractFractalView.java" tooltip="FractalActivity/src/uk/ac/ed/inf/mandelbrotmaps/AbstractFractalView.java">
+<persistable path="/FractalActivity/src/uk/ac/ed/inf/mandelbrotmaps/AbstractFractalView.java"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="com.android.ide.eclipse.editors.CommonXmlEditor" name="main.xml" tooltip="FractalActivity/res/layout-land/main.xml">
+<persistable path="/FractalActivity/res/layout-land/main.xml"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="com.android.ide.eclipse.editors.CommonXmlEditor" name="detailcontrol.xml" tooltip="FractalActivity/res/layout/detailcontrol.xml">
+<persistable path="/FractalActivity/res/layout/detailcontrol.xml"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="com.android.ide.eclipse.editors.CommonXmlEditor" name="fractalscreen.xml" tooltip="FractalActivity/res/layout/fractalscreen.xml">
+<persistable path="/FractalActivity/res/layout/fractalscreen.xml"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="FractalActivity.java" tooltip="FractalActivity/src/FractalActivity.java">
+<persistable path="/FractalActivity/src/FractalActivity.java"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="AbstractFractalView.java" tooltip="FractalActivity/src/AbstractFractalView.java">
+<persistable path="/FractalActivity/src/AbstractFractalView.java"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="DetailControl.java" tooltip="FractalActivity/src/DetailControl.java">
+<persistable path="/FractalActivity/src/DetailControl.java"/>
+</file>
 <file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="RESTDataItem.java" tooltip="DissertationAndroid/src/com/example/dissertationandroid/RESTDataItem.java">
 <persistable path="/DissertationAndroid/src/com/example/dissertationandroid/RESTDataItem.java"/>
 </file>
@@ -583,30 +653,6 @@
 </file>
 <file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="com.android.ide.eclipse.editors.CommonXmlEditor" name="activity_register.xml" tooltip="DissertationAndroid/res/layout/activity_register.xml">
 <persistable path="/DissertationAndroid/res/layout/activity_register.xml"/>
-</file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="com.android.ide.eclipse.editors.manifest.ManifestEditor" name="AndroidManifest.xml" tooltip="DissertationAndroid/AndroidManifest.xml">
-<persistable path="/DissertationAndroid/AndroidManifest.xml"/>
-</file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="MainActivity.java" tooltip="DissertationAndroid/src/com/example/dissertationandroid/MainActivity.java">
-<persistable path="/DissertationAndroid/src/com/example/dissertationandroid/MainActivity.java"/>
-</file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="com.android.ide.eclipse.editors.CommonXmlEditor" name="activity_main.xml" tooltip="DissertationAndroid/res/layout/activity_main.xml">
-<persistable path="/DissertationAndroid/res/layout/activity_main.xml"/>
-</file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="com.android.ide.eclipse.editors.manifest.ManifestEditor" name="AndroidManifest.xml" tooltip="DissertationApp/AndroidManifest.xml">
-<persistable path="/DissertationApp/AndroidManifest.xml"/>
-</file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.ui.DefaultTextEditor" name="proguard-project.txt" tooltip="DissertationApp/proguard-project.txt">
-<persistable path="/DissertationApp/proguard-project.txt"/>
-</file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.PropertiesFileEditor" name="project.properties" tooltip="DissertationApp/project.properties">
-<persistable path="/DissertationApp/project.properties"/>
-</file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="LoginActivity.java" tooltip="DissertationApp/src/com/example/dissertationapp/LoginActivity.java">
-<persistable path="/DissertationApp/src/com/example/dissertationapp/LoginActivity.java"/>
-</file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="com.android.ide.eclipse.editors.CommonXmlEditor" name="activity_login.xml" tooltip="DissertationApp/res/layout/activity_login.xml">
-<persistable path="/DissertationApp/res/layout/activity_login.xml"/>
 </file>
 </mruList>
 </workbench>

@@ -39,8 +39,22 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
+    <Compile Include="Pusher.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\PushSharp\PushSharp.Android\PushSharp.Google.csproj">
+      <Project>{71e27c37-fbbf-481b-934b-1f7dbde3c5d6}</Project>
+      <Name>PushSharp.Google</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\PushSharp\PushSharp.Common\PushSharp.Common.csproj">
+      <Project>{836f225f-6cd9-48de-910c-70f8a7cf54aa}</Project>
+      <Name>PushSharp.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\PushSharp\PushSharp\PushSharp.csproj">
+      <Project>{09414728-3728-4105-a149-ec2e315355f9}</Project>
+      <Name>PushSharp</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

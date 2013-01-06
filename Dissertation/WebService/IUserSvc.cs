@@ -33,6 +33,10 @@ namespace WebService {
         [OperationContract]
         [WebGet(UriTemplate = "GetDeviceId", ResponseFormat = WebMessageFormat.Json, RequestFormat = WebMessageFormat.Json)]
         int GetDeviceId(string authUsername, String authPassword, String gcmId);
+
+        [OperationContract]
+        [WebGet(UriTemplate = "SendTestNotification", ResponseFormat = WebMessageFormat.Json, RequestFormat = WebMessageFormat.Json)]
+        void SendTestNotification(int deviceId);
     }
 
 
