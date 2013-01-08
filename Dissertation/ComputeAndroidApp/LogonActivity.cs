@@ -30,6 +30,8 @@ namespace ComputeAndroidApp {
 
             Button buttonLogin = FindViewById<Button>(Resource.Id.btnLogin);
             buttonLogin.Click += buttonLogin_Click;
+
+
         }
 
         void buttonLogin_Click(object sender, EventArgs e) {

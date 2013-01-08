@@ -52,6 +52,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ProjectApps", "ProjectApps"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AppTemplate", "AppTemplate\AppTemplate.csproj", "{34E7FE81-0873-4C28-B8AF-852FA6BDBA16}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MessengerAppEx", "MessengerAppEx\MessengerAppEx.csproj", "{2C88E0F9-1AEA-45CA-A099-6C04ADC6783B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -220,6 +222,20 @@ Global
 		{34E7FE81-0873-4C28-B8AF-852FA6BDBA16}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{34E7FE81-0873-4C28-B8AF-852FA6BDBA16}.Release|Mixed Platforms.Deploy.0 = Release|Any CPU
 		{34E7FE81-0873-4C28-B8AF-852FA6BDBA16}.Release|x86.ActiveCfg = Release|Any CPU
+		{2C88E0F9-1AEA-45CA-A099-6C04ADC6783B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2C88E0F9-1AEA-45CA-A099-6C04ADC6783B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2C88E0F9-1AEA-45CA-A099-6C04ADC6783B}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{2C88E0F9-1AEA-45CA-A099-6C04ADC6783B}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{2C88E0F9-1AEA-45CA-A099-6C04ADC6783B}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{2C88E0F9-1AEA-45CA-A099-6C04ADC6783B}.Debug|Mixed Platforms.Deploy.0 = Debug|Any CPU
+		{2C88E0F9-1AEA-45CA-A099-6C04ADC6783B}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{2C88E0F9-1AEA-45CA-A099-6C04ADC6783B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2C88E0F9-1AEA-45CA-A099-6C04ADC6783B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2C88E0F9-1AEA-45CA-A099-6C04ADC6783B}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{2C88E0F9-1AEA-45CA-A099-6C04ADC6783B}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{2C88E0F9-1AEA-45CA-A099-6C04ADC6783B}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{2C88E0F9-1AEA-45CA-A099-6C04ADC6783B}.Release|Mixed Platforms.Deploy.0 = Release|Any CPU
+		{2C88E0F9-1AEA-45CA-A099-6C04ADC6783B}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -238,6 +254,7 @@ Global
 		{0EC3A31E-B869-4465-ABDC-90C2E3CCC17D} = {C09BBA3E-9CF3-4479-A4C3-3006820E2046}
 		{1B9A3A8B-3690-4435-BF9C-B557BF2713DB} = {04A9AE38-795E-4CB5-A9AD-C1FA83DC342C}
 		{34E7FE81-0873-4C28-B8AF-852FA6BDBA16} = {1590B877-8101-45C8-8653-C33008EF90B1}
+		{2C88E0F9-1AEA-45CA-A099-6C04ADC6783B} = {1590B877-8101-45C8-8653-C33008EF90B1}
 	EndGlobalSection
 	GlobalSection(MonoDevelopProperties) = preSolution
 		StartupItem = PushSharp.Sample\PushSharp.Sample.csproj
