@@ -14,7 +14,7 @@ using Android.Widget;
 namespace AppTemplate.ComputeFunction {
     [Service]
     [IntentFilter(new String[] { "com.AppTemplate.ComputeFunction.ComputeService" })]
-    public class ComputeService : Service {
+    public class ComputeService : Service, IComputeService {
         const int MAX_QUEUE_SIZE = 10;
         private List<ComputeItem> workList;
         private ComputeServiceBinder mBinder;
@@ -24,19 +24,29 @@ namespace AppTemplate.ComputeFunction {
             return mBinder;
         }
         
-        public void ComputeResult(int workOrderId, Array parameters) {
-            if (workList.Count() <= MAX_QUEUE_SIZE) {
+        public Object ComputeResult(int workOrderId, Dictionary<String, Object> parameters) {
+       //     if (workList.Count() <= MAX_QUEUE_SIZE) {
+                ComputeItem ci = new ComputeItem();
 
-            } else {
-                throw new Exception("Max items already queued/in progress.");   
-            }
+                ci.parameters = parameters;
+                ci.workOrderId = workOrderId;
+
+         //       this.workList.Add(ci);
+                
+                Object res = ci.GetResult();
+
+         //       this.workList.Remove(ci);
+
+                return res;
+       //     } else {
+          //      throw new Exception("Max items already queued/in progress.");   
+           // }
         }
-     
-        public void test() {
-            ComputeItem test = new ComputeItem();
-            test.workOrderId = 1;
-            test.test();
-        }
+
+        /* Compute functionality here */
+
+        
+
     }
     
     public class ComputeItem {
@@ -46,26 +56,15 @@ namespace AppTemplate.ComputeFunction {
             COMPLETED
         }
 
-        [Serializable()]    
-        private class ComputeItemResult {
-            public int workOrderId;
-            public Object result;
-        }
-
         public int workOrderId;
-
-        public void test() {
-            ComputeItemResult res = new ComputeItemResult();
-            res.workOrderId = 1;
-            res.result = "test";
-
-            var test = Newtonsoft.Json.JsonConvert.SerializeObject(res);
+        public Dictionary<String, Object> parameters;
 
 
-
-    
+        public Object GetResult() {
+            Object res = 0;
+            parameters.TryGetValue("IntVal", out res);
+            return (int)res + 1;
         }
-
 
     }
 
