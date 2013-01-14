@@ -31,7 +31,16 @@ namespace MessengerAppEx {
 
         class IncomingHandler : Handler {
             public override void HandleMessage(Message msg) {
- 	          Log.Error(this.Class.DeclaringClass.Class.Name, "Handlign message, ComputeService");
+
+                Message msg1 = Message.Obtain();
+                Bundle bundle = new Bundle();
+                bundle.PutString("arg1", "index.html");
+                bundle.PutString("arg2", "http://www.vogella.com/index.html");
+                msg1.Data = bundle;
+                Messenger replyto = new Messenger(msg.ReplyTo.Binder);
+                replyto.Send(msg1);
+
+ 	         // Log.Error(this.Class.DeclaringClass.Class.Name, "Handlign message, ComputeService");
             }
         }
       }

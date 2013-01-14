@@ -63,21 +63,7 @@ namespace AppTemplate {
 
             Dictionary<String, Object> parameters = new Dictionary<string,object>();
 
-            parameters.Add("IntVal", 1);
-
-            //Object result = -1;
-
-            
-
-                 /*   Dim task2 As Task(Of Test) = Task.Factory.StartNew(Function()
-                                                               Dim s As String = ".NET" 
-                                                               Dim d As Integer = 4.0
-                                                               Return New Test With {.Name = s, .Number = d}
-                                                           End Function)
-            */
-
-           
-
+            parameters.Add("IntVal", 1);      
 
           Task<Object> result = Task.Factory.StartNew(
                  () => {

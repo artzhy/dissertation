@@ -1,5 +1,5 @@
 MessengerAppEx.Activity1;messengerappex.Activity1
-MessengerAppEx.CHandler;messengerappex.CHandler
+MessengerAppEx.Activity1.IncomingHandler;messengerappex.Activity1_IncomingHandler
 MessengerAppEx.ServiceConnection;messengerappex.ServiceConnection
 MessengerAppEx.ComputeService;messengerappex.ComputeService
 MessengerAppEx.ComputeService.IncomingHandler;messengerappex.ComputeService_IncomingHandler

@@ -10,12 +10,20 @@ using Android.OS;
 namespace MessengerAppEx {
     [Activity(Label = "MessengerAppEx", MainLauncher = true, Icon = "@drawable/icon")]
     public class Activity1 : Activity, MessengerAppEx.ISvcComm {
-        int count = 1;
-        Bundle MessengerBundle = new Bundle();
-        Messenger _messenger = null;
-        IServiceConnection sc;
-        private Handler handler = new Handler();
 
+        Messenger ReplyMessenger = new Messenger(new MessengerAppEx.Activity1.IncomingHandler());
+        IServiceConnection sc;
+        Messenger _messenger;
+
+        Messenger ISvcComm.messenger {
+            get {
+                return _messenger;
+            }
+            set {
+                _messenger = value;
+            }
+        }
+  
         protected override void OnCreate(Bundle bundle) {
             base.OnCreate(bundle);
 
@@ -28,26 +36,17 @@ namespace MessengerAppEx {
 
             button.Click += button_Click;
 
-
             sc = new MessengerAppEx.ServiceConnection(this);
-
-            Intent test = new Intent(this, typeof(ComputeService));
-
-            this.ApplicationContext.StartService(test);
-            test.PutExtra("MESSENGER", messenger);
-
-            this.ApplicationContext.BindService(test, sc, Bind.AutoCreate);
-            int te = 0;
-
+       
         }
 
         void button_Click(object sender, EventArgs e) {
             Message msg = Message.Obtain();
             Bundle bundle = new Bundle();
             bundle.PutString("arg1", "index.html");
-            bundle.PutString("arg2", "http://www.vogella.com/index.html");
             msg.Data = bundle;
-            messenger.Send(msg);
+            msg.ReplyTo = ReplyMessenger;
+            _messenger.Send(msg);
         }
 
         protected override void OnResume() {
@@ -56,11 +55,6 @@ namespace MessengerAppEx {
             // Resume services
             Intent intent = null;
             intent = new Intent(this, typeof(ComputeService));
-            // Create a new Messenger for the communication back
-            // From the Service to the Activity
-            Messenger messenger = new Messenger(handler);
-            intent.PutExtra("MESSENGER", messenger);
-
             this.ApplicationContext.BindService(intent, sc, Bind.AutoCreate);
         }
 
@@ -68,26 +62,24 @@ namespace MessengerAppEx {
             base.OnPause();
             UnbindService(sc);
         }
+        
+        class IncomingHandler : Handler {
+            public override void HandleMessage(Message msg) {
 
-       public Messenger messenger {
-            get {
-                return _messenger;
-            }
-            set {
-                _messenger = value;
+                Message msg1 = Message.Obtain();
+                Bundle bundle = new Bundle();
+                bundle.PutString("arg1", "index.html");
+                msg1.Data = bundle;
+                Messenger replyto = new Messenger(msg.ReplyTo.Binder);
+                replyto.Send(msg1);
+
+                // Log.Error(this.Class.DeclaringClass.Class.Name, "Handlign message, ComputeService");
             }
         }
+
     }
 
-    class CHandler : Handler {
-        public void handleMessage(Message message) {
-            Bundle data = message.Data;
-            if (message.Arg1 == 1 && data != null) {
-                //String text = data.GetString();
-                //    Toast.MakeText(this, "here", ToastLength.Long).show();
-            }
-        }
-    }
+  
 
     class ServiceConnection : Java.Lang.Object, IServiceConnection {
         public Messenger messenger;
