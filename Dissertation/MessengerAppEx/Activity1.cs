@@ -7,11 +7,11 @@ using Android.Views;
 using Android.Widget;
 using Android.OS;
 
-namespace MessengerAppEx {
+namespace com.MessengerAppEx {
     [Activity(Label = "MessengerAppEx", MainLauncher = true, Icon = "@drawable/icon")]
-    public class Activity1 : Activity, MessengerAppEx.ISvcComm {
+    public class Activity1 : Activity, com.MessengerAppEx.ISvcComm {
 
-        Messenger ReplyMessenger = new Messenger(new MessengerAppEx.Activity1.IncomingHandler());
+        Messenger ReplyMessenger = new Messenger(new com.MessengerAppEx.Activity1.IncomingHandler());
         IServiceConnection sc;
         Messenger _messenger;
 
@@ -35,8 +35,8 @@ namespace MessengerAppEx {
             Button button = FindViewById<Button>(Resource.Id.MyButton);
 
             button.Click += button_Click;
-
-            sc = new MessengerAppEx.ServiceConnection(this);
+          
+            sc = new com.MessengerAppEx.ServiceConnection(this);
        
         }
 
@@ -47,6 +47,7 @@ namespace MessengerAppEx {
             msg.Data = bundle;
             msg.ReplyTo = ReplyMessenger;
             _messenger.Send(msg);
+            
         }
 
         protected override void OnResume() {
@@ -54,7 +55,8 @@ namespace MessengerAppEx {
 
             // Resume services
             Intent intent = null;
-            intent = new Intent(this, typeof(ComputeService));
+            intent = new Intent("com.test.service");
+         
             this.ApplicationContext.BindService(intent, sc, Bind.AutoCreate);
         }
 

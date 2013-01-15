@@ -1,0 +1,30 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ComputeApp", "App1\ComputeApp.csproj", "{4DA4C22E-C590-49A0-8E45-76D0127E4435}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ComputeUIApp", "App2\ComputeUIApp.csproj", "{AA224F64-0BE2-464C-9010-D3EB93ED8E67}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{4DA4C22E-C590-49A0-8E45-76D0127E4435}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4DA4C22E-C590-49A0-8E45-76D0127E4435}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4DA4C22E-C590-49A0-8E45-76D0127E4435}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{4DA4C22E-C590-49A0-8E45-76D0127E4435}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4DA4C22E-C590-49A0-8E45-76D0127E4435}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4DA4C22E-C590-49A0-8E45-76D0127E4435}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{AA224F64-0BE2-464C-9010-D3EB93ED8E67}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AA224F64-0BE2-464C-9010-D3EB93ED8E67}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AA224F64-0BE2-464C-9010-D3EB93ED8E67}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{AA224F64-0BE2-464C-9010-D3EB93ED8E67}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AA224F64-0BE2-464C-9010-D3EB93ED8E67}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AA224F64-0BE2-464C-9010-D3EB93ED8E67}.Release|Any CPU.Deploy.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

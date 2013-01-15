@@ -1,5 +1,5 @@
 ﻿using System;
-namespace MessengerAppEx {
+namespace com.MessengerAppEx {
     interface ISvcComm {
         Android.OS.Messenger messenger {
             get;

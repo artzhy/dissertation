@@ -9,15 +9,24 @@ using Android.OS;
 using Android.Runtime;
 using Android.Views;
 using Android.Widget;
+using Android.Util;
 
 namespace ComputeAndroidApp.BackgroundService {
     [Service]
     public class ControllerService : Service {
+        private ControllerServiceBinder binder;
+        // Service variables here.
+        
         public override IBinder OnBind(Intent intent) {
-            return null;
+           this.binder = new ControllerServiceBinder(this);
+           return this.binder;
         }
 
-        public override void OnCreate() {
+        public void DoWork() {
+            Log.Error("test", "here");
+        }
+
+     /*   public override void OnCreate() {
             base.OnCreate();
           // App.ShowDialog("test", "Backgrund service started", this);
             App.HandleException(new Exception("Here!"), this, false);
@@ -34,7 +43,7 @@ namespace ComputeAndroidApp.BackgroundService {
             base.OnDestroy();
 
             // ...
-        }
+        } */
     }
 
  

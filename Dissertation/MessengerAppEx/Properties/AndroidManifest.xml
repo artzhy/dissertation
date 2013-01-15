@@ -1,0 +1,7 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" android:installLocation="internalOnly" package="com.MessengerAppEx">
+  <uses-sdk android:targetSdkVersion="8" />
+  <application android:label="MessengerAppEx">
+	  <service android:name=".ComputeService" android:enabled="true" android:exported="true" />
+  </application>
+</manifest>

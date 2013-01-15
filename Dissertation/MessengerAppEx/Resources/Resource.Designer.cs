@@ -11,7 +11,7 @@
 
 [assembly: Android.Runtime.ResourceDesignerAttribute("MessengerAppEx.Resource", IsApplication=true)]
 
-namespace MessengerAppEx
+namespace com.MessengerAppEx
 {
 	
 	

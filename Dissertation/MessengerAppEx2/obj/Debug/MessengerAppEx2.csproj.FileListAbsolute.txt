@@ -1,0 +1,13 @@
+C:\Users\Marc.COOPERSOFTWARE\Dropbox\Dissertation\Code\Dissertation\MessengerAppEx2\bin\Debug\MessengerAppEx2.dll
+C:\Users\Marc.COOPERSOFTWARE\Dropbox\Dissertation\Code\Dissertation\MessengerAppEx2\bin\Debug\MessengerAppEx2.pdb
+C:\Users\Marc.COOPERSOFTWARE\Dropbox\Dissertation\Code\Dissertation\MessengerAppEx2\bin\Debug\MessengerAppEx2.dll.mdb
+C:\Users\Marc.COOPERSOFTWARE\Dropbox\Dissertation\Code\Dissertation\MessengerAppEx2\bin\Debug\MessengerAppEx2.MessengerAppEx2.apk
+C:\Users\Marc.COOPERSOFTWARE\Dropbox\Dissertation\Code\Dissertation\MessengerAppEx2\bin\Debug\MessengerAppEx2.MessengerAppEx2-Signed.apk
+C:\Users\Marc.COOPERSOFTWARE\Dropbox\Dissertation\Code\Dissertation\MessengerAppEx2\obj\Debug\MessengerAppEx2.dll
+C:\Users\Marc.COOPERSOFTWARE\Dropbox\Dissertation\Code\Dissertation\MessengerAppEx2\obj\Debug\MessengerAppEx2.pdb
+C:\Users\Marc.COOPERSOFTWARE\Dropbox\Dissertation\Code\Dissertation\MessengerAppEx2\obj\Debug\android\bin\MessengerAppEx2.MessengerAppEx2.apk
+C:\Users\Marc.COOPERSOFTWARE\Dropbox\Dissertation\Code\Dissertation\MessengerAppEx2\obj\Debug\res\layout\main.xml
+C:\Users\Marc.COOPERSOFTWARE\Dropbox\Dissertation\Code\Dissertation\MessengerAppEx2\obj\Debug\res\values\strings.xml
+C:\Users\Marc.COOPERSOFTWARE\Dropbox\Dissertation\Code\Dissertation\MessengerAppEx2\obj\Debug\res\drawable\icon.png
+C:\Users\Marc.COOPERSOFTWARE\Dropbox\Dissertation\Code\Dissertation\MessengerAppEx2\obj\Debug\R.cs.flag
+C:\Users\Marc.COOPERSOFTWARE\Dropbox\Dissertation\Code\Dissertation\MessengerAppEx2\obj\Debug\uploadflags.txt

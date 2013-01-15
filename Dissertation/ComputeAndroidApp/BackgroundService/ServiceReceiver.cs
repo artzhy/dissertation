@@ -18,10 +18,15 @@ namespace ComputeAndroidApp.BackgroundService {
   )]
     public class ServiceReceiver : BroadcastReceiver {
         public override void OnReceive(Context context, Intent intent) {
-            Toast.MakeText(context, "Received intent!", ToastLength.Short).Show();
-          //  Log.Info("ComputeAndroidApp.BackgroundService.ServiceReciever", "Message rec'd");
+           
             Log.Info(context.ApplicationInfo.PackageName + "-" + context.ApplicationInfo.ClassName, "Device started, attempting to start Controller service");
+           
+
             context.StartService(new Intent(context, typeof(ControllerService)));
+
+            App.BindService(context);
+           
+
 
             /*
              * adb.exe shell am broadcast -a android.intent.action.BOOT_COMPLETED -c android.inte

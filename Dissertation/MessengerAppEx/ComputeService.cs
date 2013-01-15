@@ -11,8 +11,9 @@ using Android.Views;
 using Android.Widget;
 using Android.Util;
 
-namespace MessengerAppEx {
+namespace com.MessengerAppEx {
     [Service]
+    [IntentFilter(new[] {"com.test.service"})]
     class ComputeService : Service {
         private Messenger inMessenger = new Messenger(new IncomingHandler());
         private Messenger outMessenger;

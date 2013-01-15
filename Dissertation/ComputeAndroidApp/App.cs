@@ -15,7 +15,17 @@ using Android.Util;
 namespace ComputeAndroidApp {
     class App {
         public const String GCM_SENDER_ID = "348279368873";
-       
+
+        public static BackgroundService.ControllerServiceBinder binder;
+
+        public static BackgroundService.ServiceConnection sc = new BackgroundService.ServiceConnection();
+
+        public static void BindService(Context context) {
+           
+            context.BindService(new Intent(context, typeof(BackgroundService.ControllerService)), ComputeAndroidApp.App.sc, Bind.AutoCreate);
+        }
+
+
 
         /// <summary>
         ///  
