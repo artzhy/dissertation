@@ -9,10 +9,6 @@
     <service android:name="computeandroidapp.backgroundservice.ControllerService" />
     <receiver android:permission="com.google.android.c2dm.permission.SEND" android:name="computeandroidapp.BroadcastReceiver">
       <intent-filter>
-        <action android:name="com.google.android.c2dm.intent.RECEIVE" />
-        <category android:name="ComputeAndroidApp" />
-      </intent-filter>
-      <intent-filter>
         <action android:name="com.google.android.c2dm.intent.REGISTRATION" />
         <category android:name="ComputeAndroidApp" />
       </intent-filter>
@@ -20,10 +16,15 @@
         <action android:name="com.google.android.gcm.intent.RETRY" />
         <category android:name="ComputeAndroidApp" />
       </intent-filter>
+      <intent-filter>
+        <action android:name="com.google.android.c2dm.intent.RECEIVE" />
+        <category android:name="ComputeAndroidApp" />
+      </intent-filter>
     </receiver>
     <receiver android:name="computeandroidapp.backgroundservice.ServiceReceiver">
       <intent-filter>
         <action android:name="android.intent.action.BOOT_COMPLETED" />
+        <action android:name="com.ComputeApp.ControllerService.Intent.Message" />
         <category android:name="android.intent.category.HOME" />
       </intent-filter>
     </receiver>

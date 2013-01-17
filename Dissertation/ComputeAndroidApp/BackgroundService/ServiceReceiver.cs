@@ -13,7 +13,7 @@ using Android.Util;
 
 namespace ComputeAndroidApp.BackgroundService {
     [BroadcastReceiver]
-    [IntentFilter(new[] { Android.Content.Intent.ActionBootCompleted },
+    [IntentFilter(new[] { Android.Content.Intent.ActionBootCompleted, "com.ComputeApp.ControllerService.Intent.Message" },
           Categories = new[] { Android.Content.Intent.CategoryHome }
   )]
     public class ServiceReceiver : BroadcastReceiver {
@@ -28,8 +28,10 @@ namespace ComputeAndroidApp.BackgroundService {
 
            ControllerServiceBinder binder = (ControllerServiceBinder)PeekService(context, ourIntent);
 
-           binder.GetService().DoWork();
-           
+          // binder.GetService().DoWork();
+
+           binder.GetService().DoCommand("com.ComputeApps.TestApp.Intents.DoWork");
+
            
          // (BackgroundService.ControllerServiceBinder)binder.
 

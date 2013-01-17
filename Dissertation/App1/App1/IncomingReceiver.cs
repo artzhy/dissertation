@@ -21,7 +21,14 @@ namespace com.ComputeApps.TestApp {
 
             }
 
-            Log.Error("com.App1.IncomingReciever", "HERE");
+
+            //Intent test = new Intent();
+            //test.SetAction("com.ComputeApp.ControllerService.Intent.Message");
+            //context.SendBroadcast(test);
+
+
+
+            Log.Error("com.ComputeApps.TestApp.Intents.DoWork", "HERE!!");
 
           
         }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
+
 using Android.App;
 using Android.Content;
 using Android.OS;
@@ -10,6 +11,8 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using Android.Util;
+
+using Newtonsoft.Json;
 
 namespace ComputeAndroidApp.BackgroundService {
     [Service]
@@ -29,7 +32,33 @@ namespace ComputeAndroidApp.BackgroundService {
         }
 
         public void NotifyDeviceActive() {
+           //  new UserWS.UserSvc().
+        }
 
+        public void DoCommand(String IntentAction) {
+            Intent test = new Intent();
+
+            Common.CommPackage pkg = new Common.CommPackage();
+            pkg.ComputationRequestId = 1;
+            List<ComputeAndroidApp.Common.CommPackage.ParamListItem> list = new List<ComputeAndroidApp.Common.CommPackage.ParamListItem>();
+           list.Add(new Common.CommPackage.ParamListItem("Param1", "VAlue1"));
+
+            pkg.ParameterList = list;
+            pkg.IntentAction = "intent.action";
+
+
+            
+           // Newtonsoft.Json.JsonSerializer.Create().Serialize(
+
+            string json = JsonConvert.SerializeObject(pkg, Formatting.Indented, new JsonSerializerSettings {
+                TypeNameHandling = TypeNameHandling.All,
+                TypeNameAssemblyFormat  = System.Runtime.Serialization.Formatters.FormatterAssemblyStyle.Simple
+            });
+            
+      //      test.PutExtra("params", JsonConvert.SerializeObject(lst));
+
+            test.SetAction(IntentAction);
+            this.ApplicationContext.SendBroadcast(test);           
         }
 
         public override void OnCreate() {

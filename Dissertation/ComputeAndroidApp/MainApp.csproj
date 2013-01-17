@@ -62,6 +62,7 @@
     <Compile Include="BackgroundService\IAppConn.cs" />
     <Compile Include="BackgroundService\ServiceConnection.cs" />
     <Compile Include="BackgroundService\ServiceReceiver.cs" />
+    <Compile Include="Common\CommPackage.cs" />
     <Compile Include="OverviewActivity.cs" />
     <Compile Include="App.cs" />
     <Compile Include="BroadcastReciever.cs" />

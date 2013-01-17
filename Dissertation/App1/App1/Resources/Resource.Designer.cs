@@ -11,7 +11,7 @@
 
 [assembly: Android.Runtime.ResourceDesignerAttribute("com.App1.Resource", IsApplication=true)]
 
-namespace com.ComputeApps.TestApp
+namespace com.App1
 {
 	
 	
