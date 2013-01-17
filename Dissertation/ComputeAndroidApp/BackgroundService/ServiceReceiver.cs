@@ -21,12 +21,28 @@ namespace ComputeAndroidApp.BackgroundService {
            
             Log.Info(context.ApplicationInfo.PackageName + "-" + context.ApplicationInfo.ClassName, "Device started, attempting to start Controller service");
            
+           Intent ourIntent = new Intent(context, typeof(ControllerService));
 
-            context.StartService(new Intent(context, typeof(ControllerService)));
 
-            App.BindService(context);
+          // context.StartService(ourIntent);
+
+           ControllerServiceBinder binder = (ControllerServiceBinder)PeekService(context, ourIntent);
+
+           binder.GetService().DoWork();
            
+           
+         // (BackgroundService.ControllerServiceBinder)binder.
 
+
+            
+
+       
+
+
+          //  App.BindControllerService();
+
+           
+         
 
             /*
              * adb.exe shell am broadcast -a android.intent.action.BOOT_COMPLETED -c android.inte

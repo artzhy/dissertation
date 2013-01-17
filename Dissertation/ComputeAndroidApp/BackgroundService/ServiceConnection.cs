@@ -13,31 +13,26 @@ using Android.Widget;
 namespace ComputeAndroidApp.BackgroundService {
     class ServiceConnection : Java.Lang.Object, IServiceConnection {
         private ControllerServiceBinder binder;
-      //  private IComputeActivity activity;
+        private IAppConn app;
 
-      //  public ServiceConnection(IComputeActivity act) {
-      //      this.activity = act;
-      //  }
-
-      //  public ComputeServiceBinder Binder {
-      //      get {
-     //           return this.binder;
-     //       }
-     //   }
+        public ServiceConnection(IAppConn app) {
+            this.app = app;
+        }
 
         public void OnServiceConnected(ComponentName name, IBinder service) {
             ControllerServiceBinder compSvcBinder = (ControllerServiceBinder)service;
 
             if (compSvcBinder != null) {
                 this.binder = (ControllerServiceBinder)service;
-             //   this.activity.binder = this.binder;
-              //  this.activity.binderSet = true;
+                this.app.ServiceBinder = this.binder;
+                this.app.binderSet = true;
 
             }
         }
 
         public void OnServiceDisconnected(ComponentName name) {
-            throw new NotImplementedException();
+            this.app.ServiceBinder = null;
+            this.app.binderSet = false;
         }
 
 

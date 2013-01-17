@@ -17,6 +17,8 @@ namespace ComputeAndroidApp.BackgroundService {
         private ControllerServiceBinder binder;
         // Service variables here.
         
+
+
         public override IBinder OnBind(Intent intent) {
            this.binder = new ControllerServiceBinder(this);
            return this.binder;
@@ -26,9 +28,12 @@ namespace ComputeAndroidApp.BackgroundService {
             Log.Error("test", "here");
         }
 
-     /*   public override void OnCreate() {
+        public void NotifyDeviceActive() {
+
+        }
+
+        public override void OnCreate() {
             base.OnCreate();
-          // App.ShowDialog("test", "Backgrund service started", this);
             App.HandleException(new Exception("Here!"), this, false);
             // ...
         }
@@ -36,6 +41,7 @@ namespace ComputeAndroidApp.BackgroundService {
         public override void OnStart(Intent intent, int startId) {
             base.OnStart(intent, startId);
             App.HandleException(new Exception("Here!"), this, false);
+
             // ...
         }
 
@@ -43,7 +49,7 @@ namespace ComputeAndroidApp.BackgroundService {
             base.OnDestroy();
 
             // ...
-        } */
+        } 
     }
 
  

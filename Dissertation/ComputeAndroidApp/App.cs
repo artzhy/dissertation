@@ -13,18 +13,52 @@ using Android.Widget;
 using Android.Util;
 
 namespace ComputeAndroidApp {
-    class App {
+    [Application]
+    class App : Application, BackgroundService.IAppConn {
         public const String GCM_SENDER_ID = "348279368873";
 
-        public static BackgroundService.ControllerServiceBinder binder;
+        private BackgroundService.ControllerServiceBinder _binder;
+        private Boolean _binderSet;
 
-        public static BackgroundService.ServiceConnection sc = new BackgroundService.ServiceConnection();
 
-        public static void BindService(Context context) {
-           
-            context.BindService(new Intent(context, typeof(BackgroundService.ControllerService)), ComputeAndroidApp.App.sc, Bind.AutoCreate);
+        public BackgroundService.ServiceConnection sc;
+
+        public App(IntPtr handle, JniHandleOwnership transfer)
+            : base(handle, transfer) {
         }
 
+        public override void OnCreate() {
+            base.OnCreate();
+
+            ApplicationContext.StartService(new Intent(ApplicationContext, typeof(BackgroundService.ControllerService)));
+            BindControllerService();
+
+        }
+
+        public void BindControllerService() {
+            sc = new BackgroundService.ServiceConnection(this);
+
+            this.ApplicationContext.BindService(new Intent(this, typeof(BackgroundService.ControllerService)), sc, Bind.AutoCreate);
+
+        }
+
+        public BackgroundService.ControllerServiceBinder ServiceBinder {
+            get {
+                return this._binder;
+            }
+            set {
+                this._binder = value;
+            }
+        }
+
+        public bool binderSet {
+            get {
+                return this._binderSet;
+            }
+            set {
+                this._binderSet = value;
+            }
+        }
 
 
         /// <summary>
@@ -36,7 +70,7 @@ namespace ComputeAndroidApp {
             ISharedPreferences prefs = context.GetSharedPreferences(context.PackageName, FileCreationMode.Private);
 
             return prefs.GetInt("DeviceID", -1);
-            }
+        }
 
         public static void setDeviceId(Context context, int deviceId) {
             ISharedPreferences prefs = context.GetSharedPreferences(context.PackageName, FileCreationMode.Private);
@@ -59,7 +93,7 @@ namespace ComputeAndroidApp {
             ISharedPreferences prefs = context.GetSharedPreferences(context.PackageName, FileCreationMode.Private);
 
             prefs.Edit().PutString("Username", username).Commit();
-            
+
         }
 
         /// <summary>
@@ -78,7 +112,7 @@ namespace ComputeAndroidApp {
 
             prefs.Edit().PutString("Password", password).Commit();
         }
-            
+
         /// <summary>
         /// 
         /// 
@@ -96,19 +130,17 @@ namespace ComputeAndroidApp {
             prefs.Edit().PutString("GCMCode", GCMCode).Commit();
         }
 
-       
-        
         public static void ShowDialog(String title, String message, Context context) {
             AlertDialog.Builder builder = new AlertDialog.Builder(context);
-                builder.SetCancelable(true);
-                builder.SetTitle(title);
-                builder.SetInverseBackgroundForced(true);
-                builder.SetMessage(message);
-                builder.SetPositiveButton("OK", delegate {
-                   
-                });
-                AlertDialog alert = builder.Create();
-                alert.Show();
+            builder.SetCancelable(true);
+            builder.SetTitle(title);
+            builder.SetInverseBackgroundForced(true);
+            builder.SetMessage(message);
+            builder.SetPositiveButton("OK", delegate {
+
+            });
+            AlertDialog alert = builder.Create();
+            alert.Show();
         }
 
         public static void HandleException(Exception e, Context context, Boolean showDialog = true) {
@@ -123,7 +155,7 @@ namespace ComputeAndroidApp {
                 AlertDialog alert = builder.Create();
                 alert.Show();
             }
-           
+
             Log.Error(e.Source, e.Message + " \n   " + e.InnerException);
         }
 
@@ -143,18 +175,18 @@ namespace ComputeAndroidApp {
             } catch (Exception ex) {
                 // Ignore excptions thrown hfrom ehre
             }
-            
-             setDeviceId(context, deviceId);
+
+            setDeviceId(context, deviceId);
 
             if (GetDeviceId(context) == -1) {
-                
+
                 UserWS.UserDevice ud = new UserWS.UserSvc().AddUserDevice(GetUsername(context), GetPassword(context), Android.OS.Build.Model, 500, true, 0, false, gcmRegId);
                 setDeviceId(context, ud.DeviceIdk__BackingField);
 
             }
-            
+
             return gcmRegId;
-            
+
         }
 
         public static void DeregisterDevice(Context context) {
@@ -169,5 +201,7 @@ namespace ComputeAndroidApp {
 
             }
         }
+
+
     }
 }

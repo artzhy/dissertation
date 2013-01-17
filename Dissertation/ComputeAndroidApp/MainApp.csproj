@@ -19,6 +19,7 @@
     <AndroidSupportedAbis>armeabi%3barmeabi-v7a%3bx86</AndroidSupportedAbis>
     <AndroidStoreUncompressedFileExtensions />
     <MandroidI18n />
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>True</DebugSymbols>
@@ -58,6 +59,7 @@
   <ItemGroup>
     <Compile Include="BackgroundService\ControllerService.cs" />
     <Compile Include="BackgroundService\ControllerServiceBinder.cs" />
+    <Compile Include="BackgroundService\IAppConn.cs" />
     <Compile Include="BackgroundService\ServiceConnection.cs" />
     <Compile Include="BackgroundService\ServiceReceiver.cs" />
     <Compile Include="OverviewActivity.cs" />
