@@ -13,6 +13,7 @@ using Android.Widget;
 using Android.Util;
 
 using Newtonsoft.Json;
+using ComputeAndroidSDK.Communication;
 
 namespace ComputeAndroidApp.BackgroundService {
     [Service]
@@ -38,25 +39,15 @@ namespace ComputeAndroidApp.BackgroundService {
         public void DoCommand(String IntentAction) {
             Intent test = new Intent();
 
-            Common.CommPackage pkg = new Common.CommPackage();
+            CommPackage pkg = new CommPackage();
             pkg.ComputationRequestId = 1;
-            List<ComputeAndroidApp.Common.CommPackage.ParamListItem> list = new List<ComputeAndroidApp.Common.CommPackage.ParamListItem>();
-           list.Add(new Common.CommPackage.ParamListItem("Param1", "VAlue1"));
+            List<CommPackage.ParamListItem> list = new List<CommPackage.ParamListItem>();
+            list.Add(new CommPackage.ParamListItem("Param1", "VAlue1"));
 
             pkg.ParameterList = list;
             pkg.IntentAction = "intent.action";
 
-
-            
-           // Newtonsoft.Json.JsonSerializer.Create().Serialize(
-
-            string json = JsonConvert.SerializeObject(pkg, Formatting.Indented, new JsonSerializerSettings {
-                TypeNameHandling = TypeNameHandling.All,
-                TypeNameAssemblyFormat  = System.Runtime.Serialization.Formatters.FormatterAssemblyStyle.Simple
-            });
-            
-      //      test.PutExtra("params", JsonConvert.SerializeObject(lst));
-
+            test.PutExtra("CommPackage", pkg.SerializeJson());
             test.SetAction(IntentAction);
             this.ApplicationContext.SendBroadcast(test);           
         }

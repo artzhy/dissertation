@@ -11,3 +11,9 @@ C:\Users\Marc.COOPERSOFTWARE\Dropbox\Dissertation\Code\Dissertation\App1\App1\ob
 C:\Users\Marc.COOPERSOFTWARE\Dropbox\Dissertation\Code\Dissertation\App1\App1\obj\Debug\res\drawable\icon.png
 C:\Users\Marc.COOPERSOFTWARE\Dropbox\Dissertation\Code\Dissertation\App1\App1\obj\Debug\R.cs.flag
 C:\Users\Marc.COOPERSOFTWARE\Dropbox\Dissertation\Code\Dissertation\App1\App1\obj\Debug\uploadflags.txt
+C:\Users\Marc.COOPERSOFTWARE\Dropbox\Dissertation\Code\Dissertation\App1\App1\bin\Debug\SharedDevClasses.dll
+C:\Users\Marc.COOPERSOFTWARE\Dropbox\Dissertation\Code\Dissertation\App1\App1\bin\Debug\Newtonsoft.Json.MonoDroid.dll
+C:\Users\Marc.COOPERSOFTWARE\Dropbox\Dissertation\Code\Dissertation\App1\App1\bin\Debug\SharedDevClasses.pdb
+C:\Users\Marc.COOPERSOFTWARE\Dropbox\Dissertation\Code\Dissertation\App1\App1\bin\Debug\SharedDevClasses.dll.mdb
+C:\Users\Marc.COOPERSOFTWARE\Dropbox\Dissertation\Code\Dissertation\App1\App1\obj\Debug\Background.csprojResolveAssemblyReference.cache
+C:\Users\Marc.COOPERSOFTWARE\Dropbox\Dissertation\Code\Dissertation\App1\App1\bin\Debug\SharedDevClasses.xml

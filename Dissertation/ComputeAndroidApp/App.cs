@@ -12,54 +12,58 @@ using Android.Widget;
 
 using Android.Util;
 
+using Newtonsoft.Json;
+
 namespace ComputeAndroidApp {
     [Application]
     class App : Application, BackgroundService.IAppConn {
-        public const String GCM_SENDER_ID = "348279368873";
+        #region "Variables"
+            public const String GCM_SENDER_ID = "348279368873";
+            private BackgroundService.ControllerServiceBinder _binder;
+            private Boolean _binderSet;
+            public BackgroundService.ServiceConnection sc;
+        #endregion
 
-        private BackgroundService.ControllerServiceBinder _binder;
-        private Boolean _binderSet;
+        #region "App Functions"
+                public App(IntPtr handle, JniHandleOwnership transfer)
+                    : base(handle, transfer) {
+                }
 
+                public override void OnCreate() {
+                    base.OnCreate();
 
-        public BackgroundService.ServiceConnection sc;
+                    ApplicationContext.StartService(new Intent(ApplicationContext, typeof(BackgroundService.ControllerService)));
+                    BindControllerService();
 
-        public App(IntPtr handle, JniHandleOwnership transfer)
-            : base(handle, transfer) {
-        }
+                }
 
-        public override void OnCreate() {
-            base.OnCreate();
+                public void BindControllerService() {
+                    sc = new BackgroundService.ServiceConnection(this);
 
-            ApplicationContext.StartService(new Intent(ApplicationContext, typeof(BackgroundService.ControllerService)));
-            BindControllerService();
+                    this.ApplicationContext.BindService(new Intent(this, typeof(BackgroundService.ControllerService)), sc, Bind.AutoCreate);
 
-        }
+                }
 
-        public void BindControllerService() {
-            sc = new BackgroundService.ServiceConnection(this);
+                public BackgroundService.ControllerServiceBinder ServiceBinder {
+                    get {
+                        return this._binder;
+                    }
+                    set {
+                        this._binder = value;
+                    }
+                }
 
-            this.ApplicationContext.BindService(new Intent(this, typeof(BackgroundService.ControllerService)), sc, Bind.AutoCreate);
+                public bool binderSet {
+                    get {
+                        return this._binderSet;
+                    }
+                    set {
+                        this._binderSet = value;
+                    }
+                }
+            #endregion
 
-        }
-
-        public BackgroundService.ControllerServiceBinder ServiceBinder {
-            get {
-                return this._binder;
-            }
-            set {
-                this._binder = value;
-            }
-        }
-
-        public bool binderSet {
-            get {
-                return this._binderSet;
-            }
-            set {
-                this._binderSet = value;
-            }
-        }
-
+        #region "Device Functions"
 
         /// <summary>
         ///  
@@ -202,6 +206,15 @@ namespace ComputeAndroidApp {
             }
         }
 
+
+        #endregion
+
+        #region "General Utilites"
+            public static String SerializeToJson(Object o) {
+                return JsonConvert.SerializeObject(o);  
+            }
+
+        #endregion
 
     }
 }

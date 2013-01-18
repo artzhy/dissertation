@@ -44,14 +44,14 @@
   <ItemGroup>
     <Reference Include="Mono.Android" />
     <Reference Include="mscorlib" />
-    <Reference Include="Newtonsoft.Json, Version=4.0.8.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\External DLLs\Newtonsoft.Json.dll</HintPath>
+    <Reference Include="Newtonsoft.Json.MonoDroid">
+      <HintPath>..\External DLLs\Newtonsoft.Json.MonoDroid.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data" />
     <Reference Include="System.EnterpriseServices" />
+    <Reference Include="System.Json" />
     <Reference Include="System.Web.Services" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Xml" />
@@ -62,7 +62,6 @@
     <Compile Include="BackgroundService\IAppConn.cs" />
     <Compile Include="BackgroundService\ServiceConnection.cs" />
     <Compile Include="BackgroundService\ServiceReceiver.cs" />
-    <Compile Include="Common\CommPackage.cs" />
     <Compile Include="OverviewActivity.cs" />
     <Compile Include="App.cs" />
     <Compile Include="BroadcastReciever.cs" />
@@ -169,6 +168,10 @@
     <ProjectReference Include="..\PushSharp\PushSharp.Client\PushSharp.Client.MonoForAndroid.Gcm\PushSharp.Client.MonoForAndroid.Gcm.csproj">
       <Project>{1466d096-69fa-4b75-bbb6-533ffaf5d4eb}</Project>
       <Name>PushSharp.Client.MonoForAndroid.Gcm</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SharedDevClasses\SharedDevClasses.csproj">
+      <Project>{1c1a4636-8b84-4da3-9965-9cf97e3c5a97}</Project>
+      <Name>SharedDevClasses</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Novell\Novell.MonoDroid.CSharp.targets" />
