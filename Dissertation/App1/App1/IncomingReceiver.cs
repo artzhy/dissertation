@@ -19,12 +19,13 @@ namespace com.ComputeApps.TestApp {
     public class IncomingReceiver : BroadcastReceiver {
     
         public override void OnReceive(Context context, Intent intent) {
-            //Intent test = new Intent();
-            //test.SetAction("com.ComputeApp.ControllerService.Intent.Message");
-            //context.SendBroadcast(test);
-                        try {
+            try {
                 CommPackage cp = CommPackage.DeserializeJson(intent.GetStringExtra("CommPackage"));
                 Log.Error("com.ComputeApps.TestApp.Intents.DoWork", "HERE!!");
+              //  App1.WorkList.getWorkList();
+                App1.WorkList.AddWorkItem(cp);
+
+                int test = 0;
             } catch (Exception ex) {
                 Log.Error("App1.Receiver.OnReceive", ex.Message);
             }
