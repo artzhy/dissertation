@@ -13,7 +13,7 @@ using Android.Util;
 
 using ComputeAndroidSDK.Communication;
 
-namespace com.App1 {
+namespace com.ComputeApps.TestApp {
     [Activity(Label = "My Activity", MainLauncher=true)]
     public class Activity1 : Activity {
         protected override void OnCreate(Bundle bundle) {

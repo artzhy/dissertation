@@ -1,2 +1,2 @@
-com.App1.Activity1;com.app1.Activity1
+com.ComputeApps.TestApp.Activity1;com.computeapps.testapp.Activity1
 com.ComputeApps.TestApp.IncomingReceiver;com.computeapps.testapp.IncomingReceiver

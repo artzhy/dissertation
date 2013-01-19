@@ -16,23 +16,23 @@ namespace WebService {
 
         [OperationContract]
         [WebGet(UriTemplate = "ModifyUser", ResponseFormat = WebMessageFormat.Json, RequestFormat = WebMessageFormat.Json)]
-        void ModifyUser(String authUsername, string authPassword, int userId, string forename, string surname, string password);
+        void ModifyUser(AuthToken at, int userId, string forename, string surname, string password);
 
         [OperationContract]
         [WebGet(UriTemplate = "AddUserDevice", ResponseFormat = WebMessageFormat.Json, RequestFormat = WebMessageFormat.Json)]
-        BusinessLayer.UserDevice AddUserDevice(string authUsername, String authPassword, string deviceType, int deviceMemoryResource, int deviceProcRating, String gcmCode);
+        BusinessLayer.UserDevice AddUserDevice(AuthToken at, string deviceType, int deviceMemoryResource, int deviceProcRating, String gcmCode);
 
         [OperationContract]
         [WebGet(UriTemplate = "DeleteUserDevice", ResponseFormat = WebMessageFormat.Json, RequestFormat = WebMessageFormat.Json)]
-        void DeleteUserDevice(string authUsername, String authPassword, int deviceId);
+        void DeleteUserDevice(AuthToken at, int deviceId);
 
         [OperationContract]
         [WebGet(UriTemplate = "ModifyUserDevice", ResponseFormat = WebMessageFormat.Json, RequestFormat = WebMessageFormat.Json)]
-        void ModifyUserDevice(string authUsername, String authPassword, String gcmCode, int deviceId = -1);
+        void ModifyUserDevice(AuthToken at, String gcmCode, int deviceId = -1);
 
         [OperationContract]
         [WebGet(UriTemplate = "GetDeviceId", ResponseFormat = WebMessageFormat.Json, RequestFormat = WebMessageFormat.Json)]
-        int GetDeviceId(string authUsername, String authPassword, String gcmId);
+        int GetDeviceId(AuthToken at, String gcmId);
 
         [OperationContract]
         [WebGet(UriTemplate = "SendTestNotification", ResponseFormat = WebMessageFormat.Json, RequestFormat = WebMessageFormat.Json)]

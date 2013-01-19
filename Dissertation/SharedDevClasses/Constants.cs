@@ -13,6 +13,7 @@ using Android.Widget;
 namespace ComputeAndroidSDK.Communication {
     public class Constants {
         public const string RETURN_RESULT_INTENT = "com.ComputeApp.ControllerService.Intent.Result";
+        public const string RETURN_STATUS_INTENT = "com.ComputeApp.ControllerService.Intent.Status";
 
     }
 }

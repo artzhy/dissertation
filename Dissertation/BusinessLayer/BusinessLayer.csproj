@@ -49,6 +49,9 @@
     <Compile Include="App.cs" />
     <Compile Include="BLUser.cs" />
     <Compile Include="BLUserDevice.cs" />
+    <Compile Include="BLDeviceApplication.cs" />
+    <Compile Include="BLDeviceAppInstall.cs" />
+    <Compile Include="BLWorkOrder.cs" />
     <Compile Include="DBModel.Context.cs">
       <DependentUpon>DBModel.Context.tt</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -64,11 +67,20 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
+    <Compile Include="DeviceAppInstallation.cs">
+      <DependentUpon>DBModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="User.cs">
       <DependentUpon>DBModel.tt</DependentUpon>
     </Compile>
     <Compile Include="UserDevice.cs">
+      <DependentUpon>DBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="WorkApplication.cs">
+      <DependentUpon>DBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="WorkOrder.cs">
       <DependentUpon>DBModel.tt</DependentUpon>
     </Compile>
   </ItemGroup>

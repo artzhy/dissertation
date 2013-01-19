@@ -24,8 +24,8 @@ namespace com.ComputeApps.TestApp {
                 Log.Error("com.ComputeApps.TestApp.Intents.DoWork", "HERE!!");
             
 
-                App1.WorkList.SetAppContext(context);
-                App1.WorkList.AddWorkItem(cp);
+                ComputeApps.TestApp.WorkList.SetAppContext(context);
+                ComputeApps.TestApp.WorkList.AddWorkItem(cp);
 
                 int test = 0;
             } catch (Exception ex) {

@@ -11,7 +11,7 @@ public class IncomingReceiver
 		__md_methods = 
 			"n_onReceive:(Landroid/content/Context;Landroid/content/Intent;)V:GetOnReceive_Landroid_content_Context_Landroid_content_Intent_Handler\n" +
 			"";
-		mono.android.Runtime.register ("com.ComputeApps.TestApp.IncomingReceiver, App1, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null", IncomingReceiver.class, __md_methods);
+		mono.android.Runtime.register ("com.ComputeApps.TestApp.IncomingReceiver, com.ComputeApps.TestApp, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null", IncomingReceiver.class, __md_methods);
 	}
 
 
@@ -19,7 +19,7 @@ public class IncomingReceiver
 	{
 		super ();
 		if (getClass () == IncomingReceiver.class)
-			mono.android.TypeManager.Activate ("com.ComputeApps.TestApp.IncomingReceiver, App1, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null", "", this, new java.lang.Object[] {  });
+			mono.android.TypeManager.Activate ("com.ComputeApps.TestApp.IncomingReceiver, com.ComputeApps.TestApp, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null", "", this, new java.lang.Object[] {  });
 	}
 
 

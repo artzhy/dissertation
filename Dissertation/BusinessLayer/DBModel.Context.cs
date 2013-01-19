@@ -25,7 +25,10 @@ namespace BusinessLayer
             throw new UnintentionalCodeFirstException();
         }
     
+        public DbSet<DeviceAppInstallation> DeviceAppInstallations { get; set; }
         public DbSet<User> Users { get; set; }
         public DbSet<UserDevice> UserDevices { get; set; }
+        public DbSet<WorkApplication> WorkApplications { get; set; }
+        public DbSet<WorkOrder> WorkOrders { get; set; }
     }
 }

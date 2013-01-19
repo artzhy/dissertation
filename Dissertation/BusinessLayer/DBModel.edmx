@@ -6,13 +6,45 @@
     <edmx:StorageModels>
     <Schema Namespace="marcdissertation_dbModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
         <EntityContainer Name="marcdissertation_dbModelStoreContainer">
+          <EntitySet Name="DeviceAppInstallation" EntityType="marcdissertation_dbModel.Store.DeviceAppInstallation" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="User" EntityType="marcdissertation_dbModel.Store.User" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="UserDevice" EntityType="marcdissertation_dbModel.Store.UserDevice" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="WorkApplication" EntityType="marcdissertation_dbModel.Store.WorkApplication" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="WorkOrder" EntityType="marcdissertation_dbModel.Store.WorkOrder" store:Type="Tables" Schema="dbo" />
+          <AssociationSet Name="FKApplicationId" Association="marcdissertation_dbModel.Store.FKApplicationId">
+            <End Role="WorkApplication" EntitySet="WorkApplication" />
+            <End Role="WorkOrder" EntitySet="WorkOrder" />
+          </AssociationSet>
+          <AssociationSet Name="FKApplicationId1" Association="marcdissertation_dbModel.Store.FKApplicationId1">
+            <End Role="WorkApplication" EntitySet="WorkApplication" />
+            <End Role="DeviceAppInstallation" EntitySet="DeviceAppInstallation" />
+          </AssociationSet>
+          <AssociationSet Name="FKDeviceId" Association="marcdissertation_dbModel.Store.FKDeviceId">
+            <End Role="UserDevice" EntitySet="UserDevice" />
+            <End Role="WorkOrder" EntitySet="WorkOrder" />
+          </AssociationSet>
+          <AssociationSet Name="FKDeviceId1" Association="marcdissertation_dbModel.Store.FKDeviceId1">
+            <End Role="UserDevice" EntitySet="UserDevice" />
+            <End Role="DeviceAppInstallation" EntitySet="DeviceAppInstallation" />
+          </AssociationSet>
+          <AssociationSet Name="FKSlaveWorkerID" Association="marcdissertation_dbModel.Store.FKSlaveWorkerID">
+            <End Role="UserDevice" EntitySet="UserDevice" />
+            <End Role="WorkOrder" EntitySet="WorkOrder" />
+          </AssociationSet>
           <AssociationSet Name="UserFK" Association="marcdissertation_dbModel.Store.UserFK">
             <End Role="User" EntitySet="User" />
             <End Role="UserDevice" EntitySet="UserDevice" />
           </AssociationSet>
         </EntityContainer>
+        <EntityType Name="DeviceAppInstallation">
+          <Key>
+            <PropertyRef Name="ApplicationDevicePairId" />
+          </Key>
+          <Property Name="ApplicationDevicePairId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="ApplicationId" Type="int" Nullable="false" />
+          <Property Name="DeviceId" Type="int" Nullable="false" />
+          <Property Name="InstallDate" Type="datetime" Nullable="false" />
+        </EntityType>
         <EntityType Name="User">
           <Key>
             <PropertyRef Name="Username" />
@@ -34,6 +66,94 @@
           <Property Name="DeviceProcRating" Type="int" Nullable="false" />
           <Property Name="GCMCode" Type="nvarchar(max)" />
         </EntityType>
+        <EntityType Name="WorkApplication">
+          <Key>
+            <PropertyRef Name="ApplicationId" />
+          </Key>
+          <Property Name="ApplicationId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="ApplicationName" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="ApplicationDescription" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="ApplicationCreator" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="ApplicationPackageURL" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="ApplicationWorkIntent" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="ApplicationVersion" Type="int" Nullable="false" />
+          <Property Name="ApplicationNamespace" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="WorkOrder">
+          <Key>
+            <PropertyRef Name="WorkOrderId" />
+          </Key>
+          <Property Name="WorkOrderId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="DeviceId" Type="int" Nullable="false" />
+          <Property Name="ApplicationId" Type="int" Nullable="false" />
+          <Property Name="CommPackageJson" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="ReceiveTime" Type="datetime" Nullable="false" />
+          <Property Name="SlaveWorkerId" Type="int" />
+          <Property Name="SlaveWorkerSubmit" Type="datetime" />
+          <Property Name="SlaveWorkOrderLastCommunication" Type="datetime" />
+          <Property Name="WorkOrderStatus" Type="nvarchar" MaxLength="50" />
+          <Property Name="WorkOrderResultJson" Type="nvarchar(max)" />
+        </EntityType>
+        <Association Name="FKApplicationId">
+          <End Role="WorkApplication" Type="marcdissertation_dbModel.Store.WorkApplication" Multiplicity="1" />
+          <End Role="WorkOrder" Type="marcdissertation_dbModel.Store.WorkOrder" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="WorkApplication">
+              <PropertyRef Name="ApplicationId" />
+            </Principal>
+            <Dependent Role="WorkOrder">
+              <PropertyRef Name="ApplicationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKApplicationId1">
+          <End Role="WorkApplication" Type="marcdissertation_dbModel.Store.WorkApplication" Multiplicity="1" />
+          <End Role="DeviceAppInstallation" Type="marcdissertation_dbModel.Store.DeviceAppInstallation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="WorkApplication">
+              <PropertyRef Name="ApplicationId" />
+            </Principal>
+            <Dependent Role="DeviceAppInstallation">
+              <PropertyRef Name="ApplicationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKDeviceId">
+          <End Role="UserDevice" Type="marcdissertation_dbModel.Store.UserDevice" Multiplicity="1" />
+          <End Role="WorkOrder" Type="marcdissertation_dbModel.Store.WorkOrder" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserDevice">
+              <PropertyRef Name="DeviceId" />
+            </Principal>
+            <Dependent Role="WorkOrder">
+              <PropertyRef Name="DeviceId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKDeviceId1">
+          <End Role="UserDevice" Type="marcdissertation_dbModel.Store.UserDevice" Multiplicity="1" />
+          <End Role="DeviceAppInstallation" Type="marcdissertation_dbModel.Store.DeviceAppInstallation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserDevice">
+              <PropertyRef Name="DeviceId" />
+            </Principal>
+            <Dependent Role="DeviceAppInstallation">
+              <PropertyRef Name="DeviceId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKSlaveWorkerID">
+          <End Role="UserDevice" Type="marcdissertation_dbModel.Store.UserDevice" Multiplicity="0..1" />
+          <End Role="WorkOrder" Type="marcdissertation_dbModel.Store.WorkOrder" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserDevice">
+              <PropertyRef Name="DeviceId" />
+            </Principal>
+            <Dependent Role="WorkOrder">
+              <PropertyRef Name="SlaveWorkerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="UserFK">
           <End Role="User" Type="marcdissertation_dbModel.Store.User" Multiplicity="1" />
           <End Role="UserDevice" Type="marcdissertation_dbModel.Store.UserDevice" Multiplicity="*" />
@@ -51,13 +171,47 @@
     <edmx:ConceptualModels>
       <Schema Namespace="marcdissertation_dbModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
         <EntityContainer Name="marcdissertation_dbEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="DeviceAppInstallations" EntityType="marcdissertation_dbModel.DeviceAppInstallation" />
           <EntitySet Name="Users" EntityType="marcdissertation_dbModel.User" />
           <EntitySet Name="UserDevices" EntityType="marcdissertation_dbModel.UserDevice" />
+          <EntitySet Name="WorkApplications" EntityType="marcdissertation_dbModel.WorkApplication" />
+          <EntitySet Name="WorkOrders" EntityType="marcdissertation_dbModel.WorkOrder" />
+          <AssociationSet Name="FKApplicationId1" Association="marcdissertation_dbModel.FKApplicationId1">
+            <End Role="WorkApplication" EntitySet="WorkApplications" />
+            <End Role="DeviceAppInstallation" EntitySet="DeviceAppInstallations" />
+          </AssociationSet>
+          <AssociationSet Name="FKDeviceId1" Association="marcdissertation_dbModel.FKDeviceId1">
+            <End Role="UserDevice" EntitySet="UserDevices" />
+            <End Role="DeviceAppInstallation" EntitySet="DeviceAppInstallations" />
+          </AssociationSet>
           <AssociationSet Name="UserFK" Association="marcdissertation_dbModel.UserFK">
             <End Role="User" EntitySet="Users" />
             <End Role="UserDevice" EntitySet="UserDevices" />
           </AssociationSet>
+          <AssociationSet Name="FKDeviceId" Association="marcdissertation_dbModel.FKDeviceId">
+            <End Role="UserDevice" EntitySet="UserDevices" />
+            <End Role="WorkOrder" EntitySet="WorkOrders" />
+          </AssociationSet>
+          <AssociationSet Name="FKSlaveWorkerID" Association="marcdissertation_dbModel.FKSlaveWorkerID">
+            <End Role="UserDevice" EntitySet="UserDevices" />
+            <End Role="WorkOrder" EntitySet="WorkOrders" />
+          </AssociationSet>
+          <AssociationSet Name="FKApplicationId" Association="marcdissertation_dbModel.FKApplicationId">
+            <End Role="WorkApplication" EntitySet="WorkApplications" />
+            <End Role="WorkOrder" EntitySet="WorkOrders" />
+          </AssociationSet>
         </EntityContainer>
+        <EntityType Name="DeviceAppInstallation">
+          <Key>
+            <PropertyRef Name="ApplicationDevicePairId" />
+          </Key>
+          <Property Type="Int32" Name="ApplicationDevicePairId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="ApplicationId" Nullable="false" />
+          <Property Type="Int32" Name="DeviceId" Nullable="false" />
+          <Property Type="DateTime" Name="InstallDate" Nullable="false" Precision="3" />
+          <NavigationProperty Name="WorkApplication" Relationship="marcdissertation_dbModel.FKApplicationId1" FromRole="DeviceAppInstallation" ToRole="WorkApplication" />
+          <NavigationProperty Name="UserDevice" Relationship="marcdissertation_dbModel.FKDeviceId1" FromRole="DeviceAppInstallation" ToRole="UserDevice" />
+        </EntityType>
         <EntityType Name="User">
           <Key>
             <PropertyRef Name="Username" />
@@ -73,14 +227,74 @@
           <Key>
             <PropertyRef Name="DeviceId" />
           </Key>
-          <Property Type="Int32" Name="DeviceId" Nullable="false" />
+          <Property Type="Int32" Name="DeviceId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Type="String" Name="Username" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Type="String" Name="DeviceType" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Type="Int32" Name="DeviceMemoryResource" Nullable="false" />
           <Property Type="Int32" Name="DeviceProcRating" Nullable="false" />
-          <NavigationProperty Name="User" Relationship="marcdissertation_dbModel.UserFK" FromRole="UserDevice" ToRole="User" />
           <Property Type="String" Name="GCMCode" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="DeviceAppInstallations" Relationship="marcdissertation_dbModel.FKDeviceId1" FromRole="UserDevice" ToRole="DeviceAppInstallation" />
+          <NavigationProperty Name="User" Relationship="marcdissertation_dbModel.UserFK" FromRole="UserDevice" ToRole="User" />
+          <NavigationProperty Name="WorkOrders" Relationship="marcdissertation_dbModel.FKDeviceId" FromRole="UserDevice" ToRole="WorkOrder" />
+          <NavigationProperty Name="WorkOrders1" Relationship="marcdissertation_dbModel.FKSlaveWorkerID" FromRole="UserDevice" ToRole="WorkOrder" />
         </EntityType>
+        <EntityType Name="WorkApplication">
+          <Key>
+            <PropertyRef Name="ApplicationId" />
+          </Key>
+          <Property Type="Int32" Name="ApplicationId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="ApplicationName" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="ApplicationDescription" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="ApplicationCreator" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="ApplicationPackageURL" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="ApplicationWorkIntent" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="Int32" Name="ApplicationVersion" Nullable="false" />
+          <Property Type="String" Name="ApplicationNamespace" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="DeviceAppInstallations" Relationship="marcdissertation_dbModel.FKApplicationId1" FromRole="WorkApplication" ToRole="DeviceAppInstallation" />
+          <NavigationProperty Name="WorkOrders" Relationship="marcdissertation_dbModel.FKApplicationId" FromRole="WorkApplication" ToRole="WorkOrder" />
+        </EntityType>
+        <EntityType Name="WorkOrder">
+          <Key>
+            <PropertyRef Name="WorkOrderId" />
+          </Key>
+          <Property Type="Int32" Name="WorkOrderId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="DeviceId" Nullable="false" />
+          <Property Type="Int32" Name="ApplicationId" Nullable="false" />
+          <Property Type="String" Name="CommPackageJson" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="DateTime" Name="ReceiveTime" Nullable="false" Precision="3" />
+          <Property Type="Int32" Name="SlaveWorkerId" />
+          <Property Type="DateTime" Name="SlaveWorkerSubmit" Precision="3" />
+          <Property Type="DateTime" Name="SlaveWorkOrderLastCommunication" Precision="3" />
+          <Property Type="String" Name="WorkOrderStatus" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="WorkOrderResultJson" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="UserDevice" Relationship="marcdissertation_dbModel.FKDeviceId" FromRole="WorkOrder" ToRole="UserDevice" />
+          <NavigationProperty Name="UserDevice1" Relationship="marcdissertation_dbModel.FKSlaveWorkerID" FromRole="WorkOrder" ToRole="UserDevice" />
+          <NavigationProperty Name="WorkApplication" Relationship="marcdissertation_dbModel.FKApplicationId" FromRole="WorkOrder" ToRole="WorkApplication" />
+        </EntityType>
+        <Association Name="FKApplicationId1">
+          <End Type="marcdissertation_dbModel.WorkApplication" Role="WorkApplication" Multiplicity="1" />
+          <End Type="marcdissertation_dbModel.DeviceAppInstallation" Role="DeviceAppInstallation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="WorkApplication">
+              <PropertyRef Name="ApplicationId" />
+            </Principal>
+            <Dependent Role="DeviceAppInstallation">
+              <PropertyRef Name="ApplicationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKDeviceId1">
+          <End Type="marcdissertation_dbModel.UserDevice" Role="UserDevice" Multiplicity="1" />
+          <End Type="marcdissertation_dbModel.DeviceAppInstallation" Role="DeviceAppInstallation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserDevice">
+              <PropertyRef Name="DeviceId" />
+            </Principal>
+            <Dependent Role="DeviceAppInstallation">
+              <PropertyRef Name="DeviceId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="UserFK">
           <End Type="marcdissertation_dbModel.User" Role="User" Multiplicity="1" />
           <End Type="marcdissertation_dbModel.UserDevice" Role="UserDevice" Multiplicity="*" />
@@ -93,12 +307,58 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-      </Schema>
+        <Association Name="FKDeviceId">
+          <End Type="marcdissertation_dbModel.UserDevice" Role="UserDevice" Multiplicity="1" />
+          <End Type="marcdissertation_dbModel.WorkOrder" Role="WorkOrder" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserDevice">
+              <PropertyRef Name="DeviceId" />
+            </Principal>
+            <Dependent Role="WorkOrder">
+              <PropertyRef Name="DeviceId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKSlaveWorkerID">
+          <End Type="marcdissertation_dbModel.UserDevice" Role="UserDevice" Multiplicity="0..1" />
+          <End Type="marcdissertation_dbModel.WorkOrder" Role="WorkOrder" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserDevice">
+              <PropertyRef Name="DeviceId" />
+            </Principal>
+            <Dependent Role="WorkOrder">
+              <PropertyRef Name="SlaveWorkerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKApplicationId">
+          <End Type="marcdissertation_dbModel.WorkApplication" Role="WorkApplication" Multiplicity="1" />
+          <End Type="marcdissertation_dbModel.WorkOrder" Role="WorkOrder" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="WorkApplication">
+              <PropertyRef Name="ApplicationId" />
+            </Principal>
+            <Dependent Role="WorkOrder">
+              <PropertyRef Name="ApplicationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="marcdissertation_dbModelStoreContainer" CdmEntityContainer="marcdissertation_dbEntities">
+          <EntitySetMapping Name="DeviceAppInstallations">
+            <EntityTypeMapping TypeName="marcdissertation_dbModel.DeviceAppInstallation">
+              <MappingFragment StoreEntitySet="DeviceAppInstallation">
+                <ScalarProperty Name="InstallDate" ColumnName="InstallDate" />
+                <ScalarProperty Name="DeviceId" ColumnName="DeviceId" />
+                <ScalarProperty Name="ApplicationId" ColumnName="ApplicationId" />
+                <ScalarProperty Name="ApplicationDevicePairId" ColumnName="ApplicationDevicePairId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Users">
             <EntityTypeMapping TypeName="marcdissertation_dbModel.User">
               <MappingFragment StoreEntitySet="User">
@@ -119,6 +379,36 @@
                 <ScalarProperty Name="DeviceType" ColumnName="DeviceType" />
                 <ScalarProperty Name="Username" ColumnName="Username" />
                 <ScalarProperty Name="DeviceId" ColumnName="DeviceId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="WorkApplications">
+            <EntityTypeMapping TypeName="marcdissertation_dbModel.WorkApplication">
+              <MappingFragment StoreEntitySet="WorkApplication">
+                <ScalarProperty Name="ApplicationNamespace" ColumnName="ApplicationNamespace" />
+                <ScalarProperty Name="ApplicationVersion" ColumnName="ApplicationVersion" />
+                <ScalarProperty Name="ApplicationWorkIntent" ColumnName="ApplicationWorkIntent" />
+                <ScalarProperty Name="ApplicationPackageURL" ColumnName="ApplicationPackageURL" />
+                <ScalarProperty Name="ApplicationCreator" ColumnName="ApplicationCreator" />
+                <ScalarProperty Name="ApplicationDescription" ColumnName="ApplicationDescription" />
+                <ScalarProperty Name="ApplicationName" ColumnName="ApplicationName" />
+                <ScalarProperty Name="ApplicationId" ColumnName="ApplicationId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="WorkOrders">
+            <EntityTypeMapping TypeName="marcdissertation_dbModel.WorkOrder">
+              <MappingFragment StoreEntitySet="WorkOrder">
+                <ScalarProperty Name="WorkOrderResultJson" ColumnName="WorkOrderResultJson" />
+                <ScalarProperty Name="WorkOrderStatus" ColumnName="WorkOrderStatus" />
+                <ScalarProperty Name="SlaveWorkOrderLastCommunication" ColumnName="SlaveWorkOrderLastCommunication" />
+                <ScalarProperty Name="SlaveWorkerSubmit" ColumnName="SlaveWorkerSubmit" />
+                <ScalarProperty Name="SlaveWorkerId" ColumnName="SlaveWorkerId" />
+                <ScalarProperty Name="ReceiveTime" ColumnName="ReceiveTime" />
+                <ScalarProperty Name="CommPackageJson" ColumnName="CommPackageJson" />
+                <ScalarProperty Name="ApplicationId" ColumnName="ApplicationId" />
+                <ScalarProperty Name="DeviceId" ColumnName="DeviceId" />
+                <ScalarProperty Name="WorkOrderId" ColumnName="WorkOrderId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

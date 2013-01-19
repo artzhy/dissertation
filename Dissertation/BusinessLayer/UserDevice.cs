@@ -14,6 +14,13 @@ namespace BusinessLayer
     
     public partial class UserDevice
     {
+        public UserDevice()
+        {
+            this.DeviceAppInstallations = new HashSet<DeviceAppInstallation>();
+            this.WorkOrders = new HashSet<WorkOrder>();
+            this.WorkOrders1 = new HashSet<WorkOrder>();
+        }
+    
         public int DeviceId { get; set; }
         public string Username { get; set; }
         public string DeviceType { get; set; }
@@ -21,6 +28,9 @@ namespace BusinessLayer
         public int DeviceProcRating { get; set; }
         public string GCMCode { get; set; }
     
+        public virtual ICollection<DeviceAppInstallation> DeviceAppInstallations { get; set; }
         public virtual User User { get; set; }
+        public virtual ICollection<WorkOrder> WorkOrders { get; set; }
+        public virtual ICollection<WorkOrder> WorkOrders1 { get; set; }
     }
 }

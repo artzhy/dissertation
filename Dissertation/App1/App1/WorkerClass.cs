@@ -13,7 +13,7 @@ using Android.Widget;
 
 using ComputeAndroidSDK.Communication;
 
-namespace com.App1 {
+namespace com.ComputeApps.TestApp {
     class WorkerClass {
 
         public WorkerClass() {

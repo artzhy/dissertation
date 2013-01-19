@@ -13,6 +13,7 @@ using Android.Widget;
 using Android.Util;
 
 using Newtonsoft.Json;
+using Android.Content.PM;
 
 namespace ComputeAndroidApp {
     [Application]
@@ -34,7 +35,6 @@ namespace ComputeAndroidApp {
 
                     ApplicationContext.StartService(new Intent(ApplicationContext, typeof(BackgroundService.ControllerService)));
                     BindControllerService();
-
                 }
 
                 public void BindControllerService() {
@@ -206,6 +206,32 @@ namespace ComputeAndroidApp {
             }
         }
 
+       public static Dictionary<String, int> GetComputeInstalledApps(Context context) {
+           ISharedPreferences prefs = context.GetSharedPreferences(context.PackageName, FileCreationMode.Private);
+           return JsonConvert.DeserializeObject<Dictionary<String, int>>(prefs.GetString("InstalledComputeApps", null));
+
+    }
+
+       public static void SetComputeInstalledApps(Context context, Dictionary<String, int> apps) {
+           ISharedPreferences prefs = context.GetSharedPreferences(context.PackageName, FileCreationMode.Private);
+           prefs.Edit().PutString("InstalledComputeApps", JsonConvert.SerializeObject(apps)).Commit();
+
+       }
+
+
+        public static void GetInstalledApplications() {
+
+            IEnumerable<ApplicationInfo> packages = App.Context.PackageManager.GetInstalledApplications(PackageInfoFlags.MetaData);
+
+            foreach (ApplicationInfo packageInfo in packages) {
+
+                Log.Error("TAG", "Installed package :" + packageInfo.PackageName);
+
+                // the getLaunchIntentForPackage returns an intent that you can use with startActivity()
+            }
+
+        }
+        
 
         #endregion
 

@@ -33,7 +33,7 @@ namespace BusinessLayer {
             return App.DbContext.Users.Count(x => x.Username.Equals(username) && x.Password.Equals(password)) == 1;
         }
 
-        public static User AddUser(string forename, string surname, string username, string password) {
+        public static User CreateUser(string forename, string surname, string username, string password) {
            
                 User u = new User();
                 u.Forename = forename;

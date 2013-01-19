@@ -10,6 +10,6 @@ namespace WebService {
     [ServiceContract]
     public interface IAuthSvc {
         [OperationContract]
-        Boolean AuthenticateUser(String username, String password);
+        AuthToken GetAuthToken(String username, String password);
     }
 }

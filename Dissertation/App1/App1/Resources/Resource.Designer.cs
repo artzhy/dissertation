@@ -9,9 +9,9 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-[assembly: Android.Runtime.ResourceDesignerAttribute("com.App1.Resource", IsApplication=true)]
+[assembly: Android.Runtime.ResourceDesignerAttribute("com.ComputeApps.TestApp.Resource", IsApplication=true)]
 
-namespace com.App1
+namespace com.ComputeApps.TestApp
 {
 	
 	

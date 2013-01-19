@@ -13,7 +13,7 @@ using Android.Widget;
 using ComputeAndroidSDK.Communication;
 
 
-namespace com.App1 {
+namespace com.ComputeApps.TestApp {
     class WorkList {
         private static List<ComputeAndroidSDK.Communication.CommPackage> workList;
         private static CommPackage currentWorkItem;

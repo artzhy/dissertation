@@ -1,6 +1,16 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
   <EntityContainerMapping StorageEntityContainer="marcdissertation_dbModelStoreContainer" CdmEntityContainer="marcdissertation_dbEntities">
+    <EntitySetMapping Name="DeviceAppInstallations">
+      <EntityTypeMapping TypeName="marcdissertation_dbModel.DeviceAppInstallation">
+        <MappingFragment StoreEntitySet="DeviceAppInstallation">
+          <ScalarProperty Name="InstallDate" ColumnName="InstallDate" />
+          <ScalarProperty Name="DeviceId" ColumnName="DeviceId" />
+          <ScalarProperty Name="ApplicationId" ColumnName="ApplicationId" />
+          <ScalarProperty Name="ApplicationDevicePairId" ColumnName="ApplicationDevicePairId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="Users">
       <EntityTypeMapping TypeName="marcdissertation_dbModel.User">
         <MappingFragment StoreEntitySet="User">
@@ -21,6 +31,36 @@
           <ScalarProperty Name="DeviceType" ColumnName="DeviceType" />
           <ScalarProperty Name="Username" ColumnName="Username" />
           <ScalarProperty Name="DeviceId" ColumnName="DeviceId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="WorkApplications">
+      <EntityTypeMapping TypeName="marcdissertation_dbModel.WorkApplication">
+        <MappingFragment StoreEntitySet="WorkApplication">
+          <ScalarProperty Name="ApplicationNamespace" ColumnName="ApplicationNamespace" />
+          <ScalarProperty Name="ApplicationVersion" ColumnName="ApplicationVersion" />
+          <ScalarProperty Name="ApplicationWorkIntent" ColumnName="ApplicationWorkIntent" />
+          <ScalarProperty Name="ApplicationPackageURL" ColumnName="ApplicationPackageURL" />
+          <ScalarProperty Name="ApplicationCreator" ColumnName="ApplicationCreator" />
+          <ScalarProperty Name="ApplicationDescription" ColumnName="ApplicationDescription" />
+          <ScalarProperty Name="ApplicationName" ColumnName="ApplicationName" />
+          <ScalarProperty Name="ApplicationId" ColumnName="ApplicationId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="WorkOrders">
+      <EntityTypeMapping TypeName="marcdissertation_dbModel.WorkOrder">
+        <MappingFragment StoreEntitySet="WorkOrder">
+          <ScalarProperty Name="WorkOrderResultJson" ColumnName="WorkOrderResultJson" />
+          <ScalarProperty Name="WorkOrderStatus" ColumnName="WorkOrderStatus" />
+          <ScalarProperty Name="SlaveWorkOrderLastCommunication" ColumnName="SlaveWorkOrderLastCommunication" />
+          <ScalarProperty Name="SlaveWorkerSubmit" ColumnName="SlaveWorkerSubmit" />
+          <ScalarProperty Name="SlaveWorkerId" ColumnName="SlaveWorkerId" />
+          <ScalarProperty Name="ReceiveTime" ColumnName="ReceiveTime" />
+          <ScalarProperty Name="CommPackageJson" ColumnName="CommPackageJson" />
+          <ScalarProperty Name="ApplicationId" ColumnName="ApplicationId" />
+          <ScalarProperty Name="DeviceId" ColumnName="DeviceId" />
+          <ScalarProperty Name="WorkOrderId" ColumnName="WorkOrderId" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
