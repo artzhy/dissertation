@@ -11,6 +11,7 @@ using Android.Views;
 using Android.Widget;
 using Android.Util;
 
+using ComputeAndroidSDK.Communication;
 
 namespace com.App1 {
     [Activity(Label = "My Activity", MainLauncher=true)]
@@ -19,6 +20,17 @@ namespace com.App1 {
             base.OnCreate(bundle);
 
             // Create your application here
+
+            CommPackage cp = new CommPackage();
+
+            cp.BackgroundProcessFunction = "WorkerFunction";
+            cp.ParameterList = new List<CommPackage.ParamListItem>();
+
+            cp.ParameterList.Add(new CommPackage.ParamListItem("a", 3));
+            cp.ParameterList.Add(new CommPackage.ParamListItem("b", 9));
+
+            WorkList.SetAppContext(this.ApplicationContext);
+            WorkList.AddWorkItem(cp);
 
         }
     }

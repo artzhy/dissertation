@@ -12,6 +12,7 @@ namespace ComputeAndroidSDK.Communication {
         public int ComputationRequestId { get; set; }
         public String IntentAction { get; set; }
         public String BackgroundProcessFunction { get; set; }
+        public String BackgroundProcessClass { get; set; }
         public List<ParamListItem> ParameterList { get; set; }
         public Object ComputationResult { get; set; }
 

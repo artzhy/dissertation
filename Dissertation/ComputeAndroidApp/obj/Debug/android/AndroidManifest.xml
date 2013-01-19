@@ -25,6 +25,7 @@
       <intent-filter>
         <action android:name="android.intent.action.BOOT_COMPLETED" />
         <action android:name="com.ComputeApp.ControllerService.Intent.Message" />
+        <action android:name="com.ComputeApp.ControllerService.Intent.Result" />
         <category android:name="android.intent.category.HOME" />
       </intent-filter>
     </receiver>

@@ -13,13 +13,15 @@ using Android.Util;
 
 namespace ComputeAndroidApp.BackgroundService {
     [BroadcastReceiver]
-    [IntentFilter(new[] { Android.Content.Intent.ActionBootCompleted, "com.ComputeApp.ControllerService.Intent.Message" },
+    [IntentFilter(new[] { Android.Content.Intent.ActionBootCompleted, "com.ComputeApp.ControllerService.Intent.Message", "com.ComputeApp.ControllerService.Intent.Result" },
           Categories = new[] { Android.Content.Intent.CategoryHome }
   )]
     public class ServiceReceiver : BroadcastReceiver {
         public override void OnReceive(Context context, Intent intent) {
            
-            Log.Info(context.ApplicationInfo.PackageName + "-" + context.ApplicationInfo.ClassName, "Device started, attempting to start Controller service");
+     //       Log.Info(context.ApplicationInfo.PackageName + "-" + context.ApplicationInfo.ClassName, "Device started, attempting to start Controller service");
+
+            Log.Error("ServiceReceiver", "Rec'd mssg");
            
            Intent ourIntent = new Intent(context, typeof(ControllerService));
 

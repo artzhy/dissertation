@@ -22,7 +22,9 @@ namespace com.ComputeApps.TestApp {
             try {
                 CommPackage cp = CommPackage.DeserializeJson(intent.GetStringExtra("CommPackage"));
                 Log.Error("com.ComputeApps.TestApp.Intents.DoWork", "HERE!!");
-              //  App1.WorkList.getWorkList();
+            
+
+                App1.WorkList.SetAppContext(context);
                 App1.WorkList.AddWorkItem(cp);
 
                 int test = 0;
