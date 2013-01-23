@@ -11,7 +11,7 @@ public class Activity1
 		__md_methods = 
 			"n_onCreate:(Landroid/os/Bundle;)V:GetOnCreate_Landroid_os_Bundle_Handler\n" +
 			"";
-		mono.android.Runtime.register ("com.ComputeApps.TestApp.Activity1, App2, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null", Activity1.class, __md_methods);
+		mono.android.Runtime.register ("com.ComputeApps.TestApp.Activity1, com.ComputeApps.TestApp, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null", Activity1.class, __md_methods);
 	}
 
 
@@ -19,7 +19,7 @@ public class Activity1
 	{
 		super ();
 		if (getClass () == Activity1.class)
-			mono.android.TypeManager.Activate ("com.ComputeApps.TestApp.Activity1, App2, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null", "", this, new java.lang.Object[] {  });
+			mono.android.TypeManager.Activate ("com.ComputeApps.TestApp.Activity1, com.ComputeApps.TestApp, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null", "", this, new java.lang.Object[] {  });
 	}
 
 

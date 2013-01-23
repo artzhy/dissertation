@@ -6,7 +6,7 @@ using System.Web;
 
 namespace WebService {
     [Serializable]
-    public class AuthToken {
+    public class AuthToken : WebService.IAuthToken {
         public String Username {
             get;
             set;

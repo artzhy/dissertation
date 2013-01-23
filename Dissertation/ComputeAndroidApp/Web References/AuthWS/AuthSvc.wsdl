@@ -6,6 +6,12 @@
       <xsd:import schemaLocation="http://192.168.1.65:58041/AuthSvc.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
     </xsd:schema>
   </wsdl:types>
+  <wsdl:message name="IAuthSvc_GetAuthToken_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetAuthToken" />
+  </wsdl:message>
+  <wsdl:message name="IAuthSvc_GetAuthToken_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetAuthTokenResponse" />
+  </wsdl:message>
   <wsdl:message name="IAuthSvc_AuthenticateUser_InputMessage">
     <wsdl:part name="parameters" element="tns:AuthenticateUser" />
   </wsdl:message>
@@ -13,6 +19,10 @@
     <wsdl:part name="parameters" element="tns:AuthenticateUserResponse" />
   </wsdl:message>
   <wsdl:portType name="IAuthSvc">
+    <wsdl:operation name="GetAuthToken">
+      <wsdl:input wsaw:Action="http://tempuri.org/IAuthSvc/GetAuthToken" message="tns:IAuthSvc_GetAuthToken_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IAuthSvc/GetAuthTokenResponse" message="tns:IAuthSvc_GetAuthToken_OutputMessage" />
+    </wsdl:operation>
     <wsdl:operation name="AuthenticateUser">
       <wsdl:input wsaw:Action="http://tempuri.org/IAuthSvc/AuthenticateUser" message="tns:IAuthSvc_AuthenticateUser_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IAuthSvc/AuthenticateUserResponse" message="tns:IAuthSvc_AuthenticateUser_OutputMessage" />
@@ -20,6 +30,15 @@
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_IAuthSvc" type="tns:IAuthSvc">
     <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetAuthToken">
+      <soap:operation soapAction="http://tempuri.org/IAuthSvc/GetAuthToken" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="AuthenticateUser">
       <soap:operation soapAction="http://tempuri.org/IAuthSvc/AuthenticateUser" style="document" />
       <wsdl:input>

@@ -29,6 +29,8 @@ namespace ComputeAndroidApp.AuthWS {
     [System.Web.Services.WebServiceBindingAttribute(Name="BasicHttpBinding_IAuthSvc", Namespace="http://tempuri.org/")]
     public partial class AuthSvc : System.Web.Services.Protocols.SoapHttpClientProtocol {
         
+        private System.Threading.SendOrPostCallback GetAuthTokenOperationCompleted;
+        
         private System.Threading.SendOrPostCallback AuthenticateUserOperationCompleted;
         
         private bool useDefaultCredentialsSetExplicitly;
@@ -70,7 +72,46 @@ namespace ComputeAndroidApp.AuthWS {
         }
         
         /// <remarks/>
+        public event GetAuthTokenCompletedEventHandler GetAuthTokenCompleted;
+        
+        /// <remarks/>
         public event AuthenticateUserCompletedEventHandler AuthenticateUserCompleted;
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/IAuthSvc/GetAuthToken", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        [return: System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string GetAuthToken([System.Xml.Serialization.XmlElementAttribute(IsNullable=true)] string username, [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)] string password, int deviceId, [System.Xml.Serialization.XmlIgnoreAttribute()] bool deviceIdSpecified) {
+            object[] results = this.Invoke("GetAuthToken", new object[] {
+                        username,
+                        password,
+                        deviceId,
+                        deviceIdSpecified});
+            return ((string)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void GetAuthTokenAsync(string username, string password, int deviceId, bool deviceIdSpecified) {
+            this.GetAuthTokenAsync(username, password, deviceId, deviceIdSpecified, null);
+        }
+        
+        /// <remarks/>
+        public void GetAuthTokenAsync(string username, string password, int deviceId, bool deviceIdSpecified, object userState) {
+            if ((this.GetAuthTokenOperationCompleted == null)) {
+                this.GetAuthTokenOperationCompleted = new System.Threading.SendOrPostCallback(this.OnGetAuthTokenOperationCompleted);
+            }
+            this.InvokeAsync("GetAuthToken", new object[] {
+                        username,
+                        password,
+                        deviceId,
+                        deviceIdSpecified}, this.GetAuthTokenOperationCompleted, userState);
+        }
+        
+        private void OnGetAuthTokenOperationCompleted(object arg) {
+            if ((this.GetAuthTokenCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.GetAuthTokenCompleted(this, new GetAuthTokenCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
         
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/IAuthSvc/AuthenticateUser", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
@@ -120,6 +161,32 @@ namespace ComputeAndroidApp.AuthWS {
                 return true;
             }
             return false;
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.17929")]
+    public delegate void GetAuthTokenCompletedEventHandler(object sender, GetAuthTokenCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.17929")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class GetAuthTokenCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal GetAuthTokenCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public string Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((string)(this.results[0]));
+            }
         }
     }
     

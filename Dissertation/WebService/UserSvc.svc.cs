@@ -6,6 +6,7 @@ using System.ServiceModel;
 using System.ServiceModel.Web;
 using System.Text;
 using PushCommunicator;
+using BusinessLayer;
 
 namespace WebService {
     public class UserSvc : IUserSvc {
@@ -14,9 +15,9 @@ namespace WebService {
             return BusinessLayer.User.CreateUser(forename, surname, username, password);
         }
 
-        public void ModifyUser(AuthToken at, int userId, string forename, string surname, string password) {
+        public void ModifyUser(String at, int userId, string forename, string surname, string password) {
 
-            new AuthSvc().AuthUser(at, userId);
+            AuthenticationToken oAt = new AuthSvc().AuthUser(at, userId);
 
             BusinessLayer.User u = BusinessLayer.User.Populate(userId);
 
@@ -27,27 +28,36 @@ namespace WebService {
             u.Save();
         }
 
-        public BusinessLayer.UserDevice AddUserDevice(AuthToken at, string deviceType, int deviceMemoryResource, int deviceProcRating, String gcmCode = "") {
+        public BusinessLayer.UserDevice AddUserDeviceNoGCMCode(String username, string deviceType, int deviceMemoryResource, int deviceProcRating) {
 
-            new AuthSvc().AuthUser(at);
-
-            return BusinessLayer.UserDevice.AddUserDevice(at.Username, deviceType, deviceMemoryResource, deviceProcRating, gcmCode);
+            // TODO: Implement authorisation here
+            
+            return BusinessLayer.UserDevice.AddUserDevice(username, deviceType, deviceMemoryResource, deviceProcRating);
         }
 
-        public void DeleteUserDevice(AuthToken at, int deviceId) {
+
+        public BusinessLayer.UserDevice AddUserDevice(String at, string deviceType, int deviceMemoryResource, int deviceProcRating, String gcmCode = "") {
+
+            AuthenticationToken oAt = new AuthSvc().AuthUser(at);
+       
+
+            return BusinessLayer.UserDevice.AddUserDevice(oAt.Username, deviceType, deviceMemoryResource, deviceProcRating, gcmCode);
+        }
+
+        public void DeleteUserDevice(String at, int deviceId) {
             BusinessLayer.UserDevice ud = BusinessLayer.UserDevice.Populate(deviceId);
 
-            new AuthSvc().AuthUser(at, ud.User.UserId);
+            AuthenticationToken oAt = new AuthSvc().AuthUser(at,ud.User.UserId);
             
-            if (ud.User.Username.Equals(at.Username)) {
+            if (ud.User.Username.Equals(oAt.Username)) {
                 ud.Delete();
             }
         }
 
-        public void ModifyUserDevice(AuthToken at, String gcmCode, int deviceId = -1) {
+        public void ModifyUserDevice(String at, String gcmCode, int deviceId = -1) {
             if (deviceId != -1) {
                
-                new AuthSvc().AuthUser(at, deviceId);
+                new AuthSvc().AuthUser(at);
                 BusinessLayer.UserDevice ud = BusinessLayer.UserDevice.Populate(deviceId);
 
                 ud.GCMCode = gcmCode;
@@ -59,11 +69,12 @@ namespace WebService {
 
         }
 
-        public int GetDeviceId(AuthToken at, String gcmId) {
-            new AuthSvc().AuthUser(at, -1);
+        public int GetDeviceId(String at, String gcmId) {
+            AuthenticationToken oAt = new AuthSvc().AuthUser(at);
+
             BusinessLayer.UserDevice ud = BusinessLayer.UserDevice.Populate(gcmId);
 
-            if (BusinessLayer.User.Populate(at.Username).UserId != ud.User.UserId) {
+            if (BusinessLayer.User.Populate(oAt.Username).UserId != ud.User.UserId) {
                 throw new Exception("Error: Device is not tied to authenticating in user");
             }
             return ud.DeviceId;

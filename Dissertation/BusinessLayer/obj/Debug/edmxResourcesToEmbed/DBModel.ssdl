@@ -1,11 +1,16 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Schema Namespace="marcdissertation_dbModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
   <EntityContainer Name="marcdissertation_dbModelStoreContainer">
+    <EntitySet Name="AuthenticationToken" EntityType="marcdissertation_dbModel.Store.AuthenticationToken" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="DeviceAppInstallation" EntityType="marcdissertation_dbModel.Store.DeviceAppInstallation" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="User" EntityType="marcdissertation_dbModel.Store.User" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="UserDevice" EntityType="marcdissertation_dbModel.Store.UserDevice" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="WorkApplication" EntityType="marcdissertation_dbModel.Store.WorkApplication" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="WorkOrder" EntityType="marcdissertation_dbModel.Store.WorkOrder" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="FK_AuthenticationToken_0" Association="marcdissertation_dbModel.Store.FK_AuthenticationToken_0">
+      <End Role="User" EntitySet="User" />
+      <End Role="AuthenticationToken" EntitySet="AuthenticationToken" />
+    </AssociationSet>
     <AssociationSet Name="FKApplicationId" Association="marcdissertation_dbModel.Store.FKApplicationId">
       <End Role="WorkApplication" EntitySet="WorkApplication" />
       <End Role="WorkOrder" EntitySet="WorkOrder" />
@@ -22,6 +27,10 @@
       <End Role="UserDevice" EntitySet="UserDevice" />
       <End Role="DeviceAppInstallation" EntitySet="DeviceAppInstallation" />
     </AssociationSet>
+    <AssociationSet Name="FKDeviceIdToken" Association="marcdissertation_dbModel.Store.FKDeviceIdToken">
+      <End Role="UserDevice" EntitySet="UserDevice" />
+      <End Role="AuthenticationToken" EntitySet="AuthenticationToken" />
+    </AssociationSet>
     <AssociationSet Name="FKSlaveWorkerID" Association="marcdissertation_dbModel.Store.FKSlaveWorkerID">
       <End Role="UserDevice" EntitySet="UserDevice" />
       <End Role="WorkOrder" EntitySet="WorkOrder" />
@@ -31,6 +40,16 @@
       <End Role="UserDevice" EntitySet="UserDevice" />
     </AssociationSet>
   </EntityContainer>
+  <EntityType Name="AuthenticationToken">
+    <Key>
+      <PropertyRef Name="DeviceId" />
+    </Key>
+    <Property Name="Token" Type="varchar(max)" Nullable="false" />
+    <Property Name="DeviceId" Type="int" Nullable="false" />
+    <Property Name="CreationDate" Type="datetime" Nullable="false" />
+    <Property Name="LastAccessDate" Type="datetime" />
+    <Property Name="Username" Type="nvarchar" Nullable="false" MaxLength="50" />
+  </EntityType>
   <EntityType Name="DeviceAppInstallation">
     <Key>
       <PropertyRef Name="ApplicationDevicePairId" />
@@ -89,6 +108,20 @@
     <Property Name="WorkOrderStatus" Type="nvarchar" MaxLength="50" />
     <Property Name="WorkOrderResultJson" Type="nvarchar(max)" />
   </EntityType>
+  <Association Name="FK_AuthenticationToken_0">
+    <End Role="User" Type="marcdissertation_dbModel.Store.User" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="AuthenticationToken" Type="marcdissertation_dbModel.Store.AuthenticationToken" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="Username" />
+      </Principal>
+      <Dependent Role="AuthenticationToken">
+        <PropertyRef Name="Username" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FKApplicationId">
     <End Role="WorkApplication" Type="marcdissertation_dbModel.Store.WorkApplication" Multiplicity="1" />
     <End Role="WorkOrder" Type="marcdissertation_dbModel.Store.WorkOrder" Multiplicity="*" />
@@ -133,6 +166,18 @@
         <PropertyRef Name="DeviceId" />
       </Principal>
       <Dependent Role="DeviceAppInstallation">
+        <PropertyRef Name="DeviceId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FKDeviceIdToken">
+    <End Role="UserDevice" Type="marcdissertation_dbModel.Store.UserDevice" Multiplicity="1" />
+    <End Role="AuthenticationToken" Type="marcdissertation_dbModel.Store.AuthenticationToken" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="UserDevice">
+        <PropertyRef Name="DeviceId" />
+      </Principal>
+      <Dependent Role="AuthenticationToken">
         <PropertyRef Name="DeviceId" />
       </Dependent>
     </ReferentialConstraint>

@@ -17,6 +17,7 @@ namespace BusinessLayer
         public User()
         {
             this.UserDevices = new HashSet<UserDevice>();
+            this.AuthenticationTokens = new HashSet<AuthenticationToken>();
         }
     
         public int UserId { get; set; }
@@ -26,5 +27,6 @@ namespace BusinessLayer
         public string Password { get; set; }
     
         public virtual ICollection<UserDevice> UserDevices { get; set; }
+        public virtual ICollection<AuthenticationToken> AuthenticationTokens { get; set; }
     }
 }

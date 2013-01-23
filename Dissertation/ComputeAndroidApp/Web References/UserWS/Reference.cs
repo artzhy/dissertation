@@ -35,6 +35,8 @@ namespace ComputeAndroidApp.UserWS {
         
         private System.Threading.SendOrPostCallback AddUserDeviceOperationCompleted;
         
+        private System.Threading.SendOrPostCallback AddUserDeviceNoGCMCodeOperationCompleted;
+        
         private System.Threading.SendOrPostCallback DeleteUserDeviceOperationCompleted;
         
         private System.Threading.SendOrPostCallback ModifyUserDeviceOperationCompleted;
@@ -91,6 +93,9 @@ namespace ComputeAndroidApp.UserWS {
         public event AddUserDeviceCompletedEventHandler AddUserDeviceCompleted;
         
         /// <remarks/>
+        public event AddUserDeviceNoGCMCodeCompletedEventHandler AddUserDeviceNoGCMCodeCompleted;
+        
+        /// <remarks/>
         public event DeleteUserDeviceCompletedEventHandler DeleteUserDeviceCompleted;
         
         /// <remarks/>
@@ -140,10 +145,9 @@ namespace ComputeAndroidApp.UserWS {
         
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/IUserSvc/ModifyUser", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public void ModifyUser([System.Xml.Serialization.XmlElementAttribute(IsNullable=true)] string authUsername, [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)] string authPassword, int userId, [System.Xml.Serialization.XmlIgnoreAttribute()] bool userIdSpecified, [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)] string forename, [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)] string surname, [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)] string password) {
+        public void ModifyUser([System.Xml.Serialization.XmlElementAttribute(IsNullable=true)] string at, int userId, [System.Xml.Serialization.XmlIgnoreAttribute()] bool userIdSpecified, [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)] string forename, [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)] string surname, [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)] string password) {
             this.Invoke("ModifyUser", new object[] {
-                        authUsername,
-                        authPassword,
+                        at,
                         userId,
                         userIdSpecified,
                         forename,
@@ -152,18 +156,17 @@ namespace ComputeAndroidApp.UserWS {
         }
         
         /// <remarks/>
-        public void ModifyUserAsync(string authUsername, string authPassword, int userId, bool userIdSpecified, string forename, string surname, string password) {
-            this.ModifyUserAsync(authUsername, authPassword, userId, userIdSpecified, forename, surname, password, null);
+        public void ModifyUserAsync(string at, int userId, bool userIdSpecified, string forename, string surname, string password) {
+            this.ModifyUserAsync(at, userId, userIdSpecified, forename, surname, password, null);
         }
         
         /// <remarks/>
-        public void ModifyUserAsync(string authUsername, string authPassword, int userId, bool userIdSpecified, string forename, string surname, string password, object userState) {
+        public void ModifyUserAsync(string at, int userId, bool userIdSpecified, string forename, string surname, string password, object userState) {
             if ((this.ModifyUserOperationCompleted == null)) {
                 this.ModifyUserOperationCompleted = new System.Threading.SendOrPostCallback(this.OnModifyUserOperationCompleted);
             }
             this.InvokeAsync("ModifyUser", new object[] {
-                        authUsername,
-                        authPassword,
+                        at,
                         userId,
                         userIdSpecified,
                         forename,
@@ -181,10 +184,9 @@ namespace ComputeAndroidApp.UserWS {
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/IUserSvc/AddUserDevice", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
         [return: System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public UserDevice AddUserDevice([System.Xml.Serialization.XmlElementAttribute(IsNullable=true)] string authUsername, [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)] string authPassword, [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)] string deviceType, int deviceMemoryResource, [System.Xml.Serialization.XmlIgnoreAttribute()] bool deviceMemoryResourceSpecified, int deviceProcRating, [System.Xml.Serialization.XmlIgnoreAttribute()] bool deviceProcRatingSpecified, [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)] string gcmCode) {
+        public UserDevice AddUserDevice([System.Xml.Serialization.XmlElementAttribute(IsNullable=true)] string at, [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)] string deviceType, int deviceMemoryResource, [System.Xml.Serialization.XmlIgnoreAttribute()] bool deviceMemoryResourceSpecified, int deviceProcRating, [System.Xml.Serialization.XmlIgnoreAttribute()] bool deviceProcRatingSpecified, [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)] string gcmCode) {
             object[] results = this.Invoke("AddUserDevice", new object[] {
-                        authUsername,
-                        authPassword,
+                        at,
                         deviceType,
                         deviceMemoryResource,
                         deviceMemoryResourceSpecified,
@@ -195,18 +197,17 @@ namespace ComputeAndroidApp.UserWS {
         }
         
         /// <remarks/>
-        public void AddUserDeviceAsync(string authUsername, string authPassword, string deviceType, int deviceMemoryResource, bool deviceMemoryResourceSpecified, int deviceProcRating, bool deviceProcRatingSpecified, string gcmCode) {
-            this.AddUserDeviceAsync(authUsername, authPassword, deviceType, deviceMemoryResource, deviceMemoryResourceSpecified, deviceProcRating, deviceProcRatingSpecified, gcmCode, null);
+        public void AddUserDeviceAsync(string at, string deviceType, int deviceMemoryResource, bool deviceMemoryResourceSpecified, int deviceProcRating, bool deviceProcRatingSpecified, string gcmCode) {
+            this.AddUserDeviceAsync(at, deviceType, deviceMemoryResource, deviceMemoryResourceSpecified, deviceProcRating, deviceProcRatingSpecified, gcmCode, null);
         }
         
         /// <remarks/>
-        public void AddUserDeviceAsync(string authUsername, string authPassword, string deviceType, int deviceMemoryResource, bool deviceMemoryResourceSpecified, int deviceProcRating, bool deviceProcRatingSpecified, string gcmCode, object userState) {
+        public void AddUserDeviceAsync(string at, string deviceType, int deviceMemoryResource, bool deviceMemoryResourceSpecified, int deviceProcRating, bool deviceProcRatingSpecified, string gcmCode, object userState) {
             if ((this.AddUserDeviceOperationCompleted == null)) {
                 this.AddUserDeviceOperationCompleted = new System.Threading.SendOrPostCallback(this.OnAddUserDeviceOperationCompleted);
             }
             this.InvokeAsync("AddUserDevice", new object[] {
-                        authUsername,
-                        authPassword,
+                        at,
                         deviceType,
                         deviceMemoryResource,
                         deviceMemoryResourceSpecified,
@@ -223,28 +224,66 @@ namespace ComputeAndroidApp.UserWS {
         }
         
         /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/IUserSvc/AddUserDeviceNoGCMCode", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        [return: System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public UserDevice AddUserDeviceNoGCMCode([System.Xml.Serialization.XmlElementAttribute(IsNullable=true)] string username, [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)] string deviceType, int deviceMemoryResource, [System.Xml.Serialization.XmlIgnoreAttribute()] bool deviceMemoryResourceSpecified, int deviceProcRating, [System.Xml.Serialization.XmlIgnoreAttribute()] bool deviceProcRatingSpecified) {
+            object[] results = this.Invoke("AddUserDeviceNoGCMCode", new object[] {
+                        username,
+                        deviceType,
+                        deviceMemoryResource,
+                        deviceMemoryResourceSpecified,
+                        deviceProcRating,
+                        deviceProcRatingSpecified});
+            return ((UserDevice)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void AddUserDeviceNoGCMCodeAsync(string username, string deviceType, int deviceMemoryResource, bool deviceMemoryResourceSpecified, int deviceProcRating, bool deviceProcRatingSpecified) {
+            this.AddUserDeviceNoGCMCodeAsync(username, deviceType, deviceMemoryResource, deviceMemoryResourceSpecified, deviceProcRating, deviceProcRatingSpecified, null);
+        }
+        
+        /// <remarks/>
+        public void AddUserDeviceNoGCMCodeAsync(string username, string deviceType, int deviceMemoryResource, bool deviceMemoryResourceSpecified, int deviceProcRating, bool deviceProcRatingSpecified, object userState) {
+            if ((this.AddUserDeviceNoGCMCodeOperationCompleted == null)) {
+                this.AddUserDeviceNoGCMCodeOperationCompleted = new System.Threading.SendOrPostCallback(this.OnAddUserDeviceNoGCMCodeOperationCompleted);
+            }
+            this.InvokeAsync("AddUserDeviceNoGCMCode", new object[] {
+                        username,
+                        deviceType,
+                        deviceMemoryResource,
+                        deviceMemoryResourceSpecified,
+                        deviceProcRating,
+                        deviceProcRatingSpecified}, this.AddUserDeviceNoGCMCodeOperationCompleted, userState);
+        }
+        
+        private void OnAddUserDeviceNoGCMCodeOperationCompleted(object arg) {
+            if ((this.AddUserDeviceNoGCMCodeCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.AddUserDeviceNoGCMCodeCompleted(this, new AddUserDeviceNoGCMCodeCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/IUserSvc/DeleteUserDevice", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public void DeleteUserDevice([System.Xml.Serialization.XmlElementAttribute(IsNullable=true)] string authUsername, [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)] string authPassword, int deviceId, [System.Xml.Serialization.XmlIgnoreAttribute()] bool deviceIdSpecified) {
+        public void DeleteUserDevice([System.Xml.Serialization.XmlElementAttribute(IsNullable=true)] string at, int deviceId, [System.Xml.Serialization.XmlIgnoreAttribute()] bool deviceIdSpecified) {
             this.Invoke("DeleteUserDevice", new object[] {
-                        authUsername,
-                        authPassword,
+                        at,
                         deviceId,
                         deviceIdSpecified});
         }
         
         /// <remarks/>
-        public void DeleteUserDeviceAsync(string authUsername, string authPassword, int deviceId, bool deviceIdSpecified) {
-            this.DeleteUserDeviceAsync(authUsername, authPassword, deviceId, deviceIdSpecified, null);
+        public void DeleteUserDeviceAsync(string at, int deviceId, bool deviceIdSpecified) {
+            this.DeleteUserDeviceAsync(at, deviceId, deviceIdSpecified, null);
         }
         
         /// <remarks/>
-        public void DeleteUserDeviceAsync(string authUsername, string authPassword, int deviceId, bool deviceIdSpecified, object userState) {
+        public void DeleteUserDeviceAsync(string at, int deviceId, bool deviceIdSpecified, object userState) {
             if ((this.DeleteUserDeviceOperationCompleted == null)) {
                 this.DeleteUserDeviceOperationCompleted = new System.Threading.SendOrPostCallback(this.OnDeleteUserDeviceOperationCompleted);
             }
             this.InvokeAsync("DeleteUserDevice", new object[] {
-                        authUsername,
-                        authPassword,
+                        at,
                         deviceId,
                         deviceIdSpecified}, this.DeleteUserDeviceOperationCompleted, userState);
         }
@@ -258,28 +297,26 @@ namespace ComputeAndroidApp.UserWS {
         
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/IUserSvc/ModifyUserDevice", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public void ModifyUserDevice([System.Xml.Serialization.XmlElementAttribute(IsNullable=true)] string authUsername, [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)] string authPassword, [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)] string gcmCode, int deviceId, [System.Xml.Serialization.XmlIgnoreAttribute()] bool deviceIdSpecified) {
+        public void ModifyUserDevice([System.Xml.Serialization.XmlElementAttribute(IsNullable=true)] string at, [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)] string gcmCode, int deviceId, [System.Xml.Serialization.XmlIgnoreAttribute()] bool deviceIdSpecified) {
             this.Invoke("ModifyUserDevice", new object[] {
-                        authUsername,
-                        authPassword,
+                        at,
                         gcmCode,
                         deviceId,
                         deviceIdSpecified});
         }
         
         /// <remarks/>
-        public void ModifyUserDeviceAsync(string authUsername, string authPassword, string gcmCode, int deviceId, bool deviceIdSpecified) {
-            this.ModifyUserDeviceAsync(authUsername, authPassword, gcmCode, deviceId, deviceIdSpecified, null);
+        public void ModifyUserDeviceAsync(string at, string gcmCode, int deviceId, bool deviceIdSpecified) {
+            this.ModifyUserDeviceAsync(at, gcmCode, deviceId, deviceIdSpecified, null);
         }
         
         /// <remarks/>
-        public void ModifyUserDeviceAsync(string authUsername, string authPassword, string gcmCode, int deviceId, bool deviceIdSpecified, object userState) {
+        public void ModifyUserDeviceAsync(string at, string gcmCode, int deviceId, bool deviceIdSpecified, object userState) {
             if ((this.ModifyUserDeviceOperationCompleted == null)) {
                 this.ModifyUserDeviceOperationCompleted = new System.Threading.SendOrPostCallback(this.OnModifyUserDeviceOperationCompleted);
             }
             this.InvokeAsync("ModifyUserDevice", new object[] {
-                        authUsername,
-                        authPassword,
+                        at,
                         gcmCode,
                         deviceId,
                         deviceIdSpecified}, this.ModifyUserDeviceOperationCompleted, userState);
@@ -294,28 +331,26 @@ namespace ComputeAndroidApp.UserWS {
         
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/IUserSvc/GetDeviceId", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public void GetDeviceId([System.Xml.Serialization.XmlElementAttribute(IsNullable=true)] string authUsername, [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)] string authPassword, [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)] string gcmId, out int GetDeviceIdResult, [System.Xml.Serialization.XmlIgnoreAttribute()] out bool GetDeviceIdResultSpecified) {
+        public void GetDeviceId([System.Xml.Serialization.XmlElementAttribute(IsNullable=true)] string at, [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)] string gcmId, out int GetDeviceIdResult, [System.Xml.Serialization.XmlIgnoreAttribute()] out bool GetDeviceIdResultSpecified) {
             object[] results = this.Invoke("GetDeviceId", new object[] {
-                        authUsername,
-                        authPassword,
+                        at,
                         gcmId});
             GetDeviceIdResult = ((int)(results[0]));
             GetDeviceIdResultSpecified = ((bool)(results[1]));
         }
         
         /// <remarks/>
-        public void GetDeviceIdAsync(string authUsername, string authPassword, string gcmId) {
-            this.GetDeviceIdAsync(authUsername, authPassword, gcmId, null);
+        public void GetDeviceIdAsync(string at, string gcmId) {
+            this.GetDeviceIdAsync(at, gcmId, null);
         }
         
         /// <remarks/>
-        public void GetDeviceIdAsync(string authUsername, string authPassword, string gcmId, object userState) {
+        public void GetDeviceIdAsync(string at, string gcmId, object userState) {
             if ((this.GetDeviceIdOperationCompleted == null)) {
                 this.GetDeviceIdOperationCompleted = new System.Threading.SendOrPostCallback(this.OnGetDeviceIdOperationCompleted);
             }
             this.InvokeAsync("GetDeviceId", new object[] {
-                        authUsername,
-                        authPassword,
+                        at,
                         gcmId}, this.GetDeviceIdOperationCompleted, userState);
         }
         
@@ -383,6 +418,8 @@ namespace ComputeAndroidApp.UserWS {
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.datacontract.org/2004/07/BusinessLayer")]
     public partial class User {
         
+        private AuthenticationToken[] authenticationTokensk__BackingFieldField;
+        
         private string forenamek__BackingFieldField;
         
         private string passwordk__BackingFieldField;
@@ -394,6 +431,17 @@ namespace ComputeAndroidApp.UserWS {
         private int userIdk__BackingFieldField;
         
         private string usernamek__BackingFieldField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlArrayAttribute("<AuthenticationTokens>k__BackingField", IsNullable=true)]
+        public AuthenticationToken[] AuthenticationTokensk__BackingField {
+            get {
+                return this.authenticationTokensk__BackingFieldField;
+            }
+            set {
+                this.authenticationTokensk__BackingFieldField = value;
+            }
+        }
         
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute("<Forename>k__BackingField", IsNullable=true)]
@@ -468,7 +516,111 @@ namespace ComputeAndroidApp.UserWS {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.datacontract.org/2004/07/BusinessLayer")]
+    public partial class AuthenticationToken {
+        
+        private System.DateTime creationDatek__BackingFieldField;
+        
+        private int deviceIdk__BackingFieldField;
+        
+        private System.Nullable<System.DateTime> lastAccessDatek__BackingFieldField;
+        
+        private string tokenk__BackingFieldField;
+        
+        private UserDevice userDevicek__BackingFieldField;
+        
+        private User userk__BackingFieldField;
+        
+        private string usernamek__BackingFieldField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("<CreationDate>k__BackingField")]
+        public System.DateTime CreationDatek__BackingField {
+            get {
+                return this.creationDatek__BackingFieldField;
+            }
+            set {
+                this.creationDatek__BackingFieldField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("<DeviceId>k__BackingField")]
+        public int DeviceIdk__BackingField {
+            get {
+                return this.deviceIdk__BackingFieldField;
+            }
+            set {
+                this.deviceIdk__BackingFieldField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("<LastAccessDate>k__BackingField", IsNullable=true)]
+        public System.Nullable<System.DateTime> LastAccessDatek__BackingField {
+            get {
+                return this.lastAccessDatek__BackingFieldField;
+            }
+            set {
+                this.lastAccessDatek__BackingFieldField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("<Token>k__BackingField", IsNullable=true)]
+        public string Tokenk__BackingField {
+            get {
+                return this.tokenk__BackingFieldField;
+            }
+            set {
+                this.tokenk__BackingFieldField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("<UserDevice>k__BackingField", IsNullable=true)]
+        public UserDevice UserDevicek__BackingField {
+            get {
+                return this.userDevicek__BackingFieldField;
+            }
+            set {
+                this.userDevicek__BackingFieldField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("<User>k__BackingField", IsNullable=true)]
+        public User Userk__BackingField {
+            get {
+                return this.userk__BackingFieldField;
+            }
+            set {
+                this.userk__BackingFieldField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("<Username>k__BackingField", IsNullable=true)]
+        public string Usernamek__BackingField {
+            get {
+                return this.usernamek__BackingFieldField;
+            }
+            set {
+                this.usernamek__BackingFieldField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.17929")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.datacontract.org/2004/07/BusinessLayer")]
     public partial class UserDevice {
+        
+        private AuthenticationToken authenticationTokenk__BackingFieldField;
+        
+        private DeviceAppInstallation[] deviceAppInstallationsk__BackingFieldField;
         
         private int deviceIdk__BackingFieldField;
         
@@ -483,6 +635,32 @@ namespace ComputeAndroidApp.UserWS {
         private User userk__BackingFieldField;
         
         private string usernamek__BackingFieldField;
+        
+        private WorkOrder[] workOrders1k__BackingFieldField;
+        
+        private WorkOrder[] workOrdersk__BackingFieldField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("<AuthenticationToken>k__BackingField", IsNullable=true)]
+        public AuthenticationToken AuthenticationTokenk__BackingField {
+            get {
+                return this.authenticationTokenk__BackingFieldField;
+            }
+            set {
+                this.authenticationTokenk__BackingFieldField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlArrayAttribute("<DeviceAppInstallations>k__BackingField", IsNullable=true)]
+        public DeviceAppInstallation[] DeviceAppInstallationsk__BackingField {
+            get {
+                return this.deviceAppInstallationsk__BackingFieldField;
+            }
+            set {
+                this.deviceAppInstallationsk__BackingFieldField = value;
+            }
+        }
         
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute("<DeviceId>k__BackingField")]
@@ -560,6 +738,432 @@ namespace ComputeAndroidApp.UserWS {
                 this.usernamek__BackingFieldField = value;
             }
         }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlArrayAttribute("<WorkOrders1>k__BackingField", IsNullable=true)]
+        public WorkOrder[] WorkOrders1k__BackingField {
+            get {
+                return this.workOrders1k__BackingFieldField;
+            }
+            set {
+                this.workOrders1k__BackingFieldField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlArrayAttribute("<WorkOrders>k__BackingField", IsNullable=true)]
+        public WorkOrder[] WorkOrdersk__BackingField {
+            get {
+                return this.workOrdersk__BackingFieldField;
+            }
+            set {
+                this.workOrdersk__BackingFieldField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.17929")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.datacontract.org/2004/07/BusinessLayer")]
+    public partial class DeviceAppInstallation {
+        
+        private int applicationDevicePairIdk__BackingFieldField;
+        
+        private int applicationIdk__BackingFieldField;
+        
+        private int deviceIdk__BackingFieldField;
+        
+        private System.DateTime installDatek__BackingFieldField;
+        
+        private UserDevice userDevicek__BackingFieldField;
+        
+        private WorkApplication workApplicationk__BackingFieldField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("<ApplicationDevicePairId>k__BackingField")]
+        public int ApplicationDevicePairIdk__BackingField {
+            get {
+                return this.applicationDevicePairIdk__BackingFieldField;
+            }
+            set {
+                this.applicationDevicePairIdk__BackingFieldField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("<ApplicationId>k__BackingField")]
+        public int ApplicationIdk__BackingField {
+            get {
+                return this.applicationIdk__BackingFieldField;
+            }
+            set {
+                this.applicationIdk__BackingFieldField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("<DeviceId>k__BackingField")]
+        public int DeviceIdk__BackingField {
+            get {
+                return this.deviceIdk__BackingFieldField;
+            }
+            set {
+                this.deviceIdk__BackingFieldField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("<InstallDate>k__BackingField")]
+        public System.DateTime InstallDatek__BackingField {
+            get {
+                return this.installDatek__BackingFieldField;
+            }
+            set {
+                this.installDatek__BackingFieldField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("<UserDevice>k__BackingField", IsNullable=true)]
+        public UserDevice UserDevicek__BackingField {
+            get {
+                return this.userDevicek__BackingFieldField;
+            }
+            set {
+                this.userDevicek__BackingFieldField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("<WorkApplication>k__BackingField", IsNullable=true)]
+        public WorkApplication WorkApplicationk__BackingField {
+            get {
+                return this.workApplicationk__BackingFieldField;
+            }
+            set {
+                this.workApplicationk__BackingFieldField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.17929")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.datacontract.org/2004/07/BusinessLayer")]
+    public partial class WorkApplication {
+        
+        private string applicationCreatork__BackingFieldField;
+        
+        private string applicationDescriptionk__BackingFieldField;
+        
+        private int applicationIdk__BackingFieldField;
+        
+        private string applicationNamek__BackingFieldField;
+        
+        private string applicationNamespacek__BackingFieldField;
+        
+        private string applicationPackageURLk__BackingFieldField;
+        
+        private int applicationVersionk__BackingFieldField;
+        
+        private string applicationWorkIntentk__BackingFieldField;
+        
+        private DeviceAppInstallation[] deviceAppInstallationsk__BackingFieldField;
+        
+        private WorkOrder[] workOrdersk__BackingFieldField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("<ApplicationCreator>k__BackingField", IsNullable=true)]
+        public string ApplicationCreatork__BackingField {
+            get {
+                return this.applicationCreatork__BackingFieldField;
+            }
+            set {
+                this.applicationCreatork__BackingFieldField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("<ApplicationDescription>k__BackingField", IsNullable=true)]
+        public string ApplicationDescriptionk__BackingField {
+            get {
+                return this.applicationDescriptionk__BackingFieldField;
+            }
+            set {
+                this.applicationDescriptionk__BackingFieldField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("<ApplicationId>k__BackingField")]
+        public int ApplicationIdk__BackingField {
+            get {
+                return this.applicationIdk__BackingFieldField;
+            }
+            set {
+                this.applicationIdk__BackingFieldField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("<ApplicationName>k__BackingField", IsNullable=true)]
+        public string ApplicationNamek__BackingField {
+            get {
+                return this.applicationNamek__BackingFieldField;
+            }
+            set {
+                this.applicationNamek__BackingFieldField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("<ApplicationNamespace>k__BackingField", IsNullable=true)]
+        public string ApplicationNamespacek__BackingField {
+            get {
+                return this.applicationNamespacek__BackingFieldField;
+            }
+            set {
+                this.applicationNamespacek__BackingFieldField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("<ApplicationPackageURL>k__BackingField", IsNullable=true)]
+        public string ApplicationPackageURLk__BackingField {
+            get {
+                return this.applicationPackageURLk__BackingFieldField;
+            }
+            set {
+                this.applicationPackageURLk__BackingFieldField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("<ApplicationVersion>k__BackingField")]
+        public int ApplicationVersionk__BackingField {
+            get {
+                return this.applicationVersionk__BackingFieldField;
+            }
+            set {
+                this.applicationVersionk__BackingFieldField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("<ApplicationWorkIntent>k__BackingField", IsNullable=true)]
+        public string ApplicationWorkIntentk__BackingField {
+            get {
+                return this.applicationWorkIntentk__BackingFieldField;
+            }
+            set {
+                this.applicationWorkIntentk__BackingFieldField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlArrayAttribute("<DeviceAppInstallations>k__BackingField", IsNullable=true)]
+        public DeviceAppInstallation[] DeviceAppInstallationsk__BackingField {
+            get {
+                return this.deviceAppInstallationsk__BackingFieldField;
+            }
+            set {
+                this.deviceAppInstallationsk__BackingFieldField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlArrayAttribute("<WorkOrders>k__BackingField", IsNullable=true)]
+        public WorkOrder[] WorkOrdersk__BackingField {
+            get {
+                return this.workOrdersk__BackingFieldField;
+            }
+            set {
+                this.workOrdersk__BackingFieldField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.17929")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.datacontract.org/2004/07/BusinessLayer")]
+    public partial class WorkOrder {
+        
+        private int applicationIdk__BackingFieldField;
+        
+        private string commPackageJsonk__BackingFieldField;
+        
+        private int deviceIdk__BackingFieldField;
+        
+        private System.DateTime receiveTimek__BackingFieldField;
+        
+        private System.Nullable<System.DateTime> slaveWorkOrderLastCommunicationk__BackingFieldField;
+        
+        private System.Nullable<int> slaveWorkerIdk__BackingFieldField;
+        
+        private System.Nullable<System.DateTime> slaveWorkerSubmitk__BackingFieldField;
+        
+        private UserDevice userDevice1k__BackingFieldField;
+        
+        private UserDevice userDevicek__BackingFieldField;
+        
+        private WorkApplication workApplicationk__BackingFieldField;
+        
+        private int workOrderIdk__BackingFieldField;
+        
+        private string workOrderResultJsonk__BackingFieldField;
+        
+        private string workOrderStatusk__BackingFieldField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("<ApplicationId>k__BackingField")]
+        public int ApplicationIdk__BackingField {
+            get {
+                return this.applicationIdk__BackingFieldField;
+            }
+            set {
+                this.applicationIdk__BackingFieldField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("<CommPackageJson>k__BackingField", IsNullable=true)]
+        public string CommPackageJsonk__BackingField {
+            get {
+                return this.commPackageJsonk__BackingFieldField;
+            }
+            set {
+                this.commPackageJsonk__BackingFieldField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("<DeviceId>k__BackingField")]
+        public int DeviceIdk__BackingField {
+            get {
+                return this.deviceIdk__BackingFieldField;
+            }
+            set {
+                this.deviceIdk__BackingFieldField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("<ReceiveTime>k__BackingField")]
+        public System.DateTime ReceiveTimek__BackingField {
+            get {
+                return this.receiveTimek__BackingFieldField;
+            }
+            set {
+                this.receiveTimek__BackingFieldField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("<SlaveWorkOrderLastCommunication>k__BackingField", IsNullable=true)]
+        public System.Nullable<System.DateTime> SlaveWorkOrderLastCommunicationk__BackingField {
+            get {
+                return this.slaveWorkOrderLastCommunicationk__BackingFieldField;
+            }
+            set {
+                this.slaveWorkOrderLastCommunicationk__BackingFieldField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("<SlaveWorkerId>k__BackingField", IsNullable=true)]
+        public System.Nullable<int> SlaveWorkerIdk__BackingField {
+            get {
+                return this.slaveWorkerIdk__BackingFieldField;
+            }
+            set {
+                this.slaveWorkerIdk__BackingFieldField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("<SlaveWorkerSubmit>k__BackingField", IsNullable=true)]
+        public System.Nullable<System.DateTime> SlaveWorkerSubmitk__BackingField {
+            get {
+                return this.slaveWorkerSubmitk__BackingFieldField;
+            }
+            set {
+                this.slaveWorkerSubmitk__BackingFieldField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("<UserDevice1>k__BackingField", IsNullable=true)]
+        public UserDevice UserDevice1k__BackingField {
+            get {
+                return this.userDevice1k__BackingFieldField;
+            }
+            set {
+                this.userDevice1k__BackingFieldField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("<UserDevice>k__BackingField", IsNullable=true)]
+        public UserDevice UserDevicek__BackingField {
+            get {
+                return this.userDevicek__BackingFieldField;
+            }
+            set {
+                this.userDevicek__BackingFieldField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("<WorkApplication>k__BackingField", IsNullable=true)]
+        public WorkApplication WorkApplicationk__BackingField {
+            get {
+                return this.workApplicationk__BackingFieldField;
+            }
+            set {
+                this.workApplicationk__BackingFieldField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("<WorkOrderId>k__BackingField")]
+        public int WorkOrderIdk__BackingField {
+            get {
+                return this.workOrderIdk__BackingFieldField;
+            }
+            set {
+                this.workOrderIdk__BackingFieldField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("<WorkOrderResultJson>k__BackingField", IsNullable=true)]
+        public string WorkOrderResultJsonk__BackingField {
+            get {
+                return this.workOrderResultJsonk__BackingFieldField;
+            }
+            set {
+                this.workOrderResultJsonk__BackingFieldField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("<WorkOrderStatus>k__BackingField", IsNullable=true)]
+        public string WorkOrderStatusk__BackingField {
+            get {
+                return this.workOrderStatusk__BackingFieldField;
+            }
+            set {
+                this.workOrderStatusk__BackingFieldField = value;
+            }
+        }
     }
     
     /// <remarks/>
@@ -605,6 +1209,32 @@ namespace ComputeAndroidApp.UserWS {
         private object[] results;
         
         internal AddUserDeviceCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public UserDevice Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((UserDevice)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.17929")]
+    public delegate void AddUserDeviceNoGCMCodeCompletedEventHandler(object sender, AddUserDeviceNoGCMCodeCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.17929")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class AddUserDeviceNoGCMCodeCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal AddUserDeviceNoGCMCodeCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
                 base(exception, cancelled, userState) {
             this.results = results;
         }

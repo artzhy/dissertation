@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android" android:versionCode="1" android:versionName="1.0" android:installLocation="internalOnly" package="com.ComputeAndroidApp">
-  <application android:label="App" android:name="computeandroidapp.App" android:debuggable="true">
+  <application android:name="computeandroidapp.App" android:debuggable="true">
     <!--<receiver android:name=".computeandroidapp.backgroundservice.servicereceiver3453">
 			<intent-filter>
 				<action android:name="android.intent.action.BOOT_COMPLETED" />
@@ -9,16 +9,16 @@
     <service android:name="computeandroidapp.backgroundservice.ControllerService" />
     <receiver android:permission="com.google.android.c2dm.permission.SEND" android:name="computeandroidapp.BroadcastReceiver">
       <intent-filter>
-        <action android:name="com.google.android.c2dm.intent.RECEIVE" />
-        <category android:name="ComputeAndroidApp" />
-      </intent-filter>
-      <intent-filter>
         <action android:name="com.google.android.c2dm.intent.REGISTRATION" />
-        <category android:name="ComputeAndroidApp" />
+        <category android:name="com.ComputeAndroidApp" />
       </intent-filter>
       <intent-filter>
         <action android:name="com.google.android.gcm.intent.RETRY" />
-        <category android:name="ComputeAndroidApp" />
+        <category android:name="com.ComputeAndroidApp" />
+      </intent-filter>
+      <intent-filter>
+        <action android:name="com.google.android.c2dm.intent.RECEIVE" />
+        <category android:name="com.ComputeAndroidApp" />
       </intent-filter>
     </receiver>
     <receiver android:name="computeandroidapp.backgroundservice.ServiceReceiver">
@@ -49,11 +49,11 @@
   <permission android:name="com.ComputeAndroidApp.permission.C2D_MESSAGE" android:protectionLevel="signature" />
   <uses-permission android:name="android.permission.GET_ACCOUNTS" />
   <uses-permission android:name="android.permission.INTERNET" />
-  <uses-permission android:name="ComputeAndroidApp.permission.C2D_MESSAGE" />
+  <uses-permission android:name="com.ComputeAndroidApp.permission.C2D_MESSAGE" />
   <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
   <uses-permission android:name="android.permission.WAKE_LOCK" />
   <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
-  <uses-sdk android:minSdkVersion="8" android:targetSdkVersion="14" />
+  <uses-sdk android:minSdkVersion="8" android:targetSdkVersion="8" />
   <!--<receiver
 				android:name="ComputeAndroidApp.BroadcastReciever"
 				android:permission="com.google.android.c2dm.permission.SEND" >

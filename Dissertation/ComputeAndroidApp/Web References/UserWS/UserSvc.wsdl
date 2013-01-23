@@ -25,6 +25,12 @@
   <wsdl:message name="IUserSvc_AddUserDevice_OutputMessage">
     <wsdl:part name="parameters" element="tns:AddUserDeviceResponse" />
   </wsdl:message>
+  <wsdl:message name="IUserSvc_AddUserDeviceNoGCMCode_InputMessage">
+    <wsdl:part name="parameters" element="tns:AddUserDeviceNoGCMCode" />
+  </wsdl:message>
+  <wsdl:message name="IUserSvc_AddUserDeviceNoGCMCode_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AddUserDeviceNoGCMCodeResponse" />
+  </wsdl:message>
   <wsdl:message name="IUserSvc_DeleteUserDevice_InputMessage">
     <wsdl:part name="parameters" element="tns:DeleteUserDevice" />
   </wsdl:message>
@@ -61,6 +67,10 @@
     <wsdl:operation name="AddUserDevice">
       <wsdl:input wsaw:Action="http://tempuri.org/IUserSvc/AddUserDevice" message="tns:IUserSvc_AddUserDevice_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IUserSvc/AddUserDeviceResponse" message="tns:IUserSvc_AddUserDevice_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AddUserDeviceNoGCMCode">
+      <wsdl:input wsaw:Action="http://tempuri.org/IUserSvc/AddUserDeviceNoGCMCode" message="tns:IUserSvc_AddUserDeviceNoGCMCode_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IUserSvc/AddUserDeviceNoGCMCodeResponse" message="tns:IUserSvc_AddUserDeviceNoGCMCode_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="DeleteUserDevice">
       <wsdl:input wsaw:Action="http://tempuri.org/IUserSvc/DeleteUserDevice" message="tns:IUserSvc_DeleteUserDevice_InputMessage" />
@@ -101,6 +111,15 @@
     </wsdl:operation>
     <wsdl:operation name="AddUserDevice">
       <soap:operation soapAction="http://tempuri.org/IUserSvc/AddUserDevice" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddUserDeviceNoGCMCode">
+      <soap:operation soapAction="http://tempuri.org/IUserSvc/AddUserDeviceNoGCMCode" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

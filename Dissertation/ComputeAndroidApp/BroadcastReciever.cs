@@ -16,11 +16,11 @@ using Android.Util;
 namespace ComputeAndroidApp {
     [BroadcastReceiver(Permission = GCMConstants.PERMISSION_GCM_INTENTS)]
     [IntentFilter(new string[] { GCMConstants.INTENT_FROM_GCM_MESSAGE },
-        Categories = new string[] { "ComputeAndroidApp" })]
+        Categories = new string[] { "com.ComputeAndroidApp" })]
     [IntentFilter(new string[] { GCMConstants.INTENT_FROM_GCM_REGISTRATION_CALLBACK },
-        Categories = new string[] { "ComputeAndroidApp" })]
+        Categories = new string[] { "com.ComputeAndroidApp" })]
     [IntentFilter(new string[] { GCMConstants.INTENT_FROM_GCM_LIBRARY_RETRY },
-        Categories = new string[] { "ComputeAndroidApp" })]
+        Categories = new string[] { "com.ComputeAndroidApp" })]
     public class BroadcastReceiver : GCMBroadcastReceiver<GCMIntentService> {
         //IMPORTANT: Change this to your own Sender ID!
         //The SENDER_ID is your Google API Console App Project ID.
@@ -39,12 +39,13 @@ namespace ComputeAndroidApp {
 
         protected override void OnRegistered(Context context, string registrationId) {
             Log.Verbose(BroadcastReceiver.TAG, "GCM Registered: " + registrationId);
-            //Send back to the server
-            //	var wc = new WebClient();
-            //	var result = wc.UploadString("http://your.server.com/api/register/", "POST", 
-            //		"{ 'registrationId' : '" + registrationId + "' }");
 
             createNotification("PushSharp-GCM Registered...", "The device has been Registered, Tap to View!");
+
+            App.setGCMCode(context, registrationId);
+
+            // Update the device to have the gcm code
+            new UserWS.UserSvc().ModifyUserDevice(App.GetAuthToken(App.GetUsername(context), App.GetPassword(context), App.GetDeviceId(context)), registrationId, App.GetDeviceId(context), true);
         }
 
         protected override void OnUnRegistered(Context context, string registrationId) {

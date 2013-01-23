@@ -47,11 +47,15 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App.cs" />
+    <Compile Include="AuthenticationToken.cs">
+      <DependentUpon>DBModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="BLUser.cs" />
     <Compile Include="BLUserDevice.cs" />
     <Compile Include="BLDeviceApplication.cs" />
     <Compile Include="BLDeviceAppInstall.cs" />
     <Compile Include="BLWorkOrder.cs" />
+    <Compile Include="BLAuthenticationToken.cs" />
     <Compile Include="DBModel.Context.cs">
       <DependentUpon>DBModel.Context.tt</DependentUpon>
       <AutoGen>True</AutoGen>

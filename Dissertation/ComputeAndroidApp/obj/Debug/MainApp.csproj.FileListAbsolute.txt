@@ -1,15 +1,12 @@
 C:\Users\Marc.COOPERSOFTWARE\Dropbox\Dissertation\Code\Dissertation\ComputeAndroidApp\bin\Debug\ComputeAndroidApp.dll
 C:\Users\Marc.COOPERSOFTWARE\Dropbox\Dissertation\Code\Dissertation\ComputeAndroidApp\bin\Debug\ComputeAndroidApp.pdb
 C:\Users\Marc.COOPERSOFTWARE\Dropbox\Dissertation\Code\Dissertation\ComputeAndroidApp\bin\Debug\ComputeAndroidApp.dll.mdb
-C:\Users\Marc.COOPERSOFTWARE\Dropbox\Dissertation\Code\Dissertation\ComputeAndroidApp\bin\Debug\com.ComputeAndroidApp.apk
-C:\Users\Marc.COOPERSOFTWARE\Dropbox\Dissertation\Code\Dissertation\ComputeAndroidApp\bin\Debug\com.ComputeAndroidApp-Signed.apk
 C:\Users\Marc.COOPERSOFTWARE\Dropbox\Dissertation\Code\Dissertation\ComputeAndroidApp\bin\Debug\PushSharp.Client.MonoForAndroid.dll
 C:\Users\Marc.COOPERSOFTWARE\Dropbox\Dissertation\Code\Dissertation\ComputeAndroidApp\bin\Debug\PushSharp.Client.MonoForAndroid.pdb
 C:\Users\Marc.COOPERSOFTWARE\Dropbox\Dissertation\Code\Dissertation\ComputeAndroidApp\bin\Debug\PushSharp.Client.MonoForAndroid.dll.mdb
 C:\Users\Marc.COOPERSOFTWARE\Dropbox\Dissertation\Code\Dissertation\ComputeAndroidApp\obj\Debug\MainApp.csprojResolveAssemblyReference.cache
 C:\Users\Marc.COOPERSOFTWARE\Dropbox\Dissertation\Code\Dissertation\ComputeAndroidApp\obj\Debug\ComputeAndroidApp.dll
 C:\Users\Marc.COOPERSOFTWARE\Dropbox\Dissertation\Code\Dissertation\ComputeAndroidApp\obj\Debug\ComputeAndroidApp.pdb
-C:\Users\Marc.COOPERSOFTWARE\Dropbox\Dissertation\Code\Dissertation\ComputeAndroidApp\obj\Debug\android\bin\com.ComputeAndroidApp.apk
 C:\Users\Marc.COOPERSOFTWARE\Dropbox\Dissertation\Code\Dissertation\ComputeAndroidApp\obj\Debug\res\layout\register.xml
 C:\Users\Marc.COOPERSOFTWARE\Dropbox\Dissertation\Code\Dissertation\ComputeAndroidApp\obj\Debug\res\layout\overview.xml
 C:\Users\Marc.COOPERSOFTWARE\Dropbox\Dissertation\Code\Dissertation\ComputeAndroidApp\obj\Debug\res\layout\main.xml
@@ -22,3 +19,6 @@ C:\Users\Marc.COOPERSOFTWARE\Dropbox\Dissertation\Code\Dissertation\ComputeAndro
 C:\Users\Marc.COOPERSOFTWARE\Dropbox\Dissertation\Code\Dissertation\ComputeAndroidApp\bin\Debug\SharedDevClasses.pdb
 C:\Users\Marc.COOPERSOFTWARE\Dropbox\Dissertation\Code\Dissertation\ComputeAndroidApp\bin\Debug\SharedDevClasses.dll.mdb
 C:\Users\Marc.COOPERSOFTWARE\Dropbox\Dissertation\Code\Dissertation\ComputeAndroidApp\bin\Debug\SharedDevClasses.xml
+C:\Users\Marc.COOPERSOFTWARE\Dropbox\Dissertation\Code\Dissertation\ComputeAndroidApp\bin\Debug\com.ComputeAndroidApp.apk
+C:\Users\Marc.COOPERSOFTWARE\Dropbox\Dissertation\Code\Dissertation\ComputeAndroidApp\bin\Debug\com.ComputeAndroidApp-Signed.apk
+C:\Users\Marc.COOPERSOFTWARE\Dropbox\Dissertation\Code\Dissertation\ComputeAndroidApp\obj\Debug\android\bin\com.ComputeAndroidApp.apk

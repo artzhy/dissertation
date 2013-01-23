@@ -9,35 +9,60 @@ namespace WebService {
     // NOTE: You can use the "Rename" command on the "Refactor" menu to change the class name "AuthSvc" in code, svc and config file together.
     // NOTE: In order to launch WCF Test Client for testing this service, please select AuthSvc.svc or AuthSvc.svc.cs at the Solution Explorer and start debugging.
     public class AuthSvc : IAuthSvc {
-        private Boolean AuthenticateUser(String username, String password) {
+        public Boolean AuthenticateUser(String username, String password) {
             return BusinessLayer.User.AuthenticateUser(username,password);
         }
 
-        public void AuthUser(AuthToken at, int userId = -1, int deviceId = -1) {
-            if (BusinessLayer.User.AuthenticateUser(at.Username, at.Password)) {
+        private BusinessLayer.AuthenticationToken AuthoriseUser(string at) {
+            try {
+                return BusinessLayer.AuthenticationToken.Populate(at);
+            } catch {
+                return null;
+            }
+        }
+
+        public BusinessLayer.AuthenticationToken AuthUser(string at, int userId = -1, int deviceId = -1) {
+            BusinessLayer.AuthenticationToken aut = AuthoriseUser(at);
+
+            if (aut != null) {
                 if (userId != -1) {
-                    if (BusinessLayer.User.Populate(at.Username).UserId != userId) {
+                    if (aut.User.UserId != userId) {
                         throw new Exception("You many only modify your own user");
                     }
                 }
 
                 if (deviceId != -1) {
-                    if (!((from x in BusinessLayer.User.Populate(at.Username).UserDevices
-                           where x.DeviceId == deviceId
-                           select x).Count() == 1)) {
-                               throw new Exception("You many only modify your own device");
+                    if (aut.DeviceId != deviceId) {
+                        throw new Exception("You many only modify your own device");
                     }
+
+                    //if (!((from x in BusinessLayer.User.Populate(at.Username).UserDevices
+                    //       where x.DeviceId == deviceId
+                    //       select x).Count() == 1)) {
+                    //           throw new Exception("You many only modify your own device");
+                    //}
                 }
             } else {
                 throw new Exception("Authentication required");
             }
+            return aut;
         }
 
 
-        public AuthToken GetAuthToken(String username, String password) {
-            if(AuthenticateUser(username, password))
-                return new AuthToken(username, password);
-            else
+        public String GetAuthToken(String username, String password, int deviceId) {
+            if(AuthenticateUser(username, password)) {
+                BusinessLayer.AuthenticationToken at = null;
+                try {
+                    at = BusinessLayer.AuthenticationToken.Populate(deviceId);
+                } catch {}
+
+                if (at == null) {
+                    // Generate new auth token.
+                    at = BusinessLayer.AuthenticationToken.AddAuthenticationToken(deviceId, username);
+                }
+
+                return at.Token;
+            } else
                 throw new Exception("Invalid username and password combination");
         }
 

@@ -1,1 +1,1 @@
-C:\Users\Marc.COOPERSOFTWARE\Dropbox\Dissertation\Code\Dissertation\App1\App2\bin\Debug\App2.dll
+C:\Users\Marc.COOPERSOFTWARE\Dropbox\Dissertation\Code\Dissertation\App1\App2\bin\Debug\com.ComputeApps.TestApp.dll

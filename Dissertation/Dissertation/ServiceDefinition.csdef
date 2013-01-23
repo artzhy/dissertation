@@ -19,5 +19,16 @@
     <LocalResources>
       <LocalStorage name="WebService.svclog" sizeInMB="1000" cleanOnRoleRecycle="false" />
     </LocalResources>
+	<ConfigurationSettings>
+		<Setting name="Microsoft.ServiceBus.ConnectionString" />
+	</ConfigurationSettings>
   </WebRole>
+  <WorkerRole name="Scheduler" vmsize="Small">
+    <Imports>
+      <Import moduleName="Diagnostics" />
+    </Imports>
+    <ConfigurationSettings>
+      <Setting name="Microsoft.ServiceBus.ConnectionString" />
+    </ConfigurationSettings>
+  </WorkerRole>
 </ServiceDefinition>

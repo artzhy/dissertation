@@ -40,8 +40,13 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.CSharp" />
-    <Reference Include="Microsoft.WindowsAzure.Configuration, Version=1.7.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.WindowsAzure.ConfigurationManager.1.7.0.0\lib\net35-full\Microsoft.WindowsAzure.Configuration.dll</HintPath>
+    <Reference Include="Microsoft.ServiceBus, Version=1.8.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\WindowsAzure.ServiceBus.1.8.0.0\lib\net40-full\Microsoft.ServiceBus.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.WindowsAzure.Configuration, Version=1.7.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.WindowsAzure.ConfigurationManager.1.7.0.3\lib\net35-full\Microsoft.WindowsAzure.Configuration.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.WindowsAzure.Diagnostics, Version=1.7.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" />
     <Reference Include="Microsoft.WindowsAzure.ServiceRuntime, Version=1.7.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" />
@@ -49,6 +54,8 @@
       <HintPath>..\packages\WindowsAzure.Storage.1.7.0.0\lib\net35-full\Microsoft.WindowsAzure.StorageClient.dll</HintPath>
     </Reference>
     <Reference Include="System.Data.Services.Client" />
+    <Reference Include="System.IdentityModel" />
+    <Reference Include="System.IdentityModel.Selectors" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -82,13 +89,16 @@
     </Compile>
     <Compile Include="AuthToken.cs" />
     <Compile Include="AzureLocalStorageTraceListener.cs" />
-    <Compile Include="IApplicationSvc.cs" />
-    <Compile Include="IAuthSvc.cs" />
-    <Compile Include="IWorkOrderSvc.cs" />
+    <Compile Include="CloudQueues.cs" />
+    <Compile Include="CustomValidator.cs" />
+    <Compile Include="Interfaces\IApplicationSvc.cs" />
+    <Compile Include="Interfaces\IAuthSvc.cs" />
+    <Compile Include="Interfaces\IAuthToken.cs" />
+    <Compile Include="Interfaces\IWorkOrderSvc.cs" />
     <Compile Include="UserSvc.svc.cs">
       <DependentUpon>UserSvc.svc</DependentUpon>
     </Compile>
-    <Compile Include="IUserSvc.cs" />
+    <Compile Include="Interfaces\IUserSvc.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="WebRole.cs" />
     <Compile Include="WorkOrderSvc.svc.cs">

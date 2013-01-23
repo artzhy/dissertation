@@ -32,5 +32,6 @@ namespace BusinessLayer
         public virtual User User { get; set; }
         public virtual ICollection<WorkOrder> WorkOrders { get; set; }
         public virtual ICollection<WorkOrder> WorkOrders1 { get; set; }
+        public virtual AuthenticationToken AuthenticationToken { get; set; }
     }
 }

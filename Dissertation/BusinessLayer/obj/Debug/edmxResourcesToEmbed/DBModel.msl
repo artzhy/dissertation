@@ -64,5 +64,16 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="AuthenticationTokens">
+      <EntityTypeMapping TypeName="marcdissertation_dbModel.AuthenticationToken">
+        <MappingFragment StoreEntitySet="AuthenticationToken">
+          <ScalarProperty Name="Username" ColumnName="Username" />
+          <ScalarProperty Name="LastAccessDate" ColumnName="LastAccessDate" />
+          <ScalarProperty Name="CreationDate" ColumnName="CreationDate" />
+          <ScalarProperty Name="DeviceId" ColumnName="DeviceId" />
+          <ScalarProperty Name="Token" ColumnName="Token" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>

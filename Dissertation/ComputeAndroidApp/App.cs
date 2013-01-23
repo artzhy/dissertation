@@ -19,49 +19,51 @@ namespace ComputeAndroidApp {
     [Application]
     class App : Application, BackgroundService.IAppConn {
         #region "Variables"
-            public const String GCM_SENDER_ID = "348279368873";
-            private BackgroundService.ControllerServiceBinder _binder;
-            private Boolean _binderSet;
-            public BackgroundService.ServiceConnection sc;
+        public const String GCM_SENDER_ID = "348279368873";
+        private BackgroundService.ControllerServiceBinder _binder;
+        private Boolean _binderSet;
+        public BackgroundService.ServiceConnection sc;
+        private static String _authToken;
+
         #endregion
 
         #region "App Functions"
-                public App(IntPtr handle, JniHandleOwnership transfer)
-                    : base(handle, transfer) {
-                }
+        public App(IntPtr handle, JniHandleOwnership transfer)
+            : base(handle, transfer) {
+        }
 
-                public override void OnCreate() {
-                    base.OnCreate();
+        public override void OnCreate() {
+            base.OnCreate();
 
-                    ApplicationContext.StartService(new Intent(ApplicationContext, typeof(BackgroundService.ControllerService)));
-                    BindControllerService();
-                }
+            ApplicationContext.StartService(new Intent(ApplicationContext, typeof(BackgroundService.ControllerService)));
+            BindControllerService();
+        }
 
-                public void BindControllerService() {
-                    sc = new BackgroundService.ServiceConnection(this);
+        public void BindControllerService() {
+            sc = new BackgroundService.ServiceConnection(this);
 
-                    this.ApplicationContext.BindService(new Intent(this, typeof(BackgroundService.ControllerService)), sc, Bind.AutoCreate);
+            this.ApplicationContext.BindService(new Intent(this, typeof(BackgroundService.ControllerService)), sc, Bind.AutoCreate);
 
-                }
+        }
 
-                public BackgroundService.ControllerServiceBinder ServiceBinder {
-                    get {
-                        return this._binder;
-                    }
-                    set {
-                        this._binder = value;
-                    }
-                }
+        public BackgroundService.ControllerServiceBinder ServiceBinder {
+            get {
+                return this._binder;
+            }
+            set {
+                this._binder = value;
+            }
+        }
 
-                public bool binderSet {
-                    get {
-                        return this._binderSet;
-                    }
-                    set {
-                        this._binderSet = value;
-                    }
-                }
-            #endregion
+        public bool binderSet {
+            get {
+                return this._binderSet;
+            }
+            set {
+                this._binderSet = value;
+            }
+        }
+        #endregion
 
         #region "Device Functions"
 
@@ -134,6 +136,24 @@ namespace ComputeAndroidApp {
             prefs.Edit().PutString("GCMCode", GCMCode).Commit();
         }
 
+        public static String GetAuthToken(String username = "", String password = "", int deviceId = -2) {
+            if (_authToken == null) {
+                if (username == "" || password == "")
+                    throw new Exception("Username/Password cannot be null");
+
+                Boolean deviceSpecified = false;
+
+                if (deviceId != -2) {
+                    deviceSpecified = true;
+                }
+
+                _authToken = new AuthWS.AuthSvc().GetAuthToken(username, password, deviceId, deviceSpecified);
+            }
+            return _authToken;
+        }
+
+        //new AuthWS.AuthSvc().GetAuthToken(username, password);
+
         public static void ShowDialog(String title, String message, Context context) {
             AlertDialog.Builder builder = new AlertDialog.Builder(context);
             builder.SetCancelable(true);
@@ -163,39 +183,28 @@ namespace ComputeAndroidApp {
             Log.Error(e.Source, e.Message + " \n   " + e.InnerException);
         }
 
-        public static String RegisterDevice(Context context) {
-            // do GCM registration
-            GCMSharp.Client.GCMRegistrar.CheckDevice(context);
-            GCMSharp.Client.GCMRegistrar.CheckManifest(context);
-            GCMSharp.Client.GCMRegistrar.Register(context, BroadcastReceiver.SENDER_ID);
-            String gcmRegId = GCMSharp.Client.GCMRegistrar.GetRegistrationId(context);
-            setGCMCode(context, gcmRegId);
+        public static void RegisterDeviceToUserNoGCM(Context context, String username) {
+                UserWS.UserDevice ud = new UserWS.UserSvc().AddUserDeviceNoGCMCode(username, Android.OS.Build.Model, 500, true, 0, false);
 
-            int deviceId = -1;
-            bool outDeviceId = false;
-            // do compue app registration
-            try {
-                new UserWS.UserSvc().GetDeviceId(GetUsername(context), GetPassword(context), gcmRegId, out deviceId, out outDeviceId);
-            } catch (Exception ex) {
-                // Ignore excptions thrown hfrom ehre
-            }
+                App.setDeviceId(context, ud.DeviceIdk__BackingField);
 
-            setDeviceId(context, deviceId);
+                RegisterDeviceGCM(context);
+        }
 
-            if (GetDeviceId(context) == -1) {
+        public static void RegisterDeviceGCM(Context context) {
+                // do GCM registration
+                GCMSharp.Client.GCMRegistrar.CheckDevice(context);
+                GCMSharp.Client.GCMRegistrar.CheckManifest(context);
 
-                UserWS.UserDevice ud = new UserWS.UserSvc().AddUserDevice(GetUsername(context), GetPassword(context), Android.OS.Build.Model, 500, true, 0, false, gcmRegId);
-                setDeviceId(context, ud.DeviceIdk__BackingField);
+                GCMSharp.Client.GCMRegistrar.Register(context, BroadcastReceiver.SENDER_ID);
 
-            }
-
-            return gcmRegId;
+            // return gcmRegId;
 
         }
 
         public static void DeregisterDevice(Context context) {
             try {
-                new UserWS.UserSvc().DeleteUserDevice(App.GetUsername(context), App.GetPassword(context), App.GetDeviceId(context), true);
+                new UserWS.UserSvc().DeleteUserDevice(App.GetAuthToken(), App.GetDeviceId(context), true);
                 App.setGCMCode(context, "");
                 App.setDeviceId(context, -1);
 
@@ -206,17 +215,17 @@ namespace ComputeAndroidApp {
             }
         }
 
-       public static Dictionary<String, int> GetComputeInstalledApps(Context context) {
-           ISharedPreferences prefs = context.GetSharedPreferences(context.PackageName, FileCreationMode.Private);
-           return JsonConvert.DeserializeObject<Dictionary<String, int>>(prefs.GetString("InstalledComputeApps", null));
+        public static Dictionary<String, int> GetComputeInstalledApps(Context context) {
+            ISharedPreferences prefs = context.GetSharedPreferences(context.PackageName, FileCreationMode.Private);
+            return JsonConvert.DeserializeObject<Dictionary<String, int>>(prefs.GetString("InstalledComputeApps", null));
 
-    }
+        }
 
-       public static void SetComputeInstalledApps(Context context, Dictionary<String, int> apps) {
-           ISharedPreferences prefs = context.GetSharedPreferences(context.PackageName, FileCreationMode.Private);
-           prefs.Edit().PutString("InstalledComputeApps", JsonConvert.SerializeObject(apps)).Commit();
+        public static void SetComputeInstalledApps(Context context, Dictionary<String, int> apps) {
+            ISharedPreferences prefs = context.GetSharedPreferences(context.PackageName, FileCreationMode.Private);
+            prefs.Edit().PutString("InstalledComputeApps", JsonConvert.SerializeObject(apps)).Commit();
 
-       }
+        }
 
 
         public static void GetInstalledApplications() {
@@ -231,14 +240,14 @@ namespace ComputeAndroidApp {
             }
 
         }
-        
+
 
         #endregion
 
         #region "General Utilites"
-            public static String SerializeToJson(Object o) {
-                return JsonConvert.SerializeObject(o);  
-            }
+        public static String SerializeToJson(Object o) {
+            return JsonConvert.SerializeObject(o);
+        }
 
         #endregion
 

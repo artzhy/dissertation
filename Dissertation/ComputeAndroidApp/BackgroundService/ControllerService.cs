@@ -20,7 +20,7 @@ namespace ComputeAndroidApp.BackgroundService {
     public class ControllerService : Service {
         private ControllerServiceBinder binder;
         // Service variables here.
-        
+        private List<CommPackage> WorkItems;
 
 
         public override IBinder OnBind(Intent intent) {
@@ -54,21 +54,20 @@ namespace ComputeAndroidApp.BackgroundService {
 
         public override void OnCreate() {
             base.OnCreate();
-            App.HandleException(new Exception("Here!"), this, false);
-            // ...
+           
+            WorkItems = new List<CommPackage>();
+
         }
 
         public override void OnStart(Intent intent, int startId) {
             base.OnStart(intent, startId);
-            App.HandleException(new Exception("Here!"), this, false);
-
-            // ...
+         
         }
 
         public override void OnDestroy() {
             base.OnDestroy();
 
-            // ...
+           
         } 
     }
 

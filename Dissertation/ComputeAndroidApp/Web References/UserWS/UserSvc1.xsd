@@ -2,6 +2,7 @@
 <xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/BusinessLayer" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/BusinessLayer" xmlns:xs="http://www.w3.org/2001/XMLSchema">
   <xs:complexType name="User">
     <xs:sequence>
+      <xs:element name="_x003C_AuthenticationTokens_x003E_k__BackingField" nillable="true" type="tns:ArrayOfAuthenticationToken" />
       <xs:element name="_x003C_Forename_x003E_k__BackingField" nillable="true" type="xs:string" />
       <xs:element name="_x003C_Password_x003E_k__BackingField" nillable="true" type="xs:string" />
       <xs:element name="_x003C_Surname_x003E_k__BackingField" nillable="true" type="xs:string" />
@@ -11,14 +12,28 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="User" nillable="true" type="tns:User" />
-  <xs:complexType name="ArrayOfUserDevice">
+  <xs:complexType name="ArrayOfAuthenticationToken">
     <xs:sequence>
-      <xs:element minOccurs="0" maxOccurs="unbounded" name="UserDevice" nillable="true" type="tns:UserDevice" />
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="AuthenticationToken" nillable="true" type="tns:AuthenticationToken" />
     </xs:sequence>
   </xs:complexType>
-  <xs:element name="ArrayOfUserDevice" nillable="true" type="tns:ArrayOfUserDevice" />
+  <xs:element name="ArrayOfAuthenticationToken" nillable="true" type="tns:ArrayOfAuthenticationToken" />
+  <xs:complexType name="AuthenticationToken">
+    <xs:sequence>
+      <xs:element name="_x003C_CreationDate_x003E_k__BackingField" type="xs:dateTime" />
+      <xs:element name="_x003C_DeviceId_x003E_k__BackingField" type="xs:int" />
+      <xs:element name="_x003C_LastAccessDate_x003E_k__BackingField" nillable="true" type="xs:dateTime" />
+      <xs:element name="_x003C_Token_x003E_k__BackingField" nillable="true" type="xs:string" />
+      <xs:element name="_x003C_UserDevice_x003E_k__BackingField" nillable="true" type="tns:UserDevice" />
+      <xs:element name="_x003C_User_x003E_k__BackingField" nillable="true" type="tns:User" />
+      <xs:element name="_x003C_Username_x003E_k__BackingField" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="AuthenticationToken" nillable="true" type="tns:AuthenticationToken" />
   <xs:complexType name="UserDevice">
     <xs:sequence>
+      <xs:element name="_x003C_AuthenticationToken_x003E_k__BackingField" nillable="true" type="tns:AuthenticationToken" />
+      <xs:element name="_x003C_DeviceAppInstallations_x003E_k__BackingField" nillable="true" type="tns:ArrayOfDeviceAppInstallation" />
       <xs:element name="_x003C_DeviceId_x003E_k__BackingField" type="xs:int" />
       <xs:element name="_x003C_DeviceMemoryResource_x003E_k__BackingField" type="xs:int" />
       <xs:element name="_x003C_DeviceProcRating_x003E_k__BackingField" type="xs:int" />
@@ -26,7 +41,71 @@
       <xs:element name="_x003C_GCMCode_x003E_k__BackingField" nillable="true" type="xs:string" />
       <xs:element name="_x003C_User_x003E_k__BackingField" nillable="true" type="tns:User" />
       <xs:element name="_x003C_Username_x003E_k__BackingField" nillable="true" type="xs:string" />
+      <xs:element name="_x003C_WorkOrders1_x003E_k__BackingField" nillable="true" type="tns:ArrayOfWorkOrder" />
+      <xs:element name="_x003C_WorkOrders_x003E_k__BackingField" nillable="true" type="tns:ArrayOfWorkOrder" />
     </xs:sequence>
   </xs:complexType>
   <xs:element name="UserDevice" nillable="true" type="tns:UserDevice" />
+  <xs:complexType name="ArrayOfDeviceAppInstallation">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="DeviceAppInstallation" nillable="true" type="tns:DeviceAppInstallation" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfDeviceAppInstallation" nillable="true" type="tns:ArrayOfDeviceAppInstallation" />
+  <xs:complexType name="DeviceAppInstallation">
+    <xs:sequence>
+      <xs:element name="_x003C_ApplicationDevicePairId_x003E_k__BackingField" type="xs:int" />
+      <xs:element name="_x003C_ApplicationId_x003E_k__BackingField" type="xs:int" />
+      <xs:element name="_x003C_DeviceId_x003E_k__BackingField" type="xs:int" />
+      <xs:element name="_x003C_InstallDate_x003E_k__BackingField" type="xs:dateTime" />
+      <xs:element name="_x003C_UserDevice_x003E_k__BackingField" nillable="true" type="tns:UserDevice" />
+      <xs:element name="_x003C_WorkApplication_x003E_k__BackingField" nillable="true" type="tns:WorkApplication" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="DeviceAppInstallation" nillable="true" type="tns:DeviceAppInstallation" />
+  <xs:complexType name="WorkApplication">
+    <xs:sequence>
+      <xs:element name="_x003C_ApplicationCreator_x003E_k__BackingField" nillable="true" type="xs:string" />
+      <xs:element name="_x003C_ApplicationDescription_x003E_k__BackingField" nillable="true" type="xs:string" />
+      <xs:element name="_x003C_ApplicationId_x003E_k__BackingField" type="xs:int" />
+      <xs:element name="_x003C_ApplicationName_x003E_k__BackingField" nillable="true" type="xs:string" />
+      <xs:element name="_x003C_ApplicationNamespace_x003E_k__BackingField" nillable="true" type="xs:string" />
+      <xs:element name="_x003C_ApplicationPackageURL_x003E_k__BackingField" nillable="true" type="xs:string" />
+      <xs:element name="_x003C_ApplicationVersion_x003E_k__BackingField" type="xs:int" />
+      <xs:element name="_x003C_ApplicationWorkIntent_x003E_k__BackingField" nillable="true" type="xs:string" />
+      <xs:element name="_x003C_DeviceAppInstallations_x003E_k__BackingField" nillable="true" type="tns:ArrayOfDeviceAppInstallation" />
+      <xs:element name="_x003C_WorkOrders_x003E_k__BackingField" nillable="true" type="tns:ArrayOfWorkOrder" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="WorkApplication" nillable="true" type="tns:WorkApplication" />
+  <xs:complexType name="ArrayOfWorkOrder">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="WorkOrder" nillable="true" type="tns:WorkOrder" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfWorkOrder" nillable="true" type="tns:ArrayOfWorkOrder" />
+  <xs:complexType name="WorkOrder">
+    <xs:sequence>
+      <xs:element name="_x003C_ApplicationId_x003E_k__BackingField" type="xs:int" />
+      <xs:element name="_x003C_CommPackageJson_x003E_k__BackingField" nillable="true" type="xs:string" />
+      <xs:element name="_x003C_DeviceId_x003E_k__BackingField" type="xs:int" />
+      <xs:element name="_x003C_ReceiveTime_x003E_k__BackingField" type="xs:dateTime" />
+      <xs:element name="_x003C_SlaveWorkOrderLastCommunication_x003E_k__BackingField" nillable="true" type="xs:dateTime" />
+      <xs:element name="_x003C_SlaveWorkerId_x003E_k__BackingField" nillable="true" type="xs:int" />
+      <xs:element name="_x003C_SlaveWorkerSubmit_x003E_k__BackingField" nillable="true" type="xs:dateTime" />
+      <xs:element name="_x003C_UserDevice1_x003E_k__BackingField" nillable="true" type="tns:UserDevice" />
+      <xs:element name="_x003C_UserDevice_x003E_k__BackingField" nillable="true" type="tns:UserDevice" />
+      <xs:element name="_x003C_WorkApplication_x003E_k__BackingField" nillable="true" type="tns:WorkApplication" />
+      <xs:element name="_x003C_WorkOrderId_x003E_k__BackingField" type="xs:int" />
+      <xs:element name="_x003C_WorkOrderResultJson_x003E_k__BackingField" nillable="true" type="xs:string" />
+      <xs:element name="_x003C_WorkOrderStatus_x003E_k__BackingField" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="WorkOrder" nillable="true" type="tns:WorkOrder" />
+  <xs:complexType name="ArrayOfUserDevice">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="UserDevice" nillable="true" type="tns:UserDevice" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfUserDevice" nillable="true" type="tns:ArrayOfUserDevice" />
 </xs:schema>

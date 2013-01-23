@@ -16,6 +16,9 @@
         <AssociationConnector Association="marcdissertation_dbModel.FKDeviceId" />
         <AssociationConnector Association="marcdissertation_dbModel.FKSlaveWorkerID" />
         <AssociationConnector Association="marcdissertation_dbModel.FKApplicationId" />
+        <EntityTypeShape EntityType="marcdissertation_dbModel.AuthenticationToken" Width="1.5" PointX="8.1220298670800535" PointY="31.697686061122308" />
+        <AssociationConnector Association="marcdissertation_dbModel.FKDeviceIdToken" />
+        <AssociationConnector Association="marcdissertation_dbModel.FK_AuthenticationToken_0" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

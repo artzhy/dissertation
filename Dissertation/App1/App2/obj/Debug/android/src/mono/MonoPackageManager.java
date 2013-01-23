@@ -66,7 +66,7 @@ public class MonoPackageManager {
 
 class MonoPackageManager_Resources {
 	public static final String[] Assemblies = new String[]{
-		"App2.dll",
+		"com.ComputeApps.TestApp.dll",
 	};
 	public static final String[] Dependencies = new String[]{
 	};

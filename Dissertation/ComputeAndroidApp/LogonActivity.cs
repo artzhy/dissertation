@@ -39,25 +39,31 @@ namespace ComputeAndroidApp {
                 String username = FindViewById<EditText>(Resource.Id.txtUsername).Text;
                 String password = FindViewById<EditText>(Resource.Id.txtPassword).Text;
 
-                Boolean success, success1;
 
-                new AuthWS.AuthSvc().AuthenticateUser(username, password, out success, out  success1);
+         //       string authtoken = App.GetAuthToken(username, password);
 
-                if (success) {
+
+               Boolean authResult, authResultSet = false;
+               new AuthWS.AuthSvc().AuthenticateUser(username, password, out authResult, out authResultSet);
+ 
+                if (authResult) {
+
                     if (username != App.GetUsername(this) || password != App.GetPassword(this)) {
                         App.setUsername(this, username);
                         App.setPassword(this, password);
                         App.setDeviceId(this, -1);
-                        App.RegisterDevice(this);
-                    } else if (App.GetGCMCode(this) == "") {
-                        App.setUsername(this, username);
-                        App.setPassword(this, password);
-                        App.RegisterDevice(this);
-                    } else if (App.GetDeviceId(this) == -1) {
-                        App.setUsername(this, username);
-                        App.setPassword(this, password);
-                        App.RegisterDevice(this);
+
+                        App.RegisterDeviceToUserNoGCM(this, username);
                     }
+
+                    if (App.GetDeviceId(this) == -1) {
+                        App.RegisterDeviceToUserNoGCM(this, username);
+                    } else if (App.GetGCMCode(this) == "") {
+                        App.RegisterDeviceGCM(this);
+                    }
+
+
+                    // TODO: Check what transactions are on the device, by searching the prefix com.ComputeApps.* and compare this to what the Database thinks.
 
                     StartActivity(typeof(OverviewActivity));
                     StartService(new Intent(this, typeof(BackgroundService.ControllerService)));

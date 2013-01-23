@@ -30,6 +30,15 @@
       <End Role="WorkApplication" EntitySet="WorkApplications" />
       <End Role="WorkOrder" EntitySet="WorkOrders" />
     </AssociationSet>
+    <EntitySet Name="AuthenticationTokens" EntityType="marcdissertation_dbModel.AuthenticationToken" />
+    <AssociationSet Name="FKDeviceIdToken" Association="marcdissertation_dbModel.FKDeviceIdToken">
+      <End Role="UserDevice" EntitySet="UserDevices" />
+      <End Role="AuthenticationToken" EntitySet="AuthenticationTokens" />
+    </AssociationSet>
+    <AssociationSet Name="FK_AuthenticationToken_0" Association="marcdissertation_dbModel.FK_AuthenticationToken_0">
+      <End Role="User" EntitySet="Users" />
+      <End Role="AuthenticationToken" EntitySet="AuthenticationTokens" />
+    </AssociationSet>
   </EntityContainer>
   <EntityType Name="DeviceAppInstallation">
     <Key>
@@ -52,6 +61,7 @@
     <Property Type="String" Name="Username" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Type="String" Name="Password" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
     <NavigationProperty Name="UserDevices" Relationship="marcdissertation_dbModel.UserFK" FromRole="User" ToRole="UserDevice" />
+    <NavigationProperty Name="AuthenticationTokens" Relationship="marcdissertation_dbModel.FK_AuthenticationToken_0" FromRole="User" ToRole="AuthenticationToken" />
   </EntityType>
   <EntityType Name="UserDevice">
     <Key>
@@ -67,6 +77,7 @@
     <NavigationProperty Name="User" Relationship="marcdissertation_dbModel.UserFK" FromRole="UserDevice" ToRole="User" />
     <NavigationProperty Name="WorkOrders" Relationship="marcdissertation_dbModel.FKDeviceId" FromRole="UserDevice" ToRole="WorkOrder" />
     <NavigationProperty Name="WorkOrders1" Relationship="marcdissertation_dbModel.FKSlaveWorkerID" FromRole="UserDevice" ToRole="WorkOrder" />
+    <NavigationProperty Name="AuthenticationToken" Relationship="marcdissertation_dbModel.FKDeviceIdToken" FromRole="UserDevice" ToRole="AuthenticationToken" />
   </EntityType>
   <EntityType Name="WorkApplication">
     <Key>
@@ -170,6 +181,44 @@
       </Principal>
       <Dependent Role="WorkOrder">
         <PropertyRef Name="ApplicationId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="AuthenticationToken">
+    <Key>
+      <PropertyRef Name="DeviceId" />
+    </Key>
+    <Property Type="String" Name="Token" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Type="Int32" Name="DeviceId" Nullable="false" />
+    <Property Type="DateTime" Name="CreationDate" Nullable="false" Precision="3" />
+    <Property Type="DateTime" Name="LastAccessDate" Precision="3" />
+    <NavigationProperty Name="UserDevice" Relationship="marcdissertation_dbModel.FKDeviceIdToken" FromRole="AuthenticationToken" ToRole="UserDevice" />
+    <Property Type="String" Name="Username" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="User" Relationship="marcdissertation_dbModel.FK_AuthenticationToken_0" FromRole="AuthenticationToken" ToRole="User" />
+  </EntityType>
+  <Association Name="FKDeviceIdToken">
+    <End Type="marcdissertation_dbModel.UserDevice" Role="UserDevice" Multiplicity="1" />
+    <End Type="marcdissertation_dbModel.AuthenticationToken" Role="AuthenticationToken" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="UserDevice">
+        <PropertyRef Name="DeviceId" />
+      </Principal>
+      <Dependent Role="AuthenticationToken">
+        <PropertyRef Name="DeviceId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_AuthenticationToken_0">
+    <End Type="marcdissertation_dbModel.User" Role="User" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="marcdissertation_dbModel.AuthenticationToken" Role="AuthenticationToken" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="Username" />
+      </Principal>
+      <Dependent Role="AuthenticationToken">
+        <PropertyRef Name="Username" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
