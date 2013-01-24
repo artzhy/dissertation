@@ -13,10 +13,9 @@ using Android.Widget;
 namespace ComputeAndroidApp.BackgroundService {
     interface IAppConn {
 
-        ControllerServiceBinder ServiceBinder {
-            get;
-            set;
-        }
+         ControllerServiceBinder GetServiceBinder();
+
+         void SetServiceBinder(ControllerServiceBinder value);
 
         Boolean binderSet {
             get;

@@ -79,6 +79,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.map</DependentUpon>
     </Compile>
+    <Compile Include="Web References\WorkOrderWS\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />
@@ -120,6 +125,29 @@
     <None Include="Web References\UserWS\UserSvc1.xsd">
       <SubType>Designer</SubType>
     </None>
+    <None Include="Web References\WorkOrderWS\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Web References\WorkOrderWS\WorkOrder.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\WorkOrderWS\WorkOrderSvc.wsdl" />
+    <None Include="Web References\WorkOrderWS\WorkOrderSvc.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Web References\WorkOrderWS\WorkOrderSvc0.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Web References\WorkOrderWS\WorkOrderSvc1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Web References\WorkOrderWS\WorkOrderSvc2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Web References\WorkOrderWS\WorkOrderTrimmed.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\Layout\Main.axml" />
@@ -152,6 +180,19 @@
       <CachedAppSettingsObjectName />
       <CachedSettingsPropName />
     </WebReferenceUrl>
+    <WebReferenceUrl Include="http://192.168.1.65:58041/WorkOrderSvc.svc">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\WorkOrderWS\</RelPath>
+      <UpdateFromURL>http://192.168.1.65:58041/WorkOrderSvc.svc</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>
+      </CachedAppSettingsObjectName>
+      <CachedSettingsPropName>
+      </CachedSettingsPropName>
+    </WebReferenceUrl>
   </ItemGroup>
   <ItemGroup>
     <None Include="Web References\UserWS\UserSvc.disco" />
@@ -163,6 +204,7 @@
     <Content Include="Properties\AndroidManifest.xml">
       <SubType>Designer</SubType>
     </Content>
+    <None Include="Web References\WorkOrderWS\WorkOrderSvc.disco" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\PushSharp\PushSharp.Client\PushSharp.Client.MonoForAndroid.Gcm\PushSharp.Client.MonoForAndroid.Gcm.csproj">

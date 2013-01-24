@@ -4,15 +4,18 @@ using System.Linq;
 using System.Text;
 
 namespace BusinessLayer {
-    [Serializable()]
+    [Serializable]
     public partial class WorkOrder {
         private static IEnumerable<System.Data.Entity.Validation.DbEntityValidationResult> errors;
 
         public static WorkOrder Populate(int workOrderId) {
             try {
-                return (from x in App.DbContext.WorkOrders
-                        where x.WorkOrderId.Equals(workOrderId)
+                App.DbContext.Configuration.ProxyCreationEnabled = false;
+                WorkOrder wo = (from x in App.DbContext.WorkOrders
+                        where x.WorkOrderId == workOrderId
                         select x).First();
+                App.DbContext.Configuration.ProxyCreationEnabled = true;
+                return wo;
             } catch {
                 throw new Exception("Application device pair with ID given does not exist");
             }

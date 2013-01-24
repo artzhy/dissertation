@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<DiscoveryClientResultsFile xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Results>
+    <DiscoveryClientResult referenceType="System.Web.Services.Discovery.SchemaReference" url="http://192.168.1.65:58041/WorkOrderSvc.svc?xsd=xsd1" filename="WorkOrderSvc.xsd" />
+    <DiscoveryClientResult referenceType="System.Web.Services.Discovery.SchemaReference" url="http://192.168.1.65:58041/WorkOrderSvc.svc?xsd=xsd0" filename="WorkOrderSvc0.xsd" />
+    <DiscoveryClientResult referenceType="System.Web.Services.Discovery.ContractReference" url="http://192.168.1.65:58041/WorkOrderSvc.svc?wsdl" filename="WorkOrderSvc.wsdl" />
+    <DiscoveryClientResult referenceType="System.Web.Services.Discovery.SchemaReference" url="http://192.168.1.65:58041/WorkOrderSvc.svc?xsd=xsd3" filename="WorkOrderSvc1.xsd" />
+    <DiscoveryClientResult referenceType="System.Web.Services.Discovery.SchemaReference" url="http://192.168.1.65:58041/WorkOrderSvc.svc?xsd=xsd2" filename="WorkOrderSvc2.xsd" />
+    <DiscoveryClientResult referenceType="System.Web.Services.Discovery.DiscoveryDocumentReference" url="http://192.168.1.65:58041/WorkOrderSvc.svc?disco" filename="WorkOrderSvc.disco" />
+  </Results>
+</DiscoveryClientResultsFile>

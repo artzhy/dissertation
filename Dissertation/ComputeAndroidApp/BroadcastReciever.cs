@@ -13,6 +13,9 @@ using Android.Widget;
 using GCMSharp.Client;
 using Android.Util;
 
+using Newtonsoft.Json;
+using ComputeAndroidSDK.Communication;
+
 namespace ComputeAndroidApp {
     [BroadcastReceiver(Permission = GCMConstants.PERMISSION_GCM_INTENTS)]
     [IntentFilter(new string[] { GCMConstants.INTENT_FROM_GCM_MESSAGE },
@@ -22,11 +25,6 @@ namespace ComputeAndroidApp {
     [IntentFilter(new string[] { GCMConstants.INTENT_FROM_GCM_LIBRARY_RETRY },
         Categories = new string[] { "com.ComputeAndroidApp" })]
     public class BroadcastReceiver : GCMBroadcastReceiver<GCMIntentService> {
-        //IMPORTANT: Change this to your own Sender ID!
-        //The SENDER_ID is your Google API Console App Project ID.
-        //  Be sure to get the right Project ID from your Google APIs Console.  It's not the named project ID that appears in the Overview,
-        //  but instead the numeric project id in the url: eg: https://code.google.com/apis/console/?pli=1#project:785671162406:overview
-        //  where 785671162406 is the project id, which is the SENDER_ID to use!
         public const string SENDER_ID = "348279368873";
 
         public const string TAG = "marcdissertationcomm";
@@ -38,14 +36,14 @@ namespace ComputeAndroidApp {
         }
 
         protected override void OnRegistered(Context context, string registrationId) {
-            Log.Verbose(BroadcastReceiver.TAG, "GCM Registered: " + registrationId);
+        //    Log.Verbose(BroadcastReceiver.TAG, "GCM Registered: " + registrationId);
 
-            createNotification("PushSharp-GCM Registered...", "The device has been Registered, Tap to View!");
+        //    createNotification("PushSharp-GCM Registered...", "The device has been Registered, Tap to View!");
 
             App.setGCMCode(context, registrationId);
 
             // Update the device to have the gcm code
-            new UserWS.UserSvc().ModifyUserDevice(App.GetAuthToken(App.GetUsername(context), App.GetPassword(context), App.GetDeviceId(context)), registrationId, App.GetDeviceId(context), true);
+            new UserWS.UserSvc().ModifyUserDevice(App.GetAuthToken(context, App.GetUsername(context), App.GetPassword(context), App.GetDeviceId(context)), registrationId, App.GetDeviceId(context), true);
         }
 
         protected override void OnUnRegistered(Context context, string registrationId) {
@@ -61,20 +59,11 @@ namespace ComputeAndroidApp {
         protected override void OnMessage(Context context, Intent intent) {
             Log.Info(BroadcastReceiver.TAG, "GCM Message Received!");
 
-            var msg = new StringBuilder();
+            String workOrderId = intent.Extras.Get("WorkOrderId").ToString();
 
-            if (intent != null && intent.Extras != null) {
-                foreach (var key in intent.Extras.KeySet())
-                    msg.AppendLine(key + "=" + intent.Extras.Get(key).ToString());
+            if (workOrderId != null) {
+                App.GetServiceBinder().GetService().AddWorkItem(int.Parse(workOrderId));
             }
-
-            //Store the message
-            var prefs = GetSharedPreferences(context.PackageName, FileCreationMode.Private);
-            var edit = prefs.Edit();
-            edit.PutString("last_msg", msg.ToString());
-            edit.Commit();
-
-            createNotification("PushSharp-GCM Msg Rec'd", "Message Received for C2DM-Sharp... Tap to View!");
         }
 
         protected override bool OnRecoverableError(Context context, string errorId) {

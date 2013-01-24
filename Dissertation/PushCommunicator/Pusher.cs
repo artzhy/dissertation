@@ -22,6 +22,8 @@ namespace PushCommunicator
            .ForDeviceRegistrationId(deviceReg)
            .WithCollapseKey("NONE")
            .WithJson(jsonString));
+
+           
         }
 
         #region Exception Handling

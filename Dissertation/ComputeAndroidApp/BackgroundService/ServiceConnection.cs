@@ -13,10 +13,10 @@ using Android.Widget;
 namespace ComputeAndroidApp.BackgroundService {
     class ServiceConnection : Java.Lang.Object, IServiceConnection {
         private ControllerServiceBinder binder;
-        private IAppConn app;
+     //   private IAppConn app;
 
-        public ServiceConnection(IAppConn app) {
-            this.app = app;
+        public ServiceConnection(App app) {
+     //       this.app = app;
         }
 
         public void OnServiceConnected(ComponentName name, IBinder service) {
@@ -24,15 +24,15 @@ namespace ComputeAndroidApp.BackgroundService {
 
             if (compSvcBinder != null) {
                 this.binder = (ControllerServiceBinder)service;
-                this.app.ServiceBinder = this.binder;
-                this.app.binderSet = true;
+                App.SetServiceBinder(this.binder);
+              //  this.app.binderSet = true;
 
             }
         }
 
         public void OnServiceDisconnected(ComponentName name) {
-            this.app.ServiceBinder = null;
-            this.app.binderSet = false;
+            App.SetServiceBinder(null);
+           // this.app.binderSet = false;
         }
 
 

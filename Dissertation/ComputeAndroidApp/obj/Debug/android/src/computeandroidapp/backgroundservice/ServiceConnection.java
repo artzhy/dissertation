@@ -24,6 +24,13 @@ public class ServiceConnection
 			mono.android.TypeManager.Activate ("ComputeAndroidApp.BackgroundService.ServiceConnection, ComputeAndroidApp, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null", "", this, new java.lang.Object[] {  });
 	}
 
+	public ServiceConnection (computeandroidapp.App p0)
+	{
+		super ();
+		if (getClass () == ServiceConnection.class)
+			mono.android.TypeManager.Activate ("ComputeAndroidApp.BackgroundService.ServiceConnection, ComputeAndroidApp, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null", "ComputeAndroidApp.App, ComputeAndroidApp, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null", this, new java.lang.Object[] { p0 });
+	}
+
 
 	public void onServiceConnected (android.content.ComponentName p0, android.os.IBinder p1)
 	{

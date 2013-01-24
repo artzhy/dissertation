@@ -57,7 +57,6 @@ namespace WebService {
         public void ModifyUserDevice(String at, String gcmCode, int deviceId = -1) {
             if (deviceId != -1) {
                
-                new AuthSvc().AuthUser(at);
                 BusinessLayer.UserDevice ud = BusinessLayer.UserDevice.Populate(deviceId);
 
                 ud.GCMCode = gcmCode;
@@ -83,7 +82,7 @@ namespace WebService {
         public void SendTestNotification(int deviceId) {
             Pusher push = new Pusher();
 
-            push.SendNotification(BusinessLayer.UserDevice.Populate(deviceId).GCMCode, "{\"alert\":\"Alert Text!\",\"badge\":\"7\"}");
+            push.SendNotification(BusinessLayer.UserDevice.Populate(deviceId).GCMCode, "{\"WorkOrderId\":\"10\"}");
 
         }
 

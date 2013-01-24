@@ -7,7 +7,18 @@ namespace BusinessLayer
 {
     class App
     {
-        public static marcdissertation_dbEntities DbContext = new marcdissertation_dbEntities();
+        public static marcdissertation_dbEntities _DbContext;
+
+        public static marcdissertation_dbEntities DbContext {
+            get {
+                if (_DbContext == null) {
+                    _DbContext = new marcdissertation_dbEntities();
+                }
+
+                return _DbContext;
+            }
+        }
+
 
         public static Exception ExceptionFormatter(IEnumerable<System.Data.Entity.Validation.DbEntityValidationResult> errors)
         {

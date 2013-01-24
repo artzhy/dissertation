@@ -51,8 +51,9 @@ namespace BusinessLayer {
         public static AuthenticationToken AddAuthenticationToken(int deviceId, string username) {
 
 
-            if (App.DbContext.AuthenticationTokens.Count(x => x.UserDevice.User.Username == username) > 0) {
-                throw new Exception("Device already has authentication token.");
+            if (App.DbContext.AuthenticationTokens.Count(x => x.UserDevice.User.Username == username  && x.UserDevice.DeviceId == deviceId) > 0) {
+               throw new Exception("Device already has authentication token.");
+           //     return AuthenticationToken.Populate(deviceId);
             }
 
             AuthenticationToken at = new AuthenticationToken();

@@ -17,12 +17,12 @@ using Android.Content.PM;
 
 namespace ComputeAndroidApp {
     [Application]
-    class App : Application, BackgroundService.IAppConn {
+    class App : Application {
         #region "Variables"
         public const String GCM_SENDER_ID = "348279368873";
-        private BackgroundService.ControllerServiceBinder _binder;
-        private Boolean _binderSet;
-        public BackgroundService.ServiceConnection sc;
+        public static BackgroundService.ControllerServiceBinder _binder;
+        private static Boolean _binderSet;
+        public static BackgroundService.ServiceConnection sc;
         private static String _authToken;
 
         #endregion
@@ -37,6 +37,18 @@ namespace ComputeAndroidApp {
 
             ApplicationContext.StartService(new Intent(ApplicationContext, typeof(BackgroundService.ControllerService)));
             BindControllerService();
+
+            try {
+                int deviceId = App.GetDeviceId(ApplicationContext) ;
+                if (deviceId == 0)
+                    deviceId = -2;
+                
+
+                GetAuthToken(ApplicationContext, GetUsername(ApplicationContext), GetPassword(ApplicationContext), deviceId);
+            } catch {
+
+            }
+
         }
 
         public void BindControllerService() {
@@ -46,21 +58,20 @@ namespace ComputeAndroidApp {
 
         }
 
-        public BackgroundService.ControllerServiceBinder ServiceBinder {
-            get {
-                return this._binder;
-            }
-            set {
-                this._binder = value;
-            }
+        public static BackgroundService.ControllerServiceBinder GetServiceBinder() {
+                return _binder;
+        }
+
+        public static void SetServiceBinder(BackgroundService.ControllerServiceBinder value) {
+            _binder = value;
         }
 
         public bool binderSet {
             get {
-                return this._binderSet;
+                return _binderSet;
             }
             set {
-                this._binderSet = value;
+                _binderSet = value;
             }
         }
         #endregion
@@ -136,18 +147,36 @@ namespace ComputeAndroidApp {
             prefs.Edit().PutString("GCMCode", GCMCode).Commit();
         }
 
-        public static String GetAuthToken(String username = "", String password = "", int deviceId = -2) {
+
+        public static String GetAuthToken(Context context) {
+            ISharedPreferences prefs = context.GetSharedPreferences(context.PackageName, FileCreationMode.Private);
+            return prefs.GetString("AuthToken", "");
+        }
+
+        public static void SetAuthToken(Context context, string authToken) {
+            ISharedPreferences prefs = context.GetSharedPreferences(context.PackageName, FileCreationMode.Private);
+
+            prefs.Edit().PutString("AuthToken", authToken).Commit();
+
+        }
+
+        public static String GetAuthToken(Context context, String username = "", String password = "", int deviceId = -2) {
             if (_authToken == null) {
-                if (username == "" || password == "")
-                    throw new Exception("Username/Password cannot be null");
+                if (GetAuthToken(context) == "") {
+                    if (username == "" || password == "")
+                        throw new Exception("Username/Password cannot be null");
 
-                Boolean deviceSpecified = false;
+                    Boolean deviceSpecified = false;
 
-                if (deviceId != -2) {
-                    deviceSpecified = true;
-                }
+                    if (deviceId != -2) {
+                        deviceSpecified = true;
+                    }
 
-                _authToken = new AuthWS.AuthSvc().GetAuthToken(username, password, deviceId, deviceSpecified);
+                    _authToken = new AuthWS.AuthSvc().GetAuthToken(username, password, deviceId, deviceSpecified);
+                    SetAuthToken(context, _authToken);
+
+                } else
+                    _authToken = GetAuthToken(context);
             }
             return _authToken;
         }
@@ -204,7 +233,7 @@ namespace ComputeAndroidApp {
 
         public static void DeregisterDevice(Context context) {
             try {
-                new UserWS.UserSvc().DeleteUserDevice(App.GetAuthToken(), App.GetDeviceId(context), true);
+                new UserWS.UserSvc().DeleteUserDevice(App.GetAuthToken(context), App.GetDeviceId(context), true);
                 App.setGCMCode(context, "");
                 App.setDeviceId(context, -1);
 
@@ -226,7 +255,6 @@ namespace ComputeAndroidApp {
             prefs.Edit().PutString("InstalledComputeApps", JsonConvert.SerializeObject(apps)).Commit();
 
         }
-
 
         public static void GetInstalledApplications() {
 

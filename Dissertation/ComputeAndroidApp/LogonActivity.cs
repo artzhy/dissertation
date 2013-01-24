@@ -45,7 +45,9 @@ namespace ComputeAndroidApp {
 
                Boolean authResult, authResultSet = false;
                new AuthWS.AuthSvc().AuthenticateUser(username, password, out authResult, out authResultSet);
- 
+
+               App.setGCMCode(this, "");
+
                 if (authResult) {
 
                     if (username != App.GetUsername(this) || password != App.GetPassword(this)) {

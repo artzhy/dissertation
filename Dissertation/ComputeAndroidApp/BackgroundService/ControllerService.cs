@@ -15,12 +15,13 @@ using Android.Util;
 using Newtonsoft.Json;
 using ComputeAndroidSDK.Communication;
 
+
 namespace ComputeAndroidApp.BackgroundService {
     [Service]
     public class ControllerService : Service {
         private ControllerServiceBinder binder;
         // Service variables here.
-        private List<CommPackage> WorkItems;
+        private List<WorkOrderWS.WorkOrder> WorkItems;
 
 
         public override IBinder OnBind(Intent intent) {
@@ -34,6 +35,21 @@ namespace ComputeAndroidApp.BackgroundService {
 
         public void NotifyDeviceActive() {
            //  new UserWS.UserSvc().
+        }
+
+        public void AddWorkItem(int workOrderId) {
+            
+            // Get it
+            WorkOrderWS.WorkOrderTrimmed wo = new WorkOrderWS.WorkOrderSvc().GetWorkOrder(App.GetAuthToken(this), App.GetDeviceId(this), true, workOrderId, true);
+
+
+
+
+            // Acknowledge it
+
+            // Schedule it
+
+
         }
 
         public void DoCommand(String IntentAction) {
@@ -54,8 +70,8 @@ namespace ComputeAndroidApp.BackgroundService {
 
         public override void OnCreate() {
             base.OnCreate();
-           
-            WorkItems = new List<CommPackage>();
+
+            WorkItems = new List<WorkOrderWS.WorkOrder>();
 
         }
 

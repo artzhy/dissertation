@@ -95,6 +95,11 @@
     <Compile Include="Interfaces\IAuthSvc.cs" />
     <Compile Include="Interfaces\IAuthToken.cs" />
     <Compile Include="Interfaces\IWorkOrderSvc.cs" />
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
     <Compile Include="UserSvc.svc.cs">
       <DependentUpon>UserSvc.svc</DependentUpon>
     </Compile>
@@ -104,6 +109,7 @@
     <Compile Include="WorkOrderSvc.svc.cs">
       <DependentUpon>WorkOrderSvc.svc</DependentUpon>
     </Compile>
+    <Compile Include="WorkOrderTrimmed.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -113,6 +119,10 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Web.config" />
+    <Content Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </Content>
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
