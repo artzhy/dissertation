@@ -10,8 +10,7 @@ using System.Configuration;
 namespace WebService {
     public class CloudQueues {
         public const String NewWorkOrderQueue = "newworkorders";
-        public const String CompletedWorkOrderQueue = "completedworkorders";
-        public const String CancelledWorkOrderQueue = "cancelledworkorders";
+        public const String UpdatedWorkOrderQueue = "updatedworkorders";
 
         public static String ConnectionString {
             get {
@@ -21,8 +20,7 @@ namespace WebService {
 
 
         private static QueueClient _NewWorkOrders;
-        private static QueueClient _CompletedWorkOrders;
-        private static QueueClient _CancelledWorkOrders;
+        private static QueueClient _UpdatedWorkOrders;
 
         private CloudQueues() {
 
@@ -37,20 +35,11 @@ namespace WebService {
             }
         }
 
-        public static QueueClient CompletedWorkOrderQueueClient {
+        public static QueueClient UpdatedWorkOrderQueueClient {
             get {
-                if (_CompletedWorkOrders == null)
-                    _CompletedWorkOrders = QueueClient.CreateFromConnectionString(ConnectionString, CompletedWorkOrderQueue);
-                return _CompletedWorkOrders;
-            }
-        }
-
-
-        public static QueueClient CancelledWorkOrderQueueClient {
-            get {
-                if (_CompletedWorkOrders == null)
-                    _CompletedWorkOrders = QueueClient.CreateFromConnectionString(ConnectionString, CompletedWorkOrderQueue);
-                return _CompletedWorkOrders;
+                if (_UpdatedWorkOrders == null)
+                    _UpdatedWorkOrders = QueueClient.CreateFromConnectionString(ConnectionString, UpdatedWorkOrderQueue);
+                return _UpdatedWorkOrders;
             }
         }
 

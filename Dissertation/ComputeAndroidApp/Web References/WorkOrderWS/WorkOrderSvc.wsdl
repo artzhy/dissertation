@@ -26,6 +26,18 @@
   <wsdl:message name="IWorkOrderSvc_GetWorkOrder_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetWorkOrderResponse" />
   </wsdl:message>
+  <wsdl:message name="IWorkOrderSvc_AcknowledgeWorkOrder_InputMessage">
+    <wsdl:part name="parameters" element="tns:AcknowledgeWorkOrder" />
+  </wsdl:message>
+  <wsdl:message name="IWorkOrderSvc_AcknowledgeWorkOrder_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AcknowledgeWorkOrderResponse" />
+  </wsdl:message>
+  <wsdl:message name="IWorkOrderSvc_SubmitWorkOrderResult_InputMessage">
+    <wsdl:part name="parameters" element="tns:SubmitWorkOrderResult" />
+  </wsdl:message>
+  <wsdl:message name="IWorkOrderSvc_SubmitWorkOrderResult_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SubmitWorkOrderResultResponse" />
+  </wsdl:message>
   <wsdl:portType name="IWorkOrderSvc">
     <wsdl:operation name="CreateWorkOrder">
       <wsdl:input wsaw:Action="http://tempuri.org/IWorkOrderSvc/CreateWorkOrder" message="tns:IWorkOrderSvc_CreateWorkOrder_InputMessage" />
@@ -38,6 +50,14 @@
     <wsdl:operation name="GetWorkOrder">
       <wsdl:input wsaw:Action="http://tempuri.org/IWorkOrderSvc/GetWorkOrder" message="tns:IWorkOrderSvc_GetWorkOrder_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IWorkOrderSvc/GetWorkOrderResponse" message="tns:IWorkOrderSvc_GetWorkOrder_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AcknowledgeWorkOrder">
+      <wsdl:input wsaw:Action="http://tempuri.org/IWorkOrderSvc/AcknowledgeWorkOrder" message="tns:IWorkOrderSvc_AcknowledgeWorkOrder_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IWorkOrderSvc/AcknowledgeWorkOrderResponse" message="tns:IWorkOrderSvc_AcknowledgeWorkOrder_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SubmitWorkOrderResult">
+      <wsdl:input wsaw:Action="http://tempuri.org/IWorkOrderSvc/SubmitWorkOrderResult" message="tns:IWorkOrderSvc_SubmitWorkOrderResult_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IWorkOrderSvc/SubmitWorkOrderResultResponse" message="tns:IWorkOrderSvc_SubmitWorkOrderResult_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_IWorkOrderSvc" type="tns:IWorkOrderSvc">
@@ -62,6 +82,24 @@
     </wsdl:operation>
     <wsdl:operation name="GetWorkOrder">
       <soap:operation soapAction="http://tempuri.org/IWorkOrderSvc/GetWorkOrder" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AcknowledgeWorkOrder">
+      <soap:operation soapAction="http://tempuri.org/IWorkOrderSvc/AcknowledgeWorkOrder" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SubmitWorkOrderResult">
+      <soap:operation soapAction="http://tempuri.org/IWorkOrderSvc/SubmitWorkOrderResult" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

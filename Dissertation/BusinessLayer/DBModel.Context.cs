@@ -29,7 +29,7 @@ namespace BusinessLayer
         public DbSet<User> Users { get; set; }
         public DbSet<UserDevice> UserDevices { get; set; }
         public DbSet<WorkApplication> WorkApplications { get; set; }
-        public DbSet<WorkOrder> WorkOrders { get; set; }
         public DbSet<AuthenticationToken> AuthenticationTokens { get; set; }
+        public DbSet<WorkOrder> WorkOrders { get; set; }
     }
 }

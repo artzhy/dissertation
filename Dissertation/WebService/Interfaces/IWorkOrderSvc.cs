@@ -21,7 +21,14 @@ namespace WebService {
         [WebGet(UriTemplate = "GetWorkOrder", ResponseFormat = WebMessageFormat.Json, RequestFormat = WebMessageFormat.Json)]
         WorkOrderTrimmed GetWorkOrder(String at, int deviceId, int workOrderId);
 
-        //TODO: Get status of work order
+        [OperationContract]
+        [WebGet(UriTemplate = "AcknowledgeWorkOrder", ResponseFormat = WebMessageFormat.Json, RequestFormat = WebMessageFormat.Json)]
+        void AcknowledgeWorkOrder(String at, int workOrderId);
+
+        [OperationContract]
+        [WebGet(UriTemplate = "SubmitWorkOrderResult", ResponseFormat = WebMessageFormat.Json, RequestFormat = WebMessageFormat.Json)]
+        void SubmitWorkOrderResult(string at, int workOrderId, String resultJson);
+       //TODO: Get status of work order
 
     }
 }

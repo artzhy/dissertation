@@ -21,7 +21,7 @@ namespace ComputeAndroidApp.BackgroundService {
     public class ControllerService : Service {
         private ControllerServiceBinder binder;
         // Service variables here.
-        private List<WorkOrderWS.WorkOrder> WorkItems;
+        private List<WorkOrderWS.WorkOrderTrimmed> WorkItems;
 
 
         public override IBinder OnBind(Intent intent) {
@@ -38,40 +38,49 @@ namespace ComputeAndroidApp.BackgroundService {
         }
 
         public void AddWorkItem(int workOrderId) {
-            
             // Get it
             WorkOrderWS.WorkOrderTrimmed wo = new WorkOrderWS.WorkOrderSvc().GetWorkOrder(App.GetAuthToken(this), App.GetDeviceId(this), true, workOrderId, true);
 
-
-
-
             // Acknowledge it
+            new WorkOrderWS.WorkOrderSvc().AcknowledgeWorkOrder(App.GetAuthToken(this), workOrderId, true);
+            // Submit comm package to Background service
 
-            // Schedule it
+            Intent doWork = new Intent();
+            
+            doWork.PutExtra("CommPackage", System.Text.RegularExpressions.Regex.Unescape(wo.CommPackageJsonk__BackingField));
+            doWork.SetAction(wo.ComputeAppIntentk__BackingField);
+            this.ApplicationContext.SendBroadcast(doWork);   
+
+            // Store it
+            wo.WorkOrderStatusk__BackingField = "SUBMITTED_TO_APP";
+            WorkItems.Add(wo);
+
+           
+
 
 
         }
 
-        public void DoCommand(String IntentAction) {
-            Intent test = new Intent();
+        //public void DoCommand(String IntentAction) {
+        //    Intent test = new Intent();
 
-            CommPackage pkg = new CommPackage();
-            pkg.ComputationRequestId = 1;
-            List<CommPackage.ParamListItem> list = new List<CommPackage.ParamListItem>();
-            list.Add(new CommPackage.ParamListItem("Param1", "VAlue1"));
+        //    CommPackage pkg = new CommPackage();
+        //    pkg.ComputationRequestId = 1;
+        //    List<CommPackage.ParamListItem> list = new List<CommPackage.ParamListItem>();
+        //    list.Add(new CommPackage.ParamListItem("Param1", "VAlue1"));
 
-            pkg.ParameterList = list;
-            pkg.IntentAction = "intent.action";
+        //    pkg.ParameterList = list;
+        //    pkg.IntentAction = "intent.action";
 
-            test.PutExtra("CommPackage", pkg.SerializeJson());
-            test.SetAction(IntentAction);
-            this.ApplicationContext.SendBroadcast(test);           
-        }
+        //    test.PutExtra("CommPackage", pkg.SerializeJson());
+        //    test.SetAction(IntentAction);
+        //    this.ApplicationContext.SendBroadcast(test);           
+        //}
 
         public override void OnCreate() {
             base.OnCreate();
 
-            WorkItems = new List<WorkOrderWS.WorkOrder>();
+            WorkItems = new List<WorkOrderWS.WorkOrderTrimmed>();
 
         }
 

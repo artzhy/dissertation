@@ -8,6 +8,8 @@ using Android.Widget;
 using Android.OS;
 using Android.Preferences;
 using Android.Util;
+using ComputeAndroidSDK.Communication;
+using System.Collections.Generic;
 
 namespace ComputeAndroidApp {
     [Activity(Label = "ComputeAndroidApp", MainLauncher = true, Icon = "@drawable/icon")]
@@ -31,6 +33,16 @@ namespace ComputeAndroidApp {
             Button buttonLogin = FindViewById<Button>(Resource.Id.btnLogin);
             buttonLogin.Click += buttonLogin_Click;
 
+            //CommPackage pkg = new CommPackage();
+            //pkg.ComputationRequestId = 1;
+            //List<CommPackage.ParamListItem> list = new List<CommPackage.ParamListItem>();
+            //list.Add(new CommPackage.ParamListItem("Param1", "VAlue1"));
+
+            //pkg.ParameterList = list;
+            //pkg.IntentAction = "intent.action";
+
+
+            //string test = pkg.SerializeJson();
 
         }
 

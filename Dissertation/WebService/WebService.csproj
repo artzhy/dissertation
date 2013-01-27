@@ -139,6 +139,10 @@
       <Project>{266850fe-45cc-47f4-82b6-a3af6793baa1}</Project>
       <Name>PushCommunicator</Name>
     </ProjectReference>
+    <ProjectReference Include="..\SharedClasses\SharedClasses.csproj">
+      <Project>{dd52b154-e0b3-4629-99f3-f95243618477}</Project>
+      <Name>SharedClasses</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

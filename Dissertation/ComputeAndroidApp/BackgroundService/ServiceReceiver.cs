@@ -28,6 +28,10 @@ namespace ComputeAndroidApp.BackgroundService {
 
             } else if (intent.Action == ComputeAndroidSDK.Communication.Constants.RETURN_RESULT_INTENT) {
                 // Handle result
+                ComputeAndroidSDK.Communication.CommPackage cp = ComputeAndroidSDK.Communication.CommPackage.DeserializeJson(intent.GetStringExtra("CommPackage"));
+
+                new WorkOrderWS.WorkOrderSvc().SubmitWorkOrderResult(App.GetAuthToken(context), cp.ComputationRequestId, true, cp.ComputationResult);
+
 
             } else if (intent.Action == ComputeAndroidSDK.Communication.Constants.RETURN_STATUS_INTENT) {
             }

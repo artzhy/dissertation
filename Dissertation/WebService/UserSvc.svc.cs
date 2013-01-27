@@ -82,7 +82,7 @@ namespace WebService {
         public void SendTestNotification(int deviceId) {
             Pusher push = new Pusher();
 
-            push.SendNotification(BusinessLayer.UserDevice.Populate(deviceId).GCMCode, "{\"WorkOrderId\":\"10\"}");
+            push.SendNotification(BusinessLayer.UserDevice.Populate(deviceId).GCMCode, "{\"WorkOrderId\":\"12\"}");
 
         }
 

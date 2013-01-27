@@ -10,14 +10,14 @@ namespace BusinessLayer {
 
         public static WorkOrder Populate(int workOrderId) {
             try {
-                App.DbContext.Configuration.ProxyCreationEnabled = false;
+               // App.DbContext.Configuration.ProxyCreationEnabled = false;
                 WorkOrder wo = (from x in App.DbContext.WorkOrders
                         where x.WorkOrderId == workOrderId
                         select x).First();
-                App.DbContext.Configuration.ProxyCreationEnabled = true;
+               // App.DbContext.Configuration.ProxyCreationEnabled = true;
                 return wo;
-            } catch {
-                throw new Exception("Application device pair with ID given does not exist");
+            } catch (Exception ex) {
+                throw ex;
             }
 
         }

@@ -48,9 +48,22 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="AuthenticationTokens">
+      <EntityTypeMapping TypeName="marcdissertation_dbModel.AuthenticationToken">
+        <MappingFragment StoreEntitySet="AuthenticationToken">
+          <ScalarProperty Name="Username" ColumnName="Username" />
+          <ScalarProperty Name="LastAccessDate" ColumnName="LastAccessDate" />
+          <ScalarProperty Name="CreationDate" ColumnName="CreationDate" />
+          <ScalarProperty Name="DeviceId" ColumnName="DeviceId" />
+          <ScalarProperty Name="Token" ColumnName="Token" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="WorkOrders">
       <EntityTypeMapping TypeName="marcdissertation_dbModel.WorkOrder">
         <MappingFragment StoreEntitySet="WorkOrder">
+          <ScalarProperty Name="EndComputationTime" ColumnName="EndComputationTime" />
+          <ScalarProperty Name="StartComputationTime" ColumnName="StartComputationTime" />
           <ScalarProperty Name="WorkOrderResultJson" ColumnName="WorkOrderResultJson" />
           <ScalarProperty Name="WorkOrderStatus" ColumnName="WorkOrderStatus" />
           <ScalarProperty Name="SlaveWorkOrderLastCommunication" ColumnName="SlaveWorkOrderLastCommunication" />
@@ -61,17 +74,6 @@
           <ScalarProperty Name="ApplicationId" ColumnName="ApplicationId" />
           <ScalarProperty Name="DeviceId" ColumnName="DeviceId" />
           <ScalarProperty Name="WorkOrderId" ColumnName="WorkOrderId" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="AuthenticationTokens">
-      <EntityTypeMapping TypeName="marcdissertation_dbModel.AuthenticationToken">
-        <MappingFragment StoreEntitySet="AuthenticationToken">
-          <ScalarProperty Name="Username" ColumnName="Username" />
-          <ScalarProperty Name="LastAccessDate" ColumnName="LastAccessDate" />
-          <ScalarProperty Name="CreationDate" ColumnName="CreationDate" />
-          <ScalarProperty Name="DeviceId" ColumnName="DeviceId" />
-          <ScalarProperty Name="Token" ColumnName="Token" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

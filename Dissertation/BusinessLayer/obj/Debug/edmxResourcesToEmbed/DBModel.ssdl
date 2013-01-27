@@ -107,6 +107,8 @@
     <Property Name="SlaveWorkOrderLastCommunication" Type="datetime" />
     <Property Name="WorkOrderStatus" Type="nvarchar" MaxLength="50" />
     <Property Name="WorkOrderResultJson" Type="nvarchar(max)" />
+    <Property Name="StartComputationTime" Type="datetime" />
+    <Property Name="EndComputationTime" Type="datetime" />
   </EntityType>
   <Association Name="FK_AuthenticationToken_0">
     <End Role="User" Type="marcdissertation_dbModel.Store.User" Multiplicity="1">

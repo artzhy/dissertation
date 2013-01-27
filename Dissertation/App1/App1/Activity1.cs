@@ -29,6 +29,9 @@ namespace com.ComputeApps.TestApp {
             cp.ParameterList.Add(new CommPackage.ParamListItem("a", 3));
             cp.ParameterList.Add(new CommPackage.ParamListItem("b", 9));
 
+            string test = cp.SerializeJson();
+
+
             WorkList.SetAppContext(this.ApplicationContext);
             WorkList.AddWorkItem(cp);
 

@@ -35,6 +35,10 @@ namespace ComputeAndroidApp.WorkOrderWS {
         
         private System.Threading.SendOrPostCallback GetWorkOrderOperationCompleted;
         
+        private System.Threading.SendOrPostCallback AcknowledgeWorkOrderOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback SubmitWorkOrderResultOperationCompleted;
+        
         private bool useDefaultCredentialsSetExplicitly;
         
         /// <remarks/>
@@ -81,6 +85,12 @@ namespace ComputeAndroidApp.WorkOrderWS {
         
         /// <remarks/>
         public event GetWorkOrderCompletedEventHandler GetWorkOrderCompleted;
+        
+        /// <remarks/>
+        public event AcknowledgeWorkOrderCompletedEventHandler AcknowledgeWorkOrderCompleted;
+        
+        /// <remarks/>
+        public event SubmitWorkOrderResultCompletedEventHandler SubmitWorkOrderResultCompleted;
         
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/IWorkOrderSvc/CreateWorkOrder", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
@@ -193,6 +203,72 @@ namespace ComputeAndroidApp.WorkOrderWS {
         }
         
         /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/IWorkOrderSvc/AcknowledgeWorkOrder", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public void AcknowledgeWorkOrder([System.Xml.Serialization.XmlElementAttribute(IsNullable=true)] string at, int workOrderId, [System.Xml.Serialization.XmlIgnoreAttribute()] bool workOrderIdSpecified) {
+            this.Invoke("AcknowledgeWorkOrder", new object[] {
+                        at,
+                        workOrderId,
+                        workOrderIdSpecified});
+        }
+        
+        /// <remarks/>
+        public void AcknowledgeWorkOrderAsync(string at, int workOrderId, bool workOrderIdSpecified) {
+            this.AcknowledgeWorkOrderAsync(at, workOrderId, workOrderIdSpecified, null);
+        }
+        
+        /// <remarks/>
+        public void AcknowledgeWorkOrderAsync(string at, int workOrderId, bool workOrderIdSpecified, object userState) {
+            if ((this.AcknowledgeWorkOrderOperationCompleted == null)) {
+                this.AcknowledgeWorkOrderOperationCompleted = new System.Threading.SendOrPostCallback(this.OnAcknowledgeWorkOrderOperationCompleted);
+            }
+            this.InvokeAsync("AcknowledgeWorkOrder", new object[] {
+                        at,
+                        workOrderId,
+                        workOrderIdSpecified}, this.AcknowledgeWorkOrderOperationCompleted, userState);
+        }
+        
+        private void OnAcknowledgeWorkOrderOperationCompleted(object arg) {
+            if ((this.AcknowledgeWorkOrderCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.AcknowledgeWorkOrderCompleted(this, new System.ComponentModel.AsyncCompletedEventArgs(invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/IWorkOrderSvc/SubmitWorkOrderResult", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public void SubmitWorkOrderResult([System.Xml.Serialization.XmlElementAttribute(IsNullable=true)] string at, int workOrderId, [System.Xml.Serialization.XmlIgnoreAttribute()] bool workOrderIdSpecified, [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)] string resultJson) {
+            this.Invoke("SubmitWorkOrderResult", new object[] {
+                        at,
+                        workOrderId,
+                        workOrderIdSpecified,
+                        resultJson});
+        }
+        
+        /// <remarks/>
+        public void SubmitWorkOrderResultAsync(string at, int workOrderId, bool workOrderIdSpecified, string resultJson) {
+            this.SubmitWorkOrderResultAsync(at, workOrderId, workOrderIdSpecified, resultJson, null);
+        }
+        
+        /// <remarks/>
+        public void SubmitWorkOrderResultAsync(string at, int workOrderId, bool workOrderIdSpecified, string resultJson, object userState) {
+            if ((this.SubmitWorkOrderResultOperationCompleted == null)) {
+                this.SubmitWorkOrderResultOperationCompleted = new System.Threading.SendOrPostCallback(this.OnSubmitWorkOrderResultOperationCompleted);
+            }
+            this.InvokeAsync("SubmitWorkOrderResult", new object[] {
+                        at,
+                        workOrderId,
+                        workOrderIdSpecified,
+                        resultJson}, this.SubmitWorkOrderResultOperationCompleted, userState);
+        }
+        
+        private void OnSubmitWorkOrderResultOperationCompleted(object arg) {
+            if ((this.SubmitWorkOrderResultCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.SubmitWorkOrderResultCompleted(this, new System.ComponentModel.AsyncCompletedEventArgs(invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
         public new void CancelAsync(object userState) {
             base.CancelAsync(userState);
         }
@@ -225,6 +301,8 @@ namespace ComputeAndroidApp.WorkOrderWS {
         
         private int deviceIdk__BackingFieldField;
         
+        private System.Nullable<System.DateTime> endComputationTimek__BackingFieldField;
+        
         private System.DateTime receiveTimek__BackingFieldField;
         
         private System.Nullable<System.DateTime> slaveWorkOrderLastCommunicationk__BackingFieldField;
@@ -232,6 +310,8 @@ namespace ComputeAndroidApp.WorkOrderWS {
         private System.Nullable<int> slaveWorkerIdk__BackingFieldField;
         
         private System.Nullable<System.DateTime> slaveWorkerSubmitk__BackingFieldField;
+        
+        private System.Nullable<System.DateTime> startComputationTimek__BackingFieldField;
         
         private UserDevice userDevice1k__BackingFieldField;
         
@@ -279,6 +359,17 @@ namespace ComputeAndroidApp.WorkOrderWS {
         }
         
         /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("<EndComputationTime>k__BackingField", IsNullable=true)]
+        public System.Nullable<System.DateTime> EndComputationTimek__BackingField {
+            get {
+                return this.endComputationTimek__BackingFieldField;
+            }
+            set {
+                this.endComputationTimek__BackingFieldField = value;
+            }
+        }
+        
+        /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute("<ReceiveTime>k__BackingField")]
         public System.DateTime ReceiveTimek__BackingField {
             get {
@@ -319,6 +410,17 @@ namespace ComputeAndroidApp.WorkOrderWS {
             }
             set {
                 this.slaveWorkerSubmitk__BackingFieldField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("<StartComputationTime>k__BackingField", IsNullable=true)]
+        public System.Nullable<System.DateTime> StartComputationTimek__BackingField {
+            get {
+                return this.startComputationTimek__BackingFieldField;
+            }
+            set {
+                this.startComputationTimek__BackingFieldField = value;
             }
         }
         
@@ -753,6 +855,8 @@ namespace ComputeAndroidApp.WorkOrderWS {
         
         private string commPackageJsonk__BackingFieldField;
         
+        private string computeAppIntentk__BackingFieldField;
+        
         private int deviceIdk__BackingFieldField;
         
         private System.DateTime receiveTimek__BackingFieldField;
@@ -788,6 +892,17 @@ namespace ComputeAndroidApp.WorkOrderWS {
             }
             set {
                 this.commPackageJsonk__BackingFieldField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("<ComputeAppIntent>k__BackingField", IsNullable=true)]
+        public string ComputeAppIntentk__BackingField {
+            get {
+                return this.computeAppIntentk__BackingFieldField;
+            }
+            set {
+                this.computeAppIntentk__BackingFieldField = value;
             }
         }
         
@@ -1161,6 +1276,14 @@ namespace ComputeAndroidApp.WorkOrderWS {
             }
         }
     }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.17929")]
+    public delegate void AcknowledgeWorkOrderCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.17929")]
+    public delegate void SubmitWorkOrderResultCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
 }
 
 #pragma warning restore 1591

@@ -5,10 +5,12 @@
       <xs:element name="_x003C_ApplicationId_x003E_k__BackingField" type="xs:int" />
       <xs:element name="_x003C_CommPackageJson_x003E_k__BackingField" nillable="true" type="xs:string" />
       <xs:element name="_x003C_DeviceId_x003E_k__BackingField" type="xs:int" />
+      <xs:element name="_x003C_EndComputationTime_x003E_k__BackingField" nillable="true" type="xs:dateTime" />
       <xs:element name="_x003C_ReceiveTime_x003E_k__BackingField" type="xs:dateTime" />
       <xs:element name="_x003C_SlaveWorkOrderLastCommunication_x003E_k__BackingField" nillable="true" type="xs:dateTime" />
       <xs:element name="_x003C_SlaveWorkerId_x003E_k__BackingField" nillable="true" type="xs:int" />
       <xs:element name="_x003C_SlaveWorkerSubmit_x003E_k__BackingField" nillable="true" type="xs:dateTime" />
+      <xs:element name="_x003C_StartComputationTime_x003E_k__BackingField" nillable="true" type="xs:dateTime" />
       <xs:element name="_x003C_UserDevice1_x003E_k__BackingField" nillable="true" type="tns:UserDevice" />
       <xs:element name="_x003C_UserDevice_x003E_k__BackingField" nillable="true" type="tns:UserDevice" />
       <xs:element name="_x003C_WorkApplication_x003E_k__BackingField" nillable="true" type="tns:WorkApplication" />

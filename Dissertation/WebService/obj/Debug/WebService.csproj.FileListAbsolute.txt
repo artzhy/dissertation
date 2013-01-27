@@ -30,3 +30,5 @@ C:\Users\Marc.COOPERSOFTWARE\Dropbox\Dissertation\Code\Dissertation\WebService\b
 C:\Users\Marc.COOPERSOFTWARE\Dropbox\Dissertation\Code\Dissertation\WebService\obj\Debug\WebService.csprojResolveAssemblyReference.cache
 C:\Users\Marc.COOPERSOFTWARE\Dropbox\Dissertation\Code\Dissertation\WebService\obj\Debug\WebService.dll
 C:\Users\Marc.COOPERSOFTWARE\Dropbox\Dissertation\Code\Dissertation\WebService\obj\Debug\WebService.pdb
+C:\Users\Marc.COOPERSOFTWARE\Dropbox\Dissertation\Code\Dissertation\WebService\bin\SharedClasses.dll
+C:\Users\Marc.COOPERSOFTWARE\Dropbox\Dissertation\Code\Dissertation\WebService\bin\SharedClasses.pdb

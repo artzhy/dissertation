@@ -42,7 +42,13 @@ namespace WebService {
             get;
             set;
         }
+
         public string WorkOrderResultJson {
+            get;
+            set;
+        }
+
+        public string ComputeAppIntent {
             get;
             set;
         }

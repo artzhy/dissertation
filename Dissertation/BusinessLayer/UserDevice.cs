@@ -30,8 +30,8 @@ namespace BusinessLayer
     
         public virtual ICollection<DeviceAppInstallation> DeviceAppInstallations { get; set; }
         public virtual User User { get; set; }
+        public virtual AuthenticationToken AuthenticationToken { get; set; }
         public virtual ICollection<WorkOrder> WorkOrders { get; set; }
         public virtual ICollection<WorkOrder> WorkOrders1 { get; set; }
-        public virtual AuthenticationToken AuthenticationToken { get; set; }
     }
 }

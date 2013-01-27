@@ -14,7 +14,7 @@ namespace ComputeAndroidSDK.Communication {
         public String BackgroundProcessFunction { get; set; }
         public String BackgroundProcessClass { get; set; }
         public List<ParamListItem> ParameterList { get; set; }
-        public Object ComputationResult { get; set; }
+        public String ComputationResult { get; set; }
 
         public String SerializeJson() {
             return JsonConvert.SerializeObject(this);

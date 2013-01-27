@@ -24,6 +24,8 @@ namespace BusinessLayer
         public Nullable<System.DateTime> SlaveWorkOrderLastCommunication { get; set; }
         public string WorkOrderStatus { get; set; }
         public string WorkOrderResultJson { get; set; }
+        public Nullable<System.DateTime> StartComputationTime { get; set; }
+        public Nullable<System.DateTime> EndComputationTime { get; set; }
     
         public virtual UserDevice UserDevice { get; set; }
         public virtual UserDevice UserDevice1 { get; set; }
