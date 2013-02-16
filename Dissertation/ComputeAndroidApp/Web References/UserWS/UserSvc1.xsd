@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/BusinessLayer" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/BusinessLayer" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+<xs:schema xmlns:ser="http://schemas.microsoft.com/2003/10/Serialization/" xmlns:tns="http://schemas.datacontract.org/2004/07/BusinessLayer" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/BusinessLayer" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import schemaLocation="http://192.168.1.65:58041/UserSvc.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
   <xs:complexType name="User">
     <xs:sequence>
       <xs:element name="_x003C_AuthenticationTokens_x003E_k__BackingField" nillable="true" type="tns:ArrayOfAuthenticationToken" />
@@ -32,7 +33,9 @@
   <xs:element name="AuthenticationToken" nillable="true" type="tns:AuthenticationToken" />
   <xs:complexType name="UserDevice">
     <xs:sequence>
+      <xs:element name="_x003C_ActiveDevice_x003E_k__BackingField" nillable="true" type="tns:ActiveDevice" />
       <xs:element name="_x003C_AuthenticationToken_x003E_k__BackingField" nillable="true" type="tns:AuthenticationToken" />
+      <xs:element name="_x003C_DeviceAccessRestrictions_x003E_k__BackingField" nillable="true" type="tns:ArrayOfDeviceAccessRestriction" />
       <xs:element name="_x003C_DeviceAppInstallations_x003E_k__BackingField" nillable="true" type="tns:ArrayOfDeviceAppInstallation" />
       <xs:element name="_x003C_DeviceId_x003E_k__BackingField" type="xs:int" />
       <xs:element name="_x003C_DeviceMemoryResource_x003E_k__BackingField" type="xs:int" />
@@ -46,6 +49,31 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="UserDevice" nillable="true" type="tns:UserDevice" />
+  <xs:complexType name="ActiveDevice">
+    <xs:sequence>
+      <xs:element name="_x003C_DeviceId_x003E_k__BackingField" type="xs:int" />
+      <xs:element name="_x003C_LastActiveSend_x003E_k__BackingField" type="xs:dateTime" />
+      <xs:element name="_x003C_UserDevice_x003E_k__BackingField" nillable="true" type="tns:UserDevice" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ActiveDevice" nillable="true" type="tns:ActiveDevice" />
+  <xs:complexType name="ArrayOfDeviceAccessRestriction">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="DeviceAccessRestriction" nillable="true" type="tns:DeviceAccessRestriction" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfDeviceAccessRestriction" nillable="true" type="tns:ArrayOfDeviceAccessRestriction" />
+  <xs:complexType name="DeviceAccessRestriction">
+    <xs:sequence>
+      <xs:element name="_x003C_AccessRestrictionId_x003E_k__BackingField" type="xs:int" />
+      <xs:element name="_x003C_Day_x003E_k__BackingField" type="xs:int" />
+      <xs:element name="_x003C_DeviceId_x003E_k__BackingField" type="xs:int" />
+      <xs:element name="_x003C_EndTime_x003E_k__BackingField" type="ser:duration" />
+      <xs:element name="_x003C_StartTime_x003E_k__BackingField" type="ser:duration" />
+      <xs:element name="_x003C_UserDevice_x003E_k__BackingField" nillable="true" type="tns:UserDevice" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="DeviceAccessRestriction" nillable="true" type="tns:DeviceAccessRestriction" />
   <xs:complexType name="ArrayOfDeviceAppInstallation">
     <xs:sequence>
       <xs:element minOccurs="0" maxOccurs="unbounded" name="DeviceAppInstallation" nillable="true" type="tns:DeviceAppInstallation" />
@@ -89,10 +117,12 @@
       <xs:element name="_x003C_ApplicationId_x003E_k__BackingField" type="xs:int" />
       <xs:element name="_x003C_CommPackageJson_x003E_k__BackingField" nillable="true" type="xs:string" />
       <xs:element name="_x003C_DeviceId_x003E_k__BackingField" type="xs:int" />
+      <xs:element name="_x003C_EndComputationTime_x003E_k__BackingField" nillable="true" type="xs:dateTime" />
       <xs:element name="_x003C_ReceiveTime_x003E_k__BackingField" type="xs:dateTime" />
       <xs:element name="_x003C_SlaveWorkOrderLastCommunication_x003E_k__BackingField" nillable="true" type="xs:dateTime" />
       <xs:element name="_x003C_SlaveWorkerId_x003E_k__BackingField" nillable="true" type="xs:int" />
       <xs:element name="_x003C_SlaveWorkerSubmit_x003E_k__BackingField" nillable="true" type="xs:dateTime" />
+      <xs:element name="_x003C_StartComputationTime_x003E_k__BackingField" nillable="true" type="xs:dateTime" />
       <xs:element name="_x003C_UserDevice1_x003E_k__BackingField" nillable="true" type="tns:UserDevice" />
       <xs:element name="_x003C_UserDevice_x003E_k__BackingField" nillable="true" type="tns:UserDevice" />
       <xs:element name="_x003C_WorkApplication_x003E_k__BackingField" nillable="true" type="tns:WorkApplication" />

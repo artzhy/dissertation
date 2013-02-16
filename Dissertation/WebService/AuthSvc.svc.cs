@@ -41,6 +41,8 @@ namespace WebService {
                     //           throw new Exception("You many only modify your own device");
                     //}
                 }
+
+                SharedFunctions.UpdateDeviceLastCommunicated(aut.DeviceId);
             } else {
                 throw new Exception("Authentication required");
             }

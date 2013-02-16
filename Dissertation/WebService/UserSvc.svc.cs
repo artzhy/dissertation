@@ -31,7 +31,7 @@ namespace WebService {
         public BusinessLayer.UserDevice AddUserDeviceNoGCMCode(String username, string deviceType, int deviceMemoryResource, int deviceProcRating) {
 
             // TODO: Implement authorisation here
-            
+
             return BusinessLayer.UserDevice.AddUserDevice(username, deviceType, deviceMemoryResource, deviceProcRating);
         }
 
@@ -39,7 +39,7 @@ namespace WebService {
         public BusinessLayer.UserDevice AddUserDevice(String at, string deviceType, int deviceMemoryResource, int deviceProcRating, String gcmCode = "") {
 
             AuthenticationToken oAt = new AuthSvc().AuthUser(at);
-       
+
 
             return BusinessLayer.UserDevice.AddUserDevice(oAt.Username, deviceType, deviceMemoryResource, deviceProcRating, gcmCode);
         }
@@ -47,8 +47,8 @@ namespace WebService {
         public void DeleteUserDevice(String at, int deviceId) {
             BusinessLayer.UserDevice ud = BusinessLayer.UserDevice.Populate(deviceId);
 
-            AuthenticationToken oAt = new AuthSvc().AuthUser(at,ud.User.UserId);
-            
+            AuthenticationToken oAt = new AuthSvc().AuthUser(at, ud.User.UserId);
+
             if (ud.User.Username.Equals(oAt.Username)) {
                 ud.Delete();
             }
@@ -56,7 +56,7 @@ namespace WebService {
 
         public void ModifyUserDevice(String at, String gcmCode, int deviceId = -1) {
             if (deviceId != -1) {
-               
+
                 BusinessLayer.UserDevice ud = BusinessLayer.UserDevice.Populate(deviceId);
 
                 ud.GCMCode = gcmCode;
@@ -86,8 +86,25 @@ namespace WebService {
 
         }
 
-       
-    
+        public void MarkDeviceActive(string at, int deviceId) {
+            AuthenticationToken oAt = new AuthSvc().AuthUser(at, -1, deviceId);
+
+            BusinessLayer.ActiveDevice.CreateActiveDevice(deviceId);
+        }
+
+        public void MarkDeviceInactive(string at, int deviceId) {
+            AuthenticationToken oAt = new AuthSvc().AuthUser(at, -1, deviceId);
+
+            try {
+                ActiveDevice ad = ActiveDevice.Populate(deviceId);
+                ad.Delete();
+                //TODO: Re-assign work orders
+            } catch {
+
+            }
+
+        }
+
     }
 
 

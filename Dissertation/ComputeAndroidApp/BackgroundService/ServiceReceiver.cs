@@ -23,14 +23,15 @@ namespace ComputeAndroidApp.BackgroundService {
             if (intent.Action == Android.Content.Intent.ActionBootCompleted) {
                 //TODO: Check apps are installed and notify cloud that device is on
 
-                App.GetInstalledApplications();
+      //          App.GetInstalledApplications();
 
-
+                new UserWS.UserSvc().MarkDeviceActive(App.GetAuthToken(context), App.GetDeviceId(context), true);
+                
             } else if (intent.Action == ComputeAndroidSDK.Communication.Constants.RETURN_RESULT_INTENT) {
                 // Handle result
                 ComputeAndroidSDK.Communication.CommPackage cp = ComputeAndroidSDK.Communication.CommPackage.DeserializeJson(intent.GetStringExtra("CommPackage"));
 
-                new WorkOrderWS.WorkOrderSvc().SubmitWorkOrderResult(App.GetAuthToken(context), cp.ComputationRequestId, true, cp.ComputationResult);
+                new WorkOrderWS.WorkOrderSvc().SubmitWorkOrderResult(App.GetAuthToken(context), cp.ComputationRequestId, true, cp.ComputationResult, cp.ComputationStartTime, true, cp.ComputationEndTime, true);
 
 
             } else if (intent.Action == ComputeAndroidSDK.Communication.Constants.RETURN_STATUS_INTENT) {
@@ -46,8 +47,7 @@ namespace ComputeAndroidApp.BackgroundService {
 
 
 /*
- * adb.exe shell am broadcast -a android.intent.action.BOOT_COMPLETED -c android.inte
-nt.category.HOME
+ * adb.exe shell am broadcast -a android.intent.action.BOOT_COMPLETED -c android.intent.category.HOME
  * C:\Users\Marc.COOPERSOFTWARE\AppData\Local\Android\android-sdk\platform-tools>ad
 b.exe shell am broadcast -a android.intent.action.BOOT_COMPLETED -c android.inte
 nt.category.HOME -n ComputeAndroidApp/.BackgroundService.ServiceReceiver

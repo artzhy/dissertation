@@ -12,26 +12,46 @@ using Microsoft.WindowsAzure.ServiceRuntime;
 using Microsoft.WindowsAzure.StorageClient;
 
 using BusinessLayer;
+using System.Threading.Tasks;
+
+using SharedClasses;
 
 namespace WorkOrderDistributor {
     public class WorkerRole : RoleEntryPoint {
         // The name of your queue
         const string NewWorkOrdersQName = "newworkorders";
         const string UpdatedWorkOrersQName = "updatedworkorders";
+        const string CommunicationPackagesQName = "communicationpackages";
+        private PushCommunicator.Pusher Pusher;
+
 
         // QueueClient is thread-safe. Recommended that you cache 
         // rather than recreating it on every request
         QueueClient NewWorkOrders;
         QueueClient UpdatedWorkOrders;
+        QueueClient CommunicationPackages;
+        List<Task> TaskList;
+
 
         bool IsStopped;
 
         public override void Run() {
             while (!IsStopped) {
                 try {
-                    ProcessNewWorkOrders();
+                    // Remove completed tasks.
+                    RemoveCompletedTasks();
 
-                    ProcessUpdatedWorkOrders();
+                    if (TaskList.Count < 10) {
+                        var taskProcessNew = Task.Factory.StartNew(() => ProcessNewWorkOrders());
+                        TaskList.Add(taskProcessNew);
+                        var taskProcessUpdates = Task.Factory.StartNew(() => ProcessUpdatedWorkOrders());
+                        TaskList.Add(taskProcessUpdates);
+                        var taskProcessCommunicate = Task.Factory.StartNew(() => ProcessCommunications());
+                        TaskList.Add(taskProcessCommunicate);
+                    } else {
+                        Task.WaitAny(TaskList.ToArray());
+                    }
+                  //  ProcessUpdatedWorkOrders();
                     
                 } catch (MessagingException e) {
                     if (!e.IsTransient) {
@@ -49,6 +69,23 @@ namespace WorkOrderDistributor {
             }
         }
 
+        private void RemoveCompletedTasks() {
+            List<Task> toRemove = new List<Task>();
+
+            foreach (Task t in TaskList) {
+                if (t.IsCompleted || t.IsCanceled)
+                    toRemove.Add(t);
+                else if (t.IsFaulted) {
+                    Trace.WriteLine(t.Exception);
+                    toRemove.Add(t);
+                }
+            }
+
+            foreach (Task t in toRemove) {
+                TaskList.Remove(t);
+            }
+        }
+
         private void ProcessNewWorkOrders() {
             BrokeredMessage newWorkOrderMessage = null;
             newWorkOrderMessage = NewWorkOrders.Receive();
@@ -56,6 +93,9 @@ namespace WorkOrderDistributor {
             if (newWorkOrderMessage != null) {
                 // Process the message
                 Trace.WriteLine("Processing", newWorkOrderMessage.SequenceNumber.ToString());
+
+                CommunicationPackages.Send(new BrokeredMessage(new CommunicationPackage(newWorkOrderMessage.GetBody<int>(), CommunicationPackage.UpdateType.NewWorkOrder, null, null, null, 6)));
+
                 newWorkOrderMessage.Complete();
             }
         }
@@ -94,12 +134,44 @@ namespace WorkOrderDistributor {
                         wo.SlaveWorkOrderLastCommunication = DateTime.Now;
                         wo.WorkOrderResultJson = wou.ResultJson;
                         wo.WorkOrderStatus = "RESULT_RECEIVED";
+                        wo.StartComputationTime = wou.ComputationStartTime;
+                        wo.EndComputationTime = wou.ComputationEndTime;
+                        
+                        wo.Save();
+
+                        // Queue result to be returned to device
+                        CommunicationPackages.Send(new BrokeredMessage(new CommunicationPackage(wo.WorkOrderId, CommunicationPackage.UpdateType.Result, wo.SlaveWorkerId, wo.StartComputationTime, wo.EndComputationTime,wo.DeviceId, wo.WorkOrderResultJson)));
+
+                        break;
+
+                    case SharedClasses.WorkOrderUpdate.UpdateType.MarkBeingComputed:
+                        // Update database
+                        wo.SlaveWorkOrderLastCommunication = DateTime.Now;
+                        wo.WorkOrderStatus = "BEING_COMPUTED";
                         wo.Save();
 
                         break;
                 }
 
                 updatedWorkOrderMessage.Complete();
+            }
+        }
+
+        private void ProcessCommunications() {
+            BrokeredMessage commMessage = null;
+            commMessage = CommunicationPackages.Receive();
+
+            if (commMessage != null) {
+
+                SharedClasses.CommunicationPackage cp = commMessage.GetBody<SharedClasses.CommunicationPackage>();
+                UserDevice targetUD = UserDevice.Populate(cp.TargetDeviceId);
+
+                Pusher.SendNotification(targetUD.GCMCode, cp.Serialize());
+
+
+                commMessage.Complete();
+
+                Debug.WriteLine("here");
             }
         }
 
@@ -118,10 +190,19 @@ namespace WorkOrderDistributor {
                 namespaceManager.CreateQueue(UpdatedWorkOrersQName);
             }
 
+            if (!namespaceManager.QueueExists(CommunicationPackagesQName)) {
+                namespaceManager.CreateQueue(CommunicationPackagesQName);
+            }
+
          
             // Initialize the connection to Service Bus Queue
             NewWorkOrders = QueueClient.CreateFromConnectionString(connectionString, NewWorkOrdersQName);
             UpdatedWorkOrders = QueueClient.CreateFromConnectionString(connectionString, UpdatedWorkOrersQName);
+            CommunicationPackages = QueueClient.CreateFromConnectionString(connectionString, CommunicationPackagesQName);
+            Pusher = new PushCommunicator.Pusher();
+
+
+            TaskList = new List<Task>();
 
             IsStopped = false;
             return base.OnStart();
@@ -132,6 +213,8 @@ namespace WorkOrderDistributor {
             IsStopped = true;
             NewWorkOrders.Close();
             UpdatedWorkOrders.Close();
+            CommunicationPackages.Close();
+            Task.WaitAll(TaskList.ToArray());
 
             base.OnStop();
         }

@@ -67,10 +67,25 @@
         <xs:element minOccurs="0" name="at" nillable="true" type="xs:string" />
         <xs:element minOccurs="0" name="workOrderId" type="xs:int" />
         <xs:element minOccurs="0" name="resultJson" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="compuatationStartTime" type="xs:dateTime" />
+        <xs:element minOccurs="0" name="computationEndTime" type="xs:dateTime" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="SubmitWorkOrderResultResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="MarkWorkOrderInComputation">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="at" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="workOrderId" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="MarkWorkOrderInComputationResponse">
     <xs:complexType>
       <xs:sequence />
     </xs:complexType>

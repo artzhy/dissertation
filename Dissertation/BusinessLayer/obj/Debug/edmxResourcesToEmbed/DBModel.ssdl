@@ -1,7 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Schema Namespace="marcdissertation_dbModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
   <EntityContainer Name="marcdissertation_dbModelStoreContainer">
+    <EntitySet Name="ActiveDevice" EntityType="marcdissertation_dbModel.Store.ActiveDevice" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="AuthenticationToken" EntityType="marcdissertation_dbModel.Store.AuthenticationToken" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Communication" EntityType="marcdissertation_dbModel.Store.Communication" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="DeviceAccessRestriction" EntityType="marcdissertation_dbModel.Store.DeviceAccessRestriction" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="DeviceAppInstallation" EntityType="marcdissertation_dbModel.Store.DeviceAppInstallation" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="User" EntityType="marcdissertation_dbModel.Store.User" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="UserDevice" EntityType="marcdissertation_dbModel.Store.UserDevice" store:Type="Tables" Schema="dbo" />
@@ -27,6 +30,14 @@
       <End Role="UserDevice" EntitySet="UserDevice" />
       <End Role="DeviceAppInstallation" EntitySet="DeviceAppInstallation" />
     </AssociationSet>
+    <AssociationSet Name="FKDeviceIdAccess" Association="marcdissertation_dbModel.Store.FKDeviceIdAccess">
+      <End Role="UserDevice" EntitySet="UserDevice" />
+      <End Role="DeviceAccessRestriction" EntitySet="DeviceAccessRestriction" />
+    </AssociationSet>
+    <AssociationSet Name="FKDeviceIdActive" Association="marcdissertation_dbModel.Store.FKDeviceIdActive">
+      <End Role="UserDevice" EntitySet="UserDevice" />
+      <End Role="ActiveDevice" EntitySet="ActiveDevice" />
+    </AssociationSet>
     <AssociationSet Name="FKDeviceIdToken" Association="marcdissertation_dbModel.Store.FKDeviceIdToken">
       <End Role="UserDevice" EntitySet="UserDevice" />
       <End Role="AuthenticationToken" EntitySet="AuthenticationToken" />
@@ -35,11 +46,26 @@
       <End Role="UserDevice" EntitySet="UserDevice" />
       <End Role="WorkOrder" EntitySet="WorkOrder" />
     </AssociationSet>
+    <AssociationSet Name="FKTgtDeviceId" Association="marcdissertation_dbModel.Store.FKTgtDeviceId">
+      <End Role="UserDevice" EntitySet="UserDevice" />
+      <End Role="Communication" EntitySet="Communication" />
+    </AssociationSet>
+    <AssociationSet Name="FKWorkOrderID" Association="marcdissertation_dbModel.Store.FKWorkOrderID">
+      <End Role="WorkOrder" EntitySet="WorkOrder" />
+      <End Role="Communication" EntitySet="Communication" />
+    </AssociationSet>
     <AssociationSet Name="UserFK" Association="marcdissertation_dbModel.Store.UserFK">
       <End Role="User" EntitySet="User" />
       <End Role="UserDevice" EntitySet="UserDevice" />
     </AssociationSet>
   </EntityContainer>
+  <EntityType Name="ActiveDevice">
+    <Key>
+      <PropertyRef Name="DeviceId" />
+    </Key>
+    <Property Name="DeviceId" Type="int" Nullable="false" />
+    <Property Name="LastActiveSend" Type="datetime" Nullable="false" />
+  </EntityType>
   <EntityType Name="AuthenticationToken">
     <Key>
       <PropertyRef Name="DeviceId" />
@@ -49,6 +75,27 @@
     <Property Name="CreationDate" Type="datetime" Nullable="false" />
     <Property Name="LastAccessDate" Type="datetime" />
     <Property Name="Username" Type="nvarchar" Nullable="false" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Communication">
+    <Key>
+      <PropertyRef Name="CommunicationId" />
+    </Key>
+    <Property Name="CommunicationId" Type="int" Nullable="false" />
+    <Property Name="CommunicationType" Type="nvarchar" Nullable="false" MaxLength="50" />
+    <Property Name="WorkOrderId" Type="int" Nullable="false" />
+    <Property Name="TargetDeviceId" Type="int" Nullable="false" />
+    <Property Name="SubmitDate" Type="datetime" Nullable="false" />
+    <Property Name="DateAcknowledged" Type="datetime" />
+  </EntityType>
+  <EntityType Name="DeviceAccessRestriction">
+    <Key>
+      <PropertyRef Name="AccessRestrictionId" />
+    </Key>
+    <Property Name="AccessRestrictionId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="DeviceId" Type="int" Nullable="false" />
+    <Property Name="Day" Type="int" Nullable="false" />
+    <Property Name="StartTime" Type="time" Nullable="false" Precision="3" />
+    <Property Name="EndTime" Type="time" Nullable="false" Precision="3" />
   </EntityType>
   <EntityType Name="DeviceAppInstallation">
     <Key>
@@ -172,6 +219,30 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FKDeviceIdAccess">
+    <End Role="UserDevice" Type="marcdissertation_dbModel.Store.UserDevice" Multiplicity="1" />
+    <End Role="DeviceAccessRestriction" Type="marcdissertation_dbModel.Store.DeviceAccessRestriction" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UserDevice">
+        <PropertyRef Name="DeviceId" />
+      </Principal>
+      <Dependent Role="DeviceAccessRestriction">
+        <PropertyRef Name="DeviceId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FKDeviceIdActive">
+    <End Role="UserDevice" Type="marcdissertation_dbModel.Store.UserDevice" Multiplicity="1" />
+    <End Role="ActiveDevice" Type="marcdissertation_dbModel.Store.ActiveDevice" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="UserDevice">
+        <PropertyRef Name="DeviceId" />
+      </Principal>
+      <Dependent Role="ActiveDevice">
+        <PropertyRef Name="DeviceId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FKDeviceIdToken">
     <End Role="UserDevice" Type="marcdissertation_dbModel.Store.UserDevice" Multiplicity="1" />
     <End Role="AuthenticationToken" Type="marcdissertation_dbModel.Store.AuthenticationToken" Multiplicity="0..1" />
@@ -193,6 +264,30 @@
       </Principal>
       <Dependent Role="WorkOrder">
         <PropertyRef Name="SlaveWorkerId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FKTgtDeviceId">
+    <End Role="UserDevice" Type="marcdissertation_dbModel.Store.UserDevice" Multiplicity="1" />
+    <End Role="Communication" Type="marcdissertation_dbModel.Store.Communication" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UserDevice">
+        <PropertyRef Name="DeviceId" />
+      </Principal>
+      <Dependent Role="Communication">
+        <PropertyRef Name="TargetDeviceId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FKWorkOrderID">
+    <End Role="WorkOrder" Type="marcdissertation_dbModel.Store.WorkOrder" Multiplicity="1" />
+    <End Role="Communication" Type="marcdissertation_dbModel.Store.Communication" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="WorkOrder">
+        <PropertyRef Name="WorkOrderId" />
+      </Principal>
+      <Dependent Role="Communication">
+        <PropertyRef Name="WorkOrderId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

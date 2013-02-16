@@ -49,7 +49,7 @@ namespace WebService {
             if (wo.DeviceId != oAt.DeviceId)
                 throw new Exception("Cannot delete Work Order which you do not own");
 
-            CloudQueues.UpdatedWorkOrderQueueClient.Send(new BrokeredMessage(new SharedClasses.WorkOrderUpdate(workOrderId, SharedClasses.WorkOrderUpdate.UpdateType.Cancel, oAt.DeviceId)));
+            CloudQueues.UpdatedWorkOrderQueueClient.Send(new BrokeredMessage(new SharedClasses.WorkOrderUpdate(workOrderId, SharedClasses.WorkOrderUpdate.UpdateType.Cancel, oAt.DeviceId, null, null)));
             
         }
 
@@ -58,20 +58,30 @@ namespace WebService {
             BusinessLayer.WorkOrder wo = BusinessLayer.WorkOrder.Populate(workOrderId);
 
             if (wo.SlaveWorkerId != oAt.DeviceId)
-                throw new Exception("Cannot delete Work Order which you are not meant to be working on.");
+                throw new Exception("Cannot modify Work Order which you are not meant to be working on.");
 
-            CloudQueues.UpdatedWorkOrderQueueClient.Send(new BrokeredMessage(new SharedClasses.WorkOrderUpdate(workOrderId, SharedClasses.WorkOrderUpdate.UpdateType.Acknowledge, oAt.DeviceId)));
+            CloudQueues.UpdatedWorkOrderQueueClient.Send(new BrokeredMessage(new SharedClasses.WorkOrderUpdate(workOrderId, SharedClasses.WorkOrderUpdate.UpdateType.Acknowledge, oAt.DeviceId, null, null)));
 
         }
 
-        public void SubmitWorkOrderResult(string at, int workOrderId, String resultJson) {
+        public void MarkWorkOrderInComputation(string at, int workOrderId) {
             BusinessLayer.AuthenticationToken oAt = new AuthSvc().AuthUser(at);
             BusinessLayer.WorkOrder wo = BusinessLayer.WorkOrder.Populate(workOrderId);
 
             if (wo.SlaveWorkerId != oAt.DeviceId)
                 throw new Exception("Cannot modify Work Order which you are not meant to be working on.");
 
-            CloudQueues.UpdatedWorkOrderQueueClient.Send(new BrokeredMessage(new SharedClasses.WorkOrderUpdate(workOrderId, SharedClasses.WorkOrderUpdate.UpdateType.SubmitResult, oAt.DeviceId, resultJson)));
+            CloudQueues.UpdatedWorkOrderQueueClient.Send(new BrokeredMessage(new SharedClasses.WorkOrderUpdate(workOrderId, SharedClasses.WorkOrderUpdate.UpdateType.MarkBeingComputed, oAt.DeviceId, null, null)));
+        }
+
+        public void SubmitWorkOrderResult(string at, int workOrderId, String resultJson, DateTime compuatationStartTime, DateTime computationEndTime) {
+            BusinessLayer.AuthenticationToken oAt = new AuthSvc().AuthUser(at);
+            BusinessLayer.WorkOrder wo = BusinessLayer.WorkOrder.Populate(workOrderId);
+
+            if (wo.SlaveWorkerId != oAt.DeviceId)
+                throw new Exception("Cannot modify Work Order which you are not meant to be working on.");
+
+            CloudQueues.UpdatedWorkOrderQueueClient.Send(new BrokeredMessage(new SharedClasses.WorkOrderUpdate(workOrderId, SharedClasses.WorkOrderUpdate.UpdateType.SubmitResult, oAt.DeviceId, compuatationStartTime, computationEndTime, resultJson)));
 
         }
 

@@ -123,4 +123,30 @@
       <xs:sequence />
     </xs:complexType>
   </xs:element>
+  <xs:element name="MarkDeviceActive">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="at" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="deviceId" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="MarkDeviceActiveResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="MarkDeviceInactive">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="at" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="deviceId" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="MarkDeviceInactiveResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
 </xs:schema>

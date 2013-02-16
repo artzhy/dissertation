@@ -23,7 +23,6 @@ namespace ComputeAndroidApp.BackgroundService {
         // Service variables here.
         private List<WorkOrderWS.WorkOrderTrimmed> WorkItems;
 
-
         public override IBinder OnBind(Intent intent) {
            this.binder = new ControllerServiceBinder(this);
            return this.binder;
@@ -54,10 +53,6 @@ namespace ComputeAndroidApp.BackgroundService {
             // Store it
             wo.WorkOrderStatusk__BackingField = "SUBMITTED_TO_APP";
             WorkItems.Add(wo);
-
-           
-
-
 
         }
 

@@ -27,7 +27,13 @@ namespace WebService {
 
         [OperationContract]
         [WebGet(UriTemplate = "SubmitWorkOrderResult", ResponseFormat = WebMessageFormat.Json, RequestFormat = WebMessageFormat.Json)]
-        void SubmitWorkOrderResult(string at, int workOrderId, String resultJson);
+        void SubmitWorkOrderResult(string at, int workOrderId, String resultJson, DateTime compuatationStartTime, DateTime computationEndTime);
+
+        [OperationContract]
+        [WebGet(UriTemplate = "MarkWorkOrderInComputation", ResponseFormat = WebMessageFormat.Json, RequestFormat = WebMessageFormat.Json)]
+        void MarkWorkOrderInComputation(string at, int workOrderId);
+
+
        //TODO: Get status of work order
 
     }

@@ -46,6 +46,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ActiveDevice.cs">
+      <DependentUpon>DBModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="App.cs" />
     <Compile Include="AuthenticationToken.cs">
       <DependentUpon>DBModel.tt</DependentUpon>
@@ -56,6 +59,12 @@
     <Compile Include="BLDeviceAppInstall.cs" />
     <Compile Include="BLWorkOrder.cs" />
     <Compile Include="BLAuthenticationToken.cs" />
+    <Compile Include="BLDeviceAccessRestriction.cs" />
+    <Compile Include="BLActiveDevice.cs" />
+    <Compile Include="Communication.cs">
+      <DependentUpon>DBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="BLCommunication.cs" />
     <Compile Include="DBModel.Context.cs">
       <DependentUpon>DBModel.Context.tt</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -70,6 +79,9 @@
       <DependentUpon>DBModel.edmx</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="DeviceAccessRestriction.cs">
+      <DependentUpon>DBModel.tt</DependentUpon>
     </Compile>
     <Compile Include="DeviceAppInstallation.cs">
       <DependentUpon>DBModel.tt</DependentUpon>

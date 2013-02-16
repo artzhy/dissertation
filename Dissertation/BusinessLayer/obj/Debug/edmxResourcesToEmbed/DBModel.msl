@@ -77,5 +77,36 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="DeviceAccessRestrictions">
+      <EntityTypeMapping TypeName="marcdissertation_dbModel.DeviceAccessRestriction">
+        <MappingFragment StoreEntitySet="DeviceAccessRestriction">
+          <ScalarProperty Name="EndTime" ColumnName="EndTime" />
+          <ScalarProperty Name="StartTime" ColumnName="StartTime" />
+          <ScalarProperty Name="Day" ColumnName="Day" />
+          <ScalarProperty Name="DeviceId" ColumnName="DeviceId" />
+          <ScalarProperty Name="AccessRestrictionId" ColumnName="AccessRestrictionId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ActiveDevices">
+      <EntityTypeMapping TypeName="marcdissertation_dbModel.ActiveDevice">
+        <MappingFragment StoreEntitySet="ActiveDevice">
+          <ScalarProperty Name="LastActiveSend" ColumnName="LastActiveSend" />
+          <ScalarProperty Name="DeviceId" ColumnName="DeviceId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Communications">
+      <EntityTypeMapping TypeName="marcdissertation_dbModel.Communication">
+        <MappingFragment StoreEntitySet="Communication">
+          <ScalarProperty Name="DateAcknowledged" ColumnName="DateAcknowledged" />
+          <ScalarProperty Name="SubmitDate" ColumnName="SubmitDate" />
+          <ScalarProperty Name="TargetDeviceId" ColumnName="TargetDeviceId" />
+          <ScalarProperty Name="WorkOrderId" ColumnName="WorkOrderId" />
+          <ScalarProperty Name="CommunicationType" ColumnName="CommunicationType" />
+          <ScalarProperty Name="CommunicationId" ColumnName="CommunicationId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>

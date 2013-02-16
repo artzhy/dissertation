@@ -31,5 +31,8 @@ namespace BusinessLayer
         public DbSet<WorkApplication> WorkApplications { get; set; }
         public DbSet<AuthenticationToken> AuthenticationTokens { get; set; }
         public DbSet<WorkOrder> WorkOrders { get; set; }
+        public DbSet<DeviceAccessRestriction> DeviceAccessRestrictions { get; set; }
+        public DbSet<ActiveDevice> ActiveDevices { get; set; }
+        public DbSet<Communication> Communications { get; set; }
     }
 }

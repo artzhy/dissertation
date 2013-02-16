@@ -56,14 +56,31 @@ namespace ComputeAndroidApp {
             createNotification("PushSharp-GCM Unregistered...", "The device has been unregistered, Tap to View!");
         }
 
+        public enum UpdateType {
+            Result,
+            UpdateRequest,
+            Error,
+            NewWorkOrder
+        }
+
         protected override void OnMessage(Context context, Intent intent) {
             Log.Info(BroadcastReceiver.TAG, "GCM Message Received!");
 
-            String workOrderId = intent.Extras.Get("WorkOrderId").ToString();
+            UpdateType ut = (UpdateType)int.Parse(intent.Extras.Get("CommunicationType").ToString());
 
-            if (workOrderId != null) {
+            if (ut == UpdateType.NewWorkOrder) {
+                String workOrderId = intent.Extras.Get("WorkOrderId").ToString();
                 App.GetServiceBinder().GetService().AddWorkItem(int.Parse(workOrderId));
+
+            } else if (ut == UpdateType.Result) {
+
             }
+
+            //String workOrderId = intent.Extras.Get("WorkOrderId").ToString();
+
+            //if (workOrderId != null) {
+            //    App.GetServiceBinder().GetService().AddWorkItem(int.Parse(workOrderId));
+            //}
         }
 
         protected override bool OnRecoverableError(Context context, string errorId) {

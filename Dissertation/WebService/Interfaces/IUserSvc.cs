@@ -41,6 +41,15 @@ namespace WebService {
         [OperationContract]
         [WebGet(UriTemplate = "SendTestNotification", ResponseFormat = WebMessageFormat.Json, RequestFormat = WebMessageFormat.Json)]
         void SendTestNotification(int deviceId);
+
+        [OperationContract]
+        [WebGet(UriTemplate = "MarkDeviceActive", ResponseFormat = WebMessageFormat.Json, RequestFormat = WebMessageFormat.Json)]
+        void MarkDeviceActive(string at, int deviceId);
+
+        [OperationContract]
+        [WebGet(UriTemplate = "MarkDeviceInactive", ResponseFormat = WebMessageFormat.Json, RequestFormat = WebMessageFormat.Json)]
+        void MarkDeviceInactive(string at, int deviceId);
+
     }
 
 

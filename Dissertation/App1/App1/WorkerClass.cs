@@ -53,8 +53,9 @@ namespace com.ComputeApps.TestApp {
             }
 
            // DateTime
-
+            workItem.ComputationStartTime = DateTime.Now;
             int result = (int)method.Invoke(c, arr);
+            workItem.ComputationEndTime = DateTime.Now;
 
             workItem.ComputationResult = new ResultPackage(result).SerializeJson();
 

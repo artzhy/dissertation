@@ -19,6 +19,8 @@ namespace BusinessLayer
             this.DeviceAppInstallations = new HashSet<DeviceAppInstallation>();
             this.WorkOrders = new HashSet<WorkOrder>();
             this.WorkOrders1 = new HashSet<WorkOrder>();
+            this.DeviceAccessRestrictions = new HashSet<DeviceAccessRestriction>();
+            this.Communications = new HashSet<Communication>();
         }
     
         public int DeviceId { get; set; }
@@ -33,5 +35,8 @@ namespace BusinessLayer
         public virtual AuthenticationToken AuthenticationToken { get; set; }
         public virtual ICollection<WorkOrder> WorkOrders { get; set; }
         public virtual ICollection<WorkOrder> WorkOrders1 { get; set; }
+        public virtual ICollection<DeviceAccessRestriction> DeviceAccessRestrictions { get; set; }
+        public virtual ActiveDevice ActiveDevice { get; set; }
+        public virtual ICollection<Communication> Communications { get; set; }
     }
 }

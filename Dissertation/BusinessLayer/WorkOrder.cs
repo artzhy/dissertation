@@ -14,6 +14,11 @@ namespace BusinessLayer
     
     public partial class WorkOrder
     {
+        public WorkOrder()
+        {
+            this.Communications = new HashSet<Communication>();
+        }
+    
         public int WorkOrderId { get; set; }
         public int DeviceId { get; set; }
         public int ApplicationId { get; set; }
@@ -30,5 +35,6 @@ namespace BusinessLayer
         public virtual UserDevice UserDevice { get; set; }
         public virtual UserDevice UserDevice1 { get; set; }
         public virtual WorkApplication WorkApplication { get; set; }
+        public virtual ICollection<Communication> Communications { get; set; }
     }
 }

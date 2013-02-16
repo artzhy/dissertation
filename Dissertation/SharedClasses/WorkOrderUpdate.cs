@@ -31,14 +31,27 @@ namespace SharedClasses
         public enum UpdateType {
             Cancel,
             Acknowledge,
-            SubmitResult
+            SubmitResult,
+            MarkBeingComputed
         }
 
-        public WorkOrderUpdate(int _workOrderId, UpdateType _updateType, int _modifiedBy, String _resultJson = "") {
+        public DateTime? ComputationStartTime {
+            get;
+            set;
+        }
+
+        public DateTime? ComputationEndTime {
+            get;
+            set;
+        }
+
+        public WorkOrderUpdate(int _workOrderId, UpdateType _updateType, int _modifiedBy, DateTime? _compStartTime, DateTime? _compEndTime, String _resultJson = "") {
             this.WorkOrderId = _workOrderId;
             this.WorkOrderUpdateType = _updateType;
             this.ModifiedBy = _modifiedBy;
             this.ResultJson = _resultJson;
+            this.ComputationStartTime = _compStartTime;
+            this.ComputationEndTime = _compEndTime;
         }
     }
 }

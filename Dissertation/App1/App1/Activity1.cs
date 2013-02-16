@@ -33,7 +33,7 @@ namespace com.ComputeApps.TestApp {
 
 
             WorkList.SetAppContext(this.ApplicationContext);
-            WorkList.AddWorkItem(cp);
+   //         WorkList.AddWorkItem(cp);
 
         }
     }

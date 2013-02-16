@@ -55,6 +55,18 @@
   <wsdl:message name="IUserSvc_SendTestNotification_OutputMessage">
     <wsdl:part name="parameters" element="tns:SendTestNotificationResponse" />
   </wsdl:message>
+  <wsdl:message name="IUserSvc_MarkDeviceActive_InputMessage">
+    <wsdl:part name="parameters" element="tns:MarkDeviceActive" />
+  </wsdl:message>
+  <wsdl:message name="IUserSvc_MarkDeviceActive_OutputMessage">
+    <wsdl:part name="parameters" element="tns:MarkDeviceActiveResponse" />
+  </wsdl:message>
+  <wsdl:message name="IUserSvc_MarkDeviceInactive_InputMessage">
+    <wsdl:part name="parameters" element="tns:MarkDeviceInactive" />
+  </wsdl:message>
+  <wsdl:message name="IUserSvc_MarkDeviceInactive_OutputMessage">
+    <wsdl:part name="parameters" element="tns:MarkDeviceInactiveResponse" />
+  </wsdl:message>
   <wsdl:portType name="IUserSvc">
     <wsdl:operation name="AddUser">
       <wsdl:input wsaw:Action="http://tempuri.org/IUserSvc/AddUser" message="tns:IUserSvc_AddUser_InputMessage" />
@@ -87,6 +99,14 @@
     <wsdl:operation name="SendTestNotification">
       <wsdl:input wsaw:Action="http://tempuri.org/IUserSvc/SendTestNotification" message="tns:IUserSvc_SendTestNotification_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IUserSvc/SendTestNotificationResponse" message="tns:IUserSvc_SendTestNotification_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="MarkDeviceActive">
+      <wsdl:input wsaw:Action="http://tempuri.org/IUserSvc/MarkDeviceActive" message="tns:IUserSvc_MarkDeviceActive_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IUserSvc/MarkDeviceActiveResponse" message="tns:IUserSvc_MarkDeviceActive_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="MarkDeviceInactive">
+      <wsdl:input wsaw:Action="http://tempuri.org/IUserSvc/MarkDeviceInactive" message="tns:IUserSvc_MarkDeviceInactive_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IUserSvc/MarkDeviceInactiveResponse" message="tns:IUserSvc_MarkDeviceInactive_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_IUserSvc" type="tns:IUserSvc">
@@ -156,6 +176,24 @@
     </wsdl:operation>
     <wsdl:operation name="SendTestNotification">
       <soap:operation soapAction="http://tempuri.org/IUserSvc/SendTestNotification" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="MarkDeviceActive">
+      <soap:operation soapAction="http://tempuri.org/IUserSvc/MarkDeviceActive" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="MarkDeviceInactive">
+      <soap:operation soapAction="http://tempuri.org/IUserSvc/MarkDeviceInactive" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

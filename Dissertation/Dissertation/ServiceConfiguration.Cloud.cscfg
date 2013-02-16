@@ -9,7 +9,7 @@
       <Setting name="Microsoft.WindowsAzure.Plugins.RemoteAccess.AccountEncryptedPassword" value="MIIBnQYJKoZIhvcNAQcDoIIBjjCCAYoCAQAxggFOMIIBSgIBADAyMB4xHDAaBgNVBAMME1dpbmRvd3MgQXp1cmUgVG9vbHMCEDWIxeGP442PQVlglsPDl+gwDQYJKoZIhvcNAQEBBQAEggEANUI1WGhe1Um2myrd14/TRALXIEgfi1FlsG4nooTZdGGj6XQzOnZzHRTH9bN6DxZ5Euo0JTy2B1idPK7JRYAWmoFwb/TyeSYJt5ImjevnDT/XjidHKjgiPuxDRhmbrqMr+bscy/Ic/0oZn4S4nWuKVR7e34d8Jth+Cevi6evhqkj8+SjRAcwDz4FX91NG+og0aFUPT+zCLviBE0dt3c2aO8QdQNajJbNAlg3SQgt0eXq5W1DIHFdm2PlMVAQm7f3iLovUQkUYquW7lidsa05VuYARV3PypnIDzL5nYtGejsLx6AhmKG8jAViJ/0JzFXKC+3B49OGyhgrZyHDlvA3DHzAzBgkqhkiG9w0BBwEwFAYIKoZIhvcNAwcECOuysNYNCrHDgBAuouwLer5xJE0xClols4LY" />
       <Setting name="Microsoft.WindowsAzure.Plugins.RemoteAccess.AccountExpiration" value="2014-02-28T23:59:59.0000000+00:00" />
       <Setting name="Microsoft.WindowsAzure.Plugins.RemoteForwarder.Enabled" value="true" />
-		<Setting name="Microsoft.ServiceBus.ConnectionString" value="Endpoint=sb://workordersvcbus.servicebus.windows.net/;SharedSecretIssuer=owner;SharedSecretValue=4efeMtvNGSjlttCnl6rDinBPaskawVr4V+V9ItjiWJw=" />
+      <Setting name="Microsoft.ServiceBus.ConnectionString" value="Endpoint=sb://workordersvcbus.servicebus.windows.net/;SharedSecretIssuer=owner;SharedSecretValue=4efeMtvNGSjlttCnl6rDinBPaskawVr4V+V9ItjiWJw=" />
     </ConfigurationSettings>
     <Certificates>
       <Certificate name="Microsoft.WindowsAzure.Plugins.RemoteAccess.PasswordEncryption" thumbprint="975DB93D7C5CB104879F9BE743F57B92D2E440B1" thumbprintAlgorithm="sha1" />

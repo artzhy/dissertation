@@ -15,6 +15,14 @@ namespace ComputeAndroidSDK.Communication {
         public String BackgroundProcessClass { get; set; }
         public List<ParamListItem> ParameterList { get; set; }
         public String ComputationResult { get; set; }
+        public DateTime ComputationStartTime {
+            get;
+            set;
+        }
+        public DateTime ComputationEndTime {
+            get;
+            set;
+        }
 
         public String SerializeJson() {
             return JsonConvert.SerializeObject(this);

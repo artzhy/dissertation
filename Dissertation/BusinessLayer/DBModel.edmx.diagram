@@ -4,21 +4,28 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="67e2fcf437644f518038f685638a80ef" Name="Diagram1" ZoomLevel="117">
-        <EntityTypeShape EntityType="marcdissertation_dbModel.DeviceAppInstallation" Width="1.5" PointX="6.6813970872580066" PointY="2.2860191773092464" />
-        <EntityTypeShape EntityType="marcdissertation_dbModel.User" Width="1.5" PointX="10.33701414910006" PointY="3.7404219227565556" />
-        <EntityTypeShape EntityType="marcdissertation_dbModel.UserDevice" Width="1.5" PointX="1.9817149834622232" PointY="21.714660207608091" />
-        <EntityTypeShape EntityType="marcdissertation_dbModel.WorkApplication" Width="1.5" PointX="9.7967345015130629" PointY="11.70405059107768" />
+      <Diagram DiagramId="67e2fcf437644f518038f685638a80ef" Name="Diagram1" ZoomLevel="47">
+        <EntityTypeShape EntityType="marcdissertation_dbModel.DeviceAppInstallation" Width="1.5" PointX="8.75" PointY="2.25" />
+        <EntityTypeShape EntityType="marcdissertation_dbModel.User" Width="1.5" PointX="12.5" PointY="3.75" />
+        <EntityTypeShape EntityType="marcdissertation_dbModel.UserDevice" Width="1.5" PointX="4.125" PointY="21.75" />
+        <EntityTypeShape EntityType="marcdissertation_dbModel.WorkApplication" Width="1.5" PointX="11.875" PointY="11.75" />
         <AssociationConnector Association="marcdissertation_dbModel.FKApplicationId1" />
         <AssociationConnector Association="marcdissertation_dbModel.FKDeviceId1" />
         <AssociationConnector Association="marcdissertation_dbModel.UserFK" />
-        <EntityTypeShape EntityType="marcdissertation_dbModel.AuthenticationToken" Width="1.5" PointX="8.1220298670800535" PointY="31.697686061122308" />
+        <EntityTypeShape EntityType="marcdissertation_dbModel.AuthenticationToken" Width="1.5" PointX="10.25" PointY="31.75" />
         <AssociationConnector Association="marcdissertation_dbModel.FKDeviceIdToken" />
         <AssociationConnector Association="marcdissertation_dbModel.FK_AuthenticationToken_0" />
-        <EntityTypeShape EntityType="marcdissertation_dbModel.WorkOrder" Width="1.5" PointX="10.577223289095434" PointY="11.298596715227978" />
+        <EntityTypeShape EntityType="marcdissertation_dbModel.WorkOrder" Width="1.5" PointX="14.75" PointY="11.25" />
         <AssociationConnector Association="marcdissertation_dbModel.FKDeviceId" />
         <AssociationConnector Association="marcdissertation_dbModel.FKSlaveWorkerID" />
         <AssociationConnector Association="marcdissertation_dbModel.FKApplicationId" />
+        <EntityTypeShape EntityType="marcdissertation_dbModel.DeviceAccessRestriction" Width="1.5" PointX="10.231091356943871" PointY="5.4515879179591256" />
+        <AssociationConnector Association="marcdissertation_dbModel.FKDeviceIdAccess" />
+        <EntityTypeShape EntityType="marcdissertation_dbModel.ActiveDevice" Width="1.5" PointX="5.9188616154337588" PointY="27.851930228924346" />
+        <AssociationConnector Association="marcdissertation_dbModel.FKDeviceIdActive" />
+        <EntityTypeShape EntityType="marcdissertation_dbModel.Communication" Width="1.5" PointX="10.094806640453081" PointY="31.983517274252847" />
+        <AssociationConnector Association="marcdissertation_dbModel.FKTgtDeviceId" />
+        <AssociationConnector Association="marcdissertation_dbModel.FKWorkOrderID" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
