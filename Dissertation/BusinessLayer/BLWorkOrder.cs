@@ -22,13 +22,14 @@ namespace BusinessLayer {
 
         }
 
-        public static WorkOrder CreateWorkOrder(int deviceId, int applicationId, String commPackageJson) {
+        public static WorkOrder CreateWorkOrder(int deviceId, int applicationId, String commPackageJson, String deviceUIRef) {
 
             WorkOrder wo = new WorkOrder();
             wo.DeviceId = deviceId;
             wo.ApplicationId = applicationId;
             wo.CommPackageJson = commPackageJson;
             wo.ReceiveTime = DateTime.Now;
+            wo.DeviceUIRef = deviceUIRef;
 
             wo = App.DbContext.WorkOrders.Add(wo);
             errors = App.DbContext.GetValidationErrors();

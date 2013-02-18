@@ -28,6 +28,7 @@ namespace BusinessLayer
         public string ApplicationWorkIntent { get; set; }
         public int ApplicationVersion { get; set; }
         public string ApplicationNamespace { get; set; }
+        public string ApplicationUIResultIntent { get; set; }
     
         public virtual ICollection<DeviceAppInstallation> DeviceAppInstallations { get; set; }
         public virtual ICollection<WorkOrder> WorkOrders { get; set; }

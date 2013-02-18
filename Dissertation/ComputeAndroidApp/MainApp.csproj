@@ -162,28 +162,28 @@
     <WebReferences Include="Web References\" />
   </ItemGroup>
   <ItemGroup>
-    <WebReferenceUrl Include="http://192.168.1.65:58041/UserSvc.svc">
+    <WebReferenceUrl Include="http://192.168.1.65/WebService/UserSvc.svc">
       <UrlBehavior>Dynamic</UrlBehavior>
       <RelPath>Web References\UserWS\</RelPath>
-      <UpdateFromURL>http://192.168.1.65:58041/UserSvc.svc</UpdateFromURL>
+      <UpdateFromURL>http://192.168.1.65/WebService/UserSvc.svc</UpdateFromURL>
       <ServiceLocationURL />
       <CachedDynamicPropName />
       <CachedAppSettingsObjectName />
       <CachedSettingsPropName />
     </WebReferenceUrl>
-    <WebReferenceUrl Include="http://192.168.1.65:58041/AuthSvc.svc">
+    <WebReferenceUrl Include="http://192.168.1.65/WebService/AuthSvc.svc">
       <UrlBehavior>Dynamic</UrlBehavior>
       <RelPath>Web References\AuthWS\</RelPath>
-      <UpdateFromURL>http://192.168.1.65:58041/AuthSvc.svc</UpdateFromURL>
+      <UpdateFromURL>http://192.168.1.65/WebService/AuthSvc.svc</UpdateFromURL>
       <ServiceLocationURL />
       <CachedDynamicPropName />
       <CachedAppSettingsObjectName />
       <CachedSettingsPropName />
     </WebReferenceUrl>
-    <WebReferenceUrl Include="http://192.168.1.65:58041/WorkOrderSvc.svc">
+    <WebReferenceUrl Include="http://192.168.1.65/WebService/WorkOrderSvc.svc">
       <UrlBehavior>Dynamic</UrlBehavior>
       <RelPath>Web References\WorkOrderWS\</RelPath>
-      <UpdateFromURL>http://192.168.1.65:58041/WorkOrderSvc.svc</UpdateFromURL>
+      <UpdateFromURL>http://192.168.1.65/WebService/WorkOrderSvc.svc</UpdateFromURL>
       <ServiceLocationURL>
       </ServiceLocationURL>
       <CachedDynamicPropName>

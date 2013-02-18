@@ -26,6 +26,7 @@
         <action android:name="android.intent.action.BOOT_COMPLETED" />
         <action android:name="com.ComputeApp.ControllerService.Intent.Status" />
         <action android:name="com.ComputeApp.ControllerService.Intent.Result" />
+        <action android:name="com.ComputeApp.ControllerService.Intent.RequestWorkOrder" />
         <category android:name="android.intent.category.HOME" />
       </intent-filter>
     </receiver>

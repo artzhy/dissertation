@@ -28,9 +28,9 @@ namespace WebService {
             u.Save();
         }
 
-        public BusinessLayer.UserDevice AddUserDeviceNoGCMCode(String username, string deviceType, int deviceMemoryResource, int deviceProcRating) {
+        public BusinessLayer.UserDevice AddUserDeviceNoGCMCode(String at, String username, string deviceType, int deviceMemoryResource, int deviceProcRating) {
 
-            // TODO: Implement authorisation here
+            AuthenticationToken oAt = new AuthSvc().AuthUser(at);
 
             return BusinessLayer.UserDevice.AddUserDevice(username, deviceType, deviceMemoryResource, deviceProcRating);
         }

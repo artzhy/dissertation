@@ -67,12 +67,20 @@ namespace ComputeAndroidApp {
             Log.Info(BroadcastReceiver.TAG, "GCM Message Received!");
 
             UpdateType ut = (UpdateType)int.Parse(intent.Extras.Get("CommunicationType").ToString());
+            String workOrderId = intent.Extras.Get("WorkOrderId").ToString();
 
             if (ut == UpdateType.NewWorkOrder) {
-                String workOrderId = intent.Extras.Get("WorkOrderId").ToString();
-                App.GetServiceBinder().GetService().AddWorkItem(int.Parse(workOrderId));
+                
+                App.GetServiceBinder().GetService().AddSlaveWorkItem(int.Parse(workOrderId));
 
             } else if (ut == UpdateType.Result) {
+                  App.GetServiceBinder().GetService().ReceiveWorkOrderResult(int.Parse(workOrderId));
+
+
+            } else if (ut == UpdateType.UpdateRequest) {
+                //TODO: Handle update request
+
+                // Speak to background portion of UI
 
             }
 

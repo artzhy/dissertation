@@ -20,6 +20,7 @@ namespace BusinessLayer
         public int TargetDeviceId { get; set; }
         public System.DateTime SubmitDate { get; set; }
         public Nullable<System.DateTime> DateAcknowledged { get; set; }
+        public string Response { get; set; }
     
         public virtual UserDevice UserDevice { get; set; }
         public virtual WorkOrder WorkOrder { get; set; }

@@ -13,7 +13,7 @@ using Android.Util;
 
 namespace ComputeAndroidApp.BackgroundService {
     [BroadcastReceiver]
-    [IntentFilter(new[] { Android.Content.Intent.ActionBootCompleted, ComputeAndroidSDK.Communication.Constants.RETURN_STATUS_INTENT, ComputeAndroidSDK.Communication.Constants.RETURN_RESULT_INTENT },
+    [IntentFilter(new[] { Android.Content.Intent.ActionBootCompleted, ComputeAndroidSDK.Communication.Constants.RETURN_STATUS_INTENT, ComputeAndroidSDK.Communication.Constants.RETURN_RESULT_INTENT, ComputeAndroidSDK.Communication.Constants.REQUEST_WORK_ORDER_INTENT },
           Categories = new[] { Android.Content.Intent.CategoryHome }
   )]
     public class ServiceReceiver : BroadcastReceiver {
@@ -35,16 +35,24 @@ namespace ComputeAndroidApp.BackgroundService {
 
 
             } else if (intent.Action == ComputeAndroidSDK.Communication.Constants.RETURN_STATUS_INTENT) {
+
+                // Get work order from Web Service
+
+                // Send to UI portion of app
+
+
+            } else if (intent.Action == ComputeAndroidSDK.Communication.Constants.REQUEST_WORK_ORDER_INTENT) {
+                // Send to Web Service
+                // Sending a comm package
+
             }
-
-           //Intent ourIntent = new Intent(context, typeof(ControllerService));
-           //ControllerServiceBinder binder = (ControllerServiceBinder)PeekService(context, ourIntent);
-           //binder.GetService().DoCommand("com.ComputeApps.TestApp.Intents.DoWork");
-
         }
     }
 }
 
+//Intent ourIntent = new Intent(context, typeof(ControllerService));
+//ControllerServiceBinder binder = (ControllerServiceBinder)PeekService(context, ourIntent);
+//binder.GetService().DoCommand("com.ComputeApps.TestApp.Intents.DoWork");
 
 /*
  * adb.exe shell am broadcast -a android.intent.action.BOOT_COMPLETED -c android.intent.category.HOME

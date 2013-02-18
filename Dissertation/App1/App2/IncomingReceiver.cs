@@ -23,6 +23,13 @@ namespace com.ComputeApps.TestApp {
         public override void OnReceive(Context context, Intent intent) {
             try {
                 if (intent.Action == "com.ComputeApps.TestApp.Intents.ReceiveResult") {
+                    //TODO: Handle result
+                    String str = intent.GetStringExtra("WorkOrderTrimmed");
+
+                    int x = 0;
+                    // Update work order list
+
+                    
 
                 }
 

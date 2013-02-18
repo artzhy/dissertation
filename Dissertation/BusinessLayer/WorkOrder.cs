@@ -31,6 +31,7 @@ namespace BusinessLayer
         public string WorkOrderResultJson { get; set; }
         public Nullable<System.DateTime> StartComputationTime { get; set; }
         public Nullable<System.DateTime> EndComputationTime { get; set; }
+        public string DeviceUIRef { get; set; }
     
         public virtual UserDevice UserDevice { get; set; }
         public virtual UserDevice UserDevice1 { get; set; }

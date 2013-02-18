@@ -7,7 +7,7 @@ using System.Text;
 using Newtonsoft.Json;
 
 namespace ComputeAndroidSDK.Communication {
-    [Serializable]
+ [Serializable]
     public class CommPackage {
         public int ComputationRequestId { get; set; }
         public String IntentAction { get; set; }
@@ -20,6 +20,11 @@ namespace ComputeAndroidSDK.Communication {
             set;
         }
         public DateTime ComputationEndTime {
+            get;
+            set;
+        }
+
+        public String DeviceUIRef {
             get;
             set;
         }

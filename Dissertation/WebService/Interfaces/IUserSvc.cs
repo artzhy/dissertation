@@ -24,7 +24,7 @@ namespace WebService {
 
         [OperationContract]
         [WebGet(UriTemplate = "AddUserDeviceNoGCM", ResponseFormat = WebMessageFormat.Json, RequestFormat = WebMessageFormat.Json)]
-        BusinessLayer.UserDevice AddUserDeviceNoGCMCode(String username, string deviceType, int deviceMemoryResource, int deviceProcRating);
+        BusinessLayer.UserDevice AddUserDeviceNoGCMCode(String at, String username, string deviceType, int deviceMemoryResource, int deviceProcRating);
 
         [OperationContract]
         [WebGet(UriTemplate = "DeleteUserDevice", ResponseFormat = WebMessageFormat.Json, RequestFormat = WebMessageFormat.Json)]

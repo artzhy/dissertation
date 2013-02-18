@@ -15,7 +15,7 @@
     <AssemblyName>WebService</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <WcfConfigValidationEnabled>True</WcfConfigValidationEnabled>
-    <UseIISExpress>true</UseIISExpress>
+    <UseIISExpress>false</UseIISExpress>
     <IISExpressSSLPort />
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
@@ -90,7 +90,6 @@
     <Compile Include="AuthToken.cs" />
     <Compile Include="AzureLocalStorageTraceListener.cs" />
     <Compile Include="CloudQueues.cs" />
-    <Compile Include="CustomValidator.cs" />
     <Compile Include="Interfaces\IApplicationSvc.cs" />
     <Compile Include="Interfaces\IAuthSvc.cs" />
     <Compile Include="Interfaces\IAuthToken.cs" />
@@ -100,6 +99,7 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
+    <Compile Include="SharedFunctions.cs" />
     <Compile Include="UserSvc.svc.cs">
       <DependentUpon>UserSvc.svc</DependentUpon>
     </Compile>
@@ -159,7 +159,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>46977</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:58041/</IISUrl>
+          <IISUrl>http://localhost/WebService</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

@@ -1,1 +1,3 @@
 com.ComputeApps.TestApp.Activity1;com.computeapps.testapp.Activity1
+com.ComputeApps.TestApp.App;com.computeapps.testapp.App
+com.ComputeApps.TestApp.IncomingReceiver;com.computeapps.testapp.IncomingReceiver

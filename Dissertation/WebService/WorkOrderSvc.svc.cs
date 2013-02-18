@@ -12,10 +12,10 @@ using Microsoft.WindowsAzure.Diagnostics;
 namespace WebService {
     public class WorkOrderSvc : IWorkOrderSvc {
         
-        public BusinessLayer.WorkOrder CreateWorkOrder(String at, int deviceId, int applicationId, string commPackageJson) {
+        public BusinessLayer.WorkOrder CreateWorkOrder(String at, int deviceId, int applicationId, string commPackageJson, string deviceUIRef) {
             new AuthSvc().AuthUser(at, -1, deviceId);
 
-            BusinessLayer.WorkOrder wo = BusinessLayer.WorkOrder.CreateWorkOrder(deviceId, applicationId, commPackageJson);
+            BusinessLayer.WorkOrder wo = BusinessLayer.WorkOrder.CreateWorkOrder(deviceId, applicationId, commPackageJson, deviceUIRef);
 
            CloudQueues.NewWorkOrderQueueClient.Send(new BrokeredMessage(wo.WorkOrderId));
 
@@ -38,6 +38,8 @@ namespace WebService {
             wt.WorkOrderResultJson = wo.WorkOrderResultJson;
             wt.WorkOrderStatus = wo.WorkOrderStatus;
             wt.ComputeAppIntent = wo.WorkApplication.ApplicationWorkIntent;
+            wt.DeviceUIRef = wo.DeviceUIRef;
+            wt.ApplicationUIResultIntent = wo.WorkApplication.ApplicationUIResultIntent;
             
             return wt;
         }

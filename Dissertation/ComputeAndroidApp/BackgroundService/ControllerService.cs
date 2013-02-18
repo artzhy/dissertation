@@ -21,7 +21,7 @@ namespace ComputeAndroidApp.BackgroundService {
     public class ControllerService : Service {
         private ControllerServiceBinder binder;
         // Service variables here.
-        private List<WorkOrderWS.WorkOrderTrimmed> WorkItems;
+        private List<WorkOrderWS.WorkOrderTrimmed> SlaveWorkItems;
 
         public override IBinder OnBind(Intent intent) {
            this.binder = new ControllerServiceBinder(this);
@@ -36,7 +36,26 @@ namespace ComputeAndroidApp.BackgroundService {
            //  new UserWS.UserSvc().
         }
 
-        public void AddWorkItem(int workOrderId) {
+        public void ReceiveWorkOrderResult(int workOrderId) {
+            WorkOrderWS.WorkOrderTrimmed wo = new WorkOrderWS.WorkOrderSvc().GetWorkOrder(App.GetAuthToken(this), App.GetDeviceId(this), true, workOrderId, true);
+
+            // TODO: Send to listener (intent attached to application)
+            Intent newIntent = new Intent(wo.ApplicationUIResultIntentk__BackingField);
+
+            newIntent.PutExtra("WorkOrderTrimmed", JsonConvert.SerializeObject(wo));
+
+            this.ApplicationContext.SendBroadcast(newIntent);
+
+        }
+
+        public void ReceiveWorkOrderUpdateRequest(int workOrderId) {
+            WorkOrderWS.WorkOrderTrimmed wo = new WorkOrderWS.WorkOrderSvc().GetWorkOrder(App.GetAuthToken(this), App.GetDeviceId(this), true, workOrderId, true);
+           
+
+            // TODO: handle it
+        }
+
+        public void AddSlaveWorkItem(int workOrderId) {
             // Get it
             WorkOrderWS.WorkOrderTrimmed wo = new WorkOrderWS.WorkOrderSvc().GetWorkOrder(App.GetAuthToken(this), App.GetDeviceId(this), true, workOrderId, true);
 
@@ -52,7 +71,7 @@ namespace ComputeAndroidApp.BackgroundService {
 
             // Store it
             wo.WorkOrderStatusk__BackingField = "SUBMITTED_TO_APP";
-            WorkItems.Add(wo);
+            SlaveWorkItems.Add(wo);
 
         }
 
@@ -75,7 +94,7 @@ namespace ComputeAndroidApp.BackgroundService {
         public override void OnCreate() {
             base.OnCreate();
 
-            WorkItems = new List<WorkOrderWS.WorkOrderTrimmed>();
+            SlaveWorkItems = new List<WorkOrderWS.WorkOrderTrimmed>();
 
         }
 

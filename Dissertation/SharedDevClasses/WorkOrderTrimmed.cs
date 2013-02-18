@@ -11,7 +11,7 @@ using Android.Views;
 using Android.Widget;
 
 namespace ComputeAndroidSDK.Communication {
-    public class WorkOrder {
+   public class WorkOrderTrimmed {
         public int WorkOrderId {
             get;
             set;
@@ -48,20 +48,23 @@ namespace ComputeAndroidSDK.Communication {
             get;
             set;
         }
+
         public string WorkOrderResultJson {
             get;
             set;
         }
-        public Nullable<System.DateTime> StartComputationTime {
-            get;
-            set;
-        }
-        public Nullable<System.DateTime> EndComputationTime {
+
+        public string ComputeAppIntent {
             get;
             set;
         }
 
-        public String DeviceUIRef {
+        public string DeviceUIRef {
+            get;
+            set;
+        }
+
+        public string ApplicationUIResultIntent {
             get;
             set;
         }

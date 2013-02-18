@@ -91,6 +91,7 @@
           <Property Name="TargetDeviceId" Type="int" Nullable="false" />
           <Property Name="SubmitDate" Type="datetime" Nullable="false" />
           <Property Name="DateAcknowledged" Type="datetime" />
+          <Property Name="Response" Type="varchar(max)" />
         </EntityType>
         <EntityType Name="DeviceAccessRestriction">
           <Key>
@@ -144,6 +145,7 @@
           <Property Name="ApplicationWorkIntent" Type="nvarchar(max)" Nullable="false" />
           <Property Name="ApplicationVersion" Type="int" Nullable="false" />
           <Property Name="ApplicationNamespace" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="ApplicationUIResultIntent" Type="nvarchar(max)" Nullable="false" />
         </EntityType>
         <EntityType Name="WorkOrder">
           <Key>
@@ -161,6 +163,7 @@
           <Property Name="WorkOrderResultJson" Type="nvarchar(max)" />
           <Property Name="StartComputationTime" Type="datetime" />
           <Property Name="EndComputationTime" Type="datetime" />
+          <Property Name="DeviceUIRef" Type="nvarchar(max)" Nullable="false" />
         </EntityType>
         <Association Name="FK_AuthenticationToken_0">
           <End Role="User" Type="marcdissertation_dbModel.Store.User" Multiplicity="1">
@@ -427,6 +430,7 @@
           <Property Type="String" Name="ApplicationNamespace" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="DeviceAppInstallations" Relationship="marcdissertation_dbModel.FKApplicationId1" FromRole="WorkApplication" ToRole="DeviceAppInstallation" />
           <NavigationProperty Name="WorkOrders" Relationship="marcdissertation_dbModel.FKApplicationId" FromRole="WorkApplication" ToRole="WorkOrder" />
+          <Property Type="String" Name="ApplicationUIResultIntent" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
         <Association Name="FKApplicationId1">
           <End Type="marcdissertation_dbModel.WorkApplication" Role="WorkApplication" Multiplicity="1" />
@@ -522,6 +526,7 @@
           <NavigationProperty Name="UserDevice1" Relationship="marcdissertation_dbModel.FKSlaveWorkerID" FromRole="WorkOrder" ToRole="UserDevice" />
           <NavigationProperty Name="WorkApplication" Relationship="marcdissertation_dbModel.FKApplicationId" FromRole="WorkOrder" ToRole="WorkApplication" />
           <NavigationProperty Name="Communications" Relationship="marcdissertation_dbModel.FKWorkOrderID" FromRole="WorkOrder" ToRole="Communication" />
+          <Property Type="String" Name="DeviceUIRef" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
         <Association Name="FKDeviceId">
           <End Type="marcdissertation_dbModel.UserDevice" Role="UserDevice" Multiplicity="1" />
@@ -614,6 +619,7 @@
           <Property Type="DateTime" Name="DateAcknowledged" Precision="3" />
           <NavigationProperty Name="UserDevice" Relationship="marcdissertation_dbModel.FKTgtDeviceId" FromRole="Communication" ToRole="UserDevice" />
           <NavigationProperty Name="WorkOrder" Relationship="marcdissertation_dbModel.FKWorkOrderID" FromRole="Communication" ToRole="WorkOrder" />
+          <Property Type="String" Name="Response" MaxLength="Max" FixedLength="false" Unicode="false" />
         </EntityType>
         <Association Name="FKTgtDeviceId">
           <End Type="marcdissertation_dbModel.UserDevice" Role="UserDevice" Multiplicity="1" />
@@ -681,6 +687,7 @@
           <EntitySetMapping Name="WorkApplications">
             <EntityTypeMapping TypeName="marcdissertation_dbModel.WorkApplication">
               <MappingFragment StoreEntitySet="WorkApplication">
+                <ScalarProperty Name="ApplicationUIResultIntent" ColumnName="ApplicationUIResultIntent" />
                 <ScalarProperty Name="ApplicationNamespace" ColumnName="ApplicationNamespace" />
                 <ScalarProperty Name="ApplicationVersion" ColumnName="ApplicationVersion" />
                 <ScalarProperty Name="ApplicationWorkIntent" ColumnName="ApplicationWorkIntent" />
@@ -706,6 +713,7 @@
           <EntitySetMapping Name="WorkOrders">
             <EntityTypeMapping TypeName="marcdissertation_dbModel.WorkOrder">
               <MappingFragment StoreEntitySet="WorkOrder">
+                <ScalarProperty Name="DeviceUIRef" ColumnName="DeviceUIRef" />
                 <ScalarProperty Name="EndComputationTime" ColumnName="EndComputationTime" />
                 <ScalarProperty Name="StartComputationTime" ColumnName="StartComputationTime" />
                 <ScalarProperty Name="WorkOrderResultJson" ColumnName="WorkOrderResultJson" />
@@ -743,6 +751,7 @@
           <EntitySetMapping Name="Communications">
             <EntityTypeMapping TypeName="marcdissertation_dbModel.Communication">
               <MappingFragment StoreEntitySet="Communication">
+                <ScalarProperty Name="Response" ColumnName="Response" />
                 <ScalarProperty Name="DateAcknowledged" ColumnName="DateAcknowledged" />
                 <ScalarProperty Name="SubmitDate" ColumnName="SubmitDate" />
                 <ScalarProperty Name="TargetDeviceId" ColumnName="TargetDeviceId" />

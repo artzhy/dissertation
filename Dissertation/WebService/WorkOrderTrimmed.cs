@@ -53,5 +53,15 @@ namespace WebService {
             set;
         }
 
+        public string DeviceUIRef {
+            get;
+            set;
+        }
+
+        public string ApplicationUIResultIntent {
+            get;
+            set;
+        }
+
     }
 }

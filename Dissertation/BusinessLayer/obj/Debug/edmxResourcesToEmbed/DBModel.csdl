@@ -115,6 +115,7 @@
     <Property Type="String" Name="ApplicationNamespace" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
     <NavigationProperty Name="DeviceAppInstallations" Relationship="marcdissertation_dbModel.FKApplicationId1" FromRole="WorkApplication" ToRole="DeviceAppInstallation" />
     <NavigationProperty Name="WorkOrders" Relationship="marcdissertation_dbModel.FKApplicationId" FromRole="WorkApplication" ToRole="WorkOrder" />
+    <Property Type="String" Name="ApplicationUIResultIntent" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
   </EntityType>
   <Association Name="FKApplicationId1">
     <End Type="marcdissertation_dbModel.WorkApplication" Role="WorkApplication" Multiplicity="1" />
@@ -210,6 +211,7 @@
     <NavigationProperty Name="UserDevice1" Relationship="marcdissertation_dbModel.FKSlaveWorkerID" FromRole="WorkOrder" ToRole="UserDevice" />
     <NavigationProperty Name="WorkApplication" Relationship="marcdissertation_dbModel.FKApplicationId" FromRole="WorkOrder" ToRole="WorkApplication" />
     <NavigationProperty Name="Communications" Relationship="marcdissertation_dbModel.FKWorkOrderID" FromRole="WorkOrder" ToRole="Communication" />
+    <Property Type="String" Name="DeviceUIRef" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
   </EntityType>
   <Association Name="FKDeviceId">
     <End Type="marcdissertation_dbModel.UserDevice" Role="UserDevice" Multiplicity="1" />
@@ -302,6 +304,7 @@
     <Property Type="DateTime" Name="DateAcknowledged" Precision="3" />
     <NavigationProperty Name="UserDevice" Relationship="marcdissertation_dbModel.FKTgtDeviceId" FromRole="Communication" ToRole="UserDevice" />
     <NavigationProperty Name="WorkOrder" Relationship="marcdissertation_dbModel.FKWorkOrderID" FromRole="Communication" ToRole="WorkOrder" />
+    <Property Type="String" Name="Response" MaxLength="Max" FixedLength="false" Unicode="false" />
   </EntityType>
   <Association Name="FKTgtDeviceId">
     <End Type="marcdissertation_dbModel.UserDevice" Role="UserDevice" Multiplicity="1" />

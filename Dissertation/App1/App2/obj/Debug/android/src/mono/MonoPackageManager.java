@@ -67,6 +67,8 @@ public class MonoPackageManager {
 class MonoPackageManager_Resources {
 	public static final String[] Assemblies = new String[]{
 		"com.ComputeApps.TestApp.dll",
+		"SharedDevClasses.dll",
+		"Newtonsoft.Json.MonoDroid.dll",
 	};
 	public static final String[] Dependencies = new String[]{
 	};

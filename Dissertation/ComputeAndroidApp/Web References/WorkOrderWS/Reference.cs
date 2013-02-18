@@ -45,7 +45,7 @@ namespace ComputeAndroidApp.WorkOrderWS {
         
         /// <remarks/>
         public WorkOrderSvc() {
-            this.Url = "http://192.168.1.65:58041/WorkOrderSvc.svc";
+            this.Url = "http://192.168.1.65/WebService/WorkOrderSvc.svc";
             if ((this.IsLocalFileSystemWebService(this.Url) == true)) {
                 this.UseDefaultCredentials = true;
                 this.useDefaultCredentialsSetExplicitly = false;
@@ -100,24 +100,25 @@ namespace ComputeAndroidApp.WorkOrderWS {
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/IWorkOrderSvc/CreateWorkOrder", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
         [return: System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public WorkOrder CreateWorkOrder([System.Xml.Serialization.XmlElementAttribute(IsNullable=true)] string at, int deviceId, [System.Xml.Serialization.XmlIgnoreAttribute()] bool deviceIdSpecified, int applicationId, [System.Xml.Serialization.XmlIgnoreAttribute()] bool applicationIdSpecified, [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)] string commPackageJson) {
+        public WorkOrder CreateWorkOrder([System.Xml.Serialization.XmlElementAttribute(IsNullable=true)] string at, int deviceId, [System.Xml.Serialization.XmlIgnoreAttribute()] bool deviceIdSpecified, int applicationId, [System.Xml.Serialization.XmlIgnoreAttribute()] bool applicationIdSpecified, [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)] string commPackageJson, [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)] string deviceUIRef) {
             object[] results = this.Invoke("CreateWorkOrder", new object[] {
                         at,
                         deviceId,
                         deviceIdSpecified,
                         applicationId,
                         applicationIdSpecified,
-                        commPackageJson});
+                        commPackageJson,
+                        deviceUIRef});
             return ((WorkOrder)(results[0]));
         }
         
         /// <remarks/>
-        public void CreateWorkOrderAsync(string at, int deviceId, bool deviceIdSpecified, int applicationId, bool applicationIdSpecified, string commPackageJson) {
-            this.CreateWorkOrderAsync(at, deviceId, deviceIdSpecified, applicationId, applicationIdSpecified, commPackageJson, null);
+        public void CreateWorkOrderAsync(string at, int deviceId, bool deviceIdSpecified, int applicationId, bool applicationIdSpecified, string commPackageJson, string deviceUIRef) {
+            this.CreateWorkOrderAsync(at, deviceId, deviceIdSpecified, applicationId, applicationIdSpecified, commPackageJson, deviceUIRef, null);
         }
         
         /// <remarks/>
-        public void CreateWorkOrderAsync(string at, int deviceId, bool deviceIdSpecified, int applicationId, bool applicationIdSpecified, string commPackageJson, object userState) {
+        public void CreateWorkOrderAsync(string at, int deviceId, bool deviceIdSpecified, int applicationId, bool applicationIdSpecified, string commPackageJson, string deviceUIRef, object userState) {
             if ((this.CreateWorkOrderOperationCompleted == null)) {
                 this.CreateWorkOrderOperationCompleted = new System.Threading.SendOrPostCallback(this.OnCreateWorkOrderOperationCompleted);
             }
@@ -127,7 +128,8 @@ namespace ComputeAndroidApp.WorkOrderWS {
                         deviceIdSpecified,
                         applicationId,
                         applicationIdSpecified,
-                        commPackageJson}, this.CreateWorkOrderOperationCompleted, userState);
+                        commPackageJson,
+                        deviceUIRef}, this.CreateWorkOrderOperationCompleted, userState);
         }
         
         private void OnCreateWorkOrderOperationCompleted(object arg) {
@@ -348,6 +350,8 @@ namespace ComputeAndroidApp.WorkOrderWS {
         
         private int deviceIdk__BackingFieldField;
         
+        private string deviceUIRefk__BackingFieldField;
+        
         private System.Nullable<System.DateTime> endComputationTimek__BackingFieldField;
         
         private System.DateTime receiveTimek__BackingFieldField;
@@ -413,6 +417,17 @@ namespace ComputeAndroidApp.WorkOrderWS {
             }
             set {
                 this.deviceIdk__BackingFieldField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("<DeviceUIRef>k__BackingField", IsNullable=true)]
+        public string DeviceUIRefk__BackingField {
+            get {
+                return this.deviceUIRefk__BackingFieldField;
+            }
+            set {
+                this.deviceUIRefk__BackingFieldField = value;
             }
         }
         
@@ -563,6 +578,8 @@ namespace ComputeAndroidApp.WorkOrderWS {
         
         private System.Nullable<System.DateTime> dateAcknowledgedk__BackingFieldField;
         
+        private string responsek__BackingFieldField;
+        
         private System.DateTime submitDatek__BackingFieldField;
         
         private int targetDeviceIdk__BackingFieldField;
@@ -603,6 +620,17 @@ namespace ComputeAndroidApp.WorkOrderWS {
             }
             set {
                 this.dateAcknowledgedk__BackingFieldField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("<Response>k__BackingField", IsNullable=true)]
+        public string Responsek__BackingField {
+            get {
+                return this.responsek__BackingFieldField;
+            }
+            set {
+                this.responsek__BackingFieldField = value;
             }
         }
         
@@ -911,11 +939,15 @@ namespace ComputeAndroidApp.WorkOrderWS {
         
         private int applicationIdk__BackingFieldField;
         
+        private string applicationUIResultIntentk__BackingFieldField;
+        
         private string commPackageJsonk__BackingFieldField;
         
         private string computeAppIntentk__BackingFieldField;
         
         private int deviceIdk__BackingFieldField;
+        
+        private string deviceUIRefk__BackingFieldField;
         
         private System.DateTime receiveTimek__BackingFieldField;
         
@@ -939,6 +971,17 @@ namespace ComputeAndroidApp.WorkOrderWS {
             }
             set {
                 this.applicationIdk__BackingFieldField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("<ApplicationUIResultIntent>k__BackingField", IsNullable=true)]
+        public string ApplicationUIResultIntentk__BackingField {
+            get {
+                return this.applicationUIResultIntentk__BackingFieldField;
+            }
+            set {
+                this.applicationUIResultIntentk__BackingFieldField = value;
             }
         }
         
@@ -972,6 +1015,17 @@ namespace ComputeAndroidApp.WorkOrderWS {
             }
             set {
                 this.deviceIdk__BackingFieldField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("<DeviceUIRef>k__BackingField", IsNullable=true)]
+        public string DeviceUIRefk__BackingField {
+            get {
+                return this.deviceUIRefk__BackingFieldField;
+            }
+            set {
+                this.deviceUIRefk__BackingFieldField = value;
             }
         }
         
@@ -1073,6 +1127,8 @@ namespace ComputeAndroidApp.WorkOrderWS {
         
         private string applicationPackageURLk__BackingFieldField;
         
+        private string applicationUIResultIntentk__BackingFieldField;
+        
         private int applicationVersionk__BackingFieldField;
         
         private string applicationWorkIntentk__BackingFieldField;
@@ -1144,6 +1200,17 @@ namespace ComputeAndroidApp.WorkOrderWS {
             }
             set {
                 this.applicationPackageURLk__BackingFieldField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("<ApplicationUIResultIntent>k__BackingField", IsNullable=true)]
+        public string ApplicationUIResultIntentk__BackingField {
+            get {
+                return this.applicationUIResultIntentk__BackingFieldField;
+            }
+            set {
+                this.applicationUIResultIntentk__BackingFieldField = value;
             }
         }
         

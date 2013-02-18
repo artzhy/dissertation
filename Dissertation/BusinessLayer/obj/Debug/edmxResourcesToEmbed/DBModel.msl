@@ -37,6 +37,7 @@
     <EntitySetMapping Name="WorkApplications">
       <EntityTypeMapping TypeName="marcdissertation_dbModel.WorkApplication">
         <MappingFragment StoreEntitySet="WorkApplication">
+          <ScalarProperty Name="ApplicationUIResultIntent" ColumnName="ApplicationUIResultIntent" />
           <ScalarProperty Name="ApplicationNamespace" ColumnName="ApplicationNamespace" />
           <ScalarProperty Name="ApplicationVersion" ColumnName="ApplicationVersion" />
           <ScalarProperty Name="ApplicationWorkIntent" ColumnName="ApplicationWorkIntent" />
@@ -62,6 +63,7 @@
     <EntitySetMapping Name="WorkOrders">
       <EntityTypeMapping TypeName="marcdissertation_dbModel.WorkOrder">
         <MappingFragment StoreEntitySet="WorkOrder">
+          <ScalarProperty Name="DeviceUIRef" ColumnName="DeviceUIRef" />
           <ScalarProperty Name="EndComputationTime" ColumnName="EndComputationTime" />
           <ScalarProperty Name="StartComputationTime" ColumnName="StartComputationTime" />
           <ScalarProperty Name="WorkOrderResultJson" ColumnName="WorkOrderResultJson" />
@@ -99,6 +101,7 @@
     <EntitySetMapping Name="Communications">
       <EntityTypeMapping TypeName="marcdissertation_dbModel.Communication">
         <MappingFragment StoreEntitySet="Communication">
+          <ScalarProperty Name="Response" ColumnName="Response" />
           <ScalarProperty Name="DateAcknowledged" ColumnName="DateAcknowledged" />
           <ScalarProperty Name="SubmitDate" ColumnName="SubmitDate" />
           <ScalarProperty Name="TargetDeviceId" ColumnName="TargetDeviceId" />
