@@ -22,15 +22,12 @@ namespace com.ComputeApps.TestApp {
     
         public override void OnReceive(Context context, Intent intent) {
             try {
-                if (intent.Action == "com.ComputeApps.TestApp.Intents.ReceiveResult") {
-                    //TODO: Handle result
-                    String str = intent.GetStringExtra("WorkOrderTrimmed");
+                if (intent.Action == "com.ComputeApps.TestApp.Intents.ReceiveResult") {            
+                    WorkOrderTrimmed wo = JsonConvert.DeserializeObject<WorkOrderTrimmed>(intent.GetStringExtra("WorkOrderTrimmed"));
 
-                    int x = 0;
                     // Update work order list
 
-                    
-
+                    WorkOrderList.SubmitWorkOrderResult(wo);
                 }
 
                 //CommPackage cp = CommPackage.DeserializeJson(intent.GetStringExtra("CommPackage"));

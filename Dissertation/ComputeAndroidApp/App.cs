@@ -213,7 +213,7 @@ namespace ComputeAndroidApp {
         }
 
         public static void RegisterDeviceToUserNoGCM(Context context, String username) {
-                UserWS.UserDevice ud = new UserWS.UserSvc().AddUserDeviceNoGCMCode(username, Android.OS.Build.Model, 500, true, 0, false);
+                UserWS.UserDevice ud = new UserWS.UserSvc().AddUserDeviceNoGCMCode(App.GetAuthToken(context), username, Android.OS.Build.Model, 500, true, 0, false);
 
                 App.setDeviceId(context, ud.DeviceIdk__BackingField);
 

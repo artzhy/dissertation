@@ -70,12 +70,14 @@ namespace ComputeAndroidApp {
             String workOrderId = intent.Extras.Get("WorkOrderId").ToString();
 
             if (ut == UpdateType.NewWorkOrder) {
-                
+                //TODO: Acnowledge receipt of message
                 App.GetServiceBinder().GetService().AddSlaveWorkItem(int.Parse(workOrderId));
 
             } else if (ut == UpdateType.Result) {
+                //TODO: Acnowledge receipt of message
                   App.GetServiceBinder().GetService().ReceiveWorkOrderResult(int.Parse(workOrderId));
 
+                
 
             } else if (ut == UpdateType.UpdateRequest) {
                 //TODO: Handle update request

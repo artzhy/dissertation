@@ -16,7 +16,7 @@ namespace BusinessLayer
     {
         public WorkOrder()
         {
-            this.Communications = new HashSet<Communication>();
+            this.CommunicationPackages = new HashSet<CommunicationPackage>();
         }
     
         public int WorkOrderId { get; set; }
@@ -31,11 +31,10 @@ namespace BusinessLayer
         public string WorkOrderResultJson { get; set; }
         public Nullable<System.DateTime> StartComputationTime { get; set; }
         public Nullable<System.DateTime> EndComputationTime { get; set; }
-        public string DeviceUIRef { get; set; }
     
+        public virtual ICollection<CommunicationPackage> CommunicationPackages { get; set; }
         public virtual UserDevice UserDevice { get; set; }
         public virtual UserDevice UserDevice1 { get; set; }
         public virtual WorkApplication WorkApplication { get; set; }
-        public virtual ICollection<Communication> Communications { get; set; }
     }
 }

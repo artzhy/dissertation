@@ -1,17 +1,26 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Text;
 
 namespace BusinessLayer {
     [Serializable]
-    public partial class Communication {
+    [KnownType(typeof(WorkOrder))]
+    public partial class CommunicationPackage {
         private static IEnumerable<System.Data.Entity.Validation.DbEntityValidationResult> errors;
 
-        public static Communication Populate(int communicationId) {
+        public enum UpdateType {
+            Result,
+            UpdateRequest,
+            Error,
+            NewWorkOrder
+        }
+
+        public static CommunicationPackage Populate(int communicationId) {
             try {
                // App.DbContext.Configuration.ProxyCreationEnabled = false;
-                Communication comm = (from x in App.DbContext.Communications
+                CommunicationPackage comm = (from x in App.DbContext.CommunicationPackages
                                 where x.CommunicationId == communicationId
                         select x).First();
                // App.DbContext.Configuration.ProxyCreationEnabled = true;
@@ -22,14 +31,15 @@ namespace BusinessLayer {
 
         }
 
-        public static Communication CreateCommunication(int deviceId, String commType) {
+        public static CommunicationPackage CreateCommunication(int deviceId, UpdateType commType, int workOrderId) {
 
-            Communication comm = new Communication();
+            CommunicationPackage comm = new CommunicationPackage();
             comm.TargetDeviceId = deviceId;
-            comm.CommunicationType = commType;
+            comm.CommunicationType = (int)commType;
             comm.SubmitDate = DateTime.Now;
-
-            comm = App.DbContext.Communications.Add(comm);
+            comm.WorkOrderId = workOrderId;
+  
+            comm = App.DbContext.CommunicationPackages.Add(comm);
             errors = App.DbContext.GetValidationErrors();
 
             try {
@@ -51,11 +61,16 @@ namespace BusinessLayer {
 
         }
 
+        public String Serialize() {
+
+            return Newtonsoft.Json.JsonConvert.SerializeObject(this);
+
+        }
 
         public void Delete() {
            // TODO: Handle if a device is carrying out the WO
 
-            App.DbContext.Communications.Remove(this);
+            App.DbContext.CommunicationPackages.Remove(this);
 
             IEnumerable<System.Data.Entity.Validation.DbEntityValidationResult> errors = App.DbContext.GetValidationErrors();
 
@@ -66,5 +81,6 @@ namespace BusinessLayer {
             App.DbContext.SaveChanges();
 
         }
+
     }
 }

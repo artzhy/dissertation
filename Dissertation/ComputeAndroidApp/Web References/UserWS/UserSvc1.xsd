@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xs:schema xmlns:ser="http://schemas.microsoft.com/2003/10/Serialization/" xmlns:tns="http://schemas.datacontract.org/2004/07/BusinessLayer" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/BusinessLayer" xmlns:xs="http://www.w3.org/2001/XMLSchema">
-  <xs:import schemaLocation="http://192.168.1.65/WebService/UserSvc.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+  <xs:import schemaLocation="http://192.168.173.116/WebService/UserSvc.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
   <xs:complexType name="User">
     <xs:sequence>
       <xs:element name="_x003C_AuthenticationTokens_x003E_k__BackingField" nillable="true" type="tns:ArrayOfAuthenticationToken" />
@@ -108,6 +108,7 @@
       <xs:element name="_x003C_ApplicationName_x003E_k__BackingField" nillable="true" type="xs:string" />
       <xs:element name="_x003C_ApplicationNamespace_x003E_k__BackingField" nillable="true" type="xs:string" />
       <xs:element name="_x003C_ApplicationPackageURL_x003E_k__BackingField" nillable="true" type="xs:string" />
+      <xs:element name="_x003C_ApplicationUIResultIntent_x003E_k__BackingField" nillable="true" type="xs:string" />
       <xs:element name="_x003C_ApplicationVersion_x003E_k__BackingField" type="xs:int" />
       <xs:element name="_x003C_ApplicationWorkIntent_x003E_k__BackingField" nillable="true" type="xs:string" />
       <xs:element name="_x003C_DeviceAppInstallations_x003E_k__BackingField" nillable="true" type="tns:ArrayOfDeviceAppInstallation" />

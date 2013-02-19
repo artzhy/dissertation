@@ -12,17 +12,14 @@ namespace BusinessLayer
     using System;
     using System.Collections.Generic;
     
-    public partial class Communication
+    public partial class CommunicationPackage
     {
         public int CommunicationId { get; set; }
-        public string CommunicationType { get; set; }
+        public int CommunicationType { get; set; }
         public int WorkOrderId { get; set; }
         public int TargetDeviceId { get; set; }
         public System.DateTime SubmitDate { get; set; }
         public Nullable<System.DateTime> DateAcknowledged { get; set; }
         public string Response { get; set; }
-    
-        public virtual UserDevice UserDevice { get; set; }
-        public virtual WorkOrder WorkOrder { get; set; }
     }
 }

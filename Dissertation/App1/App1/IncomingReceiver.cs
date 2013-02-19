@@ -14,8 +14,9 @@ using Android.Util;
 using ComputeAndroidSDK.Communication;
 
 namespace com.ComputeApps.TestApp {
-    [BroadcastReceiver(Exported=true, Enabled=true)]
-    [IntentFilter(new[] { "com.ComputeApps.TestApp.Intents.DoWork" })]
+    [BroadcastReceiver]
+    [IntentFilter(new[] { "com.ComputeApps.TestApp.Intents.DoWork" }, Categories = new[] { Android.Content.Intent.CategoryHome} )]
+
     public class IncomingReceiver : BroadcastReceiver {
     
         public override void OnReceive(Context context, Intent intent) {

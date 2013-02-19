@@ -45,7 +45,7 @@ namespace ComputeAndroidApp.WorkOrderWS {
         
         /// <remarks/>
         public WorkOrderSvc() {
-            this.Url = "http://192.168.1.65/WebService/WorkOrderSvc.svc";
+            this.Url = "http://192.168.173.116/WebService/WorkOrderSvc.svc";
             if ((this.IsLocalFileSystemWebService(this.Url) == true)) {
                 this.UseDefaultCredentials = true;
                 this.useDefaultCredentialsSetExplicitly = false;

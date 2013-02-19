@@ -51,8 +51,7 @@ namespace WorkOrderDistributor {
                     } else {
                         Task.WaitAny(TaskList.ToArray());
                     }
-                  //  ProcessUpdatedWorkOrders();
-                    
+                                     
                 } catch (MessagingException e) {
                     if (!e.IsTransient) {
                         Trace.WriteLine(e.Message);
@@ -94,10 +93,22 @@ namespace WorkOrderDistributor {
                 // Process the message
                 Trace.WriteLine("Processing", newWorkOrderMessage.SequenceNumber.ToString());
 
-                CommunicationPackages.Send(new BrokeredMessage(new CommunicationPackage(newWorkOrderMessage.GetBody<int>(), CommunicationPackage.UpdateType.NewWorkOrder, null, null, null, 6)));
+                WorkOrder wo = WorkOrder.Populate(newWorkOrderMessage.GetBody<int>());
+
+                wo.SlaveWorkerId = GetAvailableDevice(wo.WorkOrderId);
+                wo.Save();
+
+                CommunicationPackage cp = CommunicationPackage.CreateCommunication((int)wo.SlaveWorkerId, CommunicationPackage.UpdateType.NewWorkOrder, wo.WorkOrderId);
+
+                CommunicationPackages.Send(new BrokeredMessage(cp.Serialize()));
 
                 newWorkOrderMessage.Complete();
             }
+        }
+
+        private int GetAvailableDevice(int workOrderId) {
+            //TODO: implement scheduling algo here to get slave work order id
+            return 6;
         }
 
         private void ProcessUpdatedWorkOrders() {
@@ -118,7 +129,7 @@ namespace WorkOrderDistributor {
                         wo.SlaveWorkOrderLastCommunication = DateTime.Now;
                         wo.WorkOrderStatus = "SLAVE_ACKNOWLEDGED";
                         wo.Save();
-
+                       
                         break;
                     case SharedClasses.WorkOrderUpdate.UpdateType.Cancel:
                         // TODO: Implement cancel procedure
@@ -139,9 +150,23 @@ namespace WorkOrderDistributor {
                         
                         wo.Save();
 
-                        // Queue result to be returned to device
-                        CommunicationPackages.Send(new BrokeredMessage(new CommunicationPackage(wo.WorkOrderId, CommunicationPackage.UpdateType.Result, wo.SlaveWorkerId, wo.StartComputationTime, wo.EndComputationTime,wo.DeviceId, wo.WorkOrderResultJson)));
+                        //CommunicationPackage cp = new CommunicationPackage();
 
+                        //cp.TargetDeviceId = wo.DeviceId;
+                        //cp.SubmitDate = DateTime.Now;
+                        //cp.WorkOrderId = wo.WorkOrderId;
+                        //cp.CommunicationType = (int)CommunicationPackage.UpdateType.NewWorkOrder;
+                        //cp.Save();
+
+                   //     CommunicationPackage cp = CommunicationPackage.CreateCommunication(wo.DeviceId, CommunicationPackage.UpdateType.Result, wo.WorkOrderId);
+
+                        // Queue result to be returned to device
+                        //CommunicationPackages.Send(new BrokeredMessage(cp.Serialize()));
+                      
+
+                        //CommunicationPackage cp = new CommunicationPackage(wo.WorkOrderId, CommunicationPackage.UpdateType.Result, wo.SlaveWorkerId, wo.StartComputationTime, wo.EndComputationTime, wo.DeviceId, wo.WorkOrderResultJson);
+
+               
                         break;
 
                     case SharedClasses.WorkOrderUpdate.UpdateType.MarkBeingComputed:
@@ -163,15 +188,17 @@ namespace WorkOrderDistributor {
 
             if (commMessage != null) {
 
-                SharedClasses.CommunicationPackage cp = commMessage.GetBody<SharedClasses.CommunicationPackage>();
+                CommunicationPackage cp = Newtonsoft.Json.JsonConvert.DeserializeObject<CommunicationPackage>(commMessage.GetBody<String>());
+
                 UserDevice targetUD = UserDevice.Populate(cp.TargetDeviceId);
 
                 Pusher.SendNotification(targetUD.GCMCode, cp.Serialize());
 
+               
 
                 commMessage.Complete();
 
-                Debug.WriteLine("here");
+                Debug.WriteLine("Communication ID: " + cp.CommunicationId + " sent.");
             }
         }
 

@@ -1,20 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Text;
 
 namespace BusinessLayer {
-    [Serializable]
+    [Serializable()]
+    [KnownType(typeof(CommunicationPackage))]
     public partial class WorkOrder {
         private static IEnumerable<System.Data.Entity.Validation.DbEntityValidationResult> errors;
 
         public static WorkOrder Populate(int workOrderId) {
             try {
-               // App.DbContext.Configuration.ProxyCreationEnabled = false;
+              //  App.DbContext.Configuration.ProxyCreationEnabled = false;
                 WorkOrder wo = (from x in App.DbContext.WorkOrders
                         where x.WorkOrderId == workOrderId
                         select x).First();
-               // App.DbContext.Configuration.ProxyCreationEnabled = true;
+             //   App.DbContext.Configuration.ProxyCreationEnabled = true;
                 return wo;
             } catch (Exception ex) {
                 throw ex;
@@ -22,14 +24,14 @@ namespace BusinessLayer {
 
         }
 
-        public static WorkOrder CreateWorkOrder(int deviceId, int applicationId, String commPackageJson, String deviceUIRef) {
+        public static WorkOrder CreateWorkOrder(int deviceId, int applicationId, String commPackageJson) {
 
             WorkOrder wo = new WorkOrder();
             wo.DeviceId = deviceId;
             wo.ApplicationId = applicationId;
             wo.CommPackageJson = commPackageJson;
             wo.ReceiveTime = DateTime.Now;
-            wo.DeviceUIRef = deviceUIRef;
+ 
 
             wo = App.DbContext.WorkOrders.Add(wo);
             errors = App.DbContext.GetValidationErrors();
@@ -50,6 +52,7 @@ namespace BusinessLayer {
             }
 
             App.DbContext.SaveChanges();
+            
 
         }
 

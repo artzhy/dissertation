@@ -53,7 +53,7 @@ namespace ComputeAndroidApp.UserWS {
         
         /// <remarks/>
         public UserSvc() {
-            this.Url = "http://192.168.1.65/WebService/UserSvc.svc";
+            this.Url = "http://192.168.173.116/WebService/UserSvc.svc";
             if ((this.IsLocalFileSystemWebService(this.Url) == true)) {
                 this.UseDefaultCredentials = true;
                 this.useDefaultCredentialsSetExplicitly = false;
@@ -236,8 +236,9 @@ namespace ComputeAndroidApp.UserWS {
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/IUserSvc/AddUserDeviceNoGCMCode", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
         [return: System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public UserDevice AddUserDeviceNoGCMCode([System.Xml.Serialization.XmlElementAttribute(IsNullable=true)] string username, [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)] string deviceType, int deviceMemoryResource, [System.Xml.Serialization.XmlIgnoreAttribute()] bool deviceMemoryResourceSpecified, int deviceProcRating, [System.Xml.Serialization.XmlIgnoreAttribute()] bool deviceProcRatingSpecified) {
+        public UserDevice AddUserDeviceNoGCMCode([System.Xml.Serialization.XmlElementAttribute(IsNullable=true)] string at, [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)] string username, [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)] string deviceType, int deviceMemoryResource, [System.Xml.Serialization.XmlIgnoreAttribute()] bool deviceMemoryResourceSpecified, int deviceProcRating, [System.Xml.Serialization.XmlIgnoreAttribute()] bool deviceProcRatingSpecified) {
             object[] results = this.Invoke("AddUserDeviceNoGCMCode", new object[] {
+                        at,
                         username,
                         deviceType,
                         deviceMemoryResource,
@@ -248,16 +249,17 @@ namespace ComputeAndroidApp.UserWS {
         }
         
         /// <remarks/>
-        public void AddUserDeviceNoGCMCodeAsync(string username, string deviceType, int deviceMemoryResource, bool deviceMemoryResourceSpecified, int deviceProcRating, bool deviceProcRatingSpecified) {
-            this.AddUserDeviceNoGCMCodeAsync(username, deviceType, deviceMemoryResource, deviceMemoryResourceSpecified, deviceProcRating, deviceProcRatingSpecified, null);
+        public void AddUserDeviceNoGCMCodeAsync(string at, string username, string deviceType, int deviceMemoryResource, bool deviceMemoryResourceSpecified, int deviceProcRating, bool deviceProcRatingSpecified) {
+            this.AddUserDeviceNoGCMCodeAsync(at, username, deviceType, deviceMemoryResource, deviceMemoryResourceSpecified, deviceProcRating, deviceProcRatingSpecified, null);
         }
         
         /// <remarks/>
-        public void AddUserDeviceNoGCMCodeAsync(string username, string deviceType, int deviceMemoryResource, bool deviceMemoryResourceSpecified, int deviceProcRating, bool deviceProcRatingSpecified, object userState) {
+        public void AddUserDeviceNoGCMCodeAsync(string at, string username, string deviceType, int deviceMemoryResource, bool deviceMemoryResourceSpecified, int deviceProcRating, bool deviceProcRatingSpecified, object userState) {
             if ((this.AddUserDeviceNoGCMCodeOperationCompleted == null)) {
                 this.AddUserDeviceNoGCMCodeOperationCompleted = new System.Threading.SendOrPostCallback(this.OnAddUserDeviceNoGCMCodeOperationCompleted);
             }
             this.InvokeAsync("AddUserDeviceNoGCMCode", new object[] {
+                        at,
                         username,
                         deviceType,
                         deviceMemoryResource,
@@ -1117,6 +1119,8 @@ namespace ComputeAndroidApp.UserWS {
         
         private string applicationPackageURLk__BackingFieldField;
         
+        private string applicationUIResultIntentk__BackingFieldField;
+        
         private int applicationVersionk__BackingFieldField;
         
         private string applicationWorkIntentk__BackingFieldField;
@@ -1188,6 +1192,17 @@ namespace ComputeAndroidApp.UserWS {
             }
             set {
                 this.applicationPackageURLk__BackingFieldField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("<ApplicationUIResultIntent>k__BackingField", IsNullable=true)]
+        public string ApplicationUIResultIntentk__BackingField {
+            get {
+                return this.applicationUIResultIntentk__BackingFieldField;
+            }
+            set {
+                this.applicationUIResultIntentk__BackingFieldField = value;
             }
         }
         

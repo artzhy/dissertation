@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <DiscoveryClientResultsFile xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <Results>
-    <DiscoveryClientResult referenceType="System.Web.Services.Discovery.ContractReference" url="http://192.168.1.65/WebService/UserSvc.svc?wsdl" filename="UserSvc.wsdl" />
-    <DiscoveryClientResult referenceType="System.Web.Services.Discovery.SchemaReference" url="http://192.168.1.65/WebService/UserSvc.svc?xsd=xsd1" filename="UserSvc.xsd" />
-    <DiscoveryClientResult referenceType="System.Web.Services.Discovery.SchemaReference" url="http://192.168.1.65/WebService/UserSvc.svc?xsd=xsd0" filename="UserSvc0.xsd" />
-    <DiscoveryClientResult referenceType="System.Web.Services.Discovery.DiscoveryDocumentReference" url="http://192.168.1.65/WebService/UserSvc.svc?disco" filename="UserSvc.disco" />
-    <DiscoveryClientResult referenceType="System.Web.Services.Discovery.SchemaReference" url="http://192.168.1.65/WebService/UserSvc.svc?xsd=xsd2" filename="UserSvc1.xsd" />
+    <DiscoveryClientResult referenceType="System.Web.Services.Discovery.ContractReference" url="http://192.168.173.116/WebService/UserSvc.svc?wsdl" filename="UserSvc.wsdl" />
+    <DiscoveryClientResult referenceType="System.Web.Services.Discovery.DiscoveryDocumentReference" url="http://192.168.173.116/WebService/UserSvc.svc?disco" filename="UserSvc.disco" />
+    <DiscoveryClientResult referenceType="System.Web.Services.Discovery.SchemaReference" url="http://192.168.173.116/WebService/UserSvc.svc?xsd=xsd1" filename="UserSvc.xsd" />
+    <DiscoveryClientResult referenceType="System.Web.Services.Discovery.SchemaReference" url="http://192.168.173.116/WebService/UserSvc.svc?xsd=xsd0" filename="UserSvc0.xsd" />
+    <DiscoveryClientResult referenceType="System.Web.Services.Discovery.SchemaReference" url="http://192.168.173.116/WebService/UserSvc.svc?xsd=xsd2" filename="UserSvc1.xsd" />
   </Results>
 </DiscoveryClientResultsFile>

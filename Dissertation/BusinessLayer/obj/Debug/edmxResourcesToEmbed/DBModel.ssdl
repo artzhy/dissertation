@@ -3,7 +3,7 @@
   <EntityContainer Name="marcdissertation_dbModelStoreContainer">
     <EntitySet Name="ActiveDevice" EntityType="marcdissertation_dbModel.Store.ActiveDevice" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="AuthenticationToken" EntityType="marcdissertation_dbModel.Store.AuthenticationToken" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="Communication" EntityType="marcdissertation_dbModel.Store.Communication" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="CommunicationPackage" EntityType="marcdissertation_dbModel.Store.CommunicationPackage" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="DeviceAccessRestriction" EntityType="marcdissertation_dbModel.Store.DeviceAccessRestriction" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="DeviceAppInstallation" EntityType="marcdissertation_dbModel.Store.DeviceAppInstallation" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="User" EntityType="marcdissertation_dbModel.Store.User" store:Type="Tables" Schema="dbo" />
@@ -48,11 +48,11 @@
     </AssociationSet>
     <AssociationSet Name="FKTgtDeviceId" Association="marcdissertation_dbModel.Store.FKTgtDeviceId">
       <End Role="UserDevice" EntitySet="UserDevice" />
-      <End Role="Communication" EntitySet="Communication" />
+      <End Role="CommunicationPackage" EntitySet="CommunicationPackage" />
     </AssociationSet>
     <AssociationSet Name="FKWorkOrderID" Association="marcdissertation_dbModel.Store.FKWorkOrderID">
       <End Role="WorkOrder" EntitySet="WorkOrder" />
-      <End Role="Communication" EntitySet="Communication" />
+      <End Role="CommunicationPackage" EntitySet="CommunicationPackage" />
     </AssociationSet>
     <AssociationSet Name="UserFK" Association="marcdissertation_dbModel.Store.UserFK">
       <End Role="User" EntitySet="User" />
@@ -76,12 +76,12 @@
     <Property Name="LastAccessDate" Type="datetime" />
     <Property Name="Username" Type="nvarchar" Nullable="false" MaxLength="50" />
   </EntityType>
-  <EntityType Name="Communication">
+  <EntityType Name="CommunicationPackage">
     <Key>
       <PropertyRef Name="CommunicationId" />
     </Key>
-    <Property Name="CommunicationId" Type="int" Nullable="false" />
-    <Property Name="CommunicationType" Type="nvarchar" Nullable="false" MaxLength="50" />
+    <Property Name="CommunicationId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="CommunicationType" Type="int" Nullable="false" />
     <Property Name="WorkOrderId" Type="int" Nullable="false" />
     <Property Name="TargetDeviceId" Type="int" Nullable="false" />
     <Property Name="SubmitDate" Type="datetime" Nullable="false" />
@@ -158,7 +158,6 @@
     <Property Name="WorkOrderResultJson" Type="nvarchar(max)" />
     <Property Name="StartComputationTime" Type="datetime" />
     <Property Name="EndComputationTime" Type="datetime" />
-    <Property Name="DeviceUIRef" Type="nvarchar(max)" Nullable="false" />
   </EntityType>
   <Association Name="FK_AuthenticationToken_0">
     <End Role="User" Type="marcdissertation_dbModel.Store.User" Multiplicity="1">
@@ -272,24 +271,24 @@
   </Association>
   <Association Name="FKTgtDeviceId">
     <End Role="UserDevice" Type="marcdissertation_dbModel.Store.UserDevice" Multiplicity="1" />
-    <End Role="Communication" Type="marcdissertation_dbModel.Store.Communication" Multiplicity="*" />
+    <End Role="CommunicationPackage" Type="marcdissertation_dbModel.Store.CommunicationPackage" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="UserDevice">
         <PropertyRef Name="DeviceId" />
       </Principal>
-      <Dependent Role="Communication">
+      <Dependent Role="CommunicationPackage">
         <PropertyRef Name="TargetDeviceId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
   <Association Name="FKWorkOrderID">
     <End Role="WorkOrder" Type="marcdissertation_dbModel.Store.WorkOrder" Multiplicity="1" />
-    <End Role="Communication" Type="marcdissertation_dbModel.Store.Communication" Multiplicity="*" />
+    <End Role="CommunicationPackage" Type="marcdissertation_dbModel.Store.CommunicationPackage" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="WorkOrder">
         <PropertyRef Name="WorkOrderId" />
       </Principal>
-      <Dependent Role="Communication">
+      <Dependent Role="CommunicationPackage">
         <PropertyRef Name="WorkOrderId" />
       </Dependent>
     </ReferentialConstraint>

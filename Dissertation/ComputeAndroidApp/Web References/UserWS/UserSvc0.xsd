@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xs:schema xmlns:tns="http://tempuri.org/" elementFormDefault="qualified" targetNamespace="http://tempuri.org/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
-  <xs:import schemaLocation="http://192.168.1.65/WebService/UserSvc.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/BusinessLayer" />
+  <xs:import schemaLocation="http://192.168.173.116/WebService/UserSvc.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/BusinessLayer" />
   <xs:element name="AddUser">
     <xs:complexType>
       <xs:sequence>
@@ -55,6 +55,7 @@
   <xs:element name="AddUserDeviceNoGCMCode">
     <xs:complexType>
       <xs:sequence>
+        <xs:element minOccurs="0" name="at" nillable="true" type="xs:string" />
         <xs:element minOccurs="0" name="username" nillable="true" type="xs:string" />
         <xs:element minOccurs="0" name="deviceType" nillable="true" type="xs:string" />
         <xs:element minOccurs="0" name="deviceMemoryResource" type="xs:int" />
