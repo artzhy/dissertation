@@ -64,6 +64,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Cloud Apps", "Cloud Apps", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharedClasses", "SharedClasses\SharedClasses.csproj", "{DD52B154-E0B3-4629-99F3-F95243618477}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestApp", "TestApp\TestApp.csproj", "{78EF84E2-CDF3-4E60-9C0D-1A767D6E4CE1}"
+	ProjectSection(ProjectDependencies) = postProject
+		{2F8BBC8A-29BE-4768-8856-AE7BFCFEC186} = {2F8BBC8A-29BE-4768-8856-AE7BFCFEC186}
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -272,6 +277,16 @@ Global
 		{DD52B154-E0B3-4629-99F3-F95243618477}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{DD52B154-E0B3-4629-99F3-F95243618477}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{DD52B154-E0B3-4629-99F3-F95243618477}.Release|x86.ActiveCfg = Release|Any CPU
+		{78EF84E2-CDF3-4E60-9C0D-1A767D6E4CE1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{78EF84E2-CDF3-4E60-9C0D-1A767D6E4CE1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{78EF84E2-CDF3-4E60-9C0D-1A767D6E4CE1}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{78EF84E2-CDF3-4E60-9C0D-1A767D6E4CE1}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{78EF84E2-CDF3-4E60-9C0D-1A767D6E4CE1}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{78EF84E2-CDF3-4E60-9C0D-1A767D6E4CE1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{78EF84E2-CDF3-4E60-9C0D-1A767D6E4CE1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{78EF84E2-CDF3-4E60-9C0D-1A767D6E4CE1}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{78EF84E2-CDF3-4E60-9C0D-1A767D6E4CE1}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{78EF84E2-CDF3-4E60-9C0D-1A767D6E4CE1}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

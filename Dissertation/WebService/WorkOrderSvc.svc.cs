@@ -8,14 +8,29 @@ using Microsoft.ServiceBus.Messaging;
 using Microsoft.WindowsAzure;
 using Microsoft.WindowsAzure.Diagnostics;
 
+using SharedClasses;
+
 
 namespace WebService {
     public class WorkOrderSvc : IWorkOrderSvc {
         
-        public BusinessLayer.WorkOrder CreateWorkOrder(String at, int deviceId, int applicationId, string commPackageJson, string deviceUIRef) {
+        public BusinessLayer.WorkOrder CreateWorkOrder(String at, int deviceId, int applicationId, List<SharedClasses.CommPackage.ParamListItem> paramList, String backgroundProcessFunction) {
             new AuthSvc().AuthUser(at, -1, deviceId);
 
-            BusinessLayer.WorkOrder wo = BusinessLayer.WorkOrder.CreateWorkOrder(deviceId, applicationId, commPackageJson);
+            BusinessLayer.WorkApplication wa = BusinessLayer.WorkApplication.Populate(applicationId);
+           CommPackage cp = new CommPackage();
+           cp.BackgroundProcessClass = "";
+           cp.BackgroundProcessFunction = backgroundProcessFunction;
+           cp.ParameterList = paramList;
+           cp.DeviceUIRef = wa.ApplicationUIResultIntent;
+           
+
+
+            BusinessLayer.WorkOrder wo = BusinessLayer.WorkOrder.CreateWorkOrder(deviceId, applicationId);
+
+            cp.ComputationRequestId = wo.WorkOrderId;
+            wo.CommPackageJson = cp.SerializeJson();
+            wo.Save();
 
            CloudQueues.NewWorkOrderQueueClient.Send(new BrokeredMessage(wo.WorkOrderId));
 
@@ -82,8 +97,8 @@ namespace WebService {
             BusinessLayer.AuthenticationToken oAt = new AuthSvc().AuthUser(at);
             BusinessLayer.WorkOrder wo = BusinessLayer.WorkOrder.Populate(workOrderId);
 
-            if (wo.SlaveWorkerId != oAt.DeviceId)
-                throw new Exception("Cannot modify Work Order which you are not meant to be working on.");
+            //if (wo.SlaveWorkerId != oAt.DeviceId)
+            //    throw new Exception("Cannot modify Work Order which you are not meant to be working on.");
 
             CloudQueues.UpdatedWorkOrderQueueClient.Send(new BrokeredMessage(new SharedClasses.WorkOrderUpdate(workOrderId, SharedClasses.WorkOrderUpdate.UpdateType.SubmitResult, oAt.DeviceId, compuatationStartTime, computationEndTime, resultJson)));
 

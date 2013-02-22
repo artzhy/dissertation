@@ -8,8 +8,11 @@ using Newtonsoft.Json;
 
 namespace ComputeAndroidSDK.Communication {
  [Serializable]
-    [Obsolete("Use WO Trimmed instead", true)]
     public class CommPackage {
+     public int ComputationRequestId {
+         get;
+         set;
+     }
         public String IntentAction { get; set; }
         public String BackgroundProcessFunction { get; set; }
         public String BackgroundProcessClass { get; set; }

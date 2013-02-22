@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:tns="http://tempuri.org/" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="WorkOrderSvc" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://tempuri.org/Imports">
+      <xsd:import schemaLocation="http://localhost/WebService/WorkOrderSvc.svc?xsd=xsd0" namespace="http://tempuri.org/" />
+      <xsd:import schemaLocation="http://localhost/WebService/WorkOrderSvc.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import schemaLocation="http://localhost/WebService/WorkOrderSvc.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/SharedClasses" />
+      <xsd:import schemaLocation="http://localhost/WebService/WorkOrderSvc.svc?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/BusinessLayer" />
+      <xsd:import schemaLocation="http://localhost/WebService/WorkOrderSvc.svc?xsd=xsd4" namespace="http://schemas.datacontract.org/2004/07/WebService" />
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="IWorkOrderSvc_CreateWorkOrder_InputMessage">
+    <wsdl:part name="parameters" element="tns:CreateWorkOrder" />
+  </wsdl:message>
+  <wsdl:message name="IWorkOrderSvc_CreateWorkOrder_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CreateWorkOrderResponse" />
+  </wsdl:message>
+  <wsdl:message name="IWorkOrderSvc_CancelWorkOrder_InputMessage">
+    <wsdl:part name="parameters" element="tns:CancelWorkOrder" />
+  </wsdl:message>
+  <wsdl:message name="IWorkOrderSvc_CancelWorkOrder_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CancelWorkOrderResponse" />
+  </wsdl:message>
+  <wsdl:message name="IWorkOrderSvc_GetWorkOrder_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetWorkOrder" />
+  </wsdl:message>
+  <wsdl:message name="IWorkOrderSvc_GetWorkOrder_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetWorkOrderResponse" />
+  </wsdl:message>
+  <wsdl:message name="IWorkOrderSvc_AcknowledgeWorkOrder_InputMessage">
+    <wsdl:part name="parameters" element="tns:AcknowledgeWorkOrder" />
+  </wsdl:message>
+  <wsdl:message name="IWorkOrderSvc_AcknowledgeWorkOrder_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AcknowledgeWorkOrderResponse" />
+  </wsdl:message>
+  <wsdl:message name="IWorkOrderSvc_SubmitWorkOrderResult_InputMessage">
+    <wsdl:part name="parameters" element="tns:SubmitWorkOrderResult" />
+  </wsdl:message>
+  <wsdl:message name="IWorkOrderSvc_SubmitWorkOrderResult_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SubmitWorkOrderResultResponse" />
+  </wsdl:message>
+  <wsdl:message name="IWorkOrderSvc_MarkWorkOrderInComputation_InputMessage">
+    <wsdl:part name="parameters" element="tns:MarkWorkOrderInComputation" />
+  </wsdl:message>
+  <wsdl:message name="IWorkOrderSvc_MarkWorkOrderInComputation_OutputMessage">
+    <wsdl:part name="parameters" element="tns:MarkWorkOrderInComputationResponse" />
+  </wsdl:message>
+  <wsdl:portType name="IWorkOrderSvc">
+    <wsdl:operation name="CreateWorkOrder">
+      <wsdl:input wsaw:Action="http://tempuri.org/IWorkOrderSvc/CreateWorkOrder" message="tns:IWorkOrderSvc_CreateWorkOrder_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IWorkOrderSvc/CreateWorkOrderResponse" message="tns:IWorkOrderSvc_CreateWorkOrder_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="CancelWorkOrder">
+      <wsdl:input wsaw:Action="http://tempuri.org/IWorkOrderSvc/CancelWorkOrder" message="tns:IWorkOrderSvc_CancelWorkOrder_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IWorkOrderSvc/CancelWorkOrderResponse" message="tns:IWorkOrderSvc_CancelWorkOrder_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetWorkOrder">
+      <wsdl:input wsaw:Action="http://tempuri.org/IWorkOrderSvc/GetWorkOrder" message="tns:IWorkOrderSvc_GetWorkOrder_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IWorkOrderSvc/GetWorkOrderResponse" message="tns:IWorkOrderSvc_GetWorkOrder_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AcknowledgeWorkOrder">
+      <wsdl:input wsaw:Action="http://tempuri.org/IWorkOrderSvc/AcknowledgeWorkOrder" message="tns:IWorkOrderSvc_AcknowledgeWorkOrder_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IWorkOrderSvc/AcknowledgeWorkOrderResponse" message="tns:IWorkOrderSvc_AcknowledgeWorkOrder_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SubmitWorkOrderResult">
+      <wsdl:input wsaw:Action="http://tempuri.org/IWorkOrderSvc/SubmitWorkOrderResult" message="tns:IWorkOrderSvc_SubmitWorkOrderResult_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IWorkOrderSvc/SubmitWorkOrderResultResponse" message="tns:IWorkOrderSvc_SubmitWorkOrderResult_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="MarkWorkOrderInComputation">
+      <wsdl:input wsaw:Action="http://tempuri.org/IWorkOrderSvc/MarkWorkOrderInComputation" message="tns:IWorkOrderSvc_MarkWorkOrderInComputation_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IWorkOrderSvc/MarkWorkOrderInComputationResponse" message="tns:IWorkOrderSvc_MarkWorkOrderInComputation_OutputMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="BasicHttpBinding_IWorkOrderSvc" type="tns:IWorkOrderSvc">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="CreateWorkOrder">
+      <soap:operation soapAction="http://tempuri.org/IWorkOrderSvc/CreateWorkOrder" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CancelWorkOrder">
+      <soap:operation soapAction="http://tempuri.org/IWorkOrderSvc/CancelWorkOrder" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetWorkOrder">
+      <soap:operation soapAction="http://tempuri.org/IWorkOrderSvc/GetWorkOrder" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AcknowledgeWorkOrder">
+      <soap:operation soapAction="http://tempuri.org/IWorkOrderSvc/AcknowledgeWorkOrder" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SubmitWorkOrderResult">
+      <soap:operation soapAction="http://tempuri.org/IWorkOrderSvc/SubmitWorkOrderResult" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="MarkWorkOrderInComputation">
+      <soap:operation soapAction="http://tempuri.org/IWorkOrderSvc/MarkWorkOrderInComputation" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="WorkOrderSvc">
+    <wsdl:port name="BasicHttpBinding_IWorkOrderSvc" binding="tns:BasicHttpBinding_IWorkOrderSvc">
+      <soap:address location="http://localhost/WebService/WorkOrderSvc.svc" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

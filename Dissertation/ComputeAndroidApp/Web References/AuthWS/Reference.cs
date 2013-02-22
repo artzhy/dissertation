@@ -37,7 +37,7 @@ namespace ComputeAndroidApp.AuthWS {
         
         /// <remarks/>
         public AuthSvc() {
-            this.Url = "http://192.168.173.116/WebService/AuthSvc.svc";
+            this.Url = "http://192.168.1.65/WebService/AuthSvc.svc";
             if ((this.IsLocalFileSystemWebService(this.Url) == true)) {
                 this.UseDefaultCredentials = true;
                 this.useDefaultCredentialsSetExplicitly = false;

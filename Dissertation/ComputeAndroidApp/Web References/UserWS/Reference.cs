@@ -53,7 +53,7 @@ namespace ComputeAndroidApp.UserWS {
         
         /// <remarks/>
         public UserSvc() {
-            this.Url = "http://192.168.173.116/WebService/UserSvc.svc";
+            this.Url = "http://192.168.1.65/WebService/UserSvc.svc";
             if ((this.IsLocalFileSystemWebService(this.Url) == true)) {
                 this.UseDefaultCredentials = true;
                 this.useDefaultCredentialsSetExplicitly = false;
@@ -698,7 +698,7 @@ namespace ComputeAndroidApp.UserWS {
         
         private AuthenticationToken authenticationTokenk__BackingFieldField;
         
-        private Communication[] communicationsk__BackingFieldField;
+        private CommunicationPackage[] communicationPackagesk__BackingFieldField;
         
         private DeviceAccessRestriction[] deviceAccessRestrictionsk__BackingFieldField;
         
@@ -745,13 +745,13 @@ namespace ComputeAndroidApp.UserWS {
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlArrayAttribute("<Communications>k__BackingField", IsNullable=true)]
-        public Communication[] Communicationsk__BackingField {
+        [System.Xml.Serialization.XmlArrayAttribute("<CommunicationPackages>k__BackingField", IsNullable=true)]
+        public CommunicationPackage[] CommunicationPackagesk__BackingField {
             get {
-                return this.communicationsk__BackingFieldField;
+                return this.communicationPackagesk__BackingFieldField;
             }
             set {
-                this.communicationsk__BackingFieldField = value;
+                this.communicationPackagesk__BackingFieldField = value;
             }
         }
         
@@ -931,117 +931,39 @@ namespace ComputeAndroidApp.UserWS {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.datacontract.org/2004/07/BusinessLayer")]
-    public partial class DeviceAccessRestriction {
-        
-        private int accessRestrictionIdk__BackingFieldField;
-        
-        private int dayk__BackingFieldField;
-        
-        private int deviceIdk__BackingFieldField;
-        
-        private string endTimek__BackingFieldField;
-        
-        private string startTimek__BackingFieldField;
-        
-        private UserDevice userDevicek__BackingFieldField;
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("<AccessRestrictionId>k__BackingField")]
-        public int AccessRestrictionIdk__BackingField {
-            get {
-                return this.accessRestrictionIdk__BackingFieldField;
-            }
-            set {
-                this.accessRestrictionIdk__BackingFieldField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("<Day>k__BackingField")]
-        public int Dayk__BackingField {
-            get {
-                return this.dayk__BackingFieldField;
-            }
-            set {
-                this.dayk__BackingFieldField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("<DeviceId>k__BackingField")]
-        public int DeviceIdk__BackingField {
-            get {
-                return this.deviceIdk__BackingFieldField;
-            }
-            set {
-                this.deviceIdk__BackingFieldField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("<EndTime>k__BackingField", DataType="duration")]
-        public string EndTimek__BackingField {
-            get {
-                return this.endTimek__BackingFieldField;
-            }
-            set {
-                this.endTimek__BackingFieldField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("<StartTime>k__BackingField", DataType="duration")]
-        public string StartTimek__BackingField {
-            get {
-                return this.startTimek__BackingFieldField;
-            }
-            set {
-                this.startTimek__BackingFieldField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("<UserDevice>k__BackingField", IsNullable=true)]
-        public UserDevice UserDevicek__BackingField {
-            get {
-                return this.userDevicek__BackingFieldField;
-            }
-            set {
-                this.userDevicek__BackingFieldField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.18034")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.datacontract.org/2004/07/BusinessLayer")]
-    public partial class DeviceAppInstallation {
-        
-        private int applicationDevicePairIdk__BackingFieldField;
+    public partial class WorkOrder {
         
         private int applicationIdk__BackingFieldField;
         
+        private string commPackageJsonk__BackingFieldField;
+        
+        private CommunicationPackage[] communicationPackagesk__BackingFieldField;
+        
         private int deviceIdk__BackingFieldField;
         
-        private System.DateTime installDatek__BackingFieldField;
+        private System.Nullable<System.DateTime> endComputationTimek__BackingFieldField;
+        
+        private System.DateTime receiveTimek__BackingFieldField;
+        
+        private System.Nullable<System.DateTime> slaveWorkOrderLastCommunicationk__BackingFieldField;
+        
+        private System.Nullable<int> slaveWorkerIdk__BackingFieldField;
+        
+        private System.Nullable<System.DateTime> slaveWorkerSubmitk__BackingFieldField;
+        
+        private System.Nullable<System.DateTime> startComputationTimek__BackingFieldField;
+        
+        private UserDevice userDevice1k__BackingFieldField;
         
         private UserDevice userDevicek__BackingFieldField;
         
         private WorkApplication workApplicationk__BackingFieldField;
         
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("<ApplicationDevicePairId>k__BackingField")]
-        public int ApplicationDevicePairIdk__BackingField {
-            get {
-                return this.applicationDevicePairIdk__BackingFieldField;
-            }
-            set {
-                this.applicationDevicePairIdk__BackingFieldField = value;
-            }
-        }
+        private int workOrderIdk__BackingFieldField;
+        
+        private string workOrderResultJsonk__BackingFieldField;
+        
+        private string workOrderStatusk__BackingFieldField;
         
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute("<ApplicationId>k__BackingField")]
@@ -1055,6 +977,28 @@ namespace ComputeAndroidApp.UserWS {
         }
         
         /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("<CommPackageJson>k__BackingField", IsNullable=true)]
+        public string CommPackageJsonk__BackingField {
+            get {
+                return this.commPackageJsonk__BackingFieldField;
+            }
+            set {
+                this.commPackageJsonk__BackingFieldField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlArrayAttribute("<CommunicationPackages>k__BackingField", IsNullable=true)]
+        public CommunicationPackage[] CommunicationPackagesk__BackingField {
+            get {
+                return this.communicationPackagesk__BackingFieldField;
+            }
+            set {
+                this.communicationPackagesk__BackingFieldField = value;
+            }
+        }
+        
+        /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute("<DeviceId>k__BackingField")]
         public int DeviceIdk__BackingField {
             get {
@@ -1066,13 +1010,79 @@ namespace ComputeAndroidApp.UserWS {
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("<InstallDate>k__BackingField")]
-        public System.DateTime InstallDatek__BackingField {
+        [System.Xml.Serialization.XmlElementAttribute("<EndComputationTime>k__BackingField", IsNullable=true)]
+        public System.Nullable<System.DateTime> EndComputationTimek__BackingField {
             get {
-                return this.installDatek__BackingFieldField;
+                return this.endComputationTimek__BackingFieldField;
             }
             set {
-                this.installDatek__BackingFieldField = value;
+                this.endComputationTimek__BackingFieldField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("<ReceiveTime>k__BackingField")]
+        public System.DateTime ReceiveTimek__BackingField {
+            get {
+                return this.receiveTimek__BackingFieldField;
+            }
+            set {
+                this.receiveTimek__BackingFieldField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("<SlaveWorkOrderLastCommunication>k__BackingField", IsNullable=true)]
+        public System.Nullable<System.DateTime> SlaveWorkOrderLastCommunicationk__BackingField {
+            get {
+                return this.slaveWorkOrderLastCommunicationk__BackingFieldField;
+            }
+            set {
+                this.slaveWorkOrderLastCommunicationk__BackingFieldField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("<SlaveWorkerId>k__BackingField", IsNullable=true)]
+        public System.Nullable<int> SlaveWorkerIdk__BackingField {
+            get {
+                return this.slaveWorkerIdk__BackingFieldField;
+            }
+            set {
+                this.slaveWorkerIdk__BackingFieldField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("<SlaveWorkerSubmit>k__BackingField", IsNullable=true)]
+        public System.Nullable<System.DateTime> SlaveWorkerSubmitk__BackingField {
+            get {
+                return this.slaveWorkerSubmitk__BackingFieldField;
+            }
+            set {
+                this.slaveWorkerSubmitk__BackingFieldField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("<StartComputationTime>k__BackingField", IsNullable=true)]
+        public System.Nullable<System.DateTime> StartComputationTimek__BackingField {
+            get {
+                return this.startComputationTimek__BackingFieldField;
+            }
+            set {
+                this.startComputationTimek__BackingFieldField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("<UserDevice1>k__BackingField", IsNullable=true)]
+        public UserDevice UserDevice1k__BackingField {
+            get {
+                return this.userDevice1k__BackingFieldField;
+            }
+            set {
+                this.userDevice1k__BackingFieldField = value;
             }
         }
         
@@ -1095,6 +1105,139 @@ namespace ComputeAndroidApp.UserWS {
             }
             set {
                 this.workApplicationk__BackingFieldField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("<WorkOrderId>k__BackingField")]
+        public int WorkOrderIdk__BackingField {
+            get {
+                return this.workOrderIdk__BackingFieldField;
+            }
+            set {
+                this.workOrderIdk__BackingFieldField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("<WorkOrderResultJson>k__BackingField", IsNullable=true)]
+        public string WorkOrderResultJsonk__BackingField {
+            get {
+                return this.workOrderResultJsonk__BackingFieldField;
+            }
+            set {
+                this.workOrderResultJsonk__BackingFieldField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("<WorkOrderStatus>k__BackingField", IsNullable=true)]
+        public string WorkOrderStatusk__BackingField {
+            get {
+                return this.workOrderStatusk__BackingFieldField;
+            }
+            set {
+                this.workOrderStatusk__BackingFieldField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.18034")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.datacontract.org/2004/07/BusinessLayer")]
+    public partial class CommunicationPackage {
+        
+        private int communicationIdk__BackingFieldField;
+        
+        private int communicationTypek__BackingFieldField;
+        
+        private System.Nullable<System.DateTime> dateAcknowledgedk__BackingFieldField;
+        
+        private string responsek__BackingFieldField;
+        
+        private System.DateTime submitDatek__BackingFieldField;
+        
+        private int targetDeviceIdk__BackingFieldField;
+        
+        private int workOrderIdk__BackingFieldField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("<CommunicationId>k__BackingField")]
+        public int CommunicationIdk__BackingField {
+            get {
+                return this.communicationIdk__BackingFieldField;
+            }
+            set {
+                this.communicationIdk__BackingFieldField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("<CommunicationType>k__BackingField")]
+        public int CommunicationTypek__BackingField {
+            get {
+                return this.communicationTypek__BackingFieldField;
+            }
+            set {
+                this.communicationTypek__BackingFieldField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("<DateAcknowledged>k__BackingField", IsNullable=true)]
+        public System.Nullable<System.DateTime> DateAcknowledgedk__BackingField {
+            get {
+                return this.dateAcknowledgedk__BackingFieldField;
+            }
+            set {
+                this.dateAcknowledgedk__BackingFieldField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("<Response>k__BackingField", IsNullable=true)]
+        public string Responsek__BackingField {
+            get {
+                return this.responsek__BackingFieldField;
+            }
+            set {
+                this.responsek__BackingFieldField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("<SubmitDate>k__BackingField")]
+        public System.DateTime SubmitDatek__BackingField {
+            get {
+                return this.submitDatek__BackingFieldField;
+            }
+            set {
+                this.submitDatek__BackingFieldField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("<TargetDeviceId>k__BackingField")]
+        public int TargetDeviceIdk__BackingField {
+            get {
+                return this.targetDeviceIdk__BackingFieldField;
+            }
+            set {
+                this.targetDeviceIdk__BackingFieldField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("<WorkOrderId>k__BackingField")]
+        public int WorkOrderIdk__BackingField {
+            get {
+                return this.workOrderIdk__BackingFieldField;
+            }
+            set {
+                this.workOrderIdk__BackingFieldField = value;
             }
         }
     }
@@ -1257,41 +1400,30 @@ namespace ComputeAndroidApp.UserWS {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.datacontract.org/2004/07/BusinessLayer")]
-    public partial class WorkOrder {
+    public partial class DeviceAppInstallation {
+        
+        private int applicationDevicePairIdk__BackingFieldField;
         
         private int applicationIdk__BackingFieldField;
         
-        private string commPackageJsonk__BackingFieldField;
-        
-        private Communication[] communicationsk__BackingFieldField;
-        
         private int deviceIdk__BackingFieldField;
         
-        private string deviceUIRefk__BackingFieldField;
-        
-        private System.Nullable<System.DateTime> endComputationTimek__BackingFieldField;
-        
-        private System.DateTime receiveTimek__BackingFieldField;
-        
-        private System.Nullable<System.DateTime> slaveWorkOrderLastCommunicationk__BackingFieldField;
-        
-        private System.Nullable<int> slaveWorkerIdk__BackingFieldField;
-        
-        private System.Nullable<System.DateTime> slaveWorkerSubmitk__BackingFieldField;
-        
-        private System.Nullable<System.DateTime> startComputationTimek__BackingFieldField;
-        
-        private UserDevice userDevice1k__BackingFieldField;
+        private System.DateTime installDatek__BackingFieldField;
         
         private UserDevice userDevicek__BackingFieldField;
         
         private WorkApplication workApplicationk__BackingFieldField;
         
-        private int workOrderIdk__BackingFieldField;
-        
-        private string workOrderResultJsonk__BackingFieldField;
-        
-        private string workOrderStatusk__BackingFieldField;
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("<ApplicationDevicePairId>k__BackingField")]
+        public int ApplicationDevicePairIdk__BackingField {
+            get {
+                return this.applicationDevicePairIdk__BackingFieldField;
+            }
+            set {
+                this.applicationDevicePairIdk__BackingFieldField = value;
+            }
+        }
         
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute("<ApplicationId>k__BackingField")]
@@ -1301,28 +1433,6 @@ namespace ComputeAndroidApp.UserWS {
             }
             set {
                 this.applicationIdk__BackingFieldField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("<CommPackageJson>k__BackingField", IsNullable=true)]
-        public string CommPackageJsonk__BackingField {
-            get {
-                return this.commPackageJsonk__BackingFieldField;
-            }
-            set {
-                this.commPackageJsonk__BackingFieldField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlArrayAttribute("<Communications>k__BackingField", IsNullable=true)]
-        public Communication[] Communicationsk__BackingField {
-            get {
-                return this.communicationsk__BackingFieldField;
-            }
-            set {
-                this.communicationsk__BackingFieldField = value;
             }
         }
         
@@ -1338,90 +1448,13 @@ namespace ComputeAndroidApp.UserWS {
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("<DeviceUIRef>k__BackingField", IsNullable=true)]
-        public string DeviceUIRefk__BackingField {
+        [System.Xml.Serialization.XmlElementAttribute("<InstallDate>k__BackingField")]
+        public System.DateTime InstallDatek__BackingField {
             get {
-                return this.deviceUIRefk__BackingFieldField;
+                return this.installDatek__BackingFieldField;
             }
             set {
-                this.deviceUIRefk__BackingFieldField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("<EndComputationTime>k__BackingField", IsNullable=true)]
-        public System.Nullable<System.DateTime> EndComputationTimek__BackingField {
-            get {
-                return this.endComputationTimek__BackingFieldField;
-            }
-            set {
-                this.endComputationTimek__BackingFieldField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("<ReceiveTime>k__BackingField")]
-        public System.DateTime ReceiveTimek__BackingField {
-            get {
-                return this.receiveTimek__BackingFieldField;
-            }
-            set {
-                this.receiveTimek__BackingFieldField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("<SlaveWorkOrderLastCommunication>k__BackingField", IsNullable=true)]
-        public System.Nullable<System.DateTime> SlaveWorkOrderLastCommunicationk__BackingField {
-            get {
-                return this.slaveWorkOrderLastCommunicationk__BackingFieldField;
-            }
-            set {
-                this.slaveWorkOrderLastCommunicationk__BackingFieldField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("<SlaveWorkerId>k__BackingField", IsNullable=true)]
-        public System.Nullable<int> SlaveWorkerIdk__BackingField {
-            get {
-                return this.slaveWorkerIdk__BackingFieldField;
-            }
-            set {
-                this.slaveWorkerIdk__BackingFieldField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("<SlaveWorkerSubmit>k__BackingField", IsNullable=true)]
-        public System.Nullable<System.DateTime> SlaveWorkerSubmitk__BackingField {
-            get {
-                return this.slaveWorkerSubmitk__BackingFieldField;
-            }
-            set {
-                this.slaveWorkerSubmitk__BackingFieldField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("<StartComputationTime>k__BackingField", IsNullable=true)]
-        public System.Nullable<System.DateTime> StartComputationTimek__BackingField {
-            get {
-                return this.startComputationTimek__BackingFieldField;
-            }
-            set {
-                this.startComputationTimek__BackingFieldField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("<UserDevice1>k__BackingField", IsNullable=true)]
-        public UserDevice UserDevice1k__BackingField {
-            get {
-                return this.userDevice1k__BackingFieldField;
-            }
-            set {
-                this.userDevice1k__BackingFieldField = value;
+                this.installDatek__BackingFieldField = value;
             }
         }
         
@@ -1446,39 +1479,6 @@ namespace ComputeAndroidApp.UserWS {
                 this.workApplicationk__BackingFieldField = value;
             }
         }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("<WorkOrderId>k__BackingField")]
-        public int WorkOrderIdk__BackingField {
-            get {
-                return this.workOrderIdk__BackingFieldField;
-            }
-            set {
-                this.workOrderIdk__BackingFieldField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("<WorkOrderResultJson>k__BackingField", IsNullable=true)]
-        public string WorkOrderResultJsonk__BackingField {
-            get {
-                return this.workOrderResultJsonk__BackingFieldField;
-            }
-            set {
-                this.workOrderResultJsonk__BackingFieldField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("<WorkOrderStatus>k__BackingField", IsNullable=true)]
-        public string WorkOrderStatusk__BackingField {
-            get {
-                return this.workOrderStatusk__BackingFieldField;
-            }
-            set {
-                this.workOrderStatusk__BackingFieldField = value;
-            }
-        }
     }
     
     /// <remarks/>
@@ -1487,89 +1487,72 @@ namespace ComputeAndroidApp.UserWS {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.datacontract.org/2004/07/BusinessLayer")]
-    public partial class Communication {
+    public partial class DeviceAccessRestriction {
         
-        private int communicationIdk__BackingFieldField;
+        private int accessRestrictionIdk__BackingFieldField;
         
-        private string communicationTypek__BackingFieldField;
+        private int dayk__BackingFieldField;
         
-        private System.Nullable<System.DateTime> dateAcknowledgedk__BackingFieldField;
+        private int deviceIdk__BackingFieldField;
         
-        private string responsek__BackingFieldField;
+        private string endTimek__BackingFieldField;
         
-        private System.DateTime submitDatek__BackingFieldField;
-        
-        private int targetDeviceIdk__BackingFieldField;
+        private string startTimek__BackingFieldField;
         
         private UserDevice userDevicek__BackingFieldField;
         
-        private int workOrderIdk__BackingFieldField;
-        
-        private WorkOrder workOrderk__BackingFieldField;
-        
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("<CommunicationId>k__BackingField")]
-        public int CommunicationIdk__BackingField {
+        [System.Xml.Serialization.XmlElementAttribute("<AccessRestrictionId>k__BackingField")]
+        public int AccessRestrictionIdk__BackingField {
             get {
-                return this.communicationIdk__BackingFieldField;
+                return this.accessRestrictionIdk__BackingFieldField;
             }
             set {
-                this.communicationIdk__BackingFieldField = value;
+                this.accessRestrictionIdk__BackingFieldField = value;
             }
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("<CommunicationType>k__BackingField", IsNullable=true)]
-        public string CommunicationTypek__BackingField {
+        [System.Xml.Serialization.XmlElementAttribute("<Day>k__BackingField")]
+        public int Dayk__BackingField {
             get {
-                return this.communicationTypek__BackingFieldField;
+                return this.dayk__BackingFieldField;
             }
             set {
-                this.communicationTypek__BackingFieldField = value;
+                this.dayk__BackingFieldField = value;
             }
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("<DateAcknowledged>k__BackingField", IsNullable=true)]
-        public System.Nullable<System.DateTime> DateAcknowledgedk__BackingField {
+        [System.Xml.Serialization.XmlElementAttribute("<DeviceId>k__BackingField")]
+        public int DeviceIdk__BackingField {
             get {
-                return this.dateAcknowledgedk__BackingFieldField;
+                return this.deviceIdk__BackingFieldField;
             }
             set {
-                this.dateAcknowledgedk__BackingFieldField = value;
+                this.deviceIdk__BackingFieldField = value;
             }
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("<Response>k__BackingField", IsNullable=true)]
-        public string Responsek__BackingField {
+        [System.Xml.Serialization.XmlElementAttribute("<EndTime>k__BackingField", DataType="duration")]
+        public string EndTimek__BackingField {
             get {
-                return this.responsek__BackingFieldField;
+                return this.endTimek__BackingFieldField;
             }
             set {
-                this.responsek__BackingFieldField = value;
+                this.endTimek__BackingFieldField = value;
             }
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("<SubmitDate>k__BackingField")]
-        public System.DateTime SubmitDatek__BackingField {
+        [System.Xml.Serialization.XmlElementAttribute("<StartTime>k__BackingField", DataType="duration")]
+        public string StartTimek__BackingField {
             get {
-                return this.submitDatek__BackingFieldField;
+                return this.startTimek__BackingFieldField;
             }
             set {
-                this.submitDatek__BackingFieldField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("<TargetDeviceId>k__BackingField")]
-        public int TargetDeviceIdk__BackingField {
-            get {
-                return this.targetDeviceIdk__BackingFieldField;
-            }
-            set {
-                this.targetDeviceIdk__BackingFieldField = value;
+                this.startTimek__BackingFieldField = value;
             }
         }
         
@@ -1581,28 +1564,6 @@ namespace ComputeAndroidApp.UserWS {
             }
             set {
                 this.userDevicek__BackingFieldField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("<WorkOrderId>k__BackingField")]
-        public int WorkOrderIdk__BackingField {
-            get {
-                return this.workOrderIdk__BackingFieldField;
-            }
-            set {
-                this.workOrderIdk__BackingFieldField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("<WorkOrder>k__BackingField", IsNullable=true)]
-        public WorkOrder WorkOrderk__BackingField {
-            get {
-                return this.workOrderk__BackingFieldField;
-            }
-            set {
-                this.workOrderk__BackingFieldField = value;
             }
         }
     }

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xs:schema xmlns:ser="http://schemas.microsoft.com/2003/10/Serialization/" xmlns:tns="http://schemas.datacontract.org/2004/07/BusinessLayer" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/BusinessLayer" xmlns:xs="http://www.w3.org/2001/XMLSchema">
-  <xs:import schemaLocation="http://192.168.173.116/WebService/UserSvc.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+  <xs:import schemaLocation="http://192.168.1.65/WebService/UserSvc.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
   <xs:complexType name="User">
     <xs:sequence>
       <xs:element name="_x003C_AuthenticationTokens_x003E_k__BackingField" nillable="true" type="tns:ArrayOfAuthenticationToken" />
@@ -35,7 +35,7 @@
     <xs:sequence>
       <xs:element name="_x003C_ActiveDevice_x003E_k__BackingField" nillable="true" type="tns:ActiveDevice" />
       <xs:element name="_x003C_AuthenticationToken_x003E_k__BackingField" nillable="true" type="tns:AuthenticationToken" />
-      <xs:element name="_x003C_Communications_x003E_k__BackingField" nillable="true" type="tns:ArrayOfCommunication" />
+      <xs:element name="_x003C_CommunicationPackages_x003E_k__BackingField" nillable="true" type="tns:ArrayOfCommunicationPackage" />
       <xs:element name="_x003C_DeviceAccessRestrictions_x003E_k__BackingField" nillable="true" type="tns:ArrayOfDeviceAccessRestriction" />
       <xs:element name="_x003C_DeviceAppInstallations_x003E_k__BackingField" nillable="true" type="tns:ArrayOfDeviceAppInstallation" />
       <xs:element name="_x003C_DeviceId_x003E_k__BackingField" type="xs:int" />
@@ -58,33 +58,30 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="ActiveDevice" nillable="true" type="tns:ActiveDevice" />
-  <xs:complexType name="ArrayOfCommunication">
+  <xs:complexType name="ArrayOfCommunicationPackage">
     <xs:sequence>
-      <xs:element minOccurs="0" maxOccurs="unbounded" name="Communication" nillable="true" type="tns:Communication" />
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="CommunicationPackage" nillable="true" type="tns:CommunicationPackage" />
     </xs:sequence>
   </xs:complexType>
-  <xs:element name="ArrayOfCommunication" nillable="true" type="tns:ArrayOfCommunication" />
-  <xs:complexType name="Communication">
+  <xs:element name="ArrayOfCommunicationPackage" nillable="true" type="tns:ArrayOfCommunicationPackage" />
+  <xs:complexType name="CommunicationPackage">
     <xs:sequence>
       <xs:element name="_x003C_CommunicationId_x003E_k__BackingField" type="xs:int" />
-      <xs:element name="_x003C_CommunicationType_x003E_k__BackingField" nillable="true" type="xs:string" />
+      <xs:element name="_x003C_CommunicationType_x003E_k__BackingField" type="xs:int" />
       <xs:element name="_x003C_DateAcknowledged_x003E_k__BackingField" nillable="true" type="xs:dateTime" />
       <xs:element name="_x003C_Response_x003E_k__BackingField" nillable="true" type="xs:string" />
       <xs:element name="_x003C_SubmitDate_x003E_k__BackingField" type="xs:dateTime" />
       <xs:element name="_x003C_TargetDeviceId_x003E_k__BackingField" type="xs:int" />
-      <xs:element name="_x003C_UserDevice_x003E_k__BackingField" nillable="true" type="tns:UserDevice" />
       <xs:element name="_x003C_WorkOrderId_x003E_k__BackingField" type="xs:int" />
-      <xs:element name="_x003C_WorkOrder_x003E_k__BackingField" nillable="true" type="tns:WorkOrder" />
     </xs:sequence>
   </xs:complexType>
-  <xs:element name="Communication" nillable="true" type="tns:Communication" />
+  <xs:element name="CommunicationPackage" nillable="true" type="tns:CommunicationPackage" />
   <xs:complexType name="WorkOrder">
     <xs:sequence>
       <xs:element name="_x003C_ApplicationId_x003E_k__BackingField" type="xs:int" />
       <xs:element name="_x003C_CommPackageJson_x003E_k__BackingField" nillable="true" type="xs:string" />
-      <xs:element name="_x003C_Communications_x003E_k__BackingField" nillable="true" type="tns:ArrayOfCommunication" />
+      <xs:element name="_x003C_CommunicationPackages_x003E_k__BackingField" nillable="true" type="tns:ArrayOfCommunicationPackage" />
       <xs:element name="_x003C_DeviceId_x003E_k__BackingField" type="xs:int" />
-      <xs:element name="_x003C_DeviceUIRef_x003E_k__BackingField" nillable="true" type="xs:string" />
       <xs:element name="_x003C_EndComputationTime_x003E_k__BackingField" nillable="true" type="xs:dateTime" />
       <xs:element name="_x003C_ReceiveTime_x003E_k__BackingField" type="xs:dateTime" />
       <xs:element name="_x003C_SlaveWorkOrderLastCommunication_x003E_k__BackingField" nillable="true" type="xs:dateTime" />
