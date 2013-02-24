@@ -104,5 +104,16 @@ namespace WebService {
 
         }
 
+        public void AcknowledgeCommunication(String at, int communicationId, DateTime recieveTime) {
+            BusinessLayer.AuthenticationToken oAt = new AuthSvc().AuthUser(at);
+            BusinessLayer.CommunicationPackage cp = BusinessLayer.CommunicationPackage.Populate(communicationId);
+
+            cp.DateAcknowledged = recieveTime;
+            cp.Response = "ACK";
+
+            cp.Save();
+
+        }
+
     }
 }

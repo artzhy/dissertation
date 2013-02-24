@@ -74,6 +74,8 @@ namespace ComputeAndroidApp {
                         App.RegisterDeviceToUserNoGCM(this, username);
                     } else if (App.GetGCMCode(this) == "") {
                         App.RegisterDeviceGCM(this);
+                    } else {
+                        new UserWS.UserSvc().MarkDeviceActive(App.GetAuthToken(this), App.GetDeviceId(this), true);
                     }
 
 

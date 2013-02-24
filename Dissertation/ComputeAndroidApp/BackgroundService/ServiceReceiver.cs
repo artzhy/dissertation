@@ -20,6 +20,10 @@ namespace ComputeAndroidApp.BackgroundService {
         public override void OnReceive(Context context, Intent intent) {
            //TODO: Perhaps handle low battery and such like.
 
+            //TODO: HACK
+            Android.OS.StrictMode.ThreadPolicy oldThreadPolicy = StrictMode.GetThreadPolicy();
+            StrictMode.SetThreadPolicy(new StrictMode.ThreadPolicy.Builder(oldThreadPolicy).PermitNetwork().PermitDiskReads().PermitDiskWrites().Build());
+
             if (intent.Action == Android.Content.Intent.ActionBootCompleted) {
                 //TODO: Check apps are installed and notify cloud that device is on
 
@@ -42,10 +46,17 @@ namespace ComputeAndroidApp.BackgroundService {
 
 
             } else if (intent.Action == ComputeAndroidSDK.Communication.Constants.REQUEST_WORK_ORDER_INTENT) {
-                // Send to Web Service
-                // Sending a comm package
 
+                
+
+              ComputeAndroidSDK.Communication.CommPackage cp = ComputeAndroidSDK.Communication.CommPackage.DeserializeJson(intent.GetStringExtra("CommPackage"));
+
+              App.GetServiceBinder().GetService().RequestWorkOrderComputation(cp);
+
+             
             }
+
+            StrictMode.SetThreadPolicy(oldThreadPolicy);
         }
     }
 }

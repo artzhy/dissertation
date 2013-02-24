@@ -7,17 +7,36 @@ using System.Text;
 using Newtonsoft.Json;
 
 namespace ComputeAndroidSDK.Communication {
- [Serializable]
+    [Serializable]
     public class CommPackage {
-     public int ComputationRequestId {
-         get;
-         set;
-     }
-        public String IntentAction { get; set; }
-        public String BackgroundProcessFunction { get; set; }
-        public String BackgroundProcessClass { get; set; }
-        public List<ParamListItem> ParameterList { get; set; }
-        public String ComputationResult { get; set; }
+        public int ComputationRequestId {
+            get;
+            set;
+        }
+        public String IntentAction {
+            get;
+            set;
+        }
+        public String BackgroundProcessFunction {
+            get;
+            set;
+        }
+        public String BackgroundProcessClass {
+            get;
+            set;
+        }
+        public List<ParamListItem> ParameterList {
+            get;
+            set;
+        }
+        public String ComputationResult {
+            get;
+            set;
+        }
+        public int ApplicationId {
+            get;
+            set;
+        }
         public DateTime ComputationStartTime {
             get;
             set;
@@ -37,15 +56,21 @@ namespace ComputeAndroidSDK.Communication {
         }
 
         public static CommPackage DeserializeJson(String json) {
-            
-            
+
+
             return JsonConvert.DeserializeObject<CommPackage>(json);
         }
 
         [Serializable]
         public class ParamListItem {
-            public String ParameterName { get; set; }
-            public Object ParameterValue { get; set; }
+            public String ParameterName {
+                get;
+                set;
+            }
+            public Object ParameterValue {
+                get;
+                set;
+            }
 
             public ParamListItem(String _paramName, Object _paramValue) {
                 this.ParameterName = _paramName;

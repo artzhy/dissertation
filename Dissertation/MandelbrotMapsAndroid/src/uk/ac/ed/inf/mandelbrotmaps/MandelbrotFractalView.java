@@ -141,10 +141,12 @@ public class MandelbrotFractalView extends AbstractFractalView{
 		final double pixelSize,
 		final boolean allowInterruption,  // Shall we abort if renderThread signals an abort?
 		final int threadID,
-		final int noOfThreads) {				
+		final int noOfThreads, 
+		final int maxIterations //MF
+		) {				
 			RenderThread callingThread = renderThreadList.get(threadID);
 		
-			int maxIterations = getMaxIterations();
+	//MF		int maxIterations = getMaxIterations();
 			int imgWidth = xPixelMax - xPixelMin;
 			
 			int xPixel = 0, yPixel = 0, yIncrement = 0, iterationNr = 0;

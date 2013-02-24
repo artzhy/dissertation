@@ -11,6 +11,7 @@
     <receiver android:enabled="true" android:exported="true" android:name="com.computeapps.testapp.IncomingReceiver">
       <intent-filter>
         <action android:name="com.ComputeApps.TestApp.Intents.ReceiveResult" />
+        <category android:name="android.intent.category.HOME" />
       </intent-filter>
     </receiver>
     <provider android:name="mono.MonoRuntimeProvider" android:exported="false" android:initOrder="2147483647" android:authorities="com.ComputeApps.TestApp.mono.MonoRuntimeProvider.__mono_init__" />

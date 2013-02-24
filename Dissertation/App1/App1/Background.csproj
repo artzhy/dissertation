@@ -55,13 +55,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Activity1.cs" />
-    <Compile Include="IncomingReceiver.cs" />
+    <Compile Include="Background\IncomingReceiver.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ResultPackage.cs" />
-    <Compile Include="WorkerClass.cs" />
-    <Compile Include="WorkList.cs" />
+    <Compile Include="Background\ResultPackage.cs" />
+    <Compile Include="Background\WorkerClass.cs" />
+    <Compile Include="Background\WorkList.cs" />
+    <Compile Include="UI\Activity1.cs" />
+    <Compile Include="UI\App.cs" />
+    <Compile Include="UI\IncomingReceiver.cs" />
+    <Compile Include="UI\WorkOrderList.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />

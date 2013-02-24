@@ -257,6 +257,9 @@ abstract class AbstractFractalView extends View {
 		// Don't bother showing render progress on little views
 		if(fractalViewSize == FractalViewSize.LITTLE) showRenderProgress = false;
 		
+		
+		//TODO: SEND THIS TO THE CLOUD
+		
 		computePixels(
 			pixelBlockSize,
 			showRenderProgress,
@@ -328,6 +331,7 @@ abstract class AbstractFractalView extends View {
 			renderQueueList.get(i).clear();
 			renderThreadList.get(i).abortRendering();
 		}
+		//TODO: Stop WOs
 	}
 	
 	
@@ -757,6 +761,7 @@ abstract class AbstractFractalView extends View {
 	public void interruptThreads(){
 		for (RenderThread thread : renderThreadList) {
 			thread.interrupt();
+			// TODO: cancel WOs
 		}
 	}
 	
@@ -790,6 +795,8 @@ abstract class AbstractFractalView extends View {
 		fractalPixels = new int[getWidth() * getHeight()];
 		clearPixelSizes();
 		canvasHome();
+		
+		//TODO: Cancel work orders
 		
 		//postInvalidate();
 	}

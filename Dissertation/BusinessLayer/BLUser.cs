@@ -49,7 +49,7 @@ namespace BusinessLayer {
                 errors = App.DbContext.GetValidationErrors();
             try {
                 App.DbContext.SaveChanges();
-            } catch {
+            } catch (Exception e) {
                 throw App.ExceptionFormatter(errors);
             }
             return u;

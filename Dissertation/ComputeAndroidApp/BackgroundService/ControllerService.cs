@@ -48,6 +48,21 @@ namespace ComputeAndroidApp.BackgroundService {
 
         }
 
+        public void RequestWorkOrderComputation(CommPackage cp) {
+            List<WorkOrderWS.CommPackageParamListItem> workOrderParams = new List<WorkOrderWS.CommPackageParamListItem>();
+
+            foreach (ComputeAndroidSDK.Communication.CommPackage.ParamListItem x in cp.ParameterList) {
+                workOrderParams.Add(new WorkOrderWS.CommPackageParamListItem() {
+                    ParameterNamek__BackingField = x.ParameterName,
+                    ParameterValuek__BackingField = x.ParameterValue
+                });
+
+            }
+
+            new WorkOrderWS.WorkOrderSvc().CreateWorkOrder(App.GetAuthToken(this), App.GetDeviceId(this), true, cp.ApplicationId, true, workOrderParams.ToArray<WorkOrderWS.CommPackageParamListItem>(), "ProcessRequest");
+
+        }
+
         public void ReceiveWorkOrderUpdateRequest(int workOrderId) {
             WorkOrderWS.WorkOrderTrimmed wo = new WorkOrderWS.WorkOrderSvc().GetWorkOrder(App.GetAuthToken(this), App.GetDeviceId(this), true, workOrderId, true);
            

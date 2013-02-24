@@ -107,8 +107,7 @@ namespace WorkOrderDistributor {
         }
 
         private int GetAvailableDevice(int workOrderId) {
-            //TODO: implement scheduling algo here to get slave work order id
-            return 6;
+            return BusinessLayer.Scheduler.GetAvailableSlave().DeviceId;
         }
 
         private void ProcessUpdatedWorkOrders() {
@@ -140,7 +139,6 @@ namespace WorkOrderDistributor {
                         // If device is handlin work order, notify device to cancel, and then mark cancelled in DB.
                         break;
                     case SharedClasses.WorkOrderUpdate.UpdateType.SubmitResult:
-                        // TODO: Impelment submit procedure
                         // Update database with result.
                         wo.SlaveWorkOrderLastCommunication = DateTime.Now;
                         wo.WorkOrderResultJson = wou.ResultJson;
@@ -150,23 +148,14 @@ namespace WorkOrderDistributor {
                         
                         wo.Save();
 
-                        //CommunicationPackage cp = new CommunicationPackage();
+                        // Send result to requesting device
 
-                        //cp.TargetDeviceId = wo.DeviceId;
-                        //cp.SubmitDate = DateTime.Now;
-                        //cp.WorkOrderId = wo.WorkOrderId;
-                        //cp.CommunicationType = (int)CommunicationPackage.UpdateType.NewWorkOrder;
-                        //cp.Save();
+                        CommunicationPackage cp = CommunicationPackage.CreateCommunication(wo.DeviceId, CommunicationPackage.UpdateType.Result, wo.WorkOrderId);
 
-                   //     CommunicationPackage cp = CommunicationPackage.CreateCommunication(wo.DeviceId, CommunicationPackage.UpdateType.Result, wo.WorkOrderId);
+                        CommunicationPackages.Send(new BrokeredMessage(cp.Serialize()));
+              
 
-                        // Queue result to be returned to device
-                        //CommunicationPackages.Send(new BrokeredMessage(cp.Serialize()));
-                      
-
-                        //CommunicationPackage cp = new CommunicationPackage(wo.WorkOrderId, CommunicationPackage.UpdateType.Result, wo.SlaveWorkerId, wo.StartComputationTime, wo.EndComputationTime, wo.DeviceId, wo.WorkOrderResultJson);
-
-               
+                        //TODO: Send new WO to the slave device
                         break;
 
                     case SharedClasses.WorkOrderUpdate.UpdateType.MarkBeingComputed:
@@ -193,8 +182,6 @@ namespace WorkOrderDistributor {
                 UserDevice targetUD = UserDevice.Populate(cp.TargetDeviceId);
 
                 Pusher.SendNotification(targetUD.GCMCode, cp.Serialize());
-
-               
 
                 commMessage.Complete();
 

@@ -44,6 +44,8 @@ namespace ComputeAndroidApp {
 
             // Update the device to have the gcm code
             new UserWS.UserSvc().ModifyUserDevice(App.GetAuthToken(context, App.GetUsername(context), App.GetPassword(context), App.GetDeviceId(context)), registrationId, App.GetDeviceId(context), true);
+
+            new UserWS.UserSvc().MarkDeviceActive(App.GetAuthToken(context), App.GetDeviceId(context), true);
         }
 
         protected override void OnUnRegistered(Context context, string registrationId) {
@@ -68,13 +70,14 @@ namespace ComputeAndroidApp {
 
             UpdateType ut = (UpdateType)int.Parse(intent.Extras.Get("CommunicationType").ToString());
             String workOrderId = intent.Extras.Get("WorkOrderId").ToString();
+            int commId = int.Parse(intent.Extras.Get("CommunicationId").ToString());
+
+            new WorkOrderWS.WorkOrderSvc().AcknowledgeCommunication(App.GetAuthToken(context), commId, true, DateTime.Now, true);
 
             if (ut == UpdateType.NewWorkOrder) {
-                //TODO: Acnowledge receipt of message
                 App.GetServiceBinder().GetService().AddSlaveWorkItem(int.Parse(workOrderId));
 
             } else if (ut == UpdateType.Result) {
-                //TODO: Acnowledge receipt of message
                   App.GetServiceBinder().GetService().ReceiveWorkOrderResult(int.Parse(workOrderId));
 
                 

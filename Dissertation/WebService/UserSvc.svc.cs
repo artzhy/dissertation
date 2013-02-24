@@ -30,14 +30,14 @@ namespace WebService {
 
         public BusinessLayer.UserDevice AddUserDeviceNoGCMCode(String at, String username, string deviceType, int deviceMemoryResource, int deviceProcRating) {
 
-            AuthenticationToken oAt = new AuthSvc().AuthUser(at);
+            //TODO: Fix auth here
+//            AuthenticationToken oAt = new AuthSvc().AuthUser(at);
 
             return BusinessLayer.UserDevice.AddUserDevice(username, deviceType, deviceMemoryResource, deviceProcRating);
         }
 
 
         public BusinessLayer.UserDevice AddUserDevice(String at, string deviceType, int deviceMemoryResource, int deviceProcRating, String gcmCode = "") {
-
             AuthenticationToken oAt = new AuthSvc().AuthUser(at);
 
 

@@ -10,6 +10,7 @@
         <xs:element minOccurs="0" name="deviceId" type="xs:int" />
         <xs:element minOccurs="0" name="applicationId" type="xs:int" />
         <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/SharedClasses" minOccurs="0" name="paramList" nillable="true" type="q1:ArrayOfCommPackage.ParamListItem" />
+        <xs:element minOccurs="0" name="backgroundProcessFunction" nillable="true" type="xs:string" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -87,6 +88,20 @@
     </xs:complexType>
   </xs:element>
   <xs:element name="MarkWorkOrderInComputationResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="AcknowledgeCommunication">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="at" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="communicationId" type="xs:int" />
+        <xs:element minOccurs="0" name="recieveTime" type="xs:dateTime" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="AcknowledgeCommunicationResponse">
     <xs:complexType>
       <xs:sequence />
     </xs:complexType>

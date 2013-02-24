@@ -42,6 +42,8 @@ namespace ComputeAndroidApp.WorkOrderWS {
         
         private System.Threading.SendOrPostCallback MarkWorkOrderInComputationOperationCompleted;
         
+        private System.Threading.SendOrPostCallback AcknowledgeCommunicationOperationCompleted;
+        
         private bool useDefaultCredentialsSetExplicitly;
         
         /// <remarks/>
@@ -99,26 +101,30 @@ namespace ComputeAndroidApp.WorkOrderWS {
         public event MarkWorkOrderInComputationCompletedEventHandler MarkWorkOrderInComputationCompleted;
         
         /// <remarks/>
+        public event AcknowledgeCommunicationCompletedEventHandler AcknowledgeCommunicationCompleted;
+        
+        /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/IWorkOrderSvc/CreateWorkOrder", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
         [return: System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public WorkOrder CreateWorkOrder([System.Xml.Serialization.XmlElementAttribute(IsNullable=true)] string at, int deviceId, [System.Xml.Serialization.XmlIgnoreAttribute()] bool deviceIdSpecified, int applicationId, [System.Xml.Serialization.XmlIgnoreAttribute()] bool applicationIdSpecified, [System.Xml.Serialization.XmlArrayAttribute(IsNullable=true)] [System.Xml.Serialization.XmlArrayItemAttribute(Namespace="http://schemas.datacontract.org/2004/07/SharedClasses")] CommPackageParamListItem[] paramList) {
+        public WorkOrder CreateWorkOrder([System.Xml.Serialization.XmlElementAttribute(IsNullable=true)] string at, int deviceId, [System.Xml.Serialization.XmlIgnoreAttribute()] bool deviceIdSpecified, int applicationId, [System.Xml.Serialization.XmlIgnoreAttribute()] bool applicationIdSpecified, [System.Xml.Serialization.XmlArrayAttribute(IsNullable=true)] [System.Xml.Serialization.XmlArrayItemAttribute(Namespace="http://schemas.datacontract.org/2004/07/SharedClasses")] CommPackageParamListItem[] paramList, [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)] string backgroundProcessFunction) {
             object[] results = this.Invoke("CreateWorkOrder", new object[] {
                         at,
                         deviceId,
                         deviceIdSpecified,
                         applicationId,
                         applicationIdSpecified,
-                        paramList});
+                        paramList,
+                        backgroundProcessFunction});
             return ((WorkOrder)(results[0]));
         }
         
         /// <remarks/>
-        public void CreateWorkOrderAsync(string at, int deviceId, bool deviceIdSpecified, int applicationId, bool applicationIdSpecified, CommPackageParamListItem[] paramList) {
-            this.CreateWorkOrderAsync(at, deviceId, deviceIdSpecified, applicationId, applicationIdSpecified, paramList, null);
+        public void CreateWorkOrderAsync(string at, int deviceId, bool deviceIdSpecified, int applicationId, bool applicationIdSpecified, CommPackageParamListItem[] paramList, string backgroundProcessFunction) {
+            this.CreateWorkOrderAsync(at, deviceId, deviceIdSpecified, applicationId, applicationIdSpecified, paramList, backgroundProcessFunction, null);
         }
         
         /// <remarks/>
-        public void CreateWorkOrderAsync(string at, int deviceId, bool deviceIdSpecified, int applicationId, bool applicationIdSpecified, CommPackageParamListItem[] paramList, object userState) {
+        public void CreateWorkOrderAsync(string at, int deviceId, bool deviceIdSpecified, int applicationId, bool applicationIdSpecified, CommPackageParamListItem[] paramList, string backgroundProcessFunction, object userState) {
             if ((this.CreateWorkOrderOperationCompleted == null)) {
                 this.CreateWorkOrderOperationCompleted = new System.Threading.SendOrPostCallback(this.OnCreateWorkOrderOperationCompleted);
             }
@@ -128,7 +134,8 @@ namespace ComputeAndroidApp.WorkOrderWS {
                         deviceIdSpecified,
                         applicationId,
                         applicationIdSpecified,
-                        paramList}, this.CreateWorkOrderOperationCompleted, userState);
+                        paramList,
+                        backgroundProcessFunction}, this.CreateWorkOrderOperationCompleted, userState);
         }
         
         private void OnCreateWorkOrderOperationCompleted(object arg) {
@@ -315,6 +322,42 @@ namespace ComputeAndroidApp.WorkOrderWS {
         }
         
         /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/IWorkOrderSvc/AcknowledgeCommunication", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public void AcknowledgeCommunication([System.Xml.Serialization.XmlElementAttribute(IsNullable=true)] string at, int communicationId, [System.Xml.Serialization.XmlIgnoreAttribute()] bool communicationIdSpecified, System.DateTime recieveTime, [System.Xml.Serialization.XmlIgnoreAttribute()] bool recieveTimeSpecified) {
+            this.Invoke("AcknowledgeCommunication", new object[] {
+                        at,
+                        communicationId,
+                        communicationIdSpecified,
+                        recieveTime,
+                        recieveTimeSpecified});
+        }
+        
+        /// <remarks/>
+        public void AcknowledgeCommunicationAsync(string at, int communicationId, bool communicationIdSpecified, System.DateTime recieveTime, bool recieveTimeSpecified) {
+            this.AcknowledgeCommunicationAsync(at, communicationId, communicationIdSpecified, recieveTime, recieveTimeSpecified, null);
+        }
+        
+        /// <remarks/>
+        public void AcknowledgeCommunicationAsync(string at, int communicationId, bool communicationIdSpecified, System.DateTime recieveTime, bool recieveTimeSpecified, object userState) {
+            if ((this.AcknowledgeCommunicationOperationCompleted == null)) {
+                this.AcknowledgeCommunicationOperationCompleted = new System.Threading.SendOrPostCallback(this.OnAcknowledgeCommunicationOperationCompleted);
+            }
+            this.InvokeAsync("AcknowledgeCommunication", new object[] {
+                        at,
+                        communicationId,
+                        communicationIdSpecified,
+                        recieveTime,
+                        recieveTimeSpecified}, this.AcknowledgeCommunicationOperationCompleted, userState);
+        }
+        
+        private void OnAcknowledgeCommunicationOperationCompleted(object arg) {
+            if ((this.AcknowledgeCommunicationCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.AcknowledgeCommunicationCompleted(this, new System.ComponentModel.AsyncCompletedEventArgs(invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
         public new void CancelAsync(object userState) {
             base.CancelAsync(userState);
         }
@@ -364,6 +407,184 @@ namespace ComputeAndroidApp.WorkOrderWS {
             }
             set {
                 this.parameterValuek__BackingFieldField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.18034")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.datacontract.org/2004/07/WebService")]
+    public partial class WorkOrderTrimmed {
+        
+        private int applicationIdk__BackingFieldField;
+        
+        private string applicationUIResultIntentk__BackingFieldField;
+        
+        private string commPackageJsonk__BackingFieldField;
+        
+        private string computeAppIntentk__BackingFieldField;
+        
+        private int deviceIdk__BackingFieldField;
+        
+        private string deviceUIRefk__BackingFieldField;
+        
+        private System.DateTime receiveTimek__BackingFieldField;
+        
+        private System.Nullable<System.DateTime> slaveWorkOrderLastCommunicationk__BackingFieldField;
+        
+        private System.Nullable<int> slaveWorkerIdk__BackingFieldField;
+        
+        private System.Nullable<System.DateTime> slaveWorkerSubmitk__BackingFieldField;
+        
+        private int workOrderIdk__BackingFieldField;
+        
+        private string workOrderResultJsonk__BackingFieldField;
+        
+        private string workOrderStatusk__BackingFieldField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("<ApplicationId>k__BackingField")]
+        public int ApplicationIdk__BackingField {
+            get {
+                return this.applicationIdk__BackingFieldField;
+            }
+            set {
+                this.applicationIdk__BackingFieldField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("<ApplicationUIResultIntent>k__BackingField", IsNullable=true)]
+        public string ApplicationUIResultIntentk__BackingField {
+            get {
+                return this.applicationUIResultIntentk__BackingFieldField;
+            }
+            set {
+                this.applicationUIResultIntentk__BackingFieldField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("<CommPackageJson>k__BackingField", IsNullable=true)]
+        public string CommPackageJsonk__BackingField {
+            get {
+                return this.commPackageJsonk__BackingFieldField;
+            }
+            set {
+                this.commPackageJsonk__BackingFieldField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("<ComputeAppIntent>k__BackingField", IsNullable=true)]
+        public string ComputeAppIntentk__BackingField {
+            get {
+                return this.computeAppIntentk__BackingFieldField;
+            }
+            set {
+                this.computeAppIntentk__BackingFieldField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("<DeviceId>k__BackingField")]
+        public int DeviceIdk__BackingField {
+            get {
+                return this.deviceIdk__BackingFieldField;
+            }
+            set {
+                this.deviceIdk__BackingFieldField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("<DeviceUIRef>k__BackingField", IsNullable=true)]
+        public string DeviceUIRefk__BackingField {
+            get {
+                return this.deviceUIRefk__BackingFieldField;
+            }
+            set {
+                this.deviceUIRefk__BackingFieldField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("<ReceiveTime>k__BackingField")]
+        public System.DateTime ReceiveTimek__BackingField {
+            get {
+                return this.receiveTimek__BackingFieldField;
+            }
+            set {
+                this.receiveTimek__BackingFieldField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("<SlaveWorkOrderLastCommunication>k__BackingField", IsNullable=true)]
+        public System.Nullable<System.DateTime> SlaveWorkOrderLastCommunicationk__BackingField {
+            get {
+                return this.slaveWorkOrderLastCommunicationk__BackingFieldField;
+            }
+            set {
+                this.slaveWorkOrderLastCommunicationk__BackingFieldField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("<SlaveWorkerId>k__BackingField", IsNullable=true)]
+        public System.Nullable<int> SlaveWorkerIdk__BackingField {
+            get {
+                return this.slaveWorkerIdk__BackingFieldField;
+            }
+            set {
+                this.slaveWorkerIdk__BackingFieldField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("<SlaveWorkerSubmit>k__BackingField", IsNullable=true)]
+        public System.Nullable<System.DateTime> SlaveWorkerSubmitk__BackingField {
+            get {
+                return this.slaveWorkerSubmitk__BackingFieldField;
+            }
+            set {
+                this.slaveWorkerSubmitk__BackingFieldField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("<WorkOrderId>k__BackingField")]
+        public int WorkOrderIdk__BackingField {
+            get {
+                return this.workOrderIdk__BackingFieldField;
+            }
+            set {
+                this.workOrderIdk__BackingFieldField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("<WorkOrderResultJson>k__BackingField", IsNullable=true)]
+        public string WorkOrderResultJsonk__BackingField {
+            get {
+                return this.workOrderResultJsonk__BackingFieldField;
+            }
+            set {
+                this.workOrderResultJsonk__BackingFieldField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("<WorkOrderStatus>k__BackingField", IsNullable=true)]
+        public string WorkOrderStatusk__BackingField {
+            get {
+                return this.workOrderStatusk__BackingFieldField;
+            }
+            set {
+                this.workOrderStatusk__BackingFieldField = value;
             }
         }
     }
@@ -1451,184 +1672,6 @@ namespace ComputeAndroidApp.WorkOrderWS {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.18034")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.datacontract.org/2004/07/WebService")]
-    public partial class WorkOrderTrimmed {
-        
-        private int applicationIdk__BackingFieldField;
-        
-        private string applicationUIResultIntentk__BackingFieldField;
-        
-        private string commPackageJsonk__BackingFieldField;
-        
-        private string computeAppIntentk__BackingFieldField;
-        
-        private int deviceIdk__BackingFieldField;
-        
-        private string deviceUIRefk__BackingFieldField;
-        
-        private System.DateTime receiveTimek__BackingFieldField;
-        
-        private System.Nullable<System.DateTime> slaveWorkOrderLastCommunicationk__BackingFieldField;
-        
-        private System.Nullable<int> slaveWorkerIdk__BackingFieldField;
-        
-        private System.Nullable<System.DateTime> slaveWorkerSubmitk__BackingFieldField;
-        
-        private int workOrderIdk__BackingFieldField;
-        
-        private string workOrderResultJsonk__BackingFieldField;
-        
-        private string workOrderStatusk__BackingFieldField;
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("<ApplicationId>k__BackingField")]
-        public int ApplicationIdk__BackingField {
-            get {
-                return this.applicationIdk__BackingFieldField;
-            }
-            set {
-                this.applicationIdk__BackingFieldField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("<ApplicationUIResultIntent>k__BackingField", IsNullable=true)]
-        public string ApplicationUIResultIntentk__BackingField {
-            get {
-                return this.applicationUIResultIntentk__BackingFieldField;
-            }
-            set {
-                this.applicationUIResultIntentk__BackingFieldField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("<CommPackageJson>k__BackingField", IsNullable=true)]
-        public string CommPackageJsonk__BackingField {
-            get {
-                return this.commPackageJsonk__BackingFieldField;
-            }
-            set {
-                this.commPackageJsonk__BackingFieldField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("<ComputeAppIntent>k__BackingField", IsNullable=true)]
-        public string ComputeAppIntentk__BackingField {
-            get {
-                return this.computeAppIntentk__BackingFieldField;
-            }
-            set {
-                this.computeAppIntentk__BackingFieldField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("<DeviceId>k__BackingField")]
-        public int DeviceIdk__BackingField {
-            get {
-                return this.deviceIdk__BackingFieldField;
-            }
-            set {
-                this.deviceIdk__BackingFieldField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("<DeviceUIRef>k__BackingField", IsNullable=true)]
-        public string DeviceUIRefk__BackingField {
-            get {
-                return this.deviceUIRefk__BackingFieldField;
-            }
-            set {
-                this.deviceUIRefk__BackingFieldField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("<ReceiveTime>k__BackingField")]
-        public System.DateTime ReceiveTimek__BackingField {
-            get {
-                return this.receiveTimek__BackingFieldField;
-            }
-            set {
-                this.receiveTimek__BackingFieldField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("<SlaveWorkOrderLastCommunication>k__BackingField", IsNullable=true)]
-        public System.Nullable<System.DateTime> SlaveWorkOrderLastCommunicationk__BackingField {
-            get {
-                return this.slaveWorkOrderLastCommunicationk__BackingFieldField;
-            }
-            set {
-                this.slaveWorkOrderLastCommunicationk__BackingFieldField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("<SlaveWorkerId>k__BackingField", IsNullable=true)]
-        public System.Nullable<int> SlaveWorkerIdk__BackingField {
-            get {
-                return this.slaveWorkerIdk__BackingFieldField;
-            }
-            set {
-                this.slaveWorkerIdk__BackingFieldField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("<SlaveWorkerSubmit>k__BackingField", IsNullable=true)]
-        public System.Nullable<System.DateTime> SlaveWorkerSubmitk__BackingField {
-            get {
-                return this.slaveWorkerSubmitk__BackingFieldField;
-            }
-            set {
-                this.slaveWorkerSubmitk__BackingFieldField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("<WorkOrderId>k__BackingField")]
-        public int WorkOrderIdk__BackingField {
-            get {
-                return this.workOrderIdk__BackingFieldField;
-            }
-            set {
-                this.workOrderIdk__BackingFieldField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("<WorkOrderResultJson>k__BackingField", IsNullable=true)]
-        public string WorkOrderResultJsonk__BackingField {
-            get {
-                return this.workOrderResultJsonk__BackingFieldField;
-            }
-            set {
-                this.workOrderResultJsonk__BackingFieldField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("<WorkOrderStatus>k__BackingField", IsNullable=true)]
-        public string WorkOrderStatusk__BackingField {
-            get {
-                return this.workOrderStatusk__BackingFieldField;
-            }
-            set {
-                this.workOrderStatusk__BackingFieldField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.17929")]
     public delegate void CreateWorkOrderCompletedEventHandler(object sender, CreateWorkOrderCompletedEventArgs e);
     
@@ -1695,6 +1738,10 @@ namespace ComputeAndroidApp.WorkOrderWS {
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.17929")]
     public delegate void MarkWorkOrderInComputationCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.17929")]
+    public delegate void AcknowledgeCommunicationCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
 }
 
 #pragma warning restore 1591
