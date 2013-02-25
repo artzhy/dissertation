@@ -14,6 +14,7 @@ using Android.Util;
 
 using Newtonsoft.Json;
 using ComputeAndroidSDK.Communication;
+using System.Threading;
 
 
 namespace ComputeAndroidApp.BackgroundService {
@@ -48,19 +49,20 @@ namespace ComputeAndroidApp.BackgroundService {
 
         }
 
-        public void RequestWorkOrderComputation(CommPackage cp) {
-            List<WorkOrderWS.CommPackageParamListItem> workOrderParams = new List<WorkOrderWS.CommPackageParamListItem>();
 
-            foreach (ComputeAndroidSDK.Communication.CommPackage.ParamListItem x in cp.ParameterList) {
-                workOrderParams.Add(new WorkOrderWS.CommPackageParamListItem() {
-                    ParameterNamek__BackingField = x.ParameterName,
-                    ParameterValuek__BackingField = x.ParameterValue
-                });
 
+        public void RequestWorkOrderComputation(object o) {
+
+            Intent i = (Intent)o;
+            String a = i.GetStringExtra("CommPackage");
+            ComputeAndroidSDK.Communication.CommPackage cp = ComputeAndroidSDK.Communication.CommPackage.DeserializeJson(a);
+
+
+            try {
+                new WorkOrderWS.WorkOrderSvc().CreateWorkOrder(App.GetAuthToken(this), App.GetDeviceId(this), true, cp.ApplicationId, true, cp.SerializeParamList(), "ProcessRequest");
+            } catch (Exception e) {
+                Log.Error("RequestWorkOrderComputation", e.Message);
             }
-
-            new WorkOrderWS.WorkOrderSvc().CreateWorkOrder(App.GetAuthToken(this), App.GetDeviceId(this), true, cp.ApplicationId, true, workOrderParams.ToArray<WorkOrderWS.CommPackageParamListItem>(), "ProcessRequest");
-
         }
 
         public void ReceiveWorkOrderUpdateRequest(int workOrderId) {
@@ -122,7 +124,10 @@ namespace ComputeAndroidApp.BackgroundService {
             base.OnDestroy();
 
            
-        } 
+        }
+
+
+
     }
 
  

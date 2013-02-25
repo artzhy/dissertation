@@ -49,9 +49,15 @@ namespace SharedClasses {
             return JsonConvert.SerializeObject(this);
         }
 
+        public String SerializeParamList() {
+            return JsonConvert.SerializeObject(ParameterList);
+        }
+
+        public static List<ParamListItem> DeserializeParamJson(String json) {
+            return JsonConvert.DeserializeObject<List<ParamListItem>>(json);
+        }
+
         public static CommPackage DeserializeJson(String json) {
-
-
             return JsonConvert.DeserializeObject<CommPackage>(json);
         }
 

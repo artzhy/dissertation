@@ -34,6 +34,8 @@ namespace ComputeAndroidApp {
 
         public override void OnCreate() {
             base.OnCreate();
+      //      StrictMode.SetThreadPolicy(new StrictMode.ThreadPolicy.Builder().PermitAll().Build());
+
 
             ApplicationContext.StartService(new Intent(ApplicationContext, typeof(BackgroundService.ControllerService)));
             BindControllerService();

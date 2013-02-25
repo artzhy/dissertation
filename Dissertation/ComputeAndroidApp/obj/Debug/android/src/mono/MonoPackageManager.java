@@ -68,8 +68,8 @@ class MonoPackageManager_Resources {
 	public static final String[] Assemblies = new String[]{
 		"ComputeAndroidApp.dll",
 		"PushSharp.Client.MonoForAndroid.dll",
-		"SharedDevClasses.dll",
 		"Newtonsoft.Json.MonoDroid.dll",
+		"SharedDevClasses.dll",
 	};
 	public static final String[] Dependencies = new String[]{
 	};

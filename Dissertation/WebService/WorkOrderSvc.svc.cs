@@ -14,14 +14,14 @@ using SharedClasses;
 namespace WebService {
     public class WorkOrderSvc : IWorkOrderSvc {
         
-        public BusinessLayer.WorkOrder CreateWorkOrder(String at, int deviceId, int applicationId, List<SharedClasses.CommPackage.ParamListItem> paramList, String backgroundProcessFunction) {
+        public BusinessLayer.WorkOrder CreateWorkOrder(String at, int deviceId, int applicationId, String paramListJson, String backgroundProcessFunction) {
             new AuthSvc().AuthUser(at, -1, deviceId);
 
             BusinessLayer.WorkApplication wa = BusinessLayer.WorkApplication.Populate(applicationId);
            CommPackage cp = new CommPackage();
            cp.BackgroundProcessClass = "";
            cp.BackgroundProcessFunction = backgroundProcessFunction;
-           cp.ParameterList = paramList;
+           cp.ParameterList = CommPackage.DeserializeParamJson(paramListJson);
            cp.DeviceUIRef = wa.ApplicationUIResultIntent;
            
 

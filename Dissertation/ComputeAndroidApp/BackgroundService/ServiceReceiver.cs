@@ -10,6 +10,8 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using Android.Util;
+using System.Threading;
+using Java.Lang;
 
 namespace ComputeAndroidApp.BackgroundService {
     [BroadcastReceiver]
@@ -20,9 +22,6 @@ namespace ComputeAndroidApp.BackgroundService {
         public override void OnReceive(Context context, Intent intent) {
            //TODO: Perhaps handle low battery and such like.
 
-            //TODO: HACK
-            Android.OS.StrictMode.ThreadPolicy oldThreadPolicy = StrictMode.GetThreadPolicy();
-            StrictMode.SetThreadPolicy(new StrictMode.ThreadPolicy.Builder(oldThreadPolicy).PermitNetwork().PermitDiskReads().PermitDiskWrites().Build());
 
             if (intent.Action == Android.Content.Intent.ActionBootCompleted) {
                 //TODO: Check apps are installed and notify cloud that device is on
@@ -47,16 +46,23 @@ namespace ComputeAndroidApp.BackgroundService {
 
             } else if (intent.Action == ComputeAndroidSDK.Communication.Constants.REQUEST_WORK_ORDER_INTENT) {
 
-                
+                System.Threading.Thread oThread = new System.Threading.Thread(new ParameterizedThreadStart(App.GetServiceBinder().GetService().RequestWorkOrderComputation));
 
-              ComputeAndroidSDK.Communication.CommPackage cp = ComputeAndroidSDK.Communication.CommPackage.DeserializeJson(intent.GetStringExtra("CommPackage"));
+                oThread.Start(intent);
+               // App.GetServiceBinder().GetService().RequestWorkOrderComputation(intent);
 
-              App.GetServiceBinder().GetService().RequestWorkOrderComputation(cp);
+                int test = 1;
 
-             
+                int testtwo = test + 1;
+
+              //  String cpString = intent.GetStringExtra("CommPackage");
+                //TODO: HACK
+
+               
+    
             }
 
-            StrictMode.SetThreadPolicy(oldThreadPolicy);
+            
         }
     }
 }

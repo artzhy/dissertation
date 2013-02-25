@@ -23,7 +23,7 @@ namespace WorkOrderDistributor {
         const string UpdatedWorkOrersQName = "updatedworkorders";
         const string CommunicationPackagesQName = "communicationpackages";
         private PushCommunicator.Pusher Pusher;
-
+        private DateTime PackageSweepLastDone;
 
         // QueueClient is thread-safe. Recommended that you cache 
         // rather than recreating it on every request
@@ -32,8 +32,17 @@ namespace WorkOrderDistributor {
         QueueClient CommunicationPackages;
         List<Task> TaskList;
 
-
         bool IsStopped;
+
+
+        public enum UpdateType {
+            Result,
+            UpdateRequest,
+            Error,
+            NewWorkOrder,
+            Cancel
+        }
+
 
         public override void Run() {
             while (!IsStopped) {
@@ -48,6 +57,11 @@ namespace WorkOrderDistributor {
                         TaskList.Add(taskProcessUpdates);
                         var taskProcessCommunicate = Task.Factory.StartNew(() => ProcessCommunications());
                         TaskList.Add(taskProcessCommunicate);
+
+                        if (DateTime.Now.AddSeconds(-45) <= PackageSweepLastDone) {
+                            var taskDoPackageSweep = Task.Factory.StartNew(() => DoCommPackageSweep());
+                            TaskList.Add(taskDoPackageSweep);
+                        }
                     } else {
                         Task.WaitAny(TaskList.ToArray());
                     }
@@ -66,6 +80,28 @@ namespace WorkOrderDistributor {
                     }
                 }
             }
+        }
+
+        private void DoCommPackageSweep() {
+            List<CommunicationPackage> unAckedPackages = Scheduler.GetUnacknowledgedPackages(45);
+            
+            foreach (CommunicationPackage pkg in unAckedPackages) {
+                // If new WO/update request, re-schedule WO
+                if ((UpdateType)pkg.CommunicationType == UpdateType.NewWorkOrder || (UpdateType)pkg.CommunicationType == UpdateType.UpdateRequest) {
+
+
+
+
+                // If result/cancel, re-send package
+                } else if ((UpdateType)pkg.CommunicationType == UpdateType.Result || (UpdateType)pkg.CommunicationType == UpdateType.Cancel) {
+
+
+
+                }
+            }
+
+
+
         }
 
         private void RemoveCompletedTasks() {
@@ -214,7 +250,7 @@ namespace WorkOrderDistributor {
             UpdatedWorkOrders = QueueClient.CreateFromConnectionString(connectionString, UpdatedWorkOrersQName);
             CommunicationPackages = QueueClient.CreateFromConnectionString(connectionString, CommunicationPackagesQName);
             Pusher = new PushCommunicator.Pusher();
-
+            PackageSweepLastDone = DateTime.Now.AddSeconds(-60);
 
             TaskList = new List<Task>();
 

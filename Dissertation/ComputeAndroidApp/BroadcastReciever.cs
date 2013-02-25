@@ -62,7 +62,8 @@ namespace ComputeAndroidApp {
             Result,
             UpdateRequest,
             Error,
-            NewWorkOrder
+            NewWorkOrder,
+            Cancel
         }
 
         protected override void OnMessage(Context context, Intent intent) {
@@ -79,13 +80,13 @@ namespace ComputeAndroidApp {
 
             } else if (ut == UpdateType.Result) {
                   App.GetServiceBinder().GetService().ReceiveWorkOrderResult(int.Parse(workOrderId));
-
-                
-
             } else if (ut == UpdateType.UpdateRequest) {
                 //TODO: Handle update request
 
                 // Speak to background portion of UI
+
+            } else if (ut == UpdateType.Cancel) {
+                //TODO: Handle cancel request
 
             }
 

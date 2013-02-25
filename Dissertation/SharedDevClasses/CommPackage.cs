@@ -51,6 +51,14 @@ namespace ComputeAndroidSDK.Communication {
             set;
         }
 
+        public String SerializeParamList() {
+            return JsonConvert.SerializeObject(ParameterList);
+        }
+
+        public static List<ParamListItem> DeserializeParamJson(String json) {
+            return JsonConvert.DeserializeObject<List<ParamListItem>>(json);
+        }
+
         public String SerializeJson() {
             return JsonConvert.SerializeObject(this);
         }
