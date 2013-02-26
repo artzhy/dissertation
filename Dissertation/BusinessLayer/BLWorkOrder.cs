@@ -16,7 +16,7 @@ namespace BusinessLayer {
                 WorkOrder wo = (from x in App.DbContext.WorkOrders
                         where x.WorkOrderId == workOrderId
                         select x).First();
-             //   App.DbContext.Configuration.ProxyCreationEnabled = true;
+               //App.DbContext.Configuration.ProxyCreationEnabled = true;
                 return wo;
             } catch (Exception ex) {
                 throw ex;
@@ -24,13 +24,14 @@ namespace BusinessLayer {
 
         }
 
-        public static WorkOrder CreateWorkOrder(int deviceId, int applicationId) {
+        public static WorkOrder CreateWorkOrder(int deviceId, int applicationId, int localDeviceRef) {
 
             WorkOrder wo = new WorkOrder();
             wo.DeviceId = deviceId;
             wo.ApplicationId = applicationId;
             wo.ReceiveTime = DateTime.Now;
             wo.CommPackageJson = "";
+            wo.LocalDeviceId = localDeviceRef;
  
 
             wo = App.DbContext.WorkOrders.Add(wo);

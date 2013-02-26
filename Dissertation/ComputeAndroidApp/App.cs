@@ -24,6 +24,8 @@ namespace ComputeAndroidApp {
         private static Boolean _binderSet;
         public static BackgroundService.ServiceConnection sc;
         private static String _authToken;
+        private static DateTime _lastTransmitCloud;
+
 
         #endregion
 
@@ -79,6 +81,14 @@ namespace ComputeAndroidApp {
         #endregion
 
         #region "Device Functions"
+
+        public static void UpdateLastTransmit() {
+            _lastTransmitCloud = DateTime.Now;
+        }
+
+        public static DateTime GetLastTransmit() {
+            return _lastTransmitCloud;
+        }
 
         /// <summary>
         ///  

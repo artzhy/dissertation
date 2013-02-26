@@ -23,20 +23,22 @@ namespace com.ComputeApps.MandelbrotApp {
         }
 
         public static void SubmitNewWorkOrder(CommPackage cp) {
+            //TODO: This needs to be changed, leave as is just now - low priority!
+            cp.DeviceLocalRequestId = new Random().Next(1, 9999999)+(int)DateTime.Now.Ticks;
             CommunicationPackages.Add(cp);
 
             // Send to controller.
 
             Intent submitIntent = new Intent(ComputeAndroidSDK.Communication.Constants.REQUEST_WORK_ORDER_INTENT);
-            submitIntent.Extras.PutString("CommPackage", cp.SerializeJson());
-            ApplicationContext.SendBroadcast(submitIntent);
+            submitIntent.PutExtra("CommPackage", cp.SerializeJson());
+            App.Context.SendBroadcast(submitIntent);
            
         }
 
         public static void SubmitWorkOrderResult(WorkOrderTrimmed wo) {
             try {   
                 CommPackage cp = (from x in CommunicationPackages
-                                  where wo.DeviceUIRef == x.DeviceUIRef
+                                  where wo.DeviceLocalRequestId == x.DeviceLocalRequestId
                                   select x).Single();
 
                 CommunicationPackages.Remove(cp);

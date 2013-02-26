@@ -14,10 +14,7 @@ namespace WebService {
                 ad.LastActiveSend = DateTime.Now;
                 ad.Save();
             } else {
-                ActiveDevice ad = new ActiveDevice();
-                ad.DeviceId = deviceId;
-                ad.LastActiveSend = DateTime.Now;
-                ad.Save();
+                ActiveDevice.CreateActiveDevice(deviceId);
             }
 
         }

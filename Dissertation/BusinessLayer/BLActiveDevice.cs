@@ -10,11 +10,11 @@ namespace BusinessLayer {
 
         public static ActiveDevice Populate(int deviceId) {
             try {
+            
                 ActiveDevice ad = (from x in App.DbContext.ActiveDevices
                                    where x.DeviceId == deviceId
                                    select x).First();
-
-                return ad;
+                 return ad;
             } catch {
                 throw new Exception("Device not active");
             }

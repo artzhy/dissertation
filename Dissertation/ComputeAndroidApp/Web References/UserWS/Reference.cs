@@ -1158,6 +1158,10 @@ namespace ComputeAndroidApp.UserWS {
         
         private string responsek__BackingFieldField;
         
+        private int sendAttemptsk__BackingFieldField;
+        
+        private string statusk__BackingFieldField;
+        
         private System.DateTime submitDatek__BackingFieldField;
         
         private int targetDeviceIdk__BackingFieldField;
@@ -1205,6 +1209,28 @@ namespace ComputeAndroidApp.UserWS {
             }
             set {
                 this.responsek__BackingFieldField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("<SendAttempts>k__BackingField")]
+        public int SendAttemptsk__BackingField {
+            get {
+                return this.sendAttemptsk__BackingFieldField;
+            }
+            set {
+                this.sendAttemptsk__BackingFieldField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("<Status>k__BackingField", IsNullable=true)]
+        public string Statusk__BackingField {
+            get {
+                return this.statusk__BackingFieldField;
+            }
+            set {
+                this.statusk__BackingFieldField = value;
             }
         }
         

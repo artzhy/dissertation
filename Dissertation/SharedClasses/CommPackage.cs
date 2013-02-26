@@ -11,6 +11,12 @@ namespace SharedClasses {
             get;
             set;
         }
+
+        public int DeviceLocalRequestId {
+            get;
+            set;
+        }
+
         public String IntentAction {
             get;
             set;

@@ -40,7 +40,7 @@ namespace ComputeAndroidApp.BackgroundService {
         public void ReceiveWorkOrderResult(int workOrderId) {
             WorkOrderWS.WorkOrderTrimmed wo = new WorkOrderWS.WorkOrderSvc().GetWorkOrder(App.GetAuthToken(this), App.GetDeviceId(this), true, workOrderId, true);
 
-            // TODO: Send to listener (intent attached to application)
+            // Send to listener (intent attached to application)
             Intent newIntent = new Intent(wo.ApplicationUIResultIntentk__BackingField);
 
             newIntent.PutExtra("WorkOrderTrimmed", JsonConvert.SerializeObject(wo));
@@ -59,7 +59,7 @@ namespace ComputeAndroidApp.BackgroundService {
 
 
             try {
-                new WorkOrderWS.WorkOrderSvc().CreateWorkOrder(App.GetAuthToken(this), App.GetDeviceId(this), true, cp.ApplicationId, true, cp.SerializeParamList(), "ProcessRequest");
+                new WorkOrderWS.WorkOrderSvc().CreateWorkOrder(App.GetAuthToken(this), App.GetDeviceId(this), true, cp.ApplicationId, true, cp.SerializeParamList(), "ProcessRequest", cp.DeviceLocalRequestId, true);
             } catch (Exception e) {
                 Log.Error("RequestWorkOrderComputation", e.Message);
             }
@@ -78,6 +78,7 @@ namespace ComputeAndroidApp.BackgroundService {
 
             // Acknowledge it
             new WorkOrderWS.WorkOrderSvc().AcknowledgeWorkOrder(App.GetAuthToken(this), workOrderId, true);
+            App.UpdateLastTransmit();
             // Submit comm package to Background service
 
             Intent doWork = new Intent();
@@ -113,6 +114,22 @@ namespace ComputeAndroidApp.BackgroundService {
 
             SlaveWorkItems = new List<WorkOrderWS.WorkOrderTrimmed>();
 
+            System.Threading.Thread oThread = new System.Threading.Thread(new ThreadStart(ContinuallyNotifyActive));
+            oThread.Start();
+
+        }
+
+        public void ContinuallyNotifyActive() {
+            // This will run until the app is killed
+            while (true) {
+                if (App.GetLastTransmit() < DateTime.Now.AddMinutes(-2)) {
+                    if (App.GetAuthToken(this) != null && App.GetDeviceId(this) != -1) {
+                        new UserWS.UserSvc().MarkDeviceActive(App.GetAuthToken(this), App.GetDeviceId(this), true);
+                        App.UpdateLastTransmit();
+                    }
+                }
+                Thread.Sleep(new TimeSpan(0, 2, 0)); // Sleep for 2 minutes
+            }
         }
 
         public override void OnStart(Intent intent, int startId) {

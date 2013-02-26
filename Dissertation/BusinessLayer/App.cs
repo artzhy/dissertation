@@ -11,9 +11,9 @@ namespace BusinessLayer
 
         public static marcdissertation_dbEntities DbContext {
             get {
-                if (_DbContext == null) {
+               if (_DbContext == null) {
                     _DbContext = new marcdissertation_dbEntities();
-                }
+               }
 
                 return _DbContext;
             }

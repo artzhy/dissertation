@@ -101,12 +101,13 @@ namespace com.ComputeApps.MandelbrotApp {
                     parameters.Add(new CommPackage.ParamListItem("maxIterations", maxIterations));
                     cp.ParameterList = parameters;
                     cp.ApplicationId = 5;
-                   
 
-                    Intent woRequestIntent = new Intent(ComputeAndroidSDK.Communication.Constants.REQUEST_WORK_ORDER_INTENT);
-                    woRequestIntent.PutExtra("CommPackage", cp.SerializeJson());
+                    WorkOrderList.SubmitNewWorkOrder(cp);
 
-                    App.Context.SendBroadcast(woRequestIntent);
+                    //Intent woRequestIntent = new Intent(ComputeAndroidSDK.Communication.Constants.REQUEST_WORK_ORDER_INTENT);
+                    //woRequestIntent.PutExtra("CommPackage", cp.SerializeJson());
+
+                    //App.Context.SendBroadcast(woRequestIntent);
 
                     return bm;
               

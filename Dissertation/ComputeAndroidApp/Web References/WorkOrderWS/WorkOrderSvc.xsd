@@ -10,6 +10,7 @@
         <xs:element minOccurs="0" name="applicationId" type="xs:int" />
         <xs:element minOccurs="0" name="paramList" nillable="true" type="xs:string" />
         <xs:element minOccurs="0" name="backgroundProcessFunction" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="localDeviceWORef" type="xs:int" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

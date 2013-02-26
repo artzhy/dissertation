@@ -14,7 +14,7 @@ using SharedClasses;
 namespace WebService {
     public class WorkOrderSvc : IWorkOrderSvc {
         
-        public BusinessLayer.WorkOrder CreateWorkOrder(String at, int deviceId, int applicationId, String paramListJson, String backgroundProcessFunction) {
+        public BusinessLayer.WorkOrder CreateWorkOrder(String at, int deviceId, int applicationId, String paramListJson, String backgroundProcessFunction, int localDeviceWORef) {
             new AuthSvc().AuthUser(at, -1, deviceId);
 
             BusinessLayer.WorkApplication wa = BusinessLayer.WorkApplication.Populate(applicationId);
@@ -23,10 +23,9 @@ namespace WebService {
            cp.BackgroundProcessFunction = backgroundProcessFunction;
            cp.ParameterList = CommPackage.DeserializeParamJson(paramListJson);
            cp.DeviceUIRef = wa.ApplicationUIResultIntent;
-           
+           cp.DeviceLocalRequestId = localDeviceWORef;
 
-
-            BusinessLayer.WorkOrder wo = BusinessLayer.WorkOrder.CreateWorkOrder(deviceId, applicationId);
+            BusinessLayer.WorkOrder wo = BusinessLayer.WorkOrder.CreateWorkOrder(deviceId, applicationId, localDeviceWORef);
 
             cp.ComputationRequestId = wo.WorkOrderId;
             wo.CommPackageJson = cp.SerializeJson();

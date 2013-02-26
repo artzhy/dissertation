@@ -105,7 +105,7 @@ namespace ComputeAndroidApp.WorkOrderWS {
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/IWorkOrderSvc/CreateWorkOrder", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
         [return: System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public WorkOrder CreateWorkOrder([System.Xml.Serialization.XmlElementAttribute(IsNullable=true)] string at, int deviceId, [System.Xml.Serialization.XmlIgnoreAttribute()] bool deviceIdSpecified, int applicationId, [System.Xml.Serialization.XmlIgnoreAttribute()] bool applicationIdSpecified, [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)] string paramList, [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)] string backgroundProcessFunction) {
+        public WorkOrder CreateWorkOrder([System.Xml.Serialization.XmlElementAttribute(IsNullable=true)] string at, int deviceId, [System.Xml.Serialization.XmlIgnoreAttribute()] bool deviceIdSpecified, int applicationId, [System.Xml.Serialization.XmlIgnoreAttribute()] bool applicationIdSpecified, [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)] string paramList, [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)] string backgroundProcessFunction, int localDeviceWORef, [System.Xml.Serialization.XmlIgnoreAttribute()] bool localDeviceWORefSpecified) {
             object[] results = this.Invoke("CreateWorkOrder", new object[] {
                         at,
                         deviceId,
@@ -113,17 +113,19 @@ namespace ComputeAndroidApp.WorkOrderWS {
                         applicationId,
                         applicationIdSpecified,
                         paramList,
-                        backgroundProcessFunction});
+                        backgroundProcessFunction,
+                        localDeviceWORef,
+                        localDeviceWORefSpecified});
             return ((WorkOrder)(results[0]));
         }
         
         /// <remarks/>
-        public void CreateWorkOrderAsync(string at, int deviceId, bool deviceIdSpecified, int applicationId, bool applicationIdSpecified, string paramList, string backgroundProcessFunction) {
-            this.CreateWorkOrderAsync(at, deviceId, deviceIdSpecified, applicationId, applicationIdSpecified, paramList, backgroundProcessFunction, null);
+        public void CreateWorkOrderAsync(string at, int deviceId, bool deviceIdSpecified, int applicationId, bool applicationIdSpecified, string paramList, string backgroundProcessFunction, int localDeviceWORef, bool localDeviceWORefSpecified) {
+            this.CreateWorkOrderAsync(at, deviceId, deviceIdSpecified, applicationId, applicationIdSpecified, paramList, backgroundProcessFunction, localDeviceWORef, localDeviceWORefSpecified, null);
         }
         
         /// <remarks/>
-        public void CreateWorkOrderAsync(string at, int deviceId, bool deviceIdSpecified, int applicationId, bool applicationIdSpecified, string paramList, string backgroundProcessFunction, object userState) {
+        public void CreateWorkOrderAsync(string at, int deviceId, bool deviceIdSpecified, int applicationId, bool applicationIdSpecified, string paramList, string backgroundProcessFunction, int localDeviceWORef, bool localDeviceWORefSpecified, object userState) {
             if ((this.CreateWorkOrderOperationCompleted == null)) {
                 this.CreateWorkOrderOperationCompleted = new System.Threading.SendOrPostCallback(this.OnCreateWorkOrderOperationCompleted);
             }
@@ -134,7 +136,9 @@ namespace ComputeAndroidApp.WorkOrderWS {
                         applicationId,
                         applicationIdSpecified,
                         paramList,
-                        backgroundProcessFunction}, this.CreateWorkOrderOperationCompleted, userState);
+                        backgroundProcessFunction,
+                        localDeviceWORef,
+                        localDeviceWORefSpecified}, this.CreateWorkOrderOperationCompleted, userState);
         }
         
         private void OnCreateWorkOrderOperationCompleted(object arg) {
@@ -393,6 +397,8 @@ namespace ComputeAndroidApp.WorkOrderWS {
         
         private System.Nullable<System.DateTime> endComputationTimek__BackingFieldField;
         
+        private int localDeviceIdk__BackingFieldField;
+        
         private System.DateTime receiveTimek__BackingFieldField;
         
         private System.Nullable<System.DateTime> slaveWorkOrderLastCommunicationk__BackingFieldField;
@@ -467,6 +473,17 @@ namespace ComputeAndroidApp.WorkOrderWS {
             }
             set {
                 this.endComputationTimek__BackingFieldField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("<LocalDeviceId>k__BackingField")]
+        public int LocalDeviceIdk__BackingField {
+            get {
+                return this.localDeviceIdk__BackingFieldField;
+            }
+            set {
+                this.localDeviceIdk__BackingFieldField = value;
             }
         }
         
@@ -608,6 +625,10 @@ namespace ComputeAndroidApp.WorkOrderWS {
         
         private string responsek__BackingFieldField;
         
+        private int sendAttemptsk__BackingFieldField;
+        
+        private string statusk__BackingFieldField;
+        
         private System.DateTime submitDatek__BackingFieldField;
         
         private int targetDeviceIdk__BackingFieldField;
@@ -655,6 +676,28 @@ namespace ComputeAndroidApp.WorkOrderWS {
             }
             set {
                 this.responsek__BackingFieldField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("<SendAttempts>k__BackingField")]
+        public int SendAttemptsk__BackingField {
+            get {
+                return this.sendAttemptsk__BackingFieldField;
+            }
+            set {
+                this.sendAttemptsk__BackingFieldField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("<Status>k__BackingField", IsNullable=true)]
+        public string Statusk__BackingField {
+            get {
+                return this.statusk__BackingFieldField;
+            }
+            set {
+                this.statusk__BackingFieldField = value;
             }
         }
         
@@ -709,6 +752,8 @@ namespace ComputeAndroidApp.WorkOrderWS {
         private string computeAppIntentk__BackingFieldField;
         
         private int deviceIdk__BackingFieldField;
+        
+        private int deviceLocalRequestIdk__BackingFieldField;
         
         private string deviceUIRefk__BackingFieldField;
         
@@ -778,6 +823,17 @@ namespace ComputeAndroidApp.WorkOrderWS {
             }
             set {
                 this.deviceIdk__BackingFieldField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("<DeviceLocalRequestId>k__BackingField")]
+        public int DeviceLocalRequestIdk__BackingField {
+            get {
+                return this.deviceLocalRequestIdk__BackingFieldField;
+            }
+            set {
+                this.deviceLocalRequestIdk__BackingFieldField = value;
             }
         }
         

@@ -21,5 +21,7 @@ namespace BusinessLayer
         public System.DateTime SubmitDate { get; set; }
         public Nullable<System.DateTime> DateAcknowledged { get; set; }
         public string Response { get; set; }
+        public string Status { get; set; }
+        public int SendAttempts { get; set; }
     }
 }

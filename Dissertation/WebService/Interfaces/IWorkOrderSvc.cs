@@ -11,7 +11,7 @@ namespace WebService {
     public interface IWorkOrderSvc {
         [OperationContract]
         [WebGet(UriTemplate = "CreateWorkOrder", ResponseFormat = WebMessageFormat.Json, RequestFormat = WebMessageFormat.Json)]
-        BusinessLayer.WorkOrder CreateWorkOrder(String at, int deviceId, int applicationId, String paramList, String backgroundProcessFunction);
+        BusinessLayer.WorkOrder CreateWorkOrder(String at, int deviceId, int applicationId, String paramList, String backgroundProcessFunction, int localDeviceWORef);
 
         [OperationContract]
         [WebGet(UriTemplate = "CancelWorkOrder", ResponseFormat = WebMessageFormat.Json, RequestFormat = WebMessageFormat.Json)]
@@ -36,9 +36,6 @@ namespace WebService {
         [OperationContract]
         [WebGet(UriTemplate = "AcknowledgeCommunication", ResponseFormat = WebMessageFormat.Json, RequestFormat = WebMessageFormat.Json)]
         void AcknowledgeCommunication(String at, int communicationId, DateTime recieveTime);
-
-
-       //TODO: Get status of work order
 
     }
 }

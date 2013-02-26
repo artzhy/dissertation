@@ -29,6 +29,7 @@ namespace ComputeAndroidApp.BackgroundService {
       //          App.GetInstalledApplications();
 
                 new UserWS.UserSvc().MarkDeviceActive(App.GetAuthToken(context), App.GetDeviceId(context), true);
+                App.UpdateLastTransmit();
                 
             } else if (intent.Action == ComputeAndroidSDK.Communication.Constants.RETURN_RESULT_INTENT) {
                 // Handle result
@@ -36,6 +37,7 @@ namespace ComputeAndroidApp.BackgroundService {
 
                 new WorkOrderWS.WorkOrderSvc().SubmitWorkOrderResult(App.GetAuthToken(context), cp.ComputationRequestId, true, cp.ComputationResult, cp.ComputationStartTime, true, cp.ComputationEndTime, true);
 
+                App.UpdateLastTransmit();
 
             } else if (intent.Action == ComputeAndroidSDK.Communication.Constants.RETURN_STATUS_INTENT) {
 
@@ -49,17 +51,6 @@ namespace ComputeAndroidApp.BackgroundService {
                 System.Threading.Thread oThread = new System.Threading.Thread(new ParameterizedThreadStart(App.GetServiceBinder().GetService().RequestWorkOrderComputation));
 
                 oThread.Start(intent);
-               // App.GetServiceBinder().GetService().RequestWorkOrderComputation(intent);
-
-                int test = 1;
-
-                int testtwo = test + 1;
-
-              //  String cpString = intent.GetStringExtra("CommPackage");
-                //TODO: HACK
-
-               
-    
             }
 
             

@@ -75,6 +75,8 @@ namespace ComputeAndroidApp {
 
             new WorkOrderWS.WorkOrderSvc().AcknowledgeCommunication(App.GetAuthToken(context), commId, true, DateTime.Now, true);
 
+            App.UpdateLastTransmit();
+
             if (ut == UpdateType.NewWorkOrder) {
                 App.GetServiceBinder().GetService().AddSlaveWorkItem(int.Parse(workOrderId));
 

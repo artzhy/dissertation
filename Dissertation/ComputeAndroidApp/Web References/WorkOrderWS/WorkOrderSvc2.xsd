@@ -7,6 +7,7 @@
       <xs:element name="_x003C_CommPackageJson_x003E_k__BackingField" nillable="true" type="xs:string" />
       <xs:element name="_x003C_ComputeAppIntent_x003E_k__BackingField" nillable="true" type="xs:string" />
       <xs:element name="_x003C_DeviceId_x003E_k__BackingField" type="xs:int" />
+      <xs:element name="_x003C_DeviceLocalRequestId_x003E_k__BackingField" type="xs:int" />
       <xs:element name="_x003C_DeviceUIRef_x003E_k__BackingField" nillable="true" type="xs:string" />
       <xs:element name="_x003C_ReceiveTime_x003E_k__BackingField" type="xs:dateTime" />
       <xs:element name="_x003C_SlaveWorkOrderLastCommunication_x003E_k__BackingField" nillable="true" type="xs:dateTime" />

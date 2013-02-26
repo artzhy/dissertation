@@ -245,6 +245,8 @@
     <Property Type="DateTime" Name="SubmitDate" Nullable="false" Precision="3" />
     <Property Type="DateTime" Name="DateAcknowledged" Precision="3" />
     <Property Type="String" Name="Response" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="Status" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Type="Int32" Name="SendAttempts" Nullable="false" />
   </EntityType>
   <Association Name="FKTgtDeviceId">
     <End Type="marcdissertation_dbModel.UserDevice" Role="UserDevice" Multiplicity="1" />
@@ -278,6 +280,7 @@
     <NavigationProperty Name="UserDevice" Relationship="marcdissertation_dbModel.FKDeviceId" FromRole="WorkOrder" ToRole="UserDevice" />
     <NavigationProperty Name="UserDevice1" Relationship="marcdissertation_dbModel.FKSlaveWorkerID" FromRole="WorkOrder" ToRole="UserDevice" />
     <NavigationProperty Name="WorkApplication" Relationship="marcdissertation_dbModel.FKApplicationId" FromRole="WorkOrder" ToRole="WorkApplication" />
+    <Property Type="Int32" Name="LocalDeviceId" Nullable="false" />
   </EntityType>
   <Association Name="FKWorkOrderID">
     <End Type="marcdissertation_dbModel.WorkOrder" Role="WorkOrder" Multiplicity="1" />

@@ -87,9 +87,13 @@ namespace WebService {
         }
 
         public void MarkDeviceActive(string at, int deviceId) {
-            AuthenticationToken oAt = new AuthSvc().AuthUser(at, -1, deviceId);
+            try {
+                AuthenticationToken oAt = new AuthSvc().AuthUser(at, -1, deviceId);
+            } catch(Exception e) {
+                String ex = e.Message;
+            }
 
-            BusinessLayer.ActiveDevice.CreateActiveDevice(deviceId);
+          
         }
 
         public void MarkDeviceInactive(string at, int deviceId) {

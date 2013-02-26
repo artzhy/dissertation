@@ -92,6 +92,8 @@
           <Property Name="SubmitDate" Type="datetime" Nullable="false" />
           <Property Name="DateAcknowledged" Type="datetime" />
           <Property Name="Response" Type="varchar(max)" />
+          <Property Name="Status" Type="varchar(max)" />
+          <Property Name="SendAttempts" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="DeviceAccessRestriction">
           <Key>
@@ -163,6 +165,7 @@
           <Property Name="WorkOrderResultJson" Type="nvarchar(max)" />
           <Property Name="StartComputationTime" Type="datetime" />
           <Property Name="EndComputationTime" Type="datetime" />
+          <Property Name="LocalDeviceId" Type="int" Nullable="false" />
         </EntityType>
         <Association Name="FK_AuthenticationToken_0">
           <End Role="User" Type="marcdissertation_dbModel.Store.User" Multiplicity="1">
@@ -559,6 +562,8 @@
           <Property Type="DateTime" Name="SubmitDate" Nullable="false" Precision="3" />
           <Property Type="DateTime" Name="DateAcknowledged" Precision="3" />
           <Property Type="String" Name="Response" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Status" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="SendAttempts" Nullable="false" />
         </EntityType>
         <Association Name="FKTgtDeviceId">
           <End Type="marcdissertation_dbModel.UserDevice" Role="UserDevice" Multiplicity="1" />
@@ -592,6 +597,7 @@
           <NavigationProperty Name="UserDevice" Relationship="marcdissertation_dbModel.FKDeviceId" FromRole="WorkOrder" ToRole="UserDevice" />
           <NavigationProperty Name="UserDevice1" Relationship="marcdissertation_dbModel.FKSlaveWorkerID" FromRole="WorkOrder" ToRole="UserDevice" />
           <NavigationProperty Name="WorkApplication" Relationship="marcdissertation_dbModel.FKApplicationId" FromRole="WorkOrder" ToRole="WorkApplication" />
+          <Property Type="Int32" Name="LocalDeviceId" Nullable="false" />
         </EntityType>
         <Association Name="FKWorkOrderID">
           <End Type="marcdissertation_dbModel.WorkOrder" Role="WorkOrder" Multiplicity="1" />
@@ -728,6 +734,8 @@
           <EntitySetMapping Name="CommunicationPackages">
             <EntityTypeMapping TypeName="marcdissertation_dbModel.CommunicationPackage">
               <MappingFragment StoreEntitySet="CommunicationPackage">
+                <ScalarProperty Name="SendAttempts" ColumnName="SendAttempts" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
                 <ScalarProperty Name="Response" ColumnName="Response" />
                 <ScalarProperty Name="DateAcknowledged" ColumnName="DateAcknowledged" />
                 <ScalarProperty Name="SubmitDate" ColumnName="SubmitDate" />
@@ -741,6 +749,7 @@
           <EntitySetMapping Name="WorkOrders">
             <EntityTypeMapping TypeName="marcdissertation_dbModel.WorkOrder">
               <MappingFragment StoreEntitySet="WorkOrder">
+                <ScalarProperty Name="LocalDeviceId" ColumnName="LocalDeviceId" />
                 <ScalarProperty Name="EndComputationTime" ColumnName="EndComputationTime" />
                 <ScalarProperty Name="StartComputationTime" ColumnName="StartComputationTime" />
                 <ScalarProperty Name="WorkOrderResultJson" ColumnName="WorkOrderResultJson" />

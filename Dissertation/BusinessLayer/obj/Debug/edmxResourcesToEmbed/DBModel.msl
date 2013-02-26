@@ -82,6 +82,8 @@
     <EntitySetMapping Name="CommunicationPackages">
       <EntityTypeMapping TypeName="marcdissertation_dbModel.CommunicationPackage">
         <MappingFragment StoreEntitySet="CommunicationPackage">
+          <ScalarProperty Name="SendAttempts" ColumnName="SendAttempts" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
           <ScalarProperty Name="Response" ColumnName="Response" />
           <ScalarProperty Name="DateAcknowledged" ColumnName="DateAcknowledged" />
           <ScalarProperty Name="SubmitDate" ColumnName="SubmitDate" />
@@ -95,6 +97,7 @@
     <EntitySetMapping Name="WorkOrders">
       <EntityTypeMapping TypeName="marcdissertation_dbModel.WorkOrder">
         <MappingFragment StoreEntitySet="WorkOrder">
+          <ScalarProperty Name="LocalDeviceId" ColumnName="LocalDeviceId" />
           <ScalarProperty Name="EndComputationTime" ColumnName="EndComputationTime" />
           <ScalarProperty Name="StartComputationTime" ColumnName="StartComputationTime" />
           <ScalarProperty Name="WorkOrderResultJson" ColumnName="WorkOrderResultJson" />

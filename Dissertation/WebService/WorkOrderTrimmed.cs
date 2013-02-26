@@ -18,6 +18,12 @@ namespace WebService {
             get;
             set;
         }
+
+        public int DeviceLocalRequestId {
+            get;
+            set;
+        }
+
         public string CommPackageJson {
             get;
             set;

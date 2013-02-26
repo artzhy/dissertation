@@ -13,6 +13,12 @@ namespace ComputeAndroidSDK.Communication {
             get;
             set;
         }
+
+        public int DeviceLocalRequestId {
+            get;
+            set;
+        }
+
         public String IntentAction {
             get;
             set;

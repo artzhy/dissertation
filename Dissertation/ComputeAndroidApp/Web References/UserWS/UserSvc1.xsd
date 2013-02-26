@@ -70,6 +70,8 @@
       <xs:element name="_x003C_CommunicationType_x003E_k__BackingField" type="xs:int" />
       <xs:element name="_x003C_DateAcknowledged_x003E_k__BackingField" nillable="true" type="xs:dateTime" />
       <xs:element name="_x003C_Response_x003E_k__BackingField" nillable="true" type="xs:string" />
+      <xs:element name="_x003C_SendAttempts_x003E_k__BackingField" type="xs:int" />
+      <xs:element name="_x003C_Status_x003E_k__BackingField" nillable="true" type="xs:string" />
       <xs:element name="_x003C_SubmitDate_x003E_k__BackingField" type="xs:dateTime" />
       <xs:element name="_x003C_TargetDeviceId_x003E_k__BackingField" type="xs:int" />
       <xs:element name="_x003C_WorkOrderId_x003E_k__BackingField" type="xs:int" />
