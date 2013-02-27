@@ -78,7 +78,7 @@ namespace com.ComputeApps.MandelbrotApp {
             return colourCodeHex;
         }
 
-        public Bitmap SubmitWorkOrders() {
+        public String SubmitWorkOrders() {
             int x = 0;
             int y = 0;
 
@@ -102,14 +102,16 @@ namespace com.ComputeApps.MandelbrotApp {
                     cp.ParameterList = parameters;
                     cp.ApplicationId = 5;
 
-                    WorkOrderList.SubmitNewWorkOrder(cp);
+                    return cp.SerializeJson();
+
+               //     WorkOrderList.SubmitNewWorkOrder(cp);
 
                     //Intent woRequestIntent = new Intent(ComputeAndroidSDK.Communication.Constants.REQUEST_WORK_ORDER_INTENT);
                     //woRequestIntent.PutExtra("CommPackage", cp.SerializeJson());
 
                     //App.Context.SendBroadcast(woRequestIntent);
 
-                    return bm;
+                 //   return bm;
               
                     //List<CommunicationResources.PixelColour> colours = ProcessRequest(x, y, xChunk, yChunk, maxIterations);
 
@@ -128,7 +130,7 @@ namespace com.ComputeApps.MandelbrotApp {
                 x += xChunk;
             }
 
-
+            return "";
 
 
 
@@ -169,7 +171,7 @@ namespace com.ComputeApps.MandelbrotApp {
             //    x += xChunk;
             //}
 
-            return bm;
+         //   return bm;
 
 
             //int x = 0;

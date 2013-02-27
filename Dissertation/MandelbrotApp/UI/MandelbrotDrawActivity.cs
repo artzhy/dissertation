@@ -38,8 +38,10 @@ namespace com.ComputeApps.MandelbrotApp {
 
             MandelbrotCalculator mc = new MandelbrotCalculator(180, 300, 100);
 
-            ImageView iv = FindViewById<ImageView>(Resource.Id.mandelbrotImgView);
-            iv.SetImageBitmap(mc.SubmitWorkOrders());
+            new AsyncGetResultsTask(this,FindViewById<ImageView>(Resource.Id.mandelbrotImgView), 180, 300).Execute(mc.SubmitWorkOrders());
+
+    
+           // iv.SetImageBitmap();
 
 
             int test = 0;

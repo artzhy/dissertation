@@ -50,10 +50,7 @@ namespace ComputeAndroidApp {
 
         protected override void OnUnRegistered(Context context, string registrationId) {
             Log.Verbose(BroadcastReceiver.TAG, "GCM Unregistered: " + registrationId);
-            //Remove from the web service
-            //	var wc = new WebClient();
-            //	var result = wc.UploadString("http://your.server.com/api/unregister/", "POST",
-            //		"{ 'registrationId' : '" + lastRegistrationId + "' }");
+         
 
             createNotification("PushSharp-GCM Unregistered...", "The device has been unregistered, Tap to View!");
         }

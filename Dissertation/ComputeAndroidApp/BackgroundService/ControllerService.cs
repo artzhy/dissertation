@@ -40,15 +40,30 @@ namespace ComputeAndroidApp.BackgroundService {
         public void ReceiveWorkOrderResult(int workOrderId) {
             WorkOrderWS.WorkOrderTrimmed wo = new WorkOrderWS.WorkOrderSvc().GetWorkOrder(App.GetAuthToken(this), App.GetDeviceId(this), true, workOrderId, true);
 
+            ComputeAndroidSDK.Communication.WorkOrderTrimmed testWo = new WorkOrderTrimmed();
+            testWo.ApplicationId = wo.ApplicationIdk__BackingField;
+            testWo.ApplicationUIResultIntent = wo.ApplicationUIResultIntentk__BackingField;
+            testWo.CommPackageJson = wo.CommPackageJsonk__BackingField;
+            testWo.ComputeAppIntent = wo.ComputeAppIntentk__BackingField;
+            testWo.DeviceId = wo.DeviceIdk__BackingField;
+            testWo.DeviceLocalRequestId = wo.DeviceLocalRequestIdk__BackingField;
+            testWo.DeviceUIRef = wo.DeviceUIRefk__BackingField;
+            testWo.ReceiveTime = wo.ReceiveTimek__BackingField;
+            testWo.SlaveWorkerId = wo.SlaveWorkerIdk__BackingField;
+            testWo.SlaveWorkerSubmit = wo.SlaveWorkerSubmitk__BackingField;
+            testWo.SlaveWorkOrderLastCommunication = wo.SlaveWorkOrderLastCommunicationk__BackingField;
+            testWo.WorkOrderId = wo.WorkOrderIdk__BackingField;
+            testWo.WorkOrderResultJson = wo.WorkOrderResultJsonk__BackingField;
+            testWo.WorkOrderStatus = wo.WorkOrderStatusk__BackingField;
+           
             // Send to listener (intent attached to application)
             Intent newIntent = new Intent(wo.ApplicationUIResultIntentk__BackingField);
 
-            newIntent.PutExtra("WorkOrderTrimmed", JsonConvert.SerializeObject(wo));
+            newIntent.PutExtra("WorkOrderTrimmed", JsonConvert.SerializeObject(testWo));
 
             this.ApplicationContext.SendBroadcast(newIntent);
 
         }
-
 
 
         public void RequestWorkOrderComputation(object o) {

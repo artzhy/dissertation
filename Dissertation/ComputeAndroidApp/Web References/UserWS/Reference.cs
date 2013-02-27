@@ -943,6 +943,8 @@ namespace ComputeAndroidApp.UserWS {
         
         private System.Nullable<System.DateTime> endComputationTimek__BackingFieldField;
         
+        private int localDeviceIdk__BackingFieldField;
+        
         private System.DateTime receiveTimek__BackingFieldField;
         
         private System.Nullable<System.DateTime> slaveWorkOrderLastCommunicationk__BackingFieldField;
@@ -1017,6 +1019,17 @@ namespace ComputeAndroidApp.UserWS {
             }
             set {
                 this.endComputationTimek__BackingFieldField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("<LocalDeviceId>k__BackingField")]
+        public int LocalDeviceIdk__BackingField {
+            get {
+                return this.localDeviceIdk__BackingFieldField;
+            }
+            set {
+                this.localDeviceIdk__BackingFieldField = value;
             }
         }
         

@@ -54,6 +54,7 @@ namespace WebService {
             wt.WorkOrderStatus = wo.WorkOrderStatus;
             wt.ComputeAppIntent = wa.ApplicationWorkIntent;
             wt.ApplicationUIResultIntent = wa.ApplicationUIResultIntent;
+            wt.DeviceLocalRequestId = wo.LocalDeviceId;
             
             return wt;
         }
