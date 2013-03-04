@@ -11,6 +11,7 @@ using Android.Views;
 using Android.Widget;
 
 using Newtonsoft.Json;
+using ComputeAndroidSDK.Communication;
 
 namespace com.ComputeApps.MandelbrotApp {
     public class AsyncGetResultsTask : AsyncTask {
@@ -31,24 +32,28 @@ namespace com.ComputeApps.MandelbrotApp {
 
         protected override void OnProgressUpdate(params Java.Lang.Object[] values) {
             base.OnProgressUpdate(values);
-        
-            
 
             new AlertDialog.Builder(_context)
-               .SetTitle("Updated!")
-               .SetMessage("Great success!")
+               .SetTitle("Still working...")
+               .SetMessage("No complete: " + _noComplete + " out of " + _totalWOs)
                .Show();
         }
 
         protected override void OnPreExecute() {
             base.OnPreExecute();
 
-            _progressDialog = ProgressDialog.Show(_context, "Login In Progress", "Please wait...");
+            _progressDialog = ProgressDialog.Show(_context, "Mandelbrot generation in progress", "Please wait...");
         }
 
         protected override Java.Lang.Object DoInBackground(params Java.Lang.Object[] @params) {
             WorkOrderList.NewRequest(this);
-            WorkOrderList.SubmitNewWorkOrder(JsonConvert.DeserializeObject<ComputeAndroidSDK.Communication.CommPackage>((string)@params[0]));
+            List<CommPackage> cpList = JsonConvert.DeserializeObject<List<CommPackage>>((string)@params[0]);
+
+            foreach (CommPackage cp in cpList) {
+                WorkOrderList.SubmitNewWorkOrder(cp);
+            }
+
+          //  WorkOrderList.SubmitNewWorkOrder(JsonConvert.DeserializeObject<ComputeAndroidSDK.Communication.CommPackage>((string)@params[0]));
 
             while (!_complete) {
                 // do nothing
@@ -62,14 +67,14 @@ namespace com.ComputeApps.MandelbrotApp {
 
             _progressDialog.Hide();
 
+            new AlertDialog.Builder(_context)
+               .SetTitle("Mandelbrot generated")
+               .SetMessage("Success!")
+               .Show();
+
             _imgView.SetImageBitmap(WorkOrderList.TransformWorkOrderResultsToBitmap(_width, _height));
 
-        
-
-            new AlertDialog.Builder(_context)
-                .SetTitle("Login Successful")
-                .SetMessage("Great success!")
-                .Show();
+           
         }
 
         public void PostUpdate(ComputeAndroidSDK.Communication.WorkOrderTrimmed wt, Boolean TaskIsComplete, int uncomplete, int totalWOs) {

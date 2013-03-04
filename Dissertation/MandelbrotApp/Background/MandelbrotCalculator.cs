@@ -82,6 +82,7 @@ namespace com.ComputeApps.MandelbrotApp {
             int x = 0;
             int y = 0;
 
+            List<CommPackage> cpList = new List<CommPackage>();
 
             Bitmap bm = Bitmap.CreateBitmap(imgWidth, imgHeight, Bitmap.Config.Argb8888);
 
@@ -101,8 +102,8 @@ namespace com.ComputeApps.MandelbrotApp {
                     parameters.Add(new CommPackage.ParamListItem("maxIterations", maxIterations));
                     cp.ParameterList = parameters;
                     cp.ApplicationId = 5;
-
-                    return cp.SerializeJson();
+                    cpList.Add(cp);
+                    //return cp.SerializeJson();
 
                //     WorkOrderList.SubmitNewWorkOrder(cp);
 
@@ -130,7 +131,7 @@ namespace com.ComputeApps.MandelbrotApp {
                 x += xChunk;
             }
 
-            return "";
+            return Newtonsoft.Json.JsonConvert.SerializeObject(cpList.Take(10));
 
 
 

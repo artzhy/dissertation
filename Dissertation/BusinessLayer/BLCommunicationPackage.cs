@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Serialization;
@@ -7,8 +8,11 @@ using System.Text;
 namespace BusinessLayer {
     [Serializable]
     [KnownType(typeof(WorkOrder))]
+    [KnownType(typeof(marcdissertation_dbEntities))]
     public partial class CommunicationPackage {
         private static IEnumerable<System.Data.Entity.Validation.DbEntityValidationResult> errors;
+         [JsonIgnoreAttribute]
+        public marcdissertation_dbEntities context;
 
         public enum UpdateType {
             Result,
@@ -19,31 +23,33 @@ namespace BusinessLayer {
 
         public static CommunicationPackage Populate(int communicationId) {
             try {
+                marcdissertation_dbEntities ctxt = new marcdissertation_dbEntities();
                // App.DbContext.Configuration.ProxyCreationEnabled = false;
-                CommunicationPackage comm = (from x in App.DbContext.CommunicationPackages
+                CommunicationPackage comm = (from x in ctxt.CommunicationPackages
                                 where x.CommunicationId == communicationId
                         select x).First();
                // App.DbContext.Configuration.ProxyCreationEnabled = true;
+                comm.context = ctxt;
                 return comm;
             } catch (Exception ex) {
-                throw ex;
+                return null;
             }
 
         }
 
         public static CommunicationPackage CreateCommunication(int deviceId, UpdateType commType, int workOrderId) {
-
             CommunicationPackage comm = new CommunicationPackage();
             comm.TargetDeviceId = deviceId;
             comm.CommunicationType = (int)commType;
             comm.SubmitDate = DateTime.Now;
             comm.WorkOrderId = workOrderId;
-  
-            comm = App.DbContext.CommunicationPackages.Add(comm);
-            errors = App.DbContext.GetValidationErrors();
+            comm.context = new marcdissertation_dbEntities();
+
+            comm = comm.context.CommunicationPackages.Add(comm);
+            errors = comm.context.GetValidationErrors();
 
             try {
-                App.DbContext.SaveChanges();
+                comm.context.SaveChanges();
             } catch {
                 throw App.ExceptionFormatter(errors);
             }
@@ -51,35 +57,45 @@ namespace BusinessLayer {
         }
 
         public void Save() {
-            IEnumerable<System.Data.Entity.Validation.DbEntityValidationResult> errors = App.DbContext.GetValidationErrors();
+            IEnumerable<System.Data.Entity.Validation.DbEntityValidationResult> errors = context.GetValidationErrors();
 
             if (errors.Count() > 0) {
                 throw App.ExceptionFormatter(errors);
             }
 
-            App.DbContext.SaveChanges();
+            context.SaveChanges();
 
         }
 
         public String Serialize() {
 
-            return Newtonsoft.Json.JsonConvert.SerializeObject(this);
+            String serialized = Newtonsoft.Json.JsonConvert.SerializeObject(this, Newtonsoft.Json.Formatting.None, new Newtonsoft.Json.JsonSerializerSettings() {
+                ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
+            });
+
+            return serialized;
 
         }
 
         public void Delete() {
            // TODO: Handle if a device is carrying out the WO
 
-            App.DbContext.CommunicationPackages.Remove(this);
+            context.CommunicationPackages.Remove(this);
 
-            IEnumerable<System.Data.Entity.Validation.DbEntityValidationResult> errors = App.DbContext.GetValidationErrors();
+            IEnumerable<System.Data.Entity.Validation.DbEntityValidationResult> errors = context.GetValidationErrors();
 
             if (errors.Count() > 0) {
                 throw App.ExceptionFormatter(errors);
             }
 
-            App.DbContext.SaveChanges();
+            context.SaveChanges();
 
+        }
+
+        public static List<CommunicationPackage> GetTargetDeviceCommunications(int deviceId) {
+            marcdissertation_dbEntities ctxt = new marcdissertation_dbEntities();
+
+            return ctxt.CommunicationPackages.Where(x => x.TargetDeviceId == deviceId && x.Status != "ACK" && x.Status != "CANCELLED").ToList();
         }
 
     }

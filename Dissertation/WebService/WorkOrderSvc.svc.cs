@@ -40,6 +40,7 @@ namespace WebService {
             new AuthSvc().AuthUser(at, -1, deviceId);
             BusinessLayer.WorkOrder wo = BusinessLayer.WorkOrder.Populate(workOrderId);
             BusinessLayer.WorkApplication wa = BusinessLayer.WorkApplication.Populate(wo.ApplicationId);
+           
 
             WorkOrderTrimmed wt = new WorkOrderTrimmed();
             wt.ApplicationId = wo.ApplicationId;
@@ -113,6 +114,12 @@ namespace WebService {
 
             cp.Save();
 
+        }
+
+        public List<BusinessLayer.CommunicationPackage> GetOutstandingCommunications(String at, int deviceId) {
+            BusinessLayer.AuthenticationToken oAt = new AuthSvc().AuthUser(at,-1,deviceId);
+
+            return BusinessLayer.CommunicationPackage.GetTargetDeviceCommunications(deviceId);
         }
 
     }

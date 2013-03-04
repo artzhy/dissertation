@@ -200,84 +200,92 @@ namespace WorkOrderDistributor {
         }
 
         private void ProcessUpdatedWorkOrders() {
-            BrokeredMessage updatedWorkOrderMessage = null;
-            updatedWorkOrderMessage = UpdatedWorkOrders.Receive();
+            try {
+                BrokeredMessage updatedWorkOrderMessage = null;
+                updatedWorkOrderMessage = UpdatedWorkOrders.Receive();
 
-            if (updatedWorkOrderMessage != null) {
-                // Process the message
-                SharedClasses.WorkOrderUpdate wou = updatedWorkOrderMessage.GetBody<SharedClasses.WorkOrderUpdate>();
-                WorkOrder wo = WorkOrder.Populate(wou.WorkOrderId);
-                
+                if (updatedWorkOrderMessage != null) {
+                    // Process the message
+                    SharedClasses.WorkOrderUpdate wou = updatedWorkOrderMessage.GetBody<SharedClasses.WorkOrderUpdate>();
+                    WorkOrder wo = WorkOrder.Populate(wou.WorkOrderId);
 
-                Trace.WriteLine("Processing Update", wou.WorkOrderId.ToString());
 
-                switch(wou.WorkOrderUpdateType) {
-                    case SharedClasses.WorkOrderUpdate.UpdateType.Acknowledge:
-                        // Update database with last spoke time and message
-                        wo.SlaveWorkOrderLastCommunication = DateTime.Now;
-                        wo.WorkOrderStatus = "SLAVE_ACKNOWLEDGED";
-                        wo.Save();
-                       
-                        break;
-                    case SharedClasses.WorkOrderUpdate.UpdateType.Cancel:
-                        // TODO: Implement cancel procedure
-                        // Check if device is handlign WO
+                    Trace.WriteLine("Processing Update", wou.WorkOrderId.ToString());
 
-                        // If device is not handlign work order, cancel it.
+                    switch (wou.WorkOrderUpdateType) {
+                        case SharedClasses.WorkOrderUpdate.UpdateType.Acknowledge:
+                            // Update database with last spoke time and message
+                            wo.SlaveWorkOrderLastCommunication = DateTime.Now;
+                            wo.WorkOrderStatus = "SLAVE_ACKNOWLEDGED";
+                            wo.Save();
 
-                        // If device is handlin work order, notify device to cancel, and then mark cancelled in DB.
-                        break;
-                    case SharedClasses.WorkOrderUpdate.UpdateType.SubmitResult:
-                        // Update database with result.
-                        wo.SlaveWorkOrderLastCommunication = DateTime.Now;
-                        wo.WorkOrderResultJson = wou.ResultJson;
-                        wo.WorkOrderStatus = "RESULT_RECEIVED";
-                        wo.StartComputationTime = wou.ComputationStartTime;
-                        wo.EndComputationTime = wou.ComputationEndTime;
-                        
-                        wo.Save();
+                            break;
+                        case SharedClasses.WorkOrderUpdate.UpdateType.Cancel:
+                            // TODO: Implement cancel procedure
+                            // Check if device is handlign WO
 
-                        // Send result to requesting device
+                            // If device is not handlign work order, cancel it.
 
-                        CommunicationPackage cp = CommunicationPackage.CreateCommunication(wo.DeviceId, CommunicationPackage.UpdateType.Result, wo.WorkOrderId);
+                            // If device is handlin work order, notify device to cancel, and then mark cancelled in DB.
+                            break;
+                        case SharedClasses.WorkOrderUpdate.UpdateType.SubmitResult:
+                            // Update database with result.
+                            wo.SlaveWorkOrderLastCommunication = DateTime.Now;
+                            wo.WorkOrderResultJson = wou.ResultJson;
+                            wo.WorkOrderStatus = "RESULT_RECEIVED";
+                            wo.StartComputationTime = wou.ComputationStartTime;
+                            wo.EndComputationTime = wou.ComputationEndTime;
 
-                        CommunicationPackages.Send(new BrokeredMessage(cp.Serialize()));
-              
+                            wo.Save();
 
-                        //TODO: Send new WO to the slave device
-                        break;
+                            // Send result to requesting device
 
-                    case SharedClasses.WorkOrderUpdate.UpdateType.MarkBeingComputed:
-                        // Update database
-                        wo.SlaveWorkOrderLastCommunication = DateTime.Now;
-                        wo.WorkOrderStatus = "BEING_COMPUTED";
-                        wo.Save();
+                            CommunicationPackage cp = CommunicationPackage.CreateCommunication(wo.DeviceId, CommunicationPackage.UpdateType.Result, wo.WorkOrderId);
 
-                        break;
+                            CommunicationPackages.Send(new BrokeredMessage(cp.Serialize()));
+
+
+                            //TODO: Send new WO to the slave device
+                            break;
+
+                        case SharedClasses.WorkOrderUpdate.UpdateType.MarkBeingComputed:
+                            // Update database
+                            wo.SlaveWorkOrderLastCommunication = DateTime.Now;
+                            wo.WorkOrderStatus = "BEING_COMPUTED";
+                            wo.Save();
+
+                            break;
+                    }
+
+                    updatedWorkOrderMessage.Complete();
                 }
-
-                updatedWorkOrderMessage.Complete();
+            } catch (Exception e) {
+                Debug.WriteLine(e.Message);
             }
         }
 
         private void ProcessCommunications() {
-            BrokeredMessage commMessage = null;
-            commMessage = CommunicationPackages.Receive();
+            try {
+                BrokeredMessage commMessage = null;
+                commMessage = CommunicationPackages.Receive();
 
-            if (commMessage != null) {
+                if (commMessage != null) {
 
-                CommunicationPackage cp = Newtonsoft.Json.JsonConvert.DeserializeObject<CommunicationPackage>(commMessage.GetBody<String>());
-                CommunicationPackage oCP = CommunicationPackage.Populate(cp.CommunicationId);
-                oCP.SendAttempts++;
-                oCP.Save();
+                    CommunicationPackage cp = Newtonsoft.Json.JsonConvert.DeserializeObject<CommunicationPackage>(commMessage.GetBody<String>());
+                    CommunicationPackage oCP = CommunicationPackage.Populate(cp.CommunicationId);
+                    oCP.SendAttempts++;
+                    oCP.Save();
 
-                UserDevice targetUD = UserDevice.Populate(cp.TargetDeviceId);
+                    UserDevice targetUD = UserDevice.Populate(cp.TargetDeviceId);
 
-                Pusher.SendNotification(targetUD.GCMCode, cp.Serialize());
+                    Pusher.SendNotification(targetUD.GCMCode, cp.Serialize());
 
-                commMessage.Complete();
+                    commMessage.Complete();
 
-                Debug.WriteLine("Communication ID: " + cp.CommunicationId + " sent.");
+                    Debug.WriteLine("Communication ID: " + cp.CommunicationId + " sent.");
+                }
+            } catch (Exception e) {
+                Debug.WriteLine(e.Message);
             }
         }
 
@@ -300,11 +308,12 @@ namespace WorkOrderDistributor {
                 namespaceManager.CreateQueue(CommunicationPackagesQName);
             }
 
-         
+                     
             // Initialize the connection to Service Bus Queue
             NewWorkOrders = QueueClient.CreateFromConnectionString(connectionString, NewWorkOrdersQName);
             UpdatedWorkOrders = QueueClient.CreateFromConnectionString(connectionString, UpdatedWorkOrersQName);
             CommunicationPackages = QueueClient.CreateFromConnectionString(connectionString, CommunicationPackagesQName);
+
             Pusher = new PushCommunicator.Pusher();
             PackageSweepLastDone = DateTime.Now.AddSeconds(-60);
 

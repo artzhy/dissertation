@@ -8,8 +8,8 @@ namespace BusinessLayer {
 
         public static UserDevice GetAvailableSlave(int appId) {
             try {
-
-                UserDevice ud = (from x in App.DbContext.ActiveDevices
+                marcdissertation_dbEntities ctxt = new marcdissertation_dbEntities();
+                UserDevice ud = (from x in ctxt.ActiveDevices
                                  where x.UserDevice.DeviceAppInstallations.Select(z => z.ApplicationId == appId).Count() > 0
                                  orderby x.LastActiveSend ascending
                                  select x.UserDevice).First();
@@ -24,9 +24,9 @@ namespace BusinessLayer {
 
         public static List<CommunicationPackage> GetUnacknowledgedPackages(int timePeriodSecs) {
             DateTime dateToUse = DateTime.Now.AddSeconds(-timePeriodSecs);
+            marcdissertation_dbEntities ctxt = new marcdissertation_dbEntities();
 
-           
-            return (from x in App.DbContext.CommunicationPackages
+            return (from x in ctxt.CommunicationPackages
                     where x.DateAcknowledged == null && x.Status == null && x.SubmitDate <= dateToUse  
                     select x).ToList();
 

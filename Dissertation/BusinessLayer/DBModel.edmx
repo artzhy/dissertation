@@ -4,17 +4,17 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="marcdissertation_dbModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+    <Schema Namespace="marcdissertation_dbModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
         <EntityContainer Name="marcdissertation_dbModelStoreContainer">
-          <EntitySet Name="ActiveDevice" EntityType="marcdissertation_dbModel.Store.ActiveDevice" store:Type="Tables" Schema="dbo" />
-          <EntitySet Name="AuthenticationToken" EntityType="marcdissertation_dbModel.Store.AuthenticationToken" store:Type="Tables" Schema="dbo" />
-          <EntitySet Name="CommunicationPackage" EntityType="marcdissertation_dbModel.Store.CommunicationPackage" store:Type="Tables" Schema="dbo" />
-          <EntitySet Name="DeviceAccessRestriction" EntityType="marcdissertation_dbModel.Store.DeviceAccessRestriction" store:Type="Tables" Schema="dbo" />
-          <EntitySet Name="DeviceAppInstallation" EntityType="marcdissertation_dbModel.Store.DeviceAppInstallation" store:Type="Tables" Schema="dbo" />
-          <EntitySet Name="User" EntityType="marcdissertation_dbModel.Store.User" store:Type="Tables" Schema="dbo" />
-          <EntitySet Name="UserDevice" EntityType="marcdissertation_dbModel.Store.UserDevice" store:Type="Tables" Schema="dbo" />
-          <EntitySet Name="WorkApplication" EntityType="marcdissertation_dbModel.Store.WorkApplication" store:Type="Tables" Schema="dbo" />
-          <EntitySet Name="WorkOrder" EntityType="marcdissertation_dbModel.Store.WorkOrder" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="ActiveDevice" EntityType="marcdissertation_dbModel.Store.ActiveDevice" store:Type="Tables" Schema="dbo" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+          <EntitySet Name="AuthenticationToken" EntityType="marcdissertation_dbModel.Store.AuthenticationToken" store:Type="Tables" Schema="dbo" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+          <EntitySet Name="CommunicationPackage" EntityType="marcdissertation_dbModel.Store.CommunicationPackage" store:Type="Tables" Schema="dbo" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+          <EntitySet Name="DeviceAccessRestriction" EntityType="marcdissertation_dbModel.Store.DeviceAccessRestriction" store:Type="Tables" Schema="dbo" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+          <EntitySet Name="DeviceAppInstallation" EntityType="marcdissertation_dbModel.Store.DeviceAppInstallation" store:Type="Tables" Schema="dbo" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+          <EntitySet Name="User" EntityType="marcdissertation_dbModel.Store.User" store:Type="Tables" Schema="dbo" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+          <EntitySet Name="UserDevice" EntityType="marcdissertation_dbModel.Store.UserDevice" store:Type="Tables" Schema="dbo" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+          <EntitySet Name="WorkApplication" EntityType="marcdissertation_dbModel.Store.WorkApplication" store:Type="Tables" Schema="dbo" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+          <EntitySet Name="WorkOrder" EntityType="marcdissertation_dbModel.Store.WorkOrder" store:Type="Tables" Schema="dbo" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
           <AssociationSet Name="FK_AuthenticationToken_0" Association="marcdissertation_dbModel.Store.FK_AuthenticationToken_0">
             <End Role="User" EntitySet="User" />
             <End Role="AuthenticationToken" EntitySet="AuthenticationToken" />
@@ -316,8 +316,8 @@
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="marcdissertation_dbModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
-        <EntityContainer Name="marcdissertation_dbEntities" annotation:LazyLoadingEnabled="true">
+      <Schema Namespace="marcdissertation_dbModel" Alias="Self" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+        <EntityContainer Name="marcdissertation_dbEntities" annotation:LazyLoadingEnabled="true" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation">
           <EntitySet Name="DeviceAppInstallations" EntityType="marcdissertation_dbModel.DeviceAppInstallation" />
           <EntitySet Name="Users" EntityType="marcdissertation_dbModel.User" />
           <EntitySet Name="UserDevices" EntityType="marcdissertation_dbModel.UserDevice" />
@@ -380,7 +380,7 @@
           <Key>
             <PropertyRef Name="ApplicationDevicePairId" />
           </Key>
-          <Property Type="Int32" Name="ApplicationDevicePairId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="ApplicationDevicePairId" Nullable="false" annotation:StoreGeneratedPattern="Identity" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
           <Property Type="Int32" Name="ApplicationId" Nullable="false" />
           <Property Type="Int32" Name="DeviceId" Nullable="false" />
           <Property Type="DateTime" Name="InstallDate" Nullable="false" Precision="3" />
@@ -391,7 +391,7 @@
           <Key>
             <PropertyRef Name="Username" />
           </Key>
-          <Property Type="Int32" Name="UserId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="UserId" Nullable="false" annotation:StoreGeneratedPattern="Identity" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
           <Property Type="String" Name="Forename" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Type="String" Name="Surname" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Type="String" Name="Username" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
@@ -403,7 +403,7 @@
           <Key>
             <PropertyRef Name="DeviceId" />
           </Key>
-          <Property Type="Int32" Name="DeviceId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="DeviceId" Nullable="false" annotation:StoreGeneratedPattern="Identity" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
           <Property Type="String" Name="Username" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Type="String" Name="DeviceType" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Type="Int32" Name="DeviceMemoryResource" Nullable="false" />
@@ -422,7 +422,7 @@
           <Key>
             <PropertyRef Name="ApplicationId" />
           </Key>
-          <Property Type="Int32" Name="ApplicationId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="ApplicationId" Nullable="false" annotation:StoreGeneratedPattern="Identity" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
           <Property Type="String" Name="ApplicationName" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Type="String" Name="ApplicationDescription" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Type="String" Name="ApplicationCreator" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
@@ -512,7 +512,7 @@
           <Key>
             <PropertyRef Name="AccessRestrictionId" />
           </Key>
-          <Property Type="Int32" Name="AccessRestrictionId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="AccessRestrictionId" Nullable="false" annotation:StoreGeneratedPattern="Identity" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
           <Property Type="Int32" Name="DeviceId" Nullable="false" />
           <Property Type="Int32" Name="Day" Nullable="false" />
           <Property Type="Time" Name="StartTime" Nullable="false" Precision="3" />
@@ -581,7 +581,7 @@
           <Key>
             <PropertyRef Name="WorkOrderId" />
           </Key>
-          <Property Type="Int32" Name="WorkOrderId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="WorkOrderId" Nullable="false" annotation:StoreGeneratedPattern="Identity" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
           <Property Type="Int32" Name="DeviceId" Nullable="false" />
           <Property Type="Int32" Name="ApplicationId" Nullable="false" />
           <Property Type="String" Name="CommPackageJson" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
@@ -785,6 +785,6 @@
       </DesignerInfoPropertySet>
     </Options>
     <!-- Diagram content (shape and connector positions) -->
-    <Diagrams></Diagrams>
+    <Diagrams />
   </Designer>
 </edmx:Edmx>

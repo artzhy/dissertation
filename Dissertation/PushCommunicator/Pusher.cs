@@ -18,10 +18,14 @@ namespace PushCommunicator
         }
 
         public void SendNotification(String deviceReg, String jsonString) {
+            NotificationFactory.AndroidGcm().TimeToLive = 0;
+            NotificationFactory.AndroidGcm().DelayWhileIdle = false;
+            
            this.pushService.QueueNotification(NotificationFactory.AndroidGcm()
            .ForDeviceRegistrationId(deviceReg)
            .WithCollapseKey("NONE")
-           .WithJson(jsonString));
+           .WithJson(jsonString)
+           .WithDelayWhileIdle(true));
 
            
         }

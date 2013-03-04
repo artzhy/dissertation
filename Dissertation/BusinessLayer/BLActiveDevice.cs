@@ -7,13 +7,22 @@ namespace BusinessLayer {
     [Serializable]
     public partial class ActiveDevice {
         private static IEnumerable<System.Data.Entity.Validation.DbEntityValidationResult> errors;
+        public marcdissertation_dbEntities context;
 
-        public static ActiveDevice Populate(int deviceId) {
+            public static ActiveDevice Populate(int deviceId) {
             try {
-            
-                ActiveDevice ad = (from x in App.DbContext.ActiveDevices
+                marcdissertation_dbEntities ctxt = new marcdissertation_dbEntities();
+              
+              //  ad.context  
+                //ActiveDevice ad = new ActiveDevice();
+                //ad.context = new marcdissertation_dbEntities();
+
+               
+                ActiveDevice ad = (from x in ctxt.ActiveDevices
                                    where x.DeviceId == deviceId
                                    select x).First();
+                ad.context = ctxt;
+
                  return ad;
             } catch {
                 throw new Exception("Device not active");
@@ -29,14 +38,16 @@ namespace BusinessLayer {
                 // Device not active, actiavate it
 
                 ad = new ActiveDevice();
+                ad.context = new marcdissertation_dbEntities();
+
                 ad.DeviceId = deviceId;
                 ad.LastActiveSend = DateTime.Now;
 
-                ad = App.DbContext.ActiveDevices.Add(ad);
-                errors = App.DbContext.GetValidationErrors();
+                ad = ad.context.ActiveDevices.Add(ad);
+                errors = ad.context.GetValidationErrors();
 
                 try {
-                    App.DbContext.SaveChanges();
+                    ad.context.SaveChanges();
                 } catch {
                     throw App.ExceptionFormatter(errors);
                 }
@@ -58,28 +69,28 @@ namespace BusinessLayer {
         }
 
         public void Save() {
-            IEnumerable<System.Data.Entity.Validation.DbEntityValidationResult> errors = App.DbContext.GetValidationErrors();
+            IEnumerable<System.Data.Entity.Validation.DbEntityValidationResult> errors = context.GetValidationErrors();
 
             if (errors.Count() > 0) {
                 throw App.ExceptionFormatter(errors);
             }
 
-            App.DbContext.SaveChanges();
+            context.SaveChanges();
 
         }
 
         public void Delete() {
             // TODO: Handle if a device is carrying out the WO
 
-            App.DbContext.ActiveDevices.Remove(this);
+            context.ActiveDevices.Remove(this);
 
-            IEnumerable<System.Data.Entity.Validation.DbEntityValidationResult> errors = App.DbContext.GetValidationErrors();
+            IEnumerable<System.Data.Entity.Validation.DbEntityValidationResult> errors = context.GetValidationErrors();
 
             if (errors.Count() > 0) {
                 throw App.ExceptionFormatter(errors);
             }
 
-            App.DbContext.SaveChanges();
+            context.SaveChanges();
 
         }
     }

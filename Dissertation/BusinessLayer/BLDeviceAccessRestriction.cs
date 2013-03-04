@@ -7,13 +7,15 @@ namespace BusinessLayer {
     [Serializable]
     public partial class DeviceAccessRestriction {
         private static IEnumerable<System.Data.Entity.Validation.DbEntityValidationResult> errors;
-
+        private marcdissertation_dbEntities context;
         public static DeviceAccessRestriction Populate(int accessRestrictionId) {
             try {
-                DeviceAccessRestriction dar = (from x in App.DbContext.DeviceAccessRestrictions
+                marcdissertation_dbEntities ctxt = new marcdissertation_dbEntities();
+
+                DeviceAccessRestriction dar = (from x in ctxt.DeviceAccessRestrictions
                                 where x.AccessRestrictionId == accessRestrictionId
                         select x).First();
-
+                dar.context = ctxt;
                 return dar;
             } catch (Exception ex) {
                 throw ex;
@@ -28,13 +30,14 @@ namespace BusinessLayer {
             dar.Day = (int) dow;
             dar.StartTime = startTime;
             dar.EndTime = endTime;
+            dar.context = new marcdissertation_dbEntities();
 
 
-            dar = App.DbContext.DeviceAccessRestrictions.Add(dar);
-            errors = App.DbContext.GetValidationErrors();
+            dar = dar.context.DeviceAccessRestrictions.Add(dar);
+            errors = dar.context.GetValidationErrors();
 
             try {
-                App.DbContext.SaveChanges();
+                dar.context.SaveChanges();
             } catch {
                 throw App.ExceptionFormatter(errors);
             }
@@ -42,13 +45,13 @@ namespace BusinessLayer {
         }
 
         public void Save() {
-            IEnumerable<System.Data.Entity.Validation.DbEntityValidationResult> errors = App.DbContext.GetValidationErrors();
+            IEnumerable<System.Data.Entity.Validation.DbEntityValidationResult> errors = context.GetValidationErrors();
 
             if (errors.Count() > 0) {
                 throw App.ExceptionFormatter(errors);
             }
 
-            App.DbContext.SaveChanges();
+            context.SaveChanges();
 
         }
 
@@ -56,15 +59,15 @@ namespace BusinessLayer {
         public void Delete() {
            // TODO: Handle if a device is carrying out the WO
 
-            App.DbContext.DeviceAccessRestrictions.Remove(this);
+            context.DeviceAccessRestrictions.Remove(this);
 
-            IEnumerable<System.Data.Entity.Validation.DbEntityValidationResult> errors = App.DbContext.GetValidationErrors();
+            IEnumerable<System.Data.Entity.Validation.DbEntityValidationResult> errors = context.GetValidationErrors();
 
             if (errors.Count() > 0) {
                 throw App.ExceptionFormatter(errors);
             }
 
-            App.DbContext.SaveChanges();
+            context.SaveChanges();
 
         }
     }

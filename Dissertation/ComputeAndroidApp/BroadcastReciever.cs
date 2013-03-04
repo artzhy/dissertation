@@ -39,7 +39,7 @@ namespace ComputeAndroidApp {
         //    Log.Verbose(BroadcastReceiver.TAG, "GCM Registered: " + registrationId);
 
         //    createNotification("PushSharp-GCM Registered...", "The device has been Registered, Tap to View!");
-
+          
             App.setGCMCode(context, registrationId);
 
             // Update the device to have the gcm code
@@ -70,15 +70,18 @@ namespace ComputeAndroidApp {
             String workOrderId = intent.Extras.Get("WorkOrderId").ToString();
             int commId = int.Parse(intent.Extras.Get("CommunicationId").ToString());
 
+            Log.Info(BroadcastReceiver.TAG, "Handling comm id: " + commId);
+
             new WorkOrderWS.WorkOrderSvc().AcknowledgeCommunication(App.GetAuthToken(context), commId, true, DateTime.Now, true);
 
             App.UpdateLastTransmit();
 
             if (ut == UpdateType.NewWorkOrder) {
                 App.GetServiceBinder().GetService().AddSlaveWorkItem(int.Parse(workOrderId));
-
+                Log.Info(BroadcastReceiver.TAG, "Handling new work order id: " + workOrderId);
             } else if (ut == UpdateType.Result) {
                   App.GetServiceBinder().GetService().ReceiveWorkOrderResult(int.Parse(workOrderId));
+                  Log.Info(BroadcastReceiver.TAG, "Handling result work order id: " + workOrderId);
             } else if (ut == UpdateType.UpdateRequest) {
                 //TODO: Handle update request
 

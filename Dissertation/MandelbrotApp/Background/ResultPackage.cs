@@ -16,13 +16,13 @@ namespace com.ComputeApps.MandelbrotApp {
     [Serializable]
     class ResultPackage {
         // Add your own properties here!
-        public Object MultResult {
+        public List<CommunicationResources.PixelColour> PixelColours {
             get;
             set;
         }
 
-        public ResultPackage(Object _multResult) {
-            this.MultResult = _multResult;
+        public ResultPackage(List<CommunicationResources.PixelColour> _PixelColours) {
+            this.PixelColours = _PixelColours;
         }
 
         public String SerializeJson() {

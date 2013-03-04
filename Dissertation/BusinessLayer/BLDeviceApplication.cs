@@ -7,12 +7,17 @@ namespace BusinessLayer {
     [Serializable()]
     public partial class WorkApplication {
         private static IEnumerable<System.Data.Entity.Validation.DbEntityValidationResult> errors;
+        private marcdissertation_dbEntities context;
+
 
         public static WorkApplication Populate(int ApplicationId) {
             try {
-                return (from x in App.DbContext.WorkApplications
+                marcdissertation_dbEntities ctxt = new marcdissertation_dbEntities();
+                WorkApplication wa = (from x in ctxt.WorkApplications
                         where x.ApplicationId.Equals(ApplicationId)
                         select x).First();
+                wa.context = ctxt;
+                return wa;
             } catch {
                 throw new Exception("Application with ID given does not exist");
             }
@@ -21,9 +26,12 @@ namespace BusinessLayer {
 
         public static WorkApplication Populate(String applicationName) {
             try {
-                return (from x in App.DbContext.WorkApplications
+                marcdissertation_dbEntities ctxt = new marcdissertation_dbEntities();
+                WorkApplication wa =  (from x in ctxt.WorkApplications
                         where x.ApplicationName == applicationName
                         select x).First();
+                wa.context = ctxt;
+                return wa;
             } catch {
                 throw new Exception("Application with name given does not exist");
             }
@@ -39,12 +47,13 @@ namespace BusinessLayer {
             wa.ApplicationWorkIntent = applicationWorkIntent;
             wa.ApplicationVersion = applicationVersion;
             wa.ApplicationNamespace = applicationNamespace;
+            wa.context = new marcdissertation_dbEntities();
 
-            wa = App.DbContext.WorkApplications.Add(wa);
-            errors = App.DbContext.GetValidationErrors();
+            wa = wa.context.WorkApplications.Add(wa);
+            errors = wa.context.GetValidationErrors();
 
             try {
-                App.DbContext.SaveChanges();
+                wa.context.SaveChanges();
             } catch {
                 throw App.ExceptionFormatter(errors);
             }
@@ -53,13 +62,13 @@ namespace BusinessLayer {
         }
 
         public void Save() {
-            IEnumerable<System.Data.Entity.Validation.DbEntityValidationResult> errors = App.DbContext.GetValidationErrors();
+            IEnumerable<System.Data.Entity.Validation.DbEntityValidationResult> errors = context.GetValidationErrors();
 
             if (errors.Count() > 0) {
                 throw App.ExceptionFormatter(errors);
             }
 
-            App.DbContext.SaveChanges();
+            context.SaveChanges();
 
         }
     }

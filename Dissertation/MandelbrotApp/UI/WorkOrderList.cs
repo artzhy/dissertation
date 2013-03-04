@@ -78,7 +78,7 @@ namespace com.ComputeApps.MandelbrotApp {
         public static Bitmap TransformWorkOrderResultsToBitmap(int imgHeight, int imgWidth) {
             Bitmap bm = Bitmap.CreateBitmap(imgWidth, imgHeight, Bitmap.Config.Argb8888);
             foreach (WorkOrderTrimmed wot in WorkOrders) {
-                List<CommunicationResources.PixelColour> pixels = JsonConvert.DeserializeObject<List<CommunicationResources.PixelColour>>(wot.WorkOrderResultJson);
+                List<CommunicationResources.PixelColour> pixels = JsonConvert.DeserializeObject<ResultPackage>(wot.WorkOrderResultJson).PixelColours;
 
 
                 foreach (CommunicationResources.PixelColour col in pixels) {
