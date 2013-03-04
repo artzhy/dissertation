@@ -10,9 +10,9 @@ C:\Users\Marc.COOPERSOFTWARE\Dropbox\Dissertation\Code\Dissertation\External DLL
 C:\Users\Marc.COOPERSOFTWARE\Dropbox\Dissertation\Code\Dissertation\External DLLs\SharedDevClasses.dll.mdb
 C:\Users\Marc.COOPERSOFTWARE\Dropbox\Dissertation\Code\Dissertation\External DLLs\SharedDevClasses.SharedDevClasses.apk
 C:\Users\Marc.COOPERSOFTWARE\Dropbox\Dissertation\Code\Dissertation\External DLLs\SharedDevClasses.SharedDevClasses-Signed.apk
+C:\Users\Marc.COOPERSOFTWARE\Dropbox\Dissertation\Code\Dissertation\SharedDevClasses\obj\Debug\SharedDevClasses.csprojResolveAssemblyReference.cache
 C:\Users\Marc.COOPERSOFTWARE\Dropbox\Dissertation\Code\Dissertation\SharedDevClasses\obj\Debug\SharedDevClasses.dll
 C:\Users\Marc.COOPERSOFTWARE\Dropbox\Dissertation\Code\Dissertation\SharedDevClasses\obj\Debug\SharedDevClasses.pdb
 C:\Users\Marc.COOPERSOFTWARE\Dropbox\Dissertation\Code\Dissertation\SharedDevClasses\obj\Debug\android\bin\SharedDevClasses.SharedDevClasses.apk
 C:\Users\Marc.COOPERSOFTWARE\Dropbox\Dissertation\Code\Dissertation\SharedDevClasses\obj\Debug\R.cs.flag
 C:\Users\Marc.COOPERSOFTWARE\Dropbox\Dissertation\Code\Dissertation\SharedDevClasses\obj\Debug\uploadflags.txt
-C:\Users\Marc.COOPERSOFTWARE\Dropbox\Dissertation\Code\Dissertation\SharedDevClasses\obj\Debug\SharedDevClasses.csprojResolveAssemblyReference.cache

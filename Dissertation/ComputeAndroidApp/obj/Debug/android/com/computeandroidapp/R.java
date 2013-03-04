@@ -14,19 +14,20 @@ public final class R {
         public static final int icon=0x7f020000;
     }
     public static final class id {
-        public static final int btnDeregisterDevice=0x7f050009;
+        public static final int btnDeregisterDevice=0x7f05000a;
         public static final int btnLogin=0x7f050005;
         public static final int btnRegister=0x7f050006;
-        public static final int btnSubmitRegistration=0x7f05000d;
+        public static final int btnSubmitRegistration=0x7f05000e;
         public static final int lblLogin=0x7f050001;
         public static final int listView1=0x7f050008;
         public static final int tableRow1=0x7f050000;
         public static final int tableRow2=0x7f050002;
         public static final int tableRow3=0x7f050007;
-        public static final int textView1=0x7f05000a;
-        public static final int txtForename=0x7f05000b;
+        public static final int textView1=0x7f05000b;
+        public static final int txtDeviceId=0x7f050009;
+        public static final int txtForename=0x7f05000c;
         public static final int txtPassword=0x7f050004;
-        public static final int txtSurname=0x7f05000c;
+        public static final int txtSurname=0x7f05000d;
         public static final int txtUsername=0x7f050003;
     }
     public static final class layout {

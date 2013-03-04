@@ -9,6 +9,12 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:id="@+id/listView1" />
+    <TextView
+        android:text="Device ID:"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/txtDeviceId" />
     <Button
         android:text="De-register Device"
         android:layout_width="fill_parent"

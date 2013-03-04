@@ -46,6 +46,7 @@ namespace ComputeAndroidApp {
             new UserWS.UserSvc().ModifyUserDevice(App.GetAuthToken(context, App.GetUsername(context), App.GetPassword(context), App.GetDeviceId(context)), registrationId, App.GetDeviceId(context), true);
 
             new UserWS.UserSvc().MarkDeviceActive(App.GetAuthToken(context), App.GetDeviceId(context), true);
+            App.GetServiceBinder().GetService().StartCommFetch();
         }
 
         protected override void OnUnRegistered(Context context, string registrationId) {

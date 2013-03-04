@@ -19,13 +19,13 @@
         <AssociationConnector Association="marcdissertation_dbModel.FKDeviceIdAccess" />
         <EntityTypeShape EntityType="marcdissertation_dbModel.ActiveDevice" Width="1.5" PointX="5.9188616154337588" PointY="27.851930228924346" />
         <AssociationConnector Association="marcdissertation_dbModel.FKDeviceIdActive" />
-        <EntityTypeShape EntityType="marcdissertation_dbModel.CommunicationPackage" Width="1.5" PointX="4.6061369854054117" PointY="0.055614307548671173" />
-        <AssociationConnector Association="marcdissertation_dbModel.FKTgtDeviceId" />
         <EntityTypeShape EntityType="marcdissertation_dbModel.WorkOrder" Width="1.5" PointX="7.7707044909571783" PointY="9.5855211958221727" />
-        <AssociationConnector Association="marcdissertation_dbModel.FKWorkOrderID" />
         <AssociationConnector Association="marcdissertation_dbModel.FKDeviceId" />
         <AssociationConnector Association="marcdissertation_dbModel.FKSlaveWorkerID" />
         <AssociationConnector Association="marcdissertation_dbModel.FKApplicationId" />
+        <EntityTypeShape EntityType="marcdissertation_dbModel.CommunicationPackage" Width="1.5" PointX="6.25" PointY="12.375" />
+        <AssociationConnector Association="marcdissertation_dbModel.FKTgtDeviceId" />
+        <AssociationConnector Association="marcdissertation_dbModel.FKWorkOrderID" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

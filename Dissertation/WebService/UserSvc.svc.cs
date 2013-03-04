@@ -32,8 +32,8 @@ namespace WebService {
 
             //TODO: Fix auth here
 //            AuthenticationToken oAt = new AuthSvc().AuthUser(at);
-
-            return BusinessLayer.UserDevice.AddUserDevice(username, deviceType, deviceMemoryResource, deviceProcRating);
+            BusinessLayer.UserDevice ud = BusinessLayer.UserDevice.AddUserDevice(username, deviceType, deviceMemoryResource, deviceProcRating);
+            return ud;
         }
 
 

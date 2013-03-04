@@ -6,6 +6,7 @@ using System.Text;
 namespace BusinessLayer {
     [Serializable()]
     public partial class UserDevice {
+      [NonSerialized]
         public marcdissertation_dbEntities context;
 
         public static UserDevice Populate(int deviceId) {

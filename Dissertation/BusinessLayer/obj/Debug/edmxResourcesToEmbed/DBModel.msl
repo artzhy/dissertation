@@ -74,23 +74,9 @@
     <EntitySetMapping Name="ActiveDevices">
       <EntityTypeMapping TypeName="marcdissertation_dbModel.ActiveDevice">
         <MappingFragment StoreEntitySet="ActiveDevice">
+          <ScalarProperty Name="LastFetch" ColumnName="LastFetch" />
           <ScalarProperty Name="LastActiveSend" ColumnName="LastActiveSend" />
           <ScalarProperty Name="DeviceId" ColumnName="DeviceId" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="CommunicationPackages">
-      <EntityTypeMapping TypeName="marcdissertation_dbModel.CommunicationPackage">
-        <MappingFragment StoreEntitySet="CommunicationPackage">
-          <ScalarProperty Name="SendAttempts" ColumnName="SendAttempts" />
-          <ScalarProperty Name="Status" ColumnName="Status" />
-          <ScalarProperty Name="Response" ColumnName="Response" />
-          <ScalarProperty Name="DateAcknowledged" ColumnName="DateAcknowledged" />
-          <ScalarProperty Name="SubmitDate" ColumnName="SubmitDate" />
-          <ScalarProperty Name="TargetDeviceId" ColumnName="TargetDeviceId" />
-          <ScalarProperty Name="WorkOrderId" ColumnName="WorkOrderId" />
-          <ScalarProperty Name="CommunicationType" ColumnName="CommunicationType" />
-          <ScalarProperty Name="CommunicationId" ColumnName="CommunicationId" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -110,6 +96,21 @@
           <ScalarProperty Name="ApplicationId" ColumnName="ApplicationId" />
           <ScalarProperty Name="DeviceId" ColumnName="DeviceId" />
           <ScalarProperty Name="WorkOrderId" ColumnName="WorkOrderId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CommunicationPackages">
+      <EntityTypeMapping TypeName="marcdissertation_dbModel.CommunicationPackage">
+        <MappingFragment StoreEntitySet="CommunicationPackage">
+          <ScalarProperty Name="SendAttempts" ColumnName="SendAttempts" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="Response" ColumnName="Response" />
+          <ScalarProperty Name="DateAcknowledged" ColumnName="DateAcknowledged" />
+          <ScalarProperty Name="SubmitDate" ColumnName="SubmitDate" />
+          <ScalarProperty Name="TargetDeviceId" ColumnName="TargetDeviceId" />
+          <ScalarProperty Name="WorkOrderId" ColumnName="WorkOrderId" />
+          <ScalarProperty Name="CommunicationType" ColumnName="CommunicationType" />
+          <ScalarProperty Name="CommunicationId" ColumnName="CommunicationId" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

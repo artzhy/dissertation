@@ -9,15 +9,14 @@ namespace BusinessLayer {
         public static UserDevice GetAvailableSlave(int appId) {
             try {
                 marcdissertation_dbEntities ctxt = new marcdissertation_dbEntities();
-                UserDevice ud = (from x in ctxt.ActiveDevices
-                                 where x.UserDevice.DeviceAppInstallations.Select(z => z.ApplicationId == appId).Count() > 0
-                                 orderby x.LastActiveSend ascending
-                                 select x.UserDevice).First();
 
-                //(x.UserDevice.WorkOrders.Select(y => y.WorkOrderStatus != "RESULT_RECEIVED").Count() < 5) && 
+                IQueryable<UserDevice> uds = (from x in ctxt.ActiveDevices
+                                 where (x.UserDevice.DeviceAppInstallations.Count(z => z.ApplicationId == appId) > 0) && x.UserDevice.CommunicationPackages.Count(y => y.Status == null && y.Response == null) < App.MAX_COMMS_SLAVE_QUEUED
+                                 orderby x.LastFetch ascending
+                                 select x.UserDevice);
 
-                return ud;
-            } catch (Exception) {
+                return uds.First();
+            } catch (Exception e) {
                 throw new Exception("No Device Available");
             }
         }
@@ -26,9 +25,11 @@ namespace BusinessLayer {
             DateTime dateToUse = DateTime.Now.AddSeconds(-timePeriodSecs);
             marcdissertation_dbEntities ctxt = new marcdissertation_dbEntities();
 
-            return (from x in ctxt.CommunicationPackages
-                    where x.DateAcknowledged == null && x.Status == null && x.SubmitDate <= dateToUse  
-                    select x).ToList();
+            List<CommunicationPackage> unAcked = (from x in ctxt.CommunicationPackages
+                                                  where x.DateAcknowledged == null && x.Status == null && x.SubmitDate <= dateToUse
+                                                  select x).ToList();
+
+            return unAcked;
 
          
         }

@@ -11,6 +11,8 @@ namespace BusinessLayer {
     [KnownType(typeof(marcdissertation_dbEntities))]
     public partial class CommunicationPackage {
         private static IEnumerable<System.Data.Entity.Validation.DbEntityValidationResult> errors;
+         
+         [NonSerialized]
          [JsonIgnoreAttribute]
         public marcdissertation_dbEntities context;
 
@@ -18,7 +20,9 @@ namespace BusinessLayer {
             Result,
             UpdateRequest,
             Error,
-            NewWorkOrder
+            NewWorkOrder,
+            Cancel,
+            FetchRequest
         }
 
         public static CommunicationPackage Populate(int communicationId) {
@@ -37,7 +41,7 @@ namespace BusinessLayer {
 
         }
 
-        public static CommunicationPackage CreateCommunication(int deviceId, UpdateType commType, int workOrderId) {
+        public static CommunicationPackage CreateCommunication(int deviceId, UpdateType commType, int? workOrderId) {
             CommunicationPackage comm = new CommunicationPackage();
             comm.TargetDeviceId = deviceId;
             comm.CommunicationType = (int)commType;
@@ -54,6 +58,35 @@ namespace BusinessLayer {
                 throw App.ExceptionFormatter(errors);
             }
             return comm;
+        }
+
+        public static CommunicationPackage CreateFetchRequest(int deviceId) {
+            // Check there isn't one that already exists and isn't acked yet.
+            marcdissertation_dbEntities ctxt = new marcdissertation_dbEntities();
+            if (ctxt.CommunicationPackages.Where(x => x.TargetDeviceId == deviceId && x.CommunicationType == (int)UpdateType.FetchRequest && x.Status == null && x.Response == null).Count() == 0) {
+                // Create new
+                CommunicationPackage comm = new CommunicationPackage();
+                comm.TargetDeviceId = deviceId;
+                comm.CommunicationType = (int)UpdateType.FetchRequest;
+                comm.SubmitDate = DateTime.Now;
+                comm.WorkOrderId = null;
+                comm.context = ctxt;
+
+                comm = comm.context.CommunicationPackages.Add(comm);
+                errors = comm.context.GetValidationErrors();
+
+                try {
+                    comm.context.SaveChanges();
+                } catch {
+                    throw App.ExceptionFormatter(errors);
+                }
+                return comm;
+
+            } else {
+                CommunicationPackage comm =ctxt.CommunicationPackages.Where(x => x.TargetDeviceId == deviceId && x.CommunicationType == (int)UpdateType.FetchRequest && x.Status == null && x.Response == null).First();
+                comm.context = ctxt;
+                return comm;
+            }
         }
 
         public void Save() {
@@ -94,7 +127,7 @@ namespace BusinessLayer {
 
         public static List<CommunicationPackage> GetTargetDeviceCommunications(int deviceId) {
             marcdissertation_dbEntities ctxt = new marcdissertation_dbEntities();
-            List<CommunicationPackage> cps = (from x in ctxt.CommunicationPackages where x.TargetDeviceId == 9 && x.Response == null && x.Status == null select x).ToList();
+            List<CommunicationPackage> cps = (from x in ctxt.CommunicationPackages where x.TargetDeviceId == deviceId && x.Response == null && x.Status == null select x).ToList();
             
 
             return cps;

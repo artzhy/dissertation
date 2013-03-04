@@ -9,6 +9,7 @@ namespace BusinessLayer {
     [KnownType(typeof(CommunicationPackage))]
     public partial class WorkOrder {
         private static IEnumerable<System.Data.Entity.Validation.DbEntityValidationResult> errors;
+        [NonSerialized]
         public marcdissertation_dbEntities context;
         public static WorkOrder Populate(int workOrderId) {
             try {

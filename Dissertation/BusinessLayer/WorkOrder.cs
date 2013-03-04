@@ -33,9 +33,9 @@ namespace BusinessLayer
         public Nullable<System.DateTime> EndComputationTime { get; set; }
         public int LocalDeviceId { get; set; }
     
-        public virtual ICollection<CommunicationPackage> CommunicationPackages { get; set; }
         public virtual UserDevice UserDevice { get; set; }
         public virtual UserDevice UserDevice1 { get; set; }
         public virtual WorkApplication WorkApplication { get; set; }
+        public virtual ICollection<CommunicationPackage> CommunicationPackages { get; set; }
     }
 }

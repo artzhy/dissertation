@@ -16,6 +16,7 @@ namespace BusinessLayer
     {
         public int DeviceId { get; set; }
         public System.DateTime LastActiveSend { get; set; }
+        public System.DateTime LastFetch { get; set; }
     
         public virtual UserDevice UserDevice { get; set; }
     }

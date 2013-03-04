@@ -32,7 +32,7 @@ namespace BusinessLayer
         public DbSet<AuthenticationToken> AuthenticationTokens { get; set; }
         public DbSet<DeviceAccessRestriction> DeviceAccessRestrictions { get; set; }
         public DbSet<ActiveDevice> ActiveDevices { get; set; }
-        public DbSet<CommunicationPackage> CommunicationPackages { get; set; }
         public DbSet<WorkOrder> WorkOrders { get; set; }
+        public DbSet<CommunicationPackage> CommunicationPackages { get; set; }
     }
 }

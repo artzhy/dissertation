@@ -7,6 +7,7 @@ namespace BusinessLayer {
     [Serializable()]
     public partial class WorkApplication {
         private static IEnumerable<System.Data.Entity.Validation.DbEntityValidationResult> errors;
+        [NonSerialized]
         private marcdissertation_dbEntities context;
 
 

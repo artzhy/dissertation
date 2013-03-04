@@ -8,6 +8,7 @@ using System.Security.Cryptography;
 namespace BusinessLayer {
     [Serializable()]
     public partial class AuthenticationToken {
+        [NonSerialized]
         private marcdissertation_dbEntities context;
 
         public static AuthenticationToken Populate(String tokenId) {

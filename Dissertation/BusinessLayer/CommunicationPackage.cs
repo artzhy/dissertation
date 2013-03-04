@@ -16,7 +16,7 @@ namespace BusinessLayer
     {
         public int CommunicationId { get; set; }
         public int CommunicationType { get; set; }
-        public int WorkOrderId { get; set; }
+        public Nullable<int> WorkOrderId { get; set; }
         public int TargetDeviceId { get; set; }
         public System.DateTime SubmitDate { get; set; }
         public Nullable<System.DateTime> DateAcknowledged { get; set; }

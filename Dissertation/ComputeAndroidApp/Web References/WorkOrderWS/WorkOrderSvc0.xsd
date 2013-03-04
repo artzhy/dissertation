@@ -21,7 +21,6 @@
       <xs:element name="_x003C_WorkOrderId_x003E_k__BackingField" type="xs:int" />
       <xs:element name="_x003C_WorkOrderResultJson_x003E_k__BackingField" nillable="true" type="xs:string" />
       <xs:element name="_x003C_WorkOrderStatus_x003E_k__BackingField" nillable="true" type="xs:string" />
-      <xs:element name="context" nillable="true" type="tns:marcdissertation_dbEntities" />
     </xs:sequence>
   </xs:complexType>
   <xs:element name="WorkOrder" nillable="true" type="tns:WorkOrder" />
@@ -41,8 +40,7 @@
       <xs:element name="_x003C_Status_x003E_k__BackingField" nillable="true" type="xs:string" />
       <xs:element name="_x003C_SubmitDate_x003E_k__BackingField" type="xs:dateTime" />
       <xs:element name="_x003C_TargetDeviceId_x003E_k__BackingField" type="xs:int" />
-      <xs:element name="_x003C_WorkOrderId_x003E_k__BackingField" type="xs:int" />
-      <xs:element name="context" nillable="true" type="tns:marcdissertation_dbEntities" />
+      <xs:element name="_x003C_WorkOrderId_x003E_k__BackingField" nillable="true" type="xs:int" />
     </xs:sequence>
   </xs:complexType>
   <xs:element name="CommunicationPackage" nillable="true" type="tns:CommunicationPackage" />
@@ -74,8 +72,8 @@
     <xs:sequence>
       <xs:element name="_x003C_DeviceId_x003E_k__BackingField" type="xs:int" />
       <xs:element name="_x003C_LastActiveSend_x003E_k__BackingField" type="xs:dateTime" />
+      <xs:element name="_x003C_LastFetch_x003E_k__BackingField" type="xs:dateTime" />
       <xs:element name="_x003C_UserDevice_x003E_k__BackingField" nillable="true" type="tns:UserDevice" />
-      <xs:element name="context" nillable="true" type="tns:marcdissertation_dbEntities" />
     </xs:sequence>
   </xs:complexType>
   <xs:element name="ActiveDevice" nillable="true" type="tns:ActiveDevice" />
@@ -95,7 +93,6 @@
       <xs:element name="_x003C_Username_x003E_k__BackingField" nillable="true" type="xs:string" />
       <xs:element name="_x003C_WorkOrders1_x003E_k__BackingField" nillable="true" type="tns:ArrayOfWorkOrder" />
       <xs:element name="_x003C_WorkOrders_x003E_k__BackingField" nillable="true" type="tns:ArrayOfWorkOrder" />
-      <xs:element name="context" nillable="true" type="tns:marcdissertation_dbEntities" />
     </xs:sequence>
   </xs:complexType>
   <xs:element name="UserDevice" nillable="true" type="tns:UserDevice" />
@@ -108,7 +105,6 @@
       <xs:element name="_x003C_UserDevice_x003E_k__BackingField" nillable="true" type="tns:UserDevice" />
       <xs:element name="_x003C_User_x003E_k__BackingField" nillable="true" type="tns:User" />
       <xs:element name="_x003C_Username_x003E_k__BackingField" nillable="true" type="xs:string" />
-      <xs:element name="context" nillable="true" type="tns:marcdissertation_dbEntities" />
     </xs:sequence>
   </xs:complexType>
   <xs:element name="AuthenticationToken" nillable="true" type="tns:AuthenticationToken" />
@@ -121,7 +117,6 @@
       <xs:element name="_x003C_UserDevices_x003E_k__BackingField" nillable="true" type="tns:ArrayOfUserDevice" />
       <xs:element name="_x003C_UserId_x003E_k__BackingField" type="xs:int" />
       <xs:element name="_x003C_Username_x003E_k__BackingField" nillable="true" type="xs:string" />
-      <xs:element name="context" nillable="true" type="tns:marcdissertation_dbEntities" />
     </xs:sequence>
   </xs:complexType>
   <xs:element name="User" nillable="true" type="tns:User" />
@@ -151,7 +146,6 @@
       <xs:element name="_x003C_EndTime_x003E_k__BackingField" type="ser:duration" />
       <xs:element name="_x003C_StartTime_x003E_k__BackingField" type="ser:duration" />
       <xs:element name="_x003C_UserDevice_x003E_k__BackingField" nillable="true" type="tns:UserDevice" />
-      <xs:element name="context" nillable="true" type="tns:marcdissertation_dbEntities" />
     </xs:sequence>
   </xs:complexType>
   <xs:element name="DeviceAccessRestriction" nillable="true" type="tns:DeviceAccessRestriction" />
@@ -169,7 +163,6 @@
       <xs:element name="_x003C_InstallDate_x003E_k__BackingField" type="xs:dateTime" />
       <xs:element name="_x003C_UserDevice_x003E_k__BackingField" nillable="true" type="tns:UserDevice" />
       <xs:element name="_x003C_WorkApplication_x003E_k__BackingField" nillable="true" type="tns:WorkApplication" />
-      <xs:element name="context" nillable="true" type="tns:marcdissertation_dbEntities" />
     </xs:sequence>
   </xs:complexType>
   <xs:element name="DeviceAppInstallation" nillable="true" type="tns:DeviceAppInstallation" />
@@ -186,7 +179,6 @@
       <xs:element name="_x003C_ApplicationWorkIntent_x003E_k__BackingField" nillable="true" type="xs:string" />
       <xs:element name="_x003C_DeviceAppInstallations_x003E_k__BackingField" nillable="true" type="tns:ArrayOfDeviceAppInstallation" />
       <xs:element name="_x003C_WorkOrders_x003E_k__BackingField" nillable="true" type="tns:ArrayOfWorkOrder" />
-      <xs:element name="context" nillable="true" type="tns:marcdissertation_dbEntities" />
     </xs:sequence>
   </xs:complexType>
   <xs:element name="WorkApplication" nillable="true" type="tns:WorkApplication" />

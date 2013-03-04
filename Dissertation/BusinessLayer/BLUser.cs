@@ -7,6 +7,7 @@ namespace BusinessLayer {
     [Serializable()]
     public partial class User {
         private static IEnumerable<System.Data.Entity.Validation.DbEntityValidationResult> errors;
+        [NonSerialized]
         public marcdissertation_dbEntities context;
 
         public static User Populate(string username) {

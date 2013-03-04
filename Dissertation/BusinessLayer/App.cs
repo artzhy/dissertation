@@ -7,6 +7,8 @@ namespace BusinessLayer
 {
     class App
     {
+
+        public const int MAX_COMMS_SLAVE_QUEUED = 10;
         //public static marcdissertation_dbEntities _DbContext;
 
         //public static marcdissertation_dbEntities DbContext {

@@ -7,6 +7,7 @@ namespace BusinessLayer {
     [Serializable]
     public partial class ActiveDevice {
         private static IEnumerable<System.Data.Entity.Validation.DbEntityValidationResult> errors;
+        [NonSerialized]
         public marcdissertation_dbEntities context;
 
             public static ActiveDevice Populate(int deviceId) {
@@ -42,6 +43,7 @@ namespace BusinessLayer {
 
                 ad.DeviceId = deviceId;
                 ad.LastActiveSend = DateTime.Now;
+                ad.LastFetch = DateTime.Now.AddMinutes(-3);
 
                 ad = ad.context.ActiveDevices.Add(ad);
                 errors = ad.context.GetValidationErrors();

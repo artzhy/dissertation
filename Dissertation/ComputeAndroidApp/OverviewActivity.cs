@@ -19,6 +19,10 @@ namespace ComputeAndroidApp {
             SetContentView(Resource.Layout.Overview);
 
             Button btnDeregisterDevice = FindViewById<Button>(Resource.Id.btnDeregisterDevice);
+            TextView tv = FindViewById<TextView>(Resource.Id.txtDeviceId);
+
+            tv.Text = "Device ID: " + App.GetDeviceId(this);
+
 
             btnDeregisterDevice.Click += btnDeregisterDevice_Click;
 

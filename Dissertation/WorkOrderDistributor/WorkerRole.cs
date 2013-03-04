@@ -35,21 +35,24 @@ namespace WorkOrderDistributor {
 
         bool IsStopped;
 
-
         public enum UpdateType {
             Result,
             UpdateRequest,
             Error,
             NewWorkOrder,
-            Cancel
+            Cancel,
+            FetchRequest
         }
-
 
         public override void Run() {
             while (!IsStopped) {
                 try {
                     // Remove completed tasks.
                     RemoveCompletedTasks();
+
+                    if (!PackageSweepOccuring) {
+                        DoCommPackageSweep();
+                    }
 
                     if (TaskList.Count < 10) {
                         var taskProcessNew = Task.Factory.StartNew(() => ProcessNewWorkOrders());
@@ -63,9 +66,7 @@ namespace WorkOrderDistributor {
                         Task.WaitAny(TaskList.ToArray());
                     }
 
-                    if (PackageSweepLastDone <= DateTime.Now.AddSeconds(-45) && !PackageSweepOccuring) {
-                        DoCommPackageSweep();
-                    }
+                   
                 } catch (MessagingException e) {
                     if (!e.IsTransient) {
                         Trace.WriteLine(e.Message);
@@ -85,68 +86,24 @@ namespace WorkOrderDistributor {
         private void DoCommPackageSweep() {
             PackageSweepOccuring = true;
 
-            List<CommunicationPackage> unAckedPackages = Scheduler.GetUnacknowledgedPackages(180);
-            foreach (CommunicationPackage pkg in unAckedPackages) {
-                CommunicationPackage oPkg = CommunicationPackage.Populate(pkg.CommunicationId);
-                CommunicationPackages.Send(new BrokeredMessage(oPkg.Serialize()));
-            }
+            List<CommunicationPackage> unAckedPackages = Scheduler.GetUnacknowledgedPackages(20);
 
             
-            //foreach (CommunicationPackage pkg in unAckedPackages) {
+            foreach(CommunicationPackage cp in unAckedPackages.FindAll(x=>x.CommunicationType == (int) CommunicationPackage.UpdateType.FetchRequest)) {
+                // Mark as superseded - will create a new one.
+                CommunicationPackage updatableCp = CommunicationPackage.Populate(cp.CommunicationId);
+                updatableCp.Status = "SUPERSEDED";
+                updatableCp.Save();
+                unAckedPackages.Remove(cp);
+            }
+
+            // Get devices that have outstanding comm packages
 
 
 
-            //    // If new WO/update request, re-schedule WO
-            //    if ((UpdateType)pkg.CommunicationType == UpdateType.NewWorkOrder || (UpdateType)pkg.CommunicationType == UpdateType.UpdateRequest) {
-
-            //        try {
-            //            // Set old comm package status to cancelled
-            //            CommunicationPackage oPkg = CommunicationPackage.Populate(pkg.CommunicationId);
-
-            //            if (oPkg.SendAttempts < 3) {
-            //                CommunicationPackages.Send(new BrokeredMessage(oPkg.Serialize()));
-            //            } else {
-            //                try {
-            //                    WorkOrder wo = WorkOrder.Populate(pkg.WorkOrderId);
-            //                    wo.SlaveWorkerId = GetAvailableDevice(wo.ApplicationId);
-            //                    wo.Save();
-
-            //                    oPkg.Status = "CANCELLED";
-            //                    oPkg.Save();
-
-            //                    // Create new comm package and send
-            //                    CommunicationPackage cp = CommunicationPackage.CreateCommunication((int)wo.SlaveWorkerId, CommunicationPackage.UpdateType.NewWorkOrder, wo.WorkOrderId);
-
-            //                    CommunicationPackages.Send(new BrokeredMessage(cp.Serialize()));
-
-            //                } catch {
-            //                    // Error likely to be sent here due to being unable to find a slave worker.
-            //                    Debug.WriteLine("Unable to find suitable slave.  For WO: " + oPkg.WorkOrderId);
-            //                }
-            //            }
-
-            //        } catch (Exception) {
-            //            // Dont do anything - most likely cause of this is due to no device available to submit to.
-            //        }
-
-            //    // If result/cancel, re-send package
-            //    } else if ((UpdateType)pkg.CommunicationType == UpdateType.Result || (UpdateType)pkg.CommunicationType == UpdateType.Cancel) {
-
-            //        if (pkg.SendAttempts <= 3) {
-            //            // Retry, otherwise do nothing
-            //            CommunicationPackages.Send(new BrokeredMessage(pkg.Serialize()));
-            //        }    
-            //    }
-
-            //    try {
-            //        // Remove device from active list
-            //        // We can do this as devices will notify that they are active if this is true every X seconds.
-            //  //      ActiveDevice.Populate(pkg.TargetDeviceId).Delete();
-
-            //    } catch {
-            //        //Dont do anything - may already be deleted.
-            //    }
-            //}
+            foreach (CommunicationPackage cp in unAckedPackages) {
+                CommunicationPackages.Send(new BrokeredMessage(cp.Serialize()));
+            }
 
             PackageSweepOccuring = false;
             PackageSweepLastDone = DateTime.Now;
@@ -180,7 +137,7 @@ namespace WorkOrderDistributor {
                 WorkOrder wo = WorkOrder.Populate(newWorkOrderMessage.GetBody<int>());
 
                 try {
-                    wo.SlaveWorkerId = GetAvailableDevice(wo.ApplicationId);
+                    wo.SlaveWorkerId = BusinessLayer.Scheduler.GetAvailableSlave(wo.ApplicationId).DeviceId;
                     wo.Save();
 
                     CommunicationPackage cp = CommunicationPackage.CreateCommunication((int)wo.SlaveWorkerId, CommunicationPackage.UpdateType.NewWorkOrder, wo.WorkOrderId);
@@ -192,17 +149,12 @@ namespace WorkOrderDistributor {
 
                 } catch {
                    // No device available requeue the work order.
-
-                    NewWorkOrders.Send(new BrokeredMessage(wo.SlaveWorkerId));
+                    NewWorkOrders.Send(new BrokeredMessage(wo.WorkOrderId));
 
                 }
 
                 newWorkOrderMessage.Complete();
             }
-        }
-
-        private int GetAvailableDevice(int appId) {
-            return BusinessLayer.Scheduler.GetAvailableSlave(appId).DeviceId;
         }
 
         private void ProcessUpdatedWorkOrders() {
@@ -248,7 +200,7 @@ namespace WorkOrderDistributor {
 
                             CommunicationPackage cp = CommunicationPackage.CreateCommunication(wo.DeviceId, CommunicationPackage.UpdateType.Result, wo.WorkOrderId);
 
-                            CommunicationPackages.Send(new BrokeredMessage(cp.Serialize()));
+                         //   CommunicationPackages.Send(new BrokeredMessage(cp.Serialize()));
 
 
                             //TODO: Send new WO to the slave device
@@ -276,21 +228,45 @@ namespace WorkOrderDistributor {
                 commMessage = CommunicationPackages.Receive();
 
                 if (commMessage != null) {
+                    string cpSerialized = commMessage.GetBody<string>();
+                    CommunicationPackage cp = Newtonsoft.Json.JsonConvert.DeserializeObject<CommunicationPackage>(cpSerialized);
+                    UserDevice ud = UserDevice.Populate(cp.TargetDeviceId);
 
-                    CommunicationPackage cp = Newtonsoft.Json.JsonConvert.DeserializeObject<CommunicationPackage>(commMessage.GetBody<String>());
-                    CommunicationPackage oCP = CommunicationPackage.Populate(cp.CommunicationId);
-                    oCP.SendAttempts++;
-                    oCP.Save();
-
-                    UserDevice targetUD = UserDevice.Populate(cp.TargetDeviceId);
-                    // If the last send was less than 3 mins ago, send a GCM message
-                    if (targetUD.ActiveDevice.LastActiveSend < DateTime.Now.AddMinutes(-3)) {
-                        Pusher.SendNotification(targetUD.GCMCode, cp.Serialize());
+                    ActiveDevice ad;
+                    // Have to try and catch the exception, since might not exist in the current context
+                    try {
+                        ad = ActiveDevice.Populate(ud.DeviceId);
+                    } catch (Exception) {
+                        ad = null;
                     }
 
-                    commMessage.Complete();
+                    CommunicationPackage fetchRequest = CommunicationPackage.CreateFetchRequest(cp.TargetDeviceId);
 
-                    Debug.WriteLine("Communication ID: " + cp.CommunicationId + " sent.");
+                    // If last fetch from device was less than 3 mins ago, don't send GCM 
+                    if (ad != null && ad.LastFetch < DateTime.Now.AddMinutes(-1)) {
+                        // Send GCM
+                        if (fetchRequest.SendAttempts < 3) {
+                            Pusher.SendNotification(ud.GCMCode, fetchRequest.Serialize());
+                            fetchRequest.SendAttempts++;
+                            fetchRequest.Save();
+
+                            try {
+                                ad.Delete();
+                            } catch {
+
+                            }
+                        } else {
+                            // If not results, then change 
+                            // If results, re-arrange WO
+                        }
+                    } 
+
+                    // handle if less than 10 ... etc..
+
+
+
+
+                    commMessage.Complete();
                 }
             } catch (Exception e) {
                 Debug.WriteLine(e.Message);

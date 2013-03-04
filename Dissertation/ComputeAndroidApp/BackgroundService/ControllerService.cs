@@ -43,7 +43,8 @@ namespace ComputeAndroidApp.BackgroundService {
             UpdateRequest,
             Error,
             NewWorkOrder,
-            Cancel
+            Cancel,
+            FetchRequest
         }
 
         public void FetchComms() {
@@ -66,7 +67,7 @@ namespace ComputeAndroidApp.BackgroundService {
 
                     foreach (WorkOrderWS.CommunicationPackage cp in cps) {
                         UpdateType ut = (UpdateType)cp.CommunicationTypek__BackingField;
-                        int workOrderId = cp.WorkOrderIdk__BackingField;
+                        int? workOrderId = cp.WorkOrderIdk__BackingField;
                         int commId = cp.CommunicationIdk__BackingField;
 
                         Log.Info(BroadcastReceiver.TAG, "Handling comm id: " + commId);
@@ -76,18 +77,18 @@ namespace ComputeAndroidApp.BackgroundService {
                         App.UpdateLastTransmit();
 
                         if (ut == UpdateType.NewWorkOrder) {
-                            AddSlaveWorkItem(workOrderId);
+                            AddSlaveWorkItem(workOrderId.Value);
                             Log.Info(BroadcastReceiver.TAG, "Handling new work order id: " + workOrderId);
                         } else if (ut == UpdateType.Result) {
-                            ReceiveWorkOrderResult(workOrderId);
+                            ReceiveWorkOrderResult(workOrderId.Value);
                             Log.Info(BroadcastReceiver.TAG, "Handling result work order id: " + workOrderId);
                         } else if (ut == UpdateType.UpdateRequest) {
                             //TODO: Handle update request
 
-                            // Speak to background portion of UI
-
                         } else if (ut == UpdateType.Cancel) {
                             //TODO: Handle cancel request
+
+                        } else if (ut == UpdateType.FetchRequest) {
 
                         }
                     }

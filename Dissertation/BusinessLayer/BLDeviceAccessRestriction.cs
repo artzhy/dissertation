@@ -7,7 +7,9 @@ namespace BusinessLayer {
     [Serializable]
     public partial class DeviceAccessRestriction {
         private static IEnumerable<System.Data.Entity.Validation.DbEntityValidationResult> errors;
+        [NonSerialized]
         private marcdissertation_dbEntities context;
+
         public static DeviceAccessRestriction Populate(int accessRestrictionId) {
             try {
                 marcdissertation_dbEntities ctxt = new marcdissertation_dbEntities();

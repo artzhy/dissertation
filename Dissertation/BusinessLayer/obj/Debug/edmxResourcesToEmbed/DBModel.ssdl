@@ -1,15 +1,15 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Schema Namespace="marcdissertation_dbModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+<Schema Namespace="marcdissertation_dbModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
   <EntityContainer Name="marcdissertation_dbModelStoreContainer">
-    <EntitySet Name="ActiveDevice" EntityType="marcdissertation_dbModel.Store.ActiveDevice" store:Type="Tables" Schema="dbo" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
-    <EntitySet Name="AuthenticationToken" EntityType="marcdissertation_dbModel.Store.AuthenticationToken" store:Type="Tables" Schema="dbo" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
-    <EntitySet Name="CommunicationPackage" EntityType="marcdissertation_dbModel.Store.CommunicationPackage" store:Type="Tables" Schema="dbo" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
-    <EntitySet Name="DeviceAccessRestriction" EntityType="marcdissertation_dbModel.Store.DeviceAccessRestriction" store:Type="Tables" Schema="dbo" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
-    <EntitySet Name="DeviceAppInstallation" EntityType="marcdissertation_dbModel.Store.DeviceAppInstallation" store:Type="Tables" Schema="dbo" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
-    <EntitySet Name="User" EntityType="marcdissertation_dbModel.Store.User" store:Type="Tables" Schema="dbo" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
-    <EntitySet Name="UserDevice" EntityType="marcdissertation_dbModel.Store.UserDevice" store:Type="Tables" Schema="dbo" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
-    <EntitySet Name="WorkApplication" EntityType="marcdissertation_dbModel.Store.WorkApplication" store:Type="Tables" Schema="dbo" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
-    <EntitySet Name="WorkOrder" EntityType="marcdissertation_dbModel.Store.WorkOrder" store:Type="Tables" Schema="dbo" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+    <EntitySet Name="ActiveDevice" EntityType="marcdissertation_dbModel.Store.ActiveDevice" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="AuthenticationToken" EntityType="marcdissertation_dbModel.Store.AuthenticationToken" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="CommunicationPackage" EntityType="marcdissertation_dbModel.Store.CommunicationPackage" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="DeviceAccessRestriction" EntityType="marcdissertation_dbModel.Store.DeviceAccessRestriction" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="DeviceAppInstallation" EntityType="marcdissertation_dbModel.Store.DeviceAppInstallation" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="User" EntityType="marcdissertation_dbModel.Store.User" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="UserDevice" EntityType="marcdissertation_dbModel.Store.UserDevice" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="WorkApplication" EntityType="marcdissertation_dbModel.Store.WorkApplication" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="WorkOrder" EntityType="marcdissertation_dbModel.Store.WorkOrder" store:Type="Tables" Schema="dbo" />
     <AssociationSet Name="FK_AuthenticationToken_0" Association="marcdissertation_dbModel.Store.FK_AuthenticationToken_0">
       <End Role="User" EntitySet="User" />
       <End Role="AuthenticationToken" EntitySet="AuthenticationToken" />
@@ -65,6 +65,7 @@
     </Key>
     <Property Name="DeviceId" Type="int" Nullable="false" />
     <Property Name="LastActiveSend" Type="datetime" Nullable="false" />
+    <Property Name="LastFetch" Type="datetime" Nullable="false" />
   </EntityType>
   <EntityType Name="AuthenticationToken">
     <Key>
@@ -82,7 +83,7 @@
     </Key>
     <Property Name="CommunicationId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
     <Property Name="CommunicationType" Type="int" Nullable="false" />
-    <Property Name="WorkOrderId" Type="int" Nullable="false" />
+    <Property Name="WorkOrderId" Type="int" />
     <Property Name="TargetDeviceId" Type="int" Nullable="false" />
     <Property Name="SubmitDate" Type="datetime" Nullable="false" />
     <Property Name="DateAcknowledged" Type="datetime" />
@@ -285,7 +286,7 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FKWorkOrderID">
-    <End Role="WorkOrder" Type="marcdissertation_dbModel.Store.WorkOrder" Multiplicity="1" />
+    <End Role="WorkOrder" Type="marcdissertation_dbModel.Store.WorkOrder" Multiplicity="0..1" />
     <End Role="CommunicationPackage" Type="marcdissertation_dbModel.Store.CommunicationPackage" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="WorkOrder">

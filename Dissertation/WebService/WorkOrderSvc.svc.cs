@@ -119,6 +119,10 @@ namespace WebService {
         public List<BusinessLayer.CommunicationPackage> GetOutstandingCommunications(String at, int deviceId) {
             BusinessLayer.AuthenticationToken oAt = new AuthSvc().AuthUser(at,-1,deviceId);
 
+            BusinessLayer.ActiveDevice ad = BusinessLayer.ActiveDevice.Populate(deviceId);
+            ad.LastFetch = DateTime.Now;
+            ad.Save();
+
             return BusinessLayer.CommunicationPackage.GetTargetDeviceCommunications(deviceId);
         }
 
