@@ -5,7 +5,8 @@
       <xsd:import schemaLocation="http://192.168.1.65/WebService/WorkOrderSvc.svc?xsd=xsd0" namespace="http://tempuri.org/" />
       <xsd:import schemaLocation="http://192.168.1.65/WebService/WorkOrderSvc.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
       <xsd:import schemaLocation="http://192.168.1.65/WebService/WorkOrderSvc.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/BusinessLayer" />
-      <xsd:import schemaLocation="http://192.168.1.65/WebService/WorkOrderSvc.svc?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/WebService" />
+      <xsd:import schemaLocation="http://192.168.1.65/WebService/WorkOrderSvc.svc?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/System.Data.Entity" />
+      <xsd:import schemaLocation="http://192.168.1.65/WebService/WorkOrderSvc.svc?xsd=xsd4" namespace="http://schemas.datacontract.org/2004/07/WebService" />
     </xsd:schema>
   </wsdl:types>
   <wsdl:message name="IWorkOrderSvc_CreateWorkOrder_InputMessage">
@@ -50,6 +51,12 @@
   <wsdl:message name="IWorkOrderSvc_AcknowledgeCommunication_OutputMessage">
     <wsdl:part name="parameters" element="tns:AcknowledgeCommunicationResponse" />
   </wsdl:message>
+  <wsdl:message name="IWorkOrderSvc_GetOutstandingCommunications_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetOutstandingCommunications" />
+  </wsdl:message>
+  <wsdl:message name="IWorkOrderSvc_GetOutstandingCommunications_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetOutstandingCommunicationsResponse" />
+  </wsdl:message>
   <wsdl:portType name="IWorkOrderSvc">
     <wsdl:operation name="CreateWorkOrder">
       <wsdl:input wsaw:Action="http://tempuri.org/IWorkOrderSvc/CreateWorkOrder" message="tns:IWorkOrderSvc_CreateWorkOrder_InputMessage" />
@@ -78,6 +85,10 @@
     <wsdl:operation name="AcknowledgeCommunication">
       <wsdl:input wsaw:Action="http://tempuri.org/IWorkOrderSvc/AcknowledgeCommunication" message="tns:IWorkOrderSvc_AcknowledgeCommunication_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IWorkOrderSvc/AcknowledgeCommunicationResponse" message="tns:IWorkOrderSvc_AcknowledgeCommunication_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetOutstandingCommunications">
+      <wsdl:input wsaw:Action="http://tempuri.org/IWorkOrderSvc/GetOutstandingCommunications" message="tns:IWorkOrderSvc_GetOutstandingCommunications_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IWorkOrderSvc/GetOutstandingCommunicationsResponse" message="tns:IWorkOrderSvc_GetOutstandingCommunications_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_IWorkOrderSvc" type="tns:IWorkOrderSvc">
@@ -138,6 +149,15 @@
     </wsdl:operation>
     <wsdl:operation name="AcknowledgeCommunication">
       <soap:operation soapAction="http://tempuri.org/IWorkOrderSvc/AcknowledgeCommunication" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetOutstandingCommunications">
+      <soap:operation soapAction="http://tempuri.org/IWorkOrderSvc/GetOutstandingCommunications" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

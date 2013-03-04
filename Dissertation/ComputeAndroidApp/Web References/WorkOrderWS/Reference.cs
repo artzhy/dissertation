@@ -27,6 +27,7 @@ namespace ComputeAndroidApp.WorkOrderWS {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Web.Services.WebServiceBindingAttribute(Name="BasicHttpBinding_IWorkOrderSvc", Namespace="http://tempuri.org/")]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(DbContext))]
     public partial class WorkOrderSvc : System.Web.Services.Protocols.SoapHttpClientProtocol {
         
         private System.Threading.SendOrPostCallback CreateWorkOrderOperationCompleted;
@@ -42,6 +43,8 @@ namespace ComputeAndroidApp.WorkOrderWS {
         private System.Threading.SendOrPostCallback MarkWorkOrderInComputationOperationCompleted;
         
         private System.Threading.SendOrPostCallback AcknowledgeCommunicationOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback GetOutstandingCommunicationsOperationCompleted;
         
         private bool useDefaultCredentialsSetExplicitly;
         
@@ -101,6 +104,9 @@ namespace ComputeAndroidApp.WorkOrderWS {
         
         /// <remarks/>
         public event AcknowledgeCommunicationCompletedEventHandler AcknowledgeCommunicationCompleted;
+        
+        /// <remarks/>
+        public event GetOutstandingCommunicationsCompletedEventHandler GetOutstandingCommunicationsCompleted;
         
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/IWorkOrderSvc/CreateWorkOrder", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
@@ -361,6 +367,41 @@ namespace ComputeAndroidApp.WorkOrderWS {
         }
         
         /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/IWorkOrderSvc/GetOutstandingCommunications", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        [return: System.Xml.Serialization.XmlArrayAttribute(IsNullable=true)]
+        [return: System.Xml.Serialization.XmlArrayItemAttribute(Namespace="http://schemas.datacontract.org/2004/07/BusinessLayer")]
+        public CommunicationPackage[] GetOutstandingCommunications([System.Xml.Serialization.XmlElementAttribute(IsNullable=true)] string at, int deviceId, [System.Xml.Serialization.XmlIgnoreAttribute()] bool deviceIdSpecified) {
+            object[] results = this.Invoke("GetOutstandingCommunications", new object[] {
+                        at,
+                        deviceId,
+                        deviceIdSpecified});
+            return ((CommunicationPackage[])(results[0]));
+        }
+        
+        /// <remarks/>
+        public void GetOutstandingCommunicationsAsync(string at, int deviceId, bool deviceIdSpecified) {
+            this.GetOutstandingCommunicationsAsync(at, deviceId, deviceIdSpecified, null);
+        }
+        
+        /// <remarks/>
+        public void GetOutstandingCommunicationsAsync(string at, int deviceId, bool deviceIdSpecified, object userState) {
+            if ((this.GetOutstandingCommunicationsOperationCompleted == null)) {
+                this.GetOutstandingCommunicationsOperationCompleted = new System.Threading.SendOrPostCallback(this.OnGetOutstandingCommunicationsOperationCompleted);
+            }
+            this.InvokeAsync("GetOutstandingCommunications", new object[] {
+                        at,
+                        deviceId,
+                        deviceIdSpecified}, this.GetOutstandingCommunicationsOperationCompleted, userState);
+        }
+        
+        private void OnGetOutstandingCommunicationsOperationCompleted(object arg) {
+            if ((this.GetOutstandingCommunicationsCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.GetOutstandingCommunicationsCompleted(this, new GetOutstandingCommunicationsCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
         public new void CancelAsync(object userState) {
             base.CancelAsync(userState);
         }
@@ -420,6 +461,8 @@ namespace ComputeAndroidApp.WorkOrderWS {
         private string workOrderResultJsonk__BackingFieldField;
         
         private string workOrderStatusk__BackingFieldField;
+        
+        private marcdissertation_dbEntities contextField;
         
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute("<ApplicationId>k__BackingField")]
@@ -607,6 +650,17 @@ namespace ComputeAndroidApp.WorkOrderWS {
                 this.workOrderStatusk__BackingFieldField = value;
             }
         }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public marcdissertation_dbEntities context {
+            get {
+                return this.contextField;
+            }
+            set {
+                this.contextField = value;
+            }
+        }
     }
     
     /// <remarks/>
@@ -634,6 +688,8 @@ namespace ComputeAndroidApp.WorkOrderWS {
         private int targetDeviceIdk__BackingFieldField;
         
         private int workOrderIdk__BackingFieldField;
+        
+        private marcdissertation_dbEntities contextField;
         
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute("<CommunicationId>k__BackingField")]
@@ -731,6 +787,634 @@ namespace ComputeAndroidApp.WorkOrderWS {
             }
             set {
                 this.workOrderIdk__BackingFieldField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public marcdissertation_dbEntities context {
+            get {
+                return this.contextField;
+            }
+            set {
+                this.contextField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.18034")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.datacontract.org/2004/07/BusinessLayer")]
+    public partial class marcdissertation_dbEntities : DbContext {
+        
+        private ActiveDevice[] activeDevicesField;
+        
+        private AuthenticationToken[] authenticationTokensField;
+        
+        private CommunicationPackage[] communicationPackagesField;
+        
+        private DeviceAccessRestriction[] deviceAccessRestrictionsField;
+        
+        private DeviceAppInstallation[] deviceAppInstallationsField;
+        
+        private UserDevice[] userDevicesField;
+        
+        private User[] usersField;
+        
+        private WorkApplication[] workApplicationsField;
+        
+        private WorkOrder[] workOrdersField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlArrayAttribute(IsNullable=true)]
+        public ActiveDevice[] ActiveDevices {
+            get {
+                return this.activeDevicesField;
+            }
+            set {
+                this.activeDevicesField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlArrayAttribute(IsNullable=true)]
+        public AuthenticationToken[] AuthenticationTokens {
+            get {
+                return this.authenticationTokensField;
+            }
+            set {
+                this.authenticationTokensField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlArrayAttribute(IsNullable=true)]
+        public CommunicationPackage[] CommunicationPackages {
+            get {
+                return this.communicationPackagesField;
+            }
+            set {
+                this.communicationPackagesField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlArrayAttribute(IsNullable=true)]
+        public DeviceAccessRestriction[] DeviceAccessRestrictions {
+            get {
+                return this.deviceAccessRestrictionsField;
+            }
+            set {
+                this.deviceAccessRestrictionsField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlArrayAttribute(IsNullable=true)]
+        public DeviceAppInstallation[] DeviceAppInstallations {
+            get {
+                return this.deviceAppInstallationsField;
+            }
+            set {
+                this.deviceAppInstallationsField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlArrayAttribute(IsNullable=true)]
+        public UserDevice[] UserDevices {
+            get {
+                return this.userDevicesField;
+            }
+            set {
+                this.userDevicesField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlArrayAttribute(IsNullable=true)]
+        public User[] Users {
+            get {
+                return this.usersField;
+            }
+            set {
+                this.usersField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlArrayAttribute(IsNullable=true)]
+        public WorkApplication[] WorkApplications {
+            get {
+                return this.workApplicationsField;
+            }
+            set {
+                this.workApplicationsField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlArrayAttribute(IsNullable=true)]
+        public WorkOrder[] WorkOrders {
+            get {
+                return this.workOrdersField;
+            }
+            set {
+                this.workOrdersField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.18034")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.datacontract.org/2004/07/BusinessLayer")]
+    public partial class ActiveDevice {
+        
+        private int deviceIdk__BackingFieldField;
+        
+        private System.DateTime lastActiveSendk__BackingFieldField;
+        
+        private UserDevice userDevicek__BackingFieldField;
+        
+        private marcdissertation_dbEntities contextField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("<DeviceId>k__BackingField")]
+        public int DeviceIdk__BackingField {
+            get {
+                return this.deviceIdk__BackingFieldField;
+            }
+            set {
+                this.deviceIdk__BackingFieldField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("<LastActiveSend>k__BackingField")]
+        public System.DateTime LastActiveSendk__BackingField {
+            get {
+                return this.lastActiveSendk__BackingFieldField;
+            }
+            set {
+                this.lastActiveSendk__BackingFieldField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("<UserDevice>k__BackingField", IsNullable=true)]
+        public UserDevice UserDevicek__BackingField {
+            get {
+                return this.userDevicek__BackingFieldField;
+            }
+            set {
+                this.userDevicek__BackingFieldField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public marcdissertation_dbEntities context {
+            get {
+                return this.contextField;
+            }
+            set {
+                this.contextField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.18034")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.datacontract.org/2004/07/BusinessLayer")]
+    public partial class UserDevice {
+        
+        private ActiveDevice activeDevicek__BackingFieldField;
+        
+        private AuthenticationToken authenticationTokenk__BackingFieldField;
+        
+        private CommunicationPackage[] communicationPackagesk__BackingFieldField;
+        
+        private DeviceAccessRestriction[] deviceAccessRestrictionsk__BackingFieldField;
+        
+        private DeviceAppInstallation[] deviceAppInstallationsk__BackingFieldField;
+        
+        private int deviceIdk__BackingFieldField;
+        
+        private int deviceMemoryResourcek__BackingFieldField;
+        
+        private int deviceProcRatingk__BackingFieldField;
+        
+        private string deviceTypek__BackingFieldField;
+        
+        private string gCMCodek__BackingFieldField;
+        
+        private User userk__BackingFieldField;
+        
+        private string usernamek__BackingFieldField;
+        
+        private WorkOrder[] workOrders1k__BackingFieldField;
+        
+        private WorkOrder[] workOrdersk__BackingFieldField;
+        
+        private marcdissertation_dbEntities contextField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("<ActiveDevice>k__BackingField", IsNullable=true)]
+        public ActiveDevice ActiveDevicek__BackingField {
+            get {
+                return this.activeDevicek__BackingFieldField;
+            }
+            set {
+                this.activeDevicek__BackingFieldField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("<AuthenticationToken>k__BackingField", IsNullable=true)]
+        public AuthenticationToken AuthenticationTokenk__BackingField {
+            get {
+                return this.authenticationTokenk__BackingFieldField;
+            }
+            set {
+                this.authenticationTokenk__BackingFieldField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlArrayAttribute("<CommunicationPackages>k__BackingField", IsNullable=true)]
+        public CommunicationPackage[] CommunicationPackagesk__BackingField {
+            get {
+                return this.communicationPackagesk__BackingFieldField;
+            }
+            set {
+                this.communicationPackagesk__BackingFieldField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlArrayAttribute("<DeviceAccessRestrictions>k__BackingField", IsNullable=true)]
+        public DeviceAccessRestriction[] DeviceAccessRestrictionsk__BackingField {
+            get {
+                return this.deviceAccessRestrictionsk__BackingFieldField;
+            }
+            set {
+                this.deviceAccessRestrictionsk__BackingFieldField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlArrayAttribute("<DeviceAppInstallations>k__BackingField", IsNullable=true)]
+        public DeviceAppInstallation[] DeviceAppInstallationsk__BackingField {
+            get {
+                return this.deviceAppInstallationsk__BackingFieldField;
+            }
+            set {
+                this.deviceAppInstallationsk__BackingFieldField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("<DeviceId>k__BackingField")]
+        public int DeviceIdk__BackingField {
+            get {
+                return this.deviceIdk__BackingFieldField;
+            }
+            set {
+                this.deviceIdk__BackingFieldField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("<DeviceMemoryResource>k__BackingField")]
+        public int DeviceMemoryResourcek__BackingField {
+            get {
+                return this.deviceMemoryResourcek__BackingFieldField;
+            }
+            set {
+                this.deviceMemoryResourcek__BackingFieldField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("<DeviceProcRating>k__BackingField")]
+        public int DeviceProcRatingk__BackingField {
+            get {
+                return this.deviceProcRatingk__BackingFieldField;
+            }
+            set {
+                this.deviceProcRatingk__BackingFieldField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("<DeviceType>k__BackingField", IsNullable=true)]
+        public string DeviceTypek__BackingField {
+            get {
+                return this.deviceTypek__BackingFieldField;
+            }
+            set {
+                this.deviceTypek__BackingFieldField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("<GCMCode>k__BackingField", IsNullable=true)]
+        public string GCMCodek__BackingField {
+            get {
+                return this.gCMCodek__BackingFieldField;
+            }
+            set {
+                this.gCMCodek__BackingFieldField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("<User>k__BackingField", IsNullable=true)]
+        public User Userk__BackingField {
+            get {
+                return this.userk__BackingFieldField;
+            }
+            set {
+                this.userk__BackingFieldField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("<Username>k__BackingField", IsNullable=true)]
+        public string Usernamek__BackingField {
+            get {
+                return this.usernamek__BackingFieldField;
+            }
+            set {
+                this.usernamek__BackingFieldField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlArrayAttribute("<WorkOrders1>k__BackingField", IsNullable=true)]
+        public WorkOrder[] WorkOrders1k__BackingField {
+            get {
+                return this.workOrders1k__BackingFieldField;
+            }
+            set {
+                this.workOrders1k__BackingFieldField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlArrayAttribute("<WorkOrders>k__BackingField", IsNullable=true)]
+        public WorkOrder[] WorkOrdersk__BackingField {
+            get {
+                return this.workOrdersk__BackingFieldField;
+            }
+            set {
+                this.workOrdersk__BackingFieldField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public marcdissertation_dbEntities context {
+            get {
+                return this.contextField;
+            }
+            set {
+                this.contextField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.18034")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.datacontract.org/2004/07/BusinessLayer")]
+    public partial class AuthenticationToken {
+        
+        private System.DateTime creationDatek__BackingFieldField;
+        
+        private int deviceIdk__BackingFieldField;
+        
+        private System.Nullable<System.DateTime> lastAccessDatek__BackingFieldField;
+        
+        private string tokenk__BackingFieldField;
+        
+        private UserDevice userDevicek__BackingFieldField;
+        
+        private User userk__BackingFieldField;
+        
+        private string usernamek__BackingFieldField;
+        
+        private marcdissertation_dbEntities contextField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("<CreationDate>k__BackingField")]
+        public System.DateTime CreationDatek__BackingField {
+            get {
+                return this.creationDatek__BackingFieldField;
+            }
+            set {
+                this.creationDatek__BackingFieldField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("<DeviceId>k__BackingField")]
+        public int DeviceIdk__BackingField {
+            get {
+                return this.deviceIdk__BackingFieldField;
+            }
+            set {
+                this.deviceIdk__BackingFieldField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("<LastAccessDate>k__BackingField", IsNullable=true)]
+        public System.Nullable<System.DateTime> LastAccessDatek__BackingField {
+            get {
+                return this.lastAccessDatek__BackingFieldField;
+            }
+            set {
+                this.lastAccessDatek__BackingFieldField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("<Token>k__BackingField", IsNullable=true)]
+        public string Tokenk__BackingField {
+            get {
+                return this.tokenk__BackingFieldField;
+            }
+            set {
+                this.tokenk__BackingFieldField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("<UserDevice>k__BackingField", IsNullable=true)]
+        public UserDevice UserDevicek__BackingField {
+            get {
+                return this.userDevicek__BackingFieldField;
+            }
+            set {
+                this.userDevicek__BackingFieldField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("<User>k__BackingField", IsNullable=true)]
+        public User Userk__BackingField {
+            get {
+                return this.userk__BackingFieldField;
+            }
+            set {
+                this.userk__BackingFieldField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("<Username>k__BackingField", IsNullable=true)]
+        public string Usernamek__BackingField {
+            get {
+                return this.usernamek__BackingFieldField;
+            }
+            set {
+                this.usernamek__BackingFieldField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public marcdissertation_dbEntities context {
+            get {
+                return this.contextField;
+            }
+            set {
+                this.contextField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.18034")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.datacontract.org/2004/07/BusinessLayer")]
+    public partial class User {
+        
+        private AuthenticationToken[] authenticationTokensk__BackingFieldField;
+        
+        private string forenamek__BackingFieldField;
+        
+        private string passwordk__BackingFieldField;
+        
+        private string surnamek__BackingFieldField;
+        
+        private UserDevice[] userDevicesk__BackingFieldField;
+        
+        private int userIdk__BackingFieldField;
+        
+        private string usernamek__BackingFieldField;
+        
+        private marcdissertation_dbEntities contextField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlArrayAttribute("<AuthenticationTokens>k__BackingField", IsNullable=true)]
+        public AuthenticationToken[] AuthenticationTokensk__BackingField {
+            get {
+                return this.authenticationTokensk__BackingFieldField;
+            }
+            set {
+                this.authenticationTokensk__BackingFieldField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("<Forename>k__BackingField", IsNullable=true)]
+        public string Forenamek__BackingField {
+            get {
+                return this.forenamek__BackingFieldField;
+            }
+            set {
+                this.forenamek__BackingFieldField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("<Password>k__BackingField", IsNullable=true)]
+        public string Passwordk__BackingField {
+            get {
+                return this.passwordk__BackingFieldField;
+            }
+            set {
+                this.passwordk__BackingFieldField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("<Surname>k__BackingField", IsNullable=true)]
+        public string Surnamek__BackingField {
+            get {
+                return this.surnamek__BackingFieldField;
+            }
+            set {
+                this.surnamek__BackingFieldField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlArrayAttribute("<UserDevices>k__BackingField", IsNullable=true)]
+        public UserDevice[] UserDevicesk__BackingField {
+            get {
+                return this.userDevicesk__BackingFieldField;
+            }
+            set {
+                this.userDevicesk__BackingFieldField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("<UserId>k__BackingField")]
+        public int UserIdk__BackingField {
+            get {
+                return this.userIdk__BackingFieldField;
+            }
+            set {
+                this.userIdk__BackingFieldField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("<Username>k__BackingField", IsNullable=true)]
+        public string Usernamek__BackingField {
+            get {
+                return this.usernamek__BackingFieldField;
+            }
+            set {
+                this.usernamek__BackingFieldField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public marcdissertation_dbEntities context {
+            get {
+                return this.contextField;
+            }
+            set {
+                this.contextField = value;
             }
         }
     }
@@ -956,6 +1640,8 @@ namespace ComputeAndroidApp.WorkOrderWS {
         
         private WorkOrder[] workOrdersk__BackingFieldField;
         
+        private marcdissertation_dbEntities contextField;
+        
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute("<ApplicationCreator>k__BackingField", IsNullable=true)]
         public string ApplicationCreatork__BackingField {
@@ -1076,6 +1762,17 @@ namespace ComputeAndroidApp.WorkOrderWS {
                 this.workOrdersk__BackingFieldField = value;
             }
         }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public marcdissertation_dbEntities context {
+            get {
+                return this.contextField;
+            }
+            set {
+                this.contextField = value;
+            }
+        }
     }
     
     /// <remarks/>
@@ -1097,6 +1794,8 @@ namespace ComputeAndroidApp.WorkOrderWS {
         private UserDevice userDevicek__BackingFieldField;
         
         private WorkApplication workApplicationk__BackingFieldField;
+        
+        private marcdissertation_dbEntities contextField;
         
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute("<ApplicationDevicePairId>k__BackingField")]
@@ -1163,443 +1862,15 @@ namespace ComputeAndroidApp.WorkOrderWS {
                 this.workApplicationk__BackingFieldField = value;
             }
         }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.18034")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.datacontract.org/2004/07/BusinessLayer")]
-    public partial class UserDevice {
-        
-        private ActiveDevice activeDevicek__BackingFieldField;
-        
-        private AuthenticationToken authenticationTokenk__BackingFieldField;
-        
-        private CommunicationPackage[] communicationPackagesk__BackingFieldField;
-        
-        private DeviceAccessRestriction[] deviceAccessRestrictionsk__BackingFieldField;
-        
-        private DeviceAppInstallation[] deviceAppInstallationsk__BackingFieldField;
-        
-        private int deviceIdk__BackingFieldField;
-        
-        private int deviceMemoryResourcek__BackingFieldField;
-        
-        private int deviceProcRatingk__BackingFieldField;
-        
-        private string deviceTypek__BackingFieldField;
-        
-        private string gCMCodek__BackingFieldField;
-        
-        private User userk__BackingFieldField;
-        
-        private string usernamek__BackingFieldField;
-        
-        private WorkOrder[] workOrders1k__BackingFieldField;
-        
-        private WorkOrder[] workOrdersk__BackingFieldField;
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("<ActiveDevice>k__BackingField", IsNullable=true)]
-        public ActiveDevice ActiveDevicek__BackingField {
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public marcdissertation_dbEntities context {
             get {
-                return this.activeDevicek__BackingFieldField;
+                return this.contextField;
             }
             set {
-                this.activeDevicek__BackingFieldField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("<AuthenticationToken>k__BackingField", IsNullable=true)]
-        public AuthenticationToken AuthenticationTokenk__BackingField {
-            get {
-                return this.authenticationTokenk__BackingFieldField;
-            }
-            set {
-                this.authenticationTokenk__BackingFieldField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlArrayAttribute("<CommunicationPackages>k__BackingField", IsNullable=true)]
-        public CommunicationPackage[] CommunicationPackagesk__BackingField {
-            get {
-                return this.communicationPackagesk__BackingFieldField;
-            }
-            set {
-                this.communicationPackagesk__BackingFieldField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlArrayAttribute("<DeviceAccessRestrictions>k__BackingField", IsNullable=true)]
-        public DeviceAccessRestriction[] DeviceAccessRestrictionsk__BackingField {
-            get {
-                return this.deviceAccessRestrictionsk__BackingFieldField;
-            }
-            set {
-                this.deviceAccessRestrictionsk__BackingFieldField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlArrayAttribute("<DeviceAppInstallations>k__BackingField", IsNullable=true)]
-        public DeviceAppInstallation[] DeviceAppInstallationsk__BackingField {
-            get {
-                return this.deviceAppInstallationsk__BackingFieldField;
-            }
-            set {
-                this.deviceAppInstallationsk__BackingFieldField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("<DeviceId>k__BackingField")]
-        public int DeviceIdk__BackingField {
-            get {
-                return this.deviceIdk__BackingFieldField;
-            }
-            set {
-                this.deviceIdk__BackingFieldField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("<DeviceMemoryResource>k__BackingField")]
-        public int DeviceMemoryResourcek__BackingField {
-            get {
-                return this.deviceMemoryResourcek__BackingFieldField;
-            }
-            set {
-                this.deviceMemoryResourcek__BackingFieldField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("<DeviceProcRating>k__BackingField")]
-        public int DeviceProcRatingk__BackingField {
-            get {
-                return this.deviceProcRatingk__BackingFieldField;
-            }
-            set {
-                this.deviceProcRatingk__BackingFieldField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("<DeviceType>k__BackingField", IsNullable=true)]
-        public string DeviceTypek__BackingField {
-            get {
-                return this.deviceTypek__BackingFieldField;
-            }
-            set {
-                this.deviceTypek__BackingFieldField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("<GCMCode>k__BackingField", IsNullable=true)]
-        public string GCMCodek__BackingField {
-            get {
-                return this.gCMCodek__BackingFieldField;
-            }
-            set {
-                this.gCMCodek__BackingFieldField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("<User>k__BackingField", IsNullable=true)]
-        public User Userk__BackingField {
-            get {
-                return this.userk__BackingFieldField;
-            }
-            set {
-                this.userk__BackingFieldField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("<Username>k__BackingField", IsNullable=true)]
-        public string Usernamek__BackingField {
-            get {
-                return this.usernamek__BackingFieldField;
-            }
-            set {
-                this.usernamek__BackingFieldField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlArrayAttribute("<WorkOrders1>k__BackingField", IsNullable=true)]
-        public WorkOrder[] WorkOrders1k__BackingField {
-            get {
-                return this.workOrders1k__BackingFieldField;
-            }
-            set {
-                this.workOrders1k__BackingFieldField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlArrayAttribute("<WorkOrders>k__BackingField", IsNullable=true)]
-        public WorkOrder[] WorkOrdersk__BackingField {
-            get {
-                return this.workOrdersk__BackingFieldField;
-            }
-            set {
-                this.workOrdersk__BackingFieldField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.18034")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.datacontract.org/2004/07/BusinessLayer")]
-    public partial class ActiveDevice {
-        
-        private int deviceIdk__BackingFieldField;
-        
-        private System.DateTime lastActiveSendk__BackingFieldField;
-        
-        private UserDevice userDevicek__BackingFieldField;
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("<DeviceId>k__BackingField")]
-        public int DeviceIdk__BackingField {
-            get {
-                return this.deviceIdk__BackingFieldField;
-            }
-            set {
-                this.deviceIdk__BackingFieldField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("<LastActiveSend>k__BackingField")]
-        public System.DateTime LastActiveSendk__BackingField {
-            get {
-                return this.lastActiveSendk__BackingFieldField;
-            }
-            set {
-                this.lastActiveSendk__BackingFieldField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("<UserDevice>k__BackingField", IsNullable=true)]
-        public UserDevice UserDevicek__BackingField {
-            get {
-                return this.userDevicek__BackingFieldField;
-            }
-            set {
-                this.userDevicek__BackingFieldField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.18034")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.datacontract.org/2004/07/BusinessLayer")]
-    public partial class AuthenticationToken {
-        
-        private System.DateTime creationDatek__BackingFieldField;
-        
-        private int deviceIdk__BackingFieldField;
-        
-        private System.Nullable<System.DateTime> lastAccessDatek__BackingFieldField;
-        
-        private string tokenk__BackingFieldField;
-        
-        private UserDevice userDevicek__BackingFieldField;
-        
-        private User userk__BackingFieldField;
-        
-        private string usernamek__BackingFieldField;
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("<CreationDate>k__BackingField")]
-        public System.DateTime CreationDatek__BackingField {
-            get {
-                return this.creationDatek__BackingFieldField;
-            }
-            set {
-                this.creationDatek__BackingFieldField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("<DeviceId>k__BackingField")]
-        public int DeviceIdk__BackingField {
-            get {
-                return this.deviceIdk__BackingFieldField;
-            }
-            set {
-                this.deviceIdk__BackingFieldField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("<LastAccessDate>k__BackingField", IsNullable=true)]
-        public System.Nullable<System.DateTime> LastAccessDatek__BackingField {
-            get {
-                return this.lastAccessDatek__BackingFieldField;
-            }
-            set {
-                this.lastAccessDatek__BackingFieldField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("<Token>k__BackingField", IsNullable=true)]
-        public string Tokenk__BackingField {
-            get {
-                return this.tokenk__BackingFieldField;
-            }
-            set {
-                this.tokenk__BackingFieldField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("<UserDevice>k__BackingField", IsNullable=true)]
-        public UserDevice UserDevicek__BackingField {
-            get {
-                return this.userDevicek__BackingFieldField;
-            }
-            set {
-                this.userDevicek__BackingFieldField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("<User>k__BackingField", IsNullable=true)]
-        public User Userk__BackingField {
-            get {
-                return this.userk__BackingFieldField;
-            }
-            set {
-                this.userk__BackingFieldField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("<Username>k__BackingField", IsNullable=true)]
-        public string Usernamek__BackingField {
-            get {
-                return this.usernamek__BackingFieldField;
-            }
-            set {
-                this.usernamek__BackingFieldField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.18034")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.datacontract.org/2004/07/BusinessLayer")]
-    public partial class User {
-        
-        private AuthenticationToken[] authenticationTokensk__BackingFieldField;
-        
-        private string forenamek__BackingFieldField;
-        
-        private string passwordk__BackingFieldField;
-        
-        private string surnamek__BackingFieldField;
-        
-        private UserDevice[] userDevicesk__BackingFieldField;
-        
-        private int userIdk__BackingFieldField;
-        
-        private string usernamek__BackingFieldField;
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlArrayAttribute("<AuthenticationTokens>k__BackingField", IsNullable=true)]
-        public AuthenticationToken[] AuthenticationTokensk__BackingField {
-            get {
-                return this.authenticationTokensk__BackingFieldField;
-            }
-            set {
-                this.authenticationTokensk__BackingFieldField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("<Forename>k__BackingField", IsNullable=true)]
-        public string Forenamek__BackingField {
-            get {
-                return this.forenamek__BackingFieldField;
-            }
-            set {
-                this.forenamek__BackingFieldField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("<Password>k__BackingField", IsNullable=true)]
-        public string Passwordk__BackingField {
-            get {
-                return this.passwordk__BackingFieldField;
-            }
-            set {
-                this.passwordk__BackingFieldField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("<Surname>k__BackingField", IsNullable=true)]
-        public string Surnamek__BackingField {
-            get {
-                return this.surnamek__BackingFieldField;
-            }
-            set {
-                this.surnamek__BackingFieldField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlArrayAttribute("<UserDevices>k__BackingField", IsNullable=true)]
-        public UserDevice[] UserDevicesk__BackingField {
-            get {
-                return this.userDevicesk__BackingFieldField;
-            }
-            set {
-                this.userDevicesk__BackingFieldField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("<UserId>k__BackingField")]
-        public int UserIdk__BackingField {
-            get {
-                return this.userIdk__BackingFieldField;
-            }
-            set {
-                this.userIdk__BackingFieldField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("<Username>k__BackingField", IsNullable=true)]
-        public string Usernamek__BackingField {
-            get {
-                return this.usernamek__BackingFieldField;
-            }
-            set {
-                this.usernamek__BackingFieldField = value;
+                this.contextField = value;
             }
         }
     }
@@ -1623,6 +1894,8 @@ namespace ComputeAndroidApp.WorkOrderWS {
         private string startTimek__BackingFieldField;
         
         private UserDevice userDevicek__BackingFieldField;
+        
+        private marcdissertation_dbEntities contextField;
         
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute("<AccessRestrictionId>k__BackingField")]
@@ -1689,6 +1962,27 @@ namespace ComputeAndroidApp.WorkOrderWS {
                 this.userDevicek__BackingFieldField = value;
             }
         }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public marcdissertation_dbEntities context {
+            get {
+                return this.contextField;
+            }
+            set {
+                this.contextField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(marcdissertation_dbEntities))]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.18034")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.datacontract.org/2004/07/System.Data.Entity")]
+    public partial class DbContext {
     }
     
     /// <remarks/>
@@ -1762,6 +2056,32 @@ namespace ComputeAndroidApp.WorkOrderWS {
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.17929")]
     public delegate void AcknowledgeCommunicationCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.17929")]
+    public delegate void GetOutstandingCommunicationsCompletedEventHandler(object sender, GetOutstandingCommunicationsCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.17929")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class GetOutstandingCommunicationsCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal GetOutstandingCommunicationsCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public CommunicationPackage[] Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((CommunicationPackage[])(this.results[0]));
+            }
+        }
+    }
 }
 
 #pragma warning restore 1591

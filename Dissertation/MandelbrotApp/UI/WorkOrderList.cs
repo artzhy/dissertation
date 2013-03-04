@@ -87,7 +87,11 @@ namespace com.ComputeApps.MandelbrotApp {
                     int b = Color.GetBlueComponent(col.colour);
                     int a = Color.GetAlphaComponent(col.colour);
 
-                    bm.SetPixel(col.x, col.y, Color.Rgb(r, g, b));
+                    try {
+                        bm.SetPixel(col.x, col.y, Color.Rgb(r, g, b));
+                    } catch {
+
+                    }
                 }
             }
             return bm;

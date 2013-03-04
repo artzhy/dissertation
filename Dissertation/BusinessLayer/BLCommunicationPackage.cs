@@ -94,8 +94,10 @@ namespace BusinessLayer {
 
         public static List<CommunicationPackage> GetTargetDeviceCommunications(int deviceId) {
             marcdissertation_dbEntities ctxt = new marcdissertation_dbEntities();
+            List<CommunicationPackage> cps = (from x in ctxt.CommunicationPackages where x.TargetDeviceId == 9 && x.Response == null && x.Status == null select x).ToList();
+            
 
-            return ctxt.CommunicationPackages.Where(x => x.TargetDeviceId == deviceId && x.Status != "ACK" && x.Status != "CANCELLED").ToList();
+            return cps;
         }
 
     }

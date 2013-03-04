@@ -55,42 +55,36 @@ namespace ComputeAndroidApp {
             createNotification("PushSharp-GCM Unregistered...", "The device has been unregistered, Tap to View!");
         }
 
-        public enum UpdateType {
-            Result,
-            UpdateRequest,
-            Error,
-            NewWorkOrder,
-            Cancel
-        }
-
         protected override void OnMessage(Context context, Intent intent) {
             Log.Info(BroadcastReceiver.TAG, "GCM Message Received!");
 
-            UpdateType ut = (UpdateType)int.Parse(intent.Extras.Get("CommunicationType").ToString());
-            String workOrderId = intent.Extras.Get("WorkOrderId").ToString();
-            int commId = int.Parse(intent.Extras.Get("CommunicationId").ToString());
+            App.GetServiceBinder().GetService().StartCommFetch();
 
-            Log.Info(BroadcastReceiver.TAG, "Handling comm id: " + commId);
+            //UpdateType ut = (UpdateType)int.Parse(intent.Extras.Get("CommunicationType").ToString());
+            //String workOrderId = intent.Extras.Get("WorkOrderId").ToString();
+            //int commId = int.Parse(intent.Extras.Get("CommunicationId").ToString());
 
-            new WorkOrderWS.WorkOrderSvc().AcknowledgeCommunication(App.GetAuthToken(context), commId, true, DateTime.Now, true);
+            //Log.Info(BroadcastReceiver.TAG, "Handling comm id: " + commId);
 
-            App.UpdateLastTransmit();
+            //new WorkOrderWS.WorkOrderSvc().AcknowledgeCommunication(App.GetAuthToken(context), commId, true, DateTime.Now, true);
 
-            if (ut == UpdateType.NewWorkOrder) {
-                App.GetServiceBinder().GetService().AddSlaveWorkItem(int.Parse(workOrderId));
-                Log.Info(BroadcastReceiver.TAG, "Handling new work order id: " + workOrderId);
-            } else if (ut == UpdateType.Result) {
-                  App.GetServiceBinder().GetService().ReceiveWorkOrderResult(int.Parse(workOrderId));
-                  Log.Info(BroadcastReceiver.TAG, "Handling result work order id: " + workOrderId);
-            } else if (ut == UpdateType.UpdateRequest) {
-                //TODO: Handle update request
+            //App.UpdateLastTransmit();
 
-                // Speak to background portion of UI
+            //if (ut == UpdateType.NewWorkOrder) {
+            //    App.GetServiceBinder().GetService().AddSlaveWorkItem(int.Parse(workOrderId));
+            //    Log.Info(BroadcastReceiver.TAG, "Handling new work order id: " + workOrderId);
+            //} else if (ut == UpdateType.Result) {
+            //      App.GetServiceBinder().GetService().ReceiveWorkOrderResult(int.Parse(workOrderId));
+            //      Log.Info(BroadcastReceiver.TAG, "Handling result work order id: " + workOrderId);
+            //} else if (ut == UpdateType.UpdateRequest) {
+            //    //TODO: Handle update request
 
-            } else if (ut == UpdateType.Cancel) {
-                //TODO: Handle cancel request
+            //    // Speak to background portion of UI
 
-            }
+            //} else if (ut == UpdateType.Cancel) {
+            //    //TODO: Handle cancel request
+
+            //}
 
             //String workOrderId = intent.Extras.Get("WorkOrderId").ToString();
 

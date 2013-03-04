@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<serviceModel xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="Dissertation" generation="1" functional="0" release="0" Id="0d751d0f-ce25-46cf-8536-56cb6b3445b8" dslVersion="1.2.0.0" xmlns="http://schemas.microsoft.com/dsltools/RDSM">
+<serviceModel xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="Dissertation" generation="1" functional="0" release="0" Id="b8ed3a62-fce3-4945-8474-b0d9af2a5756" dslVersion="1.2.0.0" xmlns="http://schemas.microsoft.com/dsltools/RDSM">
   <groups>
     <group name="DissertationGroup" generation="1" functional="0" release="0">
       <componentports>
@@ -233,14 +233,14 @@
     </group>
   </groups>
   <implements>
-    <implementation Id="908fcb5d-8f0c-4e00-87e5-8d0f3604859c" ref="Microsoft.RedDog.Contract\ServiceContract\DissertationContract@ServiceDefinition.build">
+    <implementation Id="87085a22-2267-43b2-950a-06694c008c84" ref="Microsoft.RedDog.Contract\ServiceContract\DissertationContract@ServiceDefinition.build">
       <interfacereferences>
-        <interfaceReference Id="34b64f1f-3b0c-4449-bccc-5c27ab6c15d1" ref="Microsoft.RedDog.Contract\Interface\WebService:Endpoint1@ServiceDefinition.build">
+        <interfaceReference Id="f50a6f0c-5fed-4d60-b74a-d37d6287bc8a" ref="Microsoft.RedDog.Contract\Interface\WebService:Endpoint1@ServiceDefinition.build">
           <inPort>
             <inPortMoniker name="/Dissertation/DissertationGroup/WebService:Endpoint1" />
           </inPort>
         </interfaceReference>
-        <interfaceReference Id="ceddb0fe-e0e5-4a09-bdfe-2844bd327e14" ref="Microsoft.RedDog.Contract\Interface\WebService:Microsoft.WindowsAzure.Plugins.RemoteForwarder.RdpInput@ServiceDefinition.build">
+        <interfaceReference Id="71b08296-4078-4c5b-ac81-a010b1e1adfb" ref="Microsoft.RedDog.Contract\Interface\WebService:Microsoft.WindowsAzure.Plugins.RemoteForwarder.RdpInput@ServiceDefinition.build">
           <inPort>
             <inPortMoniker name="/Dissertation/DissertationGroup/WebService:Microsoft.WindowsAzure.Plugins.RemoteForwarder.RdpInput" />
           </inPort>

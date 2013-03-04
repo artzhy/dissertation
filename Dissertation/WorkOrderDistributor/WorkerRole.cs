@@ -84,63 +84,69 @@ namespace WorkOrderDistributor {
 
         private void DoCommPackageSweep() {
             PackageSweepOccuring = true;
-            List<CommunicationPackage> unAckedPackages = Scheduler.GetUnacknowledgedPackages(45);
-            
+
+            List<CommunicationPackage> unAckedPackages = Scheduler.GetUnacknowledgedPackages(180);
             foreach (CommunicationPackage pkg in unAckedPackages) {
-
-
-
-                // If new WO/update request, re-schedule WO
-                if ((UpdateType)pkg.CommunicationType == UpdateType.NewWorkOrder || (UpdateType)pkg.CommunicationType == UpdateType.UpdateRequest) {
-
-                    try {
-                        // Set old comm package status to cancelled
-                        CommunicationPackage oPkg = CommunicationPackage.Populate(pkg.CommunicationId);
-
-                        if (oPkg.SendAttempts < 3) {
-                            CommunicationPackages.Send(new BrokeredMessage(oPkg.Serialize()));
-                        } else {
-                            try {
-                                WorkOrder wo = WorkOrder.Populate(pkg.WorkOrderId);
-                                wo.SlaveWorkerId = GetAvailableDevice(wo.ApplicationId);
-                                wo.Save();
-
-                                oPkg.Status = "CANCELLED";
-                                oPkg.Save();
-
-                                // Create new comm package and send
-                                CommunicationPackage cp = CommunicationPackage.CreateCommunication((int)wo.SlaveWorkerId, CommunicationPackage.UpdateType.NewWorkOrder, wo.WorkOrderId);
-
-                                CommunicationPackages.Send(new BrokeredMessage(cp.Serialize()));
-
-                            } catch {
-                                // Error likely to be sent here due to being unable to find a slave worker.
-                                Debug.WriteLine("Unable to find suitable slave.  For WO: " + oPkg.WorkOrderId);
-                            }
-                        }
-
-                    } catch (Exception) {
-                        // Dont do anything - most likely cause of this is due to no device available to submit to.
-                    }
-
-                // If result/cancel, re-send package
-                } else if ((UpdateType)pkg.CommunicationType == UpdateType.Result || (UpdateType)pkg.CommunicationType == UpdateType.Cancel) {
-
-                    if (pkg.SendAttempts <= 3) {
-                        // Retry, otherwise do nothing
-                        CommunicationPackages.Send(new BrokeredMessage(pkg.Serialize()));
-                    }    
-                }
-
-                try {
-                    // Remove device from active list
-                    // We can do this as devices will notify that they are active if this is true every X seconds.
-              //      ActiveDevice.Populate(pkg.TargetDeviceId).Delete();
-
-                } catch {
-                    //Dont do anything - may already be deleted.
-                }
+                CommunicationPackage oPkg = CommunicationPackage.Populate(pkg.CommunicationId);
+                CommunicationPackages.Send(new BrokeredMessage(oPkg.Serialize()));
             }
+
+            
+            //foreach (CommunicationPackage pkg in unAckedPackages) {
+
+
+
+            //    // If new WO/update request, re-schedule WO
+            //    if ((UpdateType)pkg.CommunicationType == UpdateType.NewWorkOrder || (UpdateType)pkg.CommunicationType == UpdateType.UpdateRequest) {
+
+            //        try {
+            //            // Set old comm package status to cancelled
+            //            CommunicationPackage oPkg = CommunicationPackage.Populate(pkg.CommunicationId);
+
+            //            if (oPkg.SendAttempts < 3) {
+            //                CommunicationPackages.Send(new BrokeredMessage(oPkg.Serialize()));
+            //            } else {
+            //                try {
+            //                    WorkOrder wo = WorkOrder.Populate(pkg.WorkOrderId);
+            //                    wo.SlaveWorkerId = GetAvailableDevice(wo.ApplicationId);
+            //                    wo.Save();
+
+            //                    oPkg.Status = "CANCELLED";
+            //                    oPkg.Save();
+
+            //                    // Create new comm package and send
+            //                    CommunicationPackage cp = CommunicationPackage.CreateCommunication((int)wo.SlaveWorkerId, CommunicationPackage.UpdateType.NewWorkOrder, wo.WorkOrderId);
+
+            //                    CommunicationPackages.Send(new BrokeredMessage(cp.Serialize()));
+
+            //                } catch {
+            //                    // Error likely to be sent here due to being unable to find a slave worker.
+            //                    Debug.WriteLine("Unable to find suitable slave.  For WO: " + oPkg.WorkOrderId);
+            //                }
+            //            }
+
+            //        } catch (Exception) {
+            //            // Dont do anything - most likely cause of this is due to no device available to submit to.
+            //        }
+
+            //    // If result/cancel, re-send package
+            //    } else if ((UpdateType)pkg.CommunicationType == UpdateType.Result || (UpdateType)pkg.CommunicationType == UpdateType.Cancel) {
+
+            //        if (pkg.SendAttempts <= 3) {
+            //            // Retry, otherwise do nothing
+            //            CommunicationPackages.Send(new BrokeredMessage(pkg.Serialize()));
+            //        }    
+            //    }
+
+            //    try {
+            //        // Remove device from active list
+            //        // We can do this as devices will notify that they are active if this is true every X seconds.
+            //  //      ActiveDevice.Populate(pkg.TargetDeviceId).Delete();
+
+            //    } catch {
+            //        //Dont do anything - may already be deleted.
+            //    }
+            //}
 
             PackageSweepOccuring = false;
             PackageSweepLastDone = DateTime.Now;
@@ -277,8 +283,10 @@ namespace WorkOrderDistributor {
                     oCP.Save();
 
                     UserDevice targetUD = UserDevice.Populate(cp.TargetDeviceId);
-
-                    Pusher.SendNotification(targetUD.GCMCode, cp.Serialize());
+                    // If the last send was less than 3 mins ago, send a GCM message
+                    if (targetUD.ActiveDevice.LastActiveSend < DateTime.Now.AddMinutes(-3)) {
+                        Pusher.SendNotification(targetUD.GCMCode, cp.Serialize());
+                    }
 
                     commMessage.Complete();
 

@@ -21,6 +21,7 @@ namespace ComputeAndroidApp.BackgroundService {
     [Service]
     public class ControllerService : Service {
         private ControllerServiceBinder binder;
+        private bool hasCommPackageGetThreadRunning;
         // Service variables here.
         private List<WorkOrderWS.WorkOrderTrimmed> SlaveWorkItems;
 
@@ -29,8 +30,73 @@ namespace ComputeAndroidApp.BackgroundService {
            return this.binder;
         }
 
-        public void DoWork() {
-            Log.Error("test", "here");
+        public void StartCommFetch() {
+            if (!hasCommPackageGetThreadRunning) {
+                // start thread
+                Thread fetchThread = new Thread(new ThreadStart(FetchComms));
+                fetchThread.Start();
+            }
+        }
+
+        public enum UpdateType {
+            Result,
+            UpdateRequest,
+            Error,
+            NewWorkOrder,
+            Cancel
+        }
+
+        public void FetchComms() {
+            if (hasCommPackageGetThreadRunning)
+                return;
+            hasCommPackageGetThreadRunning = true;
+            int deviceId = App.GetDeviceId(this);
+            string authToken = App.GetAuthToken(this);
+            // get comms and handle them
+            int noSecsNoComms = 0;
+
+            while (noSecsNoComms < 180) {
+                List<WorkOrderWS.CommunicationPackage> cps = new WorkOrderWS.WorkOrderSvc().GetOutstandingCommunications(authToken, deviceId, true).ToList();
+
+                if (cps.Count() == 0) {
+                    noSecsNoComms += 20;
+                } else {
+                    // Handle all the comms
+                    noSecsNoComms = 0;
+
+                    foreach (WorkOrderWS.CommunicationPackage cp in cps) {
+                        UpdateType ut = (UpdateType)cp.CommunicationTypek__BackingField;
+                        int workOrderId = cp.WorkOrderIdk__BackingField;
+                        int commId = cp.CommunicationIdk__BackingField;
+
+                        Log.Info(BroadcastReceiver.TAG, "Handling comm id: " + commId);
+
+                        new WorkOrderWS.WorkOrderSvc().AcknowledgeCommunication(authToken, commId, true, DateTime.Now, true);
+
+                        App.UpdateLastTransmit();
+
+                        if (ut == UpdateType.NewWorkOrder) {
+                            AddSlaveWorkItem(workOrderId);
+                            Log.Info(BroadcastReceiver.TAG, "Handling new work order id: " + workOrderId);
+                        } else if (ut == UpdateType.Result) {
+                            ReceiveWorkOrderResult(workOrderId);
+                            Log.Info(BroadcastReceiver.TAG, "Handling result work order id: " + workOrderId);
+                        } else if (ut == UpdateType.UpdateRequest) {
+                            //TODO: Handle update request
+
+                            // Speak to background portion of UI
+
+                        } else if (ut == UpdateType.Cancel) {
+                            //TODO: Handle cancel request
+
+                        }
+                    }
+                }
+                // Sleep before checking again.
+                Thread.Sleep(new TimeSpan(0, 0, 20));
+            }
+
+            hasCommPackageGetThreadRunning = false;
         }
 
         public void NotifyDeviceActive() {
@@ -78,6 +144,8 @@ namespace ComputeAndroidApp.BackgroundService {
             } catch (Exception e) {
                 Log.Error("RequestWorkOrderComputation", e.Message);
             }
+            
+            StartCommFetch();
         }
 
         public void ReceiveWorkOrderUpdateRequest(int workOrderId) {
@@ -137,13 +205,13 @@ namespace ComputeAndroidApp.BackgroundService {
         public void ContinuallyNotifyActive() {
             // This will run until the app is killed
             while (true) {
-                if (App.GetLastTransmit() < DateTime.Now.AddMinutes(-2)) {
+                if (App.GetLastTransmit() < DateTime.Now.AddMinutes(-4)) {
                     if (App.GetAuthToken(this) != null && App.GetDeviceId(this) != -1) {
                         new UserWS.UserSvc().MarkDeviceActive(App.GetAuthToken(this), App.GetDeviceId(this), true);
                         App.UpdateLastTransmit();
                     }
                 }
-                Thread.Sleep(new TimeSpan(0, 2, 0)); // Sleep for 2 minutes
+                Thread.Sleep(new TimeSpan(0, 4, 0)); // Sleep for 4 minutes
             }
         }
 

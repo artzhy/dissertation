@@ -37,5 +37,9 @@ namespace WebService {
         [WebGet(UriTemplate = "AcknowledgeCommunication", ResponseFormat = WebMessageFormat.Json, RequestFormat = WebMessageFormat.Json)]
         void AcknowledgeCommunication(String at, int communicationId, DateTime recieveTime);
 
+        [OperationContract]
+        [WebGet(UriTemplate = "GetOutstandingCommunications", ResponseFormat = WebMessageFormat.Json, RequestFormat = WebMessageFormat.Json)]
+        List<BusinessLayer.CommunicationPackage> GetOutstandingCommunications(String at, int deviceId);
+
     }
 }
