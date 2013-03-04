@@ -29,16 +29,16 @@ namespace com.ComputeApps.MandelbrotApp {
             if ((imgWidth / MinXChunk) < 1) {
                 xChunk = MinXChunk;
             } else {
-                xChunk = MinXChunk;
+                xChunk = imgWidth/4;
                 while ((imgWidth % xChunk) != 0) {
-                    xChunk++;
+                    xChunk--;
                 }
             }
 
             if ((imgHeight / MinYChunk) < 1) {
                 yChunk = MinYChunk;
             } else {
-                yChunk = MinYChunk;
+                yChunk = imgHeight / 4;
                 while ((imgHeight % yChunk) != 0) {
                     yChunk++;
                 }
@@ -131,7 +131,7 @@ namespace com.ComputeApps.MandelbrotApp {
                 x += xChunk;
             }
 
-            return Newtonsoft.Json.JsonConvert.SerializeObject(cpList.Take(50));
+            return Newtonsoft.Json.JsonConvert.SerializeObject(cpList);
 
 
 

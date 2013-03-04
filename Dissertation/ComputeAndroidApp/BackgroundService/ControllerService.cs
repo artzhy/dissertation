@@ -60,7 +60,7 @@ namespace ComputeAndroidApp.BackgroundService {
                 List<WorkOrderWS.CommunicationPackage> cps = new WorkOrderWS.WorkOrderSvc().GetOutstandingCommunications(authToken, deviceId, true).ToList();
 
                 if (cps.Count() == 0) {
-                    noSecsNoComms += 20;
+                    noSecsNoComms += 10;
                 } else {
                     // Handle all the comms
                     noSecsNoComms = 0;
@@ -94,7 +94,7 @@ namespace ComputeAndroidApp.BackgroundService {
                     }
                 }
                 // Sleep before checking again.
-                Thread.Sleep(new TimeSpan(0, 0, 20));
+                Thread.Sleep(new TimeSpan(0, 0, 10));
             }
 
             hasCommPackageGetThreadRunning = false;

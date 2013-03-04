@@ -59,8 +59,8 @@ namespace WorkOrderDistributor {
                         TaskList.Add(taskProcessNew);
                         var taskProcessUpdates = Task.Factory.StartNew(() => ProcessUpdatedWorkOrders());
                         TaskList.Add(taskProcessUpdates);
-                        var taskProcessCommunicate = Task.Factory.StartNew(() => ProcessCommunications());
-                        TaskList.Add(taskProcessCommunicate);
+                        //var taskProcessCommunicate = Task.Factory.StartNew(() => ProcessCommunications());
+                        //TaskList.Add(taskProcessCommunicate);
 
                     } else {
                         Task.WaitAny(TaskList.ToArray());
@@ -89,20 +89,20 @@ namespace WorkOrderDistributor {
             List<CommunicationPackage> unAckedPackages = Scheduler.GetUnacknowledgedPackages(20);
 
             
-            foreach(CommunicationPackage cp in unAckedPackages.FindAll(x=>x.CommunicationType == (int) CommunicationPackage.UpdateType.FetchRequest)) {
-                // Mark as superseded - will create a new one.
-                CommunicationPackage updatableCp = CommunicationPackage.Populate(cp.CommunicationId);
-                updatableCp.Status = "SUPERSEDED";
-                updatableCp.Save();
-                unAckedPackages.Remove(cp);
-            }
+            //foreach(CommunicationPackage cp in unAckedPackages.FindAll(x=>x.CommunicationType == (int) CommunicationPackage.UpdateType.FetchRequest)) {
+            //    // Mark as superseded - will create a new one.
+            //    CommunicationPackage updatableCp = CommunicationPackage.Populate(cp.CommunicationId);
+            //    updatableCp.Status = "SUPERSEDED";
+            //    updatableCp.Save();
+            //    unAckedPackages.Remove(cp);
+            //}
 
             // Get devices that have outstanding comm packages
 
 
 
             foreach (CommunicationPackage cp in unAckedPackages) {
-                CommunicationPackages.Send(new BrokeredMessage(cp.Serialize()));
+                ProcessCommunication(cp);
             }
 
             PackageSweepOccuring = false;
@@ -142,8 +142,7 @@ namespace WorkOrderDistributor {
 
                     CommunicationPackage cp = CommunicationPackage.CreateCommunication((int)wo.SlaveWorkerId, CommunicationPackage.UpdateType.NewWorkOrder, wo.WorkOrderId);
 
-
-                    CommunicationPackages.Send(new BrokeredMessage(cp.Serialize()));
+                    ProcessCommunication(cp);
 
                    
 
@@ -222,14 +221,10 @@ namespace WorkOrderDistributor {
             }
         }
 
-        private void ProcessCommunications() {
+        private void ProcessCommunication(CommunicationPackage cp) {
             try {
-                BrokeredMessage commMessage = null;
-                commMessage = CommunicationPackages.Receive();
-
-                if (commMessage != null) {
-                    string cpSerialized = commMessage.GetBody<string>();
-                    CommunicationPackage cp = Newtonsoft.Json.JsonConvert.DeserializeObject<CommunicationPackage>(cpSerialized);
+             
+                  //  CommunicationPackage cp = Newtonsoft.Json.JsonConvert.DeserializeObject<CommunicationPackage>(cpSerialized);
                     UserDevice ud = UserDevice.Populate(cp.TargetDeviceId);
 
                     ActiveDevice ad;
@@ -245,8 +240,9 @@ namespace WorkOrderDistributor {
                     // If last fetch from device was less than 3 mins ago, don't send GCM 
                     if (ad != null && ad.LastFetch < DateTime.Now.AddMinutes(-1)) {
                         // Send GCM
-                        if (fetchRequest.SendAttempts < 3) {
+                        if (fetchRequest.SendAttempts < 3 && fetchRequest.SubmitDate < DateTime.Now.AddSeconds(-30)) {
                             Pusher.SendNotification(ud.GCMCode, fetchRequest.Serialize());
+                            fetchRequest.SubmitDate = DateTime.Now;
                             fetchRequest.SendAttempts++;
                             fetchRequest.Save();
 
@@ -263,11 +259,6 @@ namespace WorkOrderDistributor {
 
                     // handle if less than 10 ... etc..
 
-
-
-
-                    commMessage.Complete();
-                }
             } catch (Exception e) {
                 Debug.WriteLine(e.Message);
             }
