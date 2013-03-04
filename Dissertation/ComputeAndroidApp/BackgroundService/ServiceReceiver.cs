@@ -33,11 +33,12 @@ namespace ComputeAndroidApp.BackgroundService {
                 
             } else if (intent.Action == ComputeAndroidSDK.Communication.Constants.RETURN_RESULT_INTENT) {
                 // Handle result
-                ComputeAndroidSDK.Communication.CommPackage cp = ComputeAndroidSDK.Communication.CommPackage.DeserializeJson(intent.GetStringExtra("CommPackage"));
 
-                new WorkOrderWS.WorkOrderSvc().SubmitWorkOrderResult(App.GetAuthToken(context), cp.ComputationRequestId, true, cp.ComputationResult, cp.ComputationStartTime, true, cp.ComputationEndTime, true);
+                System.Threading.Thread oThread = new System.Threading.Thread(new ParameterizedThreadStart(App.GetServiceBinder().GetService().ReturnWORequestResult));
 
-                App.UpdateLastTransmit();
+                oThread.Start(intent);
+
+             
 
             } else if (intent.Action == ComputeAndroidSDK.Communication.Constants.RETURN_STATUS_INTENT) {
 

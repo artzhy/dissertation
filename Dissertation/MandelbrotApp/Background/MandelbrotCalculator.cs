@@ -15,8 +15,8 @@ using Android.Graphics;
 
 namespace com.ComputeApps.MandelbrotApp {
     public class MandelbrotCalculator {
-        private const int MinXChunk = 20;
-        private const int MinYChunk = 20;
+        private const int MinXChunk = 60;
+        private const int MinYChunk = 60;
         private int imgWidth, imgHeight, maxIterations, xChunk, yChunk;
 
         public MandelbrotCalculator(int _imgWidth, int _imgHeight, int _maxIterations) {
@@ -29,16 +29,16 @@ namespace com.ComputeApps.MandelbrotApp {
             if ((imgWidth / MinXChunk) < 1) {
                 xChunk = MinXChunk;
             } else {
-                xChunk = imgWidth/4;
+                xChunk = MinXChunk;
                 while ((imgWidth % xChunk) != 0) {
-                    xChunk--;
+                    xChunk++;
                 }
             }
 
             if ((imgHeight / MinYChunk) < 1) {
                 yChunk = MinYChunk;
             } else {
-                yChunk = imgHeight / 4;
+                yChunk = MinYChunk;
                 while ((imgHeight % yChunk) != 0) {
                     yChunk++;
                 }

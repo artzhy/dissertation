@@ -21,14 +21,8 @@ namespace com.ComputeApps.MandelbrotApp {
     
         public override void OnReceive(Context context, Intent intent) {
             try {
-                CommPackage cp = CommPackage.DeserializeJson(intent.GetStringExtra("CommPackage"));
-                Log.Error("com.ComputeApps.MandelbrotApp.Intents.DoWork", "HERE!!");
-            
-
-                ComputeApps.MandelbrotApp.WorkList.SetAppContext(context);
-                ComputeApps.MandelbrotApp.WorkList.AddWorkItem(cp);
-
-                int test = 0;
+                new ReturnResultTask().Execute(context, intent);
+          
             } catch (Exception ex) {
                 Log.Error("App1.Receiver.OnReceive", ex.Message);
             }
@@ -38,4 +32,20 @@ namespace com.ComputeApps.MandelbrotApp {
           
         }
     }
+
+    public class ReturnResultTask : AsyncTask {
+
+        protected override Java.Lang.Object DoInBackground(params Java.Lang.Object[] @params) {
+            Context c = (Context)@params[0];
+            Intent intent = (Intent)@params[1];
+            Log.Error("com.ComputeApps.MandelbrotApp.Intents.DoWork", "HERE!!");
+            CommPackage cp = CommPackage.DeserializeJson(intent.GetStringExtra("CommPackage"));
+           
+            ComputeApps.MandelbrotApp.WorkList.SetAppContext(c);
+            ComputeApps.MandelbrotApp.WorkList.AddWorkItem(cp);
+
+            return null;
+        }
+    }
+
 }

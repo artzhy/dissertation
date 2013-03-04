@@ -156,6 +156,19 @@ namespace ComputeAndroidApp.BackgroundService {
             // TODO: handle it
         }
 
+        public void ReturnWORequestResult(object o) {
+            Intent intent = (Intent)o;
+
+            // Get it
+            ComputeAndroidSDK.Communication.CommPackage cp = ComputeAndroidSDK.Communication.CommPackage.DeserializeJson(intent.GetStringExtra("CommPackage"));
+
+            new WorkOrderWS.WorkOrderSvc().SubmitWorkOrderResult(App.GetAuthToken(this), cp.ComputationRequestId, true, cp.ComputationResult, cp.ComputationStartTime, true, cp.ComputationEndTime, true);
+
+            App.UpdateLastTransmit();
+
+        }
+
+
         public void AddSlaveWorkItem(int workOrderId) {
             // Get it
             WorkOrderWS.WorkOrderTrimmed wo = new WorkOrderWS.WorkOrderSvc().GetWorkOrder(App.GetAuthToken(this), App.GetDeviceId(this), true, workOrderId, true);
