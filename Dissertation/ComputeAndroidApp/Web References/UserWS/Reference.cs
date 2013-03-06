@@ -27,7 +27,6 @@ namespace ComputeAndroidApp.UserWS {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Web.Services.WebServiceBindingAttribute(Name="BasicHttpBinding_IUserSvc", Namespace="http://tempuri.org/")]
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(DbContext))]
     public partial class UserSvc : System.Web.Services.Protocols.SoapHttpClientProtocol {
         
         private System.Threading.SendOrPostCallback AddUserOperationCompleted;
@@ -509,8 +508,6 @@ namespace ComputeAndroidApp.UserWS {
         
         private string usernamek__BackingFieldField;
         
-        private marcdissertation_dbEntities contextField;
-        
         /// <remarks/>
         [System.Xml.Serialization.XmlArrayAttribute("<AuthenticationTokens>k__BackingField", IsNullable=true)]
         public AuthenticationToken[] AuthenticationTokensk__BackingField {
@@ -587,17 +584,6 @@ namespace ComputeAndroidApp.UserWS {
                 this.usernamek__BackingFieldField = value;
             }
         }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public marcdissertation_dbEntities context {
-            get {
-                return this.contextField;
-            }
-            set {
-                this.contextField = value;
-            }
-        }
     }
     
     /// <remarks/>
@@ -621,8 +607,6 @@ namespace ComputeAndroidApp.UserWS {
         private User userk__BackingFieldField;
         
         private string usernamek__BackingFieldField;
-        
-        private marcdissertation_dbEntities contextField;
         
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute("<CreationDate>k__BackingField")]
@@ -700,17 +684,6 @@ namespace ComputeAndroidApp.UserWS {
                 this.usernamek__BackingFieldField = value;
             }
         }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public marcdissertation_dbEntities context {
-            get {
-                return this.contextField;
-            }
-            set {
-                this.contextField = value;
-            }
-        }
     }
     
     /// <remarks/>
@@ -748,8 +721,6 @@ namespace ComputeAndroidApp.UserWS {
         private WorkOrder[] workOrders1k__BackingFieldField;
         
         private WorkOrder[] workOrdersk__BackingFieldField;
-        
-        private marcdissertation_dbEntities contextField;
         
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute("<ActiveDevice>k__BackingField", IsNullable=true)]
@@ -904,17 +875,6 @@ namespace ComputeAndroidApp.UserWS {
                 this.workOrdersk__BackingFieldField = value;
             }
         }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public marcdissertation_dbEntities context {
-            get {
-                return this.contextField;
-            }
-            set {
-                this.contextField = value;
-            }
-        }
     }
     
     /// <remarks/>
@@ -929,9 +889,9 @@ namespace ComputeAndroidApp.UserWS {
         
         private System.DateTime lastActiveSendk__BackingFieldField;
         
-        private UserDevice userDevicek__BackingFieldField;
+        private System.DateTime lastFetchk__BackingFieldField;
         
-        private marcdissertation_dbEntities contextField;
+        private UserDevice userDevicek__BackingFieldField;
         
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute("<DeviceId>k__BackingField")]
@@ -956,6 +916,17 @@ namespace ComputeAndroidApp.UserWS {
         }
         
         /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("<LastFetch>k__BackingField")]
+        public System.DateTime LastFetchk__BackingField {
+            get {
+                return this.lastFetchk__BackingFieldField;
+            }
+            set {
+                this.lastFetchk__BackingFieldField = value;
+            }
+        }
+        
+        /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute("<UserDevice>k__BackingField", IsNullable=true)]
         public UserDevice UserDevicek__BackingField {
             get {
@@ -963,282 +934,6 @@ namespace ComputeAndroidApp.UserWS {
             }
             set {
                 this.userDevicek__BackingFieldField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public marcdissertation_dbEntities context {
-            get {
-                return this.contextField;
-            }
-            set {
-                this.contextField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.18034")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.datacontract.org/2004/07/BusinessLayer")]
-    public partial class marcdissertation_dbEntities : DbContext {
-        
-        private ActiveDevice[] activeDevicesField;
-        
-        private AuthenticationToken[] authenticationTokensField;
-        
-        private CommunicationPackage[] communicationPackagesField;
-        
-        private DeviceAccessRestriction[] deviceAccessRestrictionsField;
-        
-        private DeviceAppInstallation[] deviceAppInstallationsField;
-        
-        private UserDevice[] userDevicesField;
-        
-        private User[] usersField;
-        
-        private WorkApplication[] workApplicationsField;
-        
-        private WorkOrder[] workOrdersField;
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlArrayAttribute(IsNullable=true)]
-        public ActiveDevice[] ActiveDevices {
-            get {
-                return this.activeDevicesField;
-            }
-            set {
-                this.activeDevicesField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlArrayAttribute(IsNullable=true)]
-        public AuthenticationToken[] AuthenticationTokens {
-            get {
-                return this.authenticationTokensField;
-            }
-            set {
-                this.authenticationTokensField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlArrayAttribute(IsNullable=true)]
-        public CommunicationPackage[] CommunicationPackages {
-            get {
-                return this.communicationPackagesField;
-            }
-            set {
-                this.communicationPackagesField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlArrayAttribute(IsNullable=true)]
-        public DeviceAccessRestriction[] DeviceAccessRestrictions {
-            get {
-                return this.deviceAccessRestrictionsField;
-            }
-            set {
-                this.deviceAccessRestrictionsField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlArrayAttribute(IsNullable=true)]
-        public DeviceAppInstallation[] DeviceAppInstallations {
-            get {
-                return this.deviceAppInstallationsField;
-            }
-            set {
-                this.deviceAppInstallationsField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlArrayAttribute(IsNullable=true)]
-        public UserDevice[] UserDevices {
-            get {
-                return this.userDevicesField;
-            }
-            set {
-                this.userDevicesField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlArrayAttribute(IsNullable=true)]
-        public User[] Users {
-            get {
-                return this.usersField;
-            }
-            set {
-                this.usersField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlArrayAttribute(IsNullable=true)]
-        public WorkApplication[] WorkApplications {
-            get {
-                return this.workApplicationsField;
-            }
-            set {
-                this.workApplicationsField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlArrayAttribute(IsNullable=true)]
-        public WorkOrder[] WorkOrders {
-            get {
-                return this.workOrdersField;
-            }
-            set {
-                this.workOrdersField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.18034")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.datacontract.org/2004/07/BusinessLayer")]
-    public partial class CommunicationPackage {
-        
-        private int communicationIdk__BackingFieldField;
-        
-        private int communicationTypek__BackingFieldField;
-        
-        private System.Nullable<System.DateTime> dateAcknowledgedk__BackingFieldField;
-        
-        private string responsek__BackingFieldField;
-        
-        private int sendAttemptsk__BackingFieldField;
-        
-        private string statusk__BackingFieldField;
-        
-        private System.DateTime submitDatek__BackingFieldField;
-        
-        private int targetDeviceIdk__BackingFieldField;
-        
-        private int workOrderIdk__BackingFieldField;
-        
-        private marcdissertation_dbEntities contextField;
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("<CommunicationId>k__BackingField")]
-        public int CommunicationIdk__BackingField {
-            get {
-                return this.communicationIdk__BackingFieldField;
-            }
-            set {
-                this.communicationIdk__BackingFieldField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("<CommunicationType>k__BackingField")]
-        public int CommunicationTypek__BackingField {
-            get {
-                return this.communicationTypek__BackingFieldField;
-            }
-            set {
-                this.communicationTypek__BackingFieldField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("<DateAcknowledged>k__BackingField", IsNullable=true)]
-        public System.Nullable<System.DateTime> DateAcknowledgedk__BackingField {
-            get {
-                return this.dateAcknowledgedk__BackingFieldField;
-            }
-            set {
-                this.dateAcknowledgedk__BackingFieldField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("<Response>k__BackingField", IsNullable=true)]
-        public string Responsek__BackingField {
-            get {
-                return this.responsek__BackingFieldField;
-            }
-            set {
-                this.responsek__BackingFieldField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("<SendAttempts>k__BackingField")]
-        public int SendAttemptsk__BackingField {
-            get {
-                return this.sendAttemptsk__BackingFieldField;
-            }
-            set {
-                this.sendAttemptsk__BackingFieldField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("<Status>k__BackingField", IsNullable=true)]
-        public string Statusk__BackingField {
-            get {
-                return this.statusk__BackingFieldField;
-            }
-            set {
-                this.statusk__BackingFieldField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("<SubmitDate>k__BackingField")]
-        public System.DateTime SubmitDatek__BackingField {
-            get {
-                return this.submitDatek__BackingFieldField;
-            }
-            set {
-                this.submitDatek__BackingFieldField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("<TargetDeviceId>k__BackingField")]
-        public int TargetDeviceIdk__BackingField {
-            get {
-                return this.targetDeviceIdk__BackingFieldField;
-            }
-            set {
-                this.targetDeviceIdk__BackingFieldField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("<WorkOrderId>k__BackingField")]
-        public int WorkOrderIdk__BackingField {
-            get {
-                return this.workOrderIdk__BackingFieldField;
-            }
-            set {
-                this.workOrderIdk__BackingFieldField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public marcdissertation_dbEntities context {
-            get {
-                return this.contextField;
-            }
-            set {
-                this.contextField = value;
             }
         }
     }
@@ -1284,8 +979,6 @@ namespace ComputeAndroidApp.UserWS {
         private string workOrderResultJsonk__BackingFieldField;
         
         private string workOrderStatusk__BackingFieldField;
-        
-        private marcdissertation_dbEntities contextField;
         
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute("<ApplicationId>k__BackingField")]
@@ -1473,15 +1166,130 @@ namespace ComputeAndroidApp.UserWS {
                 this.workOrderStatusk__BackingFieldField = value;
             }
         }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.18034")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.datacontract.org/2004/07/BusinessLayer")]
+    public partial class CommunicationPackage {
+        
+        private int communicationIdk__BackingFieldField;
+        
+        private int communicationTypek__BackingFieldField;
+        
+        private System.Nullable<System.DateTime> dateAcknowledgedk__BackingFieldField;
+        
+        private string responsek__BackingFieldField;
+        
+        private int sendAttemptsk__BackingFieldField;
+        
+        private string statusk__BackingFieldField;
+        
+        private System.DateTime submitDatek__BackingFieldField;
+        
+        private int targetDeviceIdk__BackingFieldField;
+        
+        private System.Nullable<int> workOrderIdk__BackingFieldField;
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public marcdissertation_dbEntities context {
+        [System.Xml.Serialization.XmlElementAttribute("<CommunicationId>k__BackingField")]
+        public int CommunicationIdk__BackingField {
             get {
-                return this.contextField;
+                return this.communicationIdk__BackingFieldField;
             }
             set {
-                this.contextField = value;
+                this.communicationIdk__BackingFieldField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("<CommunicationType>k__BackingField")]
+        public int CommunicationTypek__BackingField {
+            get {
+                return this.communicationTypek__BackingFieldField;
+            }
+            set {
+                this.communicationTypek__BackingFieldField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("<DateAcknowledged>k__BackingField", IsNullable=true)]
+        public System.Nullable<System.DateTime> DateAcknowledgedk__BackingField {
+            get {
+                return this.dateAcknowledgedk__BackingFieldField;
+            }
+            set {
+                this.dateAcknowledgedk__BackingFieldField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("<Response>k__BackingField", IsNullable=true)]
+        public string Responsek__BackingField {
+            get {
+                return this.responsek__BackingFieldField;
+            }
+            set {
+                this.responsek__BackingFieldField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("<SendAttempts>k__BackingField")]
+        public int SendAttemptsk__BackingField {
+            get {
+                return this.sendAttemptsk__BackingFieldField;
+            }
+            set {
+                this.sendAttemptsk__BackingFieldField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("<Status>k__BackingField", IsNullable=true)]
+        public string Statusk__BackingField {
+            get {
+                return this.statusk__BackingFieldField;
+            }
+            set {
+                this.statusk__BackingFieldField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("<SubmitDate>k__BackingField")]
+        public System.DateTime SubmitDatek__BackingField {
+            get {
+                return this.submitDatek__BackingFieldField;
+            }
+            set {
+                this.submitDatek__BackingFieldField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("<TargetDeviceId>k__BackingField")]
+        public int TargetDeviceIdk__BackingField {
+            get {
+                return this.targetDeviceIdk__BackingFieldField;
+            }
+            set {
+                this.targetDeviceIdk__BackingFieldField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("<WorkOrderId>k__BackingField", IsNullable=true)]
+        public System.Nullable<int> WorkOrderIdk__BackingField {
+            get {
+                return this.workOrderIdk__BackingFieldField;
+            }
+            set {
+                this.workOrderIdk__BackingFieldField = value;
             }
         }
     }
@@ -1515,8 +1323,6 @@ namespace ComputeAndroidApp.UserWS {
         private DeviceAppInstallation[] deviceAppInstallationsk__BackingFieldField;
         
         private WorkOrder[] workOrdersk__BackingFieldField;
-        
-        private marcdissertation_dbEntities contextField;
         
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute("<ApplicationCreator>k__BackingField", IsNullable=true)]
@@ -1638,17 +1444,6 @@ namespace ComputeAndroidApp.UserWS {
                 this.workOrdersk__BackingFieldField = value;
             }
         }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public marcdissertation_dbEntities context {
-            get {
-                return this.contextField;
-            }
-            set {
-                this.contextField = value;
-            }
-        }
     }
     
     /// <remarks/>
@@ -1670,8 +1465,6 @@ namespace ComputeAndroidApp.UserWS {
         private UserDevice userDevicek__BackingFieldField;
         
         private WorkApplication workApplicationk__BackingFieldField;
-        
-        private marcdissertation_dbEntities contextField;
         
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute("<ApplicationDevicePairId>k__BackingField")]
@@ -1738,17 +1531,6 @@ namespace ComputeAndroidApp.UserWS {
                 this.workApplicationk__BackingFieldField = value;
             }
         }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public marcdissertation_dbEntities context {
-            get {
-                return this.contextField;
-            }
-            set {
-                this.contextField = value;
-            }
-        }
     }
     
     /// <remarks/>
@@ -1770,8 +1552,6 @@ namespace ComputeAndroidApp.UserWS {
         private string startTimek__BackingFieldField;
         
         private UserDevice userDevicek__BackingFieldField;
-        
-        private marcdissertation_dbEntities contextField;
         
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute("<AccessRestrictionId>k__BackingField")]
@@ -1838,27 +1618,6 @@ namespace ComputeAndroidApp.UserWS {
                 this.userDevicek__BackingFieldField = value;
             }
         }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public marcdissertation_dbEntities context {
-            get {
-                return this.contextField;
-            }
-            set {
-                this.contextField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(marcdissertation_dbEntities))]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.18034")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.datacontract.org/2004/07/System.Data.Entity")]
-    public partial class DbContext {
     }
     
     /// <remarks/>

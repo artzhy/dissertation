@@ -11,6 +11,7 @@ using Android.Views;
 using Android.Widget;
 
 using ComputeAndroidSDK.Communication;
+using System.Threading;
 
 
 namespace com.ComputeApps.MandelbrotApp {
@@ -58,9 +59,8 @@ namespace com.ComputeApps.MandelbrotApp {
 
             // Continue doing work.
             CommPackage nextWorkItem = GetNextWorkItem();
-           
-            if (nextWorkItem != null)
-                DoWork(nextWorkItem);
+
+            DoNextWorkItem();
         }
 
         public static void DoWork(CommPackage workItem) {
@@ -76,11 +76,19 @@ namespace com.ComputeApps.MandelbrotApp {
 
             workList.Add(toAdd);
 
-            // Continue doing work.
-            CommPackage nextWorkItem = GetNextWorkItem();
+            DoNextWorkItem();
+        }
 
-            if (nextWorkItem != null)
-                DoWork(nextWorkItem);
+        public static void DoNextWorkItem() {
+            Thread.BeginCriticalRegion();
+            if (currentWorkItem == null) {
+                // Continue doing work.
+                CommPackage nextWorkItem = GetNextWorkItem();
+
+                if (nextWorkItem != null)
+                    DoWork(nextWorkItem);
+            }
+            Thread.EndCriticalRegion();
         }
 
         public static void RemoveWorkItem(CommPackage toRemove) {

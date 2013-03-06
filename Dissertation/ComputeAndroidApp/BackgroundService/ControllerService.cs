@@ -57,13 +57,16 @@ namespace ComputeAndroidApp.BackgroundService {
             int noSecsNoComms = 0;
 
             while (noSecsNoComms < 180) {
+                Log.Info("ControllerService", "Fetching outstanding comms");
                 List<WorkOrderWS.CommunicationPackage> cps = new WorkOrderWS.WorkOrderSvc().GetOutstandingCommunications(authToken, deviceId, true).ToList();
+
 
                 if (cps.Count() == 0) {
                     noSecsNoComms += 10;
                 } else {
                     // Handle all the comms
                     noSecsNoComms = 0;
+                    Log.Info("ControllerService", "Got some outstanding comms");
 
                     foreach (WorkOrderWS.CommunicationPackage cp in cps) {
                         UpdateType ut = (UpdateType)cp.CommunicationTypek__BackingField;
@@ -163,8 +166,10 @@ namespace ComputeAndroidApp.BackgroundService {
             ComputeAndroidSDK.Communication.CommPackage cp = ComputeAndroidSDK.Communication.CommPackage.DeserializeJson(intent.GetStringExtra("CommPackage"));
 
             new WorkOrderWS.WorkOrderSvc().SubmitWorkOrderResult(App.GetAuthToken(this), cp.ComputationRequestId, true, cp.ComputationResult, cp.ComputationStartTime, true, cp.ComputationEndTime, true);
-
+            Log.Info("ControllerService", "Result returned WO: " +cp.ComputationRequestId);
             App.UpdateLastTransmit();
+
+            intent.Dispose();
 
         }
 
@@ -219,10 +224,12 @@ namespace ComputeAndroidApp.BackgroundService {
         public void ContinuallyNotifyActive() {
             // This will run until the app is killed
             while (true) {
+                Log.Info("MainApp","Notifying device active");
                 if (App.GetLastTransmit() < DateTime.Now.AddMinutes(-4)) {
                     if (App.GetAuthToken(this) != null && App.GetDeviceId(this) != -1) {
                         new UserWS.UserSvc().MarkDeviceActive(App.GetAuthToken(this), App.GetDeviceId(this), true);
                         App.UpdateLastTransmit();
+                        StartCommFetch();
                     }
                 }
                 Thread.Sleep(new TimeSpan(0, 4, 0)); // Sleep for 4 minutes

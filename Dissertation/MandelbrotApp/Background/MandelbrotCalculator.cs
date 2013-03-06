@@ -131,7 +131,7 @@ namespace com.ComputeApps.MandelbrotApp {
                 x += xChunk;
             }
 
-            return Newtonsoft.Json.JsonConvert.SerializeObject(cpList);
+            return Newtonsoft.Json.JsonConvert.SerializeObject(cpList.Take(15));
 
 
 

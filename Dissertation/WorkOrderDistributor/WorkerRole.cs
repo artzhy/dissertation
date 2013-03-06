@@ -253,14 +253,27 @@ namespace WorkOrderDistributor {
                             fetchRequest.SendAttempts++;
                             fetchRequest.Save();
 
+
+                        } else if (fetchRequest.SendAttempts >= 3 && fetchRequest.SubmitDate < DateTime.Now.AddSeconds(-40)) {
+                            // Device might not be active, delete it from the active device list.
                             try {
                                 ad.Delete();
                             } catch {
 
                             }
-                        } else {
-                            // If not results, then change 
-                            // If results, re-arrange WO
+
+                            // If not results, re-arrange WO
+                            List<int?> workOrdersToBeRearranged = ud.CommunicationPackages.Where(x => x.Status == null && x.Response == null && x.CommunicationType != (int)CommunicationPackage.UpdateType.Result).Select(x => x.WorkOrderId).ToList();
+                            
+                            // Delete current Comm Packages to the device if they are requests for work.
+                            ud.DeleteOutstandingSlaveCommPackages();
+
+                            // Rearange work orders
+                            foreach (int? woId in workOrdersToBeRearranged) {
+                                if (woId.HasValue)
+                                    NewWorkOrders.Send(new BrokeredMessage(woId.Value));
+                            }
+
                         }
                     } 
 

@@ -36,9 +36,8 @@ namespace com.ComputeApps.MandelbrotApp {
 
             //TODO: Split request up and into WOs
 
-            MandelbrotCalculator mc = new MandelbrotCalculator(180, 300, 100);
-
-            new AsyncGetResultsTask(this,FindViewById<ImageView>(Resource.Id.mandelbrotImgView), 180, 300).Execute(mc.SubmitWorkOrders());
+     
+            new AsyncGetResultsTask(this,FindViewById<ImageView>(Resource.Id.mandelbrotImgView), 180, 300, 100).Execute();
 
     
            // iv.SetImageBitmap();

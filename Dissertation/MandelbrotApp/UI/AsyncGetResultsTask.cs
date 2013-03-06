@@ -21,13 +21,14 @@ namespace com.ComputeApps.MandelbrotApp {
         private int _noComplete;
         private int _totalWOs;
         private ImageView _imgView;
-        private int _width, _height;
+        private int _width, _height, _maxIterations;
         
-        public AsyncGetResultsTask(Context context, ImageView imgV, int width, int height) {
+        public AsyncGetResultsTask(Context context, ImageView imgV, int width, int height, int maxIterations) {
             _context = context;
             _imgView = imgV;
             _width = width;
             _height = height;
+            _maxIterations = maxIterations;
         }
 
         protected override void OnProgressUpdate(params Java.Lang.Object[] values) {
@@ -41,13 +42,17 @@ namespace com.ComputeApps.MandelbrotApp {
 
         protected override void OnPreExecute() {
             base.OnPreExecute();
-
+           
+         
             _progressDialog = ProgressDialog.Show(_context, "Mandelbrot generation in progress", "Please wait...");
+            
         }
 
         protected override Java.Lang.Object DoInBackground(params Java.Lang.Object[] @params) {
+
+            MandelbrotCalculator mc = new MandelbrotCalculator(_width, _height, _maxIterations);
             WorkOrderList.NewRequest(this);
-            List<CommPackage> cpList = JsonConvert.DeserializeObject<List<CommPackage>>((string)@params[0]);
+            List<CommPackage> cpList = JsonConvert.DeserializeObject<List<CommPackage>>(mc.SubmitWorkOrders());
 
             foreach (CommPackage cp in cpList) {
                 WorkOrderList.SubmitNewWorkOrder(cp);

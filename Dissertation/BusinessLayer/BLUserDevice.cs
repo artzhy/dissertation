@@ -99,6 +99,17 @@ namespace BusinessLayer {
 
         }
 
+        public void DeleteOutstandingSlaveCommPackages() {
+            // Get packages outstanding
+            IEnumerable<CommunicationPackage> outstandingCPs = this.CommunicationPackages.Where(x => x.Response == null && x.Status == null && x.CommunicationType != (int)CommunicationPackage.UpdateType.Result);
+            foreach (CommunicationPackage cp in outstandingCPs) {
+                CommunicationPackage oCp = CommunicationPackage.Populate(cp.CommunicationId);
+                oCp.Status = "CANCELLED";
+                oCp.Save();
+            }
+
+        }
+
         public void Save() {
             IEnumerable<System.Data.Entity.Validation.DbEntityValidationResult> errors = context.GetValidationErrors();
 

@@ -45,7 +45,7 @@ namespace BusinessLayer {
             CommunicationPackage comm = new CommunicationPackage();
             comm.TargetDeviceId = deviceId;
             comm.CommunicationType = (int)commType;
-            comm.SubmitDate = DateTime.Now;
+            comm.SubmitDate = DateTime.Now.AddSeconds(-35); // This is a hack, should be a nullable type
             comm.WorkOrderId = workOrderId;
             comm.context = new marcdissertation_dbEntities();
 
