@@ -11,7 +11,7 @@ using Android.Graphics;
 namespace com.ComputeApps.MandelbrotApp {
     [Activity(Label = "App2", MainLauncher = true, Icon = "@drawable/icon")]
     public class MandelbrotDraw : Activity {
-        int count = 1;
+       
 
         protected override void OnCreate(Bundle bundle) {
             base.OnCreate(bundle);
@@ -32,27 +32,19 @@ namespace com.ComputeApps.MandelbrotApp {
         }
 
         void button_Click(object sender, EventArgs e) {
-            //TODO: Validation
-
-            //TODO: Split request up and into WOs
-
-     
-            new AsyncGetResultsTask(this, this,FindViewById<ImageView>(Resource.Id.mandelbrotImgView), 180, 300, 100).Execute();
-
-    
-           // iv.SetImageBitmap();
-
-
- 
-
+          new AsyncGetResultsTask(this, this,FindViewById<ImageView>(Resource.Id.mandelbrotImgView), 180, 300, 100).Execute();
+      
         }
 
         internal void setBitmap(Bitmap bm) {
             ImageView _imgView = FindViewById<ImageView>(Resource.Id.mandelbrotImgView);
             _imgView.SetImageBitmap(bm);
-        //    _imgView.RefreshDrawableState();
         }
 
+      
+
     }
+
+ 
 }
 

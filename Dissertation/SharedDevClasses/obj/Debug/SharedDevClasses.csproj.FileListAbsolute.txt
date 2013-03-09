@@ -15,3 +15,4 @@ C:\Users\Marc.COOPERSOFTWARE\Dropbox\Dissertation\Code\Dissertation\SharedDevCla
 C:\Users\Marc.COOPERSOFTWARE\Dropbox\Dissertation\Code\Dissertation\SharedDevClasses\obj\Debug\android\bin\SharedDevClasses.SharedDevClasses.apk
 C:\Users\Marc.COOPERSOFTWARE\Dropbox\Dissertation\Code\Dissertation\SharedDevClasses\obj\Debug\R.cs.flag
 C:\Users\Marc.COOPERSOFTWARE\Dropbox\Dissertation\Code\Dissertation\SharedDevClasses\obj\Debug\uploadflags.txt
+C:\Users\Marc.COOPERSOFTWARE\Dropbox\Dissertation\Code\Dissertation\SharedDevClasses\obj\Debug\SharedDevClasses.csprojResolveAssemblyReference.cache

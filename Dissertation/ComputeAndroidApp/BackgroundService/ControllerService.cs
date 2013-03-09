@@ -135,6 +135,16 @@ namespace ComputeAndroidApp.BackgroundService {
 
         }
 
+        public void CancelWorkOrderComputationRequest(Intent intent) {
+            try {
+
+                List<int> localIds = JsonConvert.DeserializeObject<List<int>>(intent.GetStringExtra("localIdList"));
+
+                new WorkOrderWS.WorkOrderSvc().CancelWorkOrder(App.GetAuthToken(this), localIds.ToArray());
+            } catch (Exception e) {
+                Log.Error("CancelWorkOrderComputationRequest", e.Message);
+            }
+        }
 
         public void RequestWorkOrderComputation(object o) {
 
@@ -172,7 +182,6 @@ namespace ComputeAndroidApp.BackgroundService {
             intent.Dispose();
 
         }
-
 
         public void AddSlaveWorkItem(int workOrderId) {
             // Get it

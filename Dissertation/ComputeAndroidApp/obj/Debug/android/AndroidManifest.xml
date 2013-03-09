@@ -13,11 +13,11 @@
         <category android:name="com.ComputeAndroidApp" />
       </intent-filter>
       <intent-filter>
-        <action android:name="com.google.android.c2dm.intent.RECEIVE" />
+        <action android:name="com.google.android.gcm.intent.RETRY" />
         <category android:name="com.ComputeAndroidApp" />
       </intent-filter>
       <intent-filter>
-        <action android:name="com.google.android.gcm.intent.RETRY" />
+        <action android:name="com.google.android.c2dm.intent.RECEIVE" />
         <category android:name="com.ComputeAndroidApp" />
       </intent-filter>
     </receiver>
@@ -27,6 +27,7 @@
         <action android:name="com.ComputeApp.ControllerService.Intent.Status" />
         <action android:name="com.ComputeApp.ControllerService.Intent.Result" />
         <action android:name="com.ComputeApp.ControllerService.Intent.RequestWorkOrder" />
+        <action android:name="com.ComputeApp.ControllerService.Intent.Cancel" />
         <category android:name="android.intent.category.HOME" />
       </intent-filter>
     </receiver>

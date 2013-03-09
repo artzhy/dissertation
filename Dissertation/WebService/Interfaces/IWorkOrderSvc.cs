@@ -15,7 +15,7 @@ namespace WebService {
 
         [OperationContract]
         [WebGet(UriTemplate = "CancelWorkOrder", ResponseFormat = WebMessageFormat.Json, RequestFormat = WebMessageFormat.Json)]
-        void CancelWorkOrder(String at, int workOrderId);
+        void CancelWorkOrder(String at, List<int> localDeviceIdList);
 
         [OperationContract]
         [WebGet(UriTemplate = "GetWorkOrder", ResponseFormat = WebMessageFormat.Json, RequestFormat = WebMessageFormat.Json)]

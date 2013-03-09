@@ -15,7 +15,7 @@ using Java.Lang;
 
 namespace ComputeAndroidApp.BackgroundService {
     [BroadcastReceiver]
-    [IntentFilter(new[] { Android.Content.Intent.ActionBootCompleted, ComputeAndroidSDK.Communication.Constants.RETURN_STATUS_INTENT, ComputeAndroidSDK.Communication.Constants.RETURN_RESULT_INTENT, ComputeAndroidSDK.Communication.Constants.REQUEST_WORK_ORDER_INTENT },
+    [IntentFilter(new[] { Android.Content.Intent.ActionBootCompleted, ComputeAndroidSDK.Communication.Constants.RETURN_STATUS_INTENT, ComputeAndroidSDK.Communication.Constants.RETURN_RESULT_INTENT, ComputeAndroidSDK.Communication.Constants.REQUEST_WORK_ORDER_INTENT, ComputeAndroidSDK.Communication.Constants.CANCEL_WORK_ORDER_INTENT },
           Categories = new[] { Android.Content.Intent.CategoryHome }
   )]
     public class ServiceReceiver : BroadcastReceiver {
@@ -38,8 +38,6 @@ namespace ComputeAndroidApp.BackgroundService {
 
                 oThread.Start(intent);
 
-             
-
             } else if (intent.Action == ComputeAndroidSDK.Communication.Constants.RETURN_STATUS_INTENT) {
 
                 // Get work order from Web Service
@@ -52,9 +50,9 @@ namespace ComputeAndroidApp.BackgroundService {
                 System.Threading.Thread oThread = new System.Threading.Thread(new ParameterizedThreadStart(App.GetServiceBinder().GetService().RequestWorkOrderComputation));
 
                 oThread.Start(intent);
-            }
-
-            
+            } else if (intent.Action == ComputeAndroidSDK.Communication.Constants.CANCEL_WORK_ORDER_INTENT) {
+                App.GetServiceBinder().GetService().CancelWorkOrderComputationRequest(intent);
+            }            
         }
     }
 }

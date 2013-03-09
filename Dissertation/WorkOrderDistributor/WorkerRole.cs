@@ -57,8 +57,8 @@ namespace WorkOrderDistributor {
 
                     if (!PackageSweepOccuring)
                         Task.Factory.StartNew(() => DoCommPackageSweep());
-                    //if (!WOSweepOccuring)
-                    //    Task.Factory.StartNew(() => DoWOSweep());
+                    if (!WOSweepOccuring)
+                        Task.Factory.StartNew(() => DoWOSweep());
                     if (!ProcessingNewWorkOrders)
                         Task.Factory.StartNew(() => ProcessNewWorkOrders());
                     if (!ProcessingUpdatedWorkOrders)
@@ -101,7 +101,6 @@ namespace WorkOrderDistributor {
         }
 
         private void DoCommPackageSweep() {
-            // while (!IsStopped) {
             if (!PackageSweepOccuring) {
                 PackageSweepOccuring = true;
 
@@ -112,13 +111,10 @@ namespace WorkOrderDistributor {
                     ProcessCommunication(cp);
                 }
 
-
                 Thread.Sleep(new TimeSpan(0, 0, 15));
                 PackageSweepOccuring = false;
             }
-            //      Thread.Sleep(ThreadSleepTime);
 
-            //   }
         }
 
         private void DoWOSweep() {
@@ -179,7 +175,6 @@ namespace WorkOrderDistributor {
                 Trace.WriteLine("Processing", newWorkOrderMessage.SequenceNumber.ToString());
 
                 using (WorkOrder wo = WorkOrder.Populate(newWorkOrderMessage.GetBody<int>())) {
-                  //  WorkOrder wo = WorkOrder.Populate(newWorkOrderMessage.GetBody<int>());
 
                     try {
                         wo.WorkOrderStatus = "";
@@ -232,10 +227,30 @@ namespace WorkOrderDistributor {
                             case SharedClasses.WorkOrderUpdate.UpdateType.Cancel:
                                 // TODO: Implement cancel procedure
                                 // Check if device is handlign WO
+                                if (wo.WorkOrderStatus == "SLAVE_ACKNOWLEDGED") {
+                                    // Send message to cancel
+                                    CommunicationPackage.CreateCommunication(wo.SlaveWorkerId.Value, CommunicationPackage.UpdateType.Cancel, wo.WorkOrderId);
+                                }
 
-                                // If device is not handlign work order, cancel it.
+                                if (wo.CommunicationPackages.Count() > 0) {
+                                    // Have to notify device to cancel
+                                    foreach (CommunicationPackage cp in wo.CommunicationPackages.Where(x=>x.CommunicationType != (int)CommunicationPackage.UpdateType.Cancel)) {
+                                        if (cp.Response == null && cp.Status == null) {
+                                            // Cancel
+                                            using (CommunicationPackage oCp = CommunicationPackage.Populate(cp.CommunicationId)) {
+                                                oCp.Status = "USER_CANCELLED";
+                                                oCp.Save();
+                                            }
 
-                                // If device is handlin work order, notify device to cancel, and then mark cancelled in DB.
+                                        }
+                                    }
+
+                                    wo.WorkOrderStatus = "USER_CANCELLED";
+                                } else {
+                                    wo.WorkOrderStatus = "CANCELLED";
+                                }
+
+                                wo.Save();
                                 break;
                             case SharedClasses.WorkOrderUpdate.UpdateType.SubmitResult:
                                 // Update database with result.
@@ -249,12 +264,11 @@ namespace WorkOrderDistributor {
 
                                 // Send result to requesting device
 
-                                CommunicationPackage cp = CommunicationPackage.CreateCommunication(wo.DeviceId, CommunicationPackage.UpdateType.Result, wo.WorkOrderId);
+            CommunicationPackage.CreateCommunication(wo.DeviceId, CommunicationPackage.UpdateType.Result, wo.WorkOrderId);
 
                                 //   CommunicationPackages.Send(new BrokeredMessage(cp.Serialize()));
 
 
-                                //TODO: Send new WO to the slave device
                                 break;
 
                             case SharedClasses.WorkOrderUpdate.UpdateType.MarkBeingComputed:

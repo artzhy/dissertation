@@ -1,124 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<xs:schema xmlns:tns="http://tempuri.org/" elementFormDefault="qualified" targetNamespace="http://tempuri.org/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
-  <xs:import schemaLocation="http://192.168.1.65/WebService/WorkOrderSvc.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/BusinessLayer" />
-  <xs:import schemaLocation="http://192.168.1.65/WebService/WorkOrderSvc.svc?xsd=xsd4" namespace="http://schemas.datacontract.org/2004/07/WebService" />
-  <xs:element name="CreateWorkOrder">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element minOccurs="0" name="at" nillable="true" type="xs:string" />
-        <xs:element minOccurs="0" name="deviceId" type="xs:int" />
-        <xs:element minOccurs="0" name="applicationId" type="xs:int" />
-        <xs:element minOccurs="0" name="paramList" nillable="true" type="xs:string" />
-        <xs:element minOccurs="0" name="backgroundProcessFunction" nillable="true" type="xs:string" />
-        <xs:element minOccurs="0" name="localDeviceWORef" type="xs:int" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="CreateWorkOrderResponse">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/BusinessLayer" minOccurs="0" name="CreateWorkOrderResult" nillable="true" type="q1:WorkOrder" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="CancelWorkOrder">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element minOccurs="0" name="at" nillable="true" type="xs:string" />
-        <xs:element minOccurs="0" name="workOrderId" type="xs:int" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="CancelWorkOrderResponse">
-    <xs:complexType>
-      <xs:sequence />
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="GetWorkOrder">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element minOccurs="0" name="at" nillable="true" type="xs:string" />
-        <xs:element minOccurs="0" name="deviceId" type="xs:int" />
-        <xs:element minOccurs="0" name="workOrderId" type="xs:int" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="GetWorkOrderResponse">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/WebService" minOccurs="0" name="GetWorkOrderResult" nillable="true" type="q2:WorkOrderTrimmed" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="AcknowledgeWorkOrder">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element minOccurs="0" name="at" nillable="true" type="xs:string" />
-        <xs:element minOccurs="0" name="workOrderId" type="xs:int" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="AcknowledgeWorkOrderResponse">
-    <xs:complexType>
-      <xs:sequence />
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="SubmitWorkOrderResult">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element minOccurs="0" name="at" nillable="true" type="xs:string" />
-        <xs:element minOccurs="0" name="workOrderId" type="xs:int" />
-        <xs:element minOccurs="0" name="resultJson" nillable="true" type="xs:string" />
-        <xs:element minOccurs="0" name="compuatationStartTime" type="xs:dateTime" />
-        <xs:element minOccurs="0" name="computationEndTime" type="xs:dateTime" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="SubmitWorkOrderResultResponse">
-    <xs:complexType>
-      <xs:sequence />
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="MarkWorkOrderInComputation">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element minOccurs="0" name="at" nillable="true" type="xs:string" />
-        <xs:element minOccurs="0" name="workOrderId" type="xs:int" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="MarkWorkOrderInComputationResponse">
-    <xs:complexType>
-      <xs:sequence />
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="AcknowledgeCommunication">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element minOccurs="0" name="at" nillable="true" type="xs:string" />
-        <xs:element minOccurs="0" name="communicationId" type="xs:int" />
-        <xs:element minOccurs="0" name="recieveTime" type="xs:dateTime" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="AcknowledgeCommunicationResponse">
-    <xs:complexType>
-      <xs:sequence />
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="GetOutstandingCommunications">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element minOccurs="0" name="at" nillable="true" type="xs:string" />
-        <xs:element minOccurs="0" name="deviceId" type="xs:int" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="GetOutstandingCommunicationsResponse">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/BusinessLayer" minOccurs="0" name="GetOutstandingCommunicationsResult" nillable="true" type="q3:ArrayOfCommunicationPackage" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
+<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/WebService" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/WebService" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:complexType name="WorkOrderTrimmed">
+    <xs:sequence>
+      <xs:element name="_x003C_ApplicationId_x003E_k__BackingField" type="xs:int" />
+      <xs:element name="_x003C_ApplicationUIResultIntent_x003E_k__BackingField" nillable="true" type="xs:string" />
+      <xs:element name="_x003C_CommPackageJson_x003E_k__BackingField" nillable="true" type="xs:string" />
+      <xs:element name="_x003C_ComputeAppIntent_x003E_k__BackingField" nillable="true" type="xs:string" />
+      <xs:element name="_x003C_DeviceId_x003E_k__BackingField" type="xs:int" />
+      <xs:element name="_x003C_DeviceLocalRequestId_x003E_k__BackingField" type="xs:int" />
+      <xs:element name="_x003C_DeviceUIRef_x003E_k__BackingField" nillable="true" type="xs:string" />
+      <xs:element name="_x003C_ReceiveTime_x003E_k__BackingField" type="xs:dateTime" />
+      <xs:element name="_x003C_SlaveWorkOrderLastCommunication_x003E_k__BackingField" nillable="true" type="xs:dateTime" />
+      <xs:element name="_x003C_SlaveWorkerId_x003E_k__BackingField" nillable="true" type="xs:int" />
+      <xs:element name="_x003C_SlaveWorkerSubmit_x003E_k__BackingField" nillable="true" type="xs:dateTime" />
+      <xs:element name="_x003C_WorkOrderId_x003E_k__BackingField" type="xs:int" />
+      <xs:element name="_x003C_WorkOrderResultJson_x003E_k__BackingField" nillable="true" type="xs:string" />
+      <xs:element name="_x003C_WorkOrderStatus_x003E_k__BackingField" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="WorkOrderTrimmed" nillable="true" type="tns:WorkOrderTrimmed" />
 </xs:schema>

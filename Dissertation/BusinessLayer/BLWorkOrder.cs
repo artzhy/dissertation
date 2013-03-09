@@ -28,6 +28,22 @@ namespace BusinessLayer {
 
         }
 
+        public static WorkOrder PopulateLocalDeviceId(int localDeviceId, int deviceId) {
+            try {
+                marcdissertation_dbEntities ctxt = new marcdissertation_dbEntities();
+            
+                WorkOrder wo = (from x in ctxt.WorkOrders
+                                where x.LocalDeviceId == localDeviceId && x.DeviceId == deviceId
+                                select x).First();
+                wo.context = ctxt;
+
+                return wo;
+            } catch (Exception ex) {
+                throw ex;
+            }
+
+        }
+
         public static WorkOrder CreateWorkOrder(int deviceId, int applicationId, int localDeviceRef) {
 
             WorkOrder wo = new WorkOrder();
@@ -96,10 +112,10 @@ namespace BusinessLayer {
 
                 if (avgComputeTime == 0 || double.IsNaN(avgComputeTime)) {
                     // New app, give 2 mins
-                    avgComputeTime += 60;
+                    avgComputeTime += 120;
                 } else {
                     // Give some leeway
-                    avgComputeTime += 20;
+                    avgComputeTime += 40;
                 }
 
                 foreach (WorkOrder wo in wos) {

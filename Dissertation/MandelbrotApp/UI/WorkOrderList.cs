@@ -20,13 +20,15 @@ namespace com.ComputeApps.MandelbrotApp {
         private static List<WorkOrderTrimmed> WorkOrders = new List<WorkOrderTrimmed>();
         private static Context ApplicationContext;
         private static AsyncGetResultsTask AsyncResultTask;
+        private static Bitmap image;
 
         public static void SetApplicationContext(Context AppContext) {
             ApplicationContext = AppContext;
         }
 
-        public static void NewRequest(AsyncGetResultsTask agr) {
+        public static void NewRequest(AsyncGetResultsTask agr, int imgWidth, int imgHeight) {
             AsyncResultTask = agr;
+          image = Bitmap.CreateBitmap(imgWidth, imgHeight, Bitmap.Config.Argb8888);
         }
 
         public static void SubmitNewWorkOrder(CommPackage cp) {
@@ -44,23 +46,14 @@ namespace com.ComputeApps.MandelbrotApp {
 
         public static void SubmitWorkOrderResult(WorkOrderTrimmed wo) {
             try {   
-                //CommPackage cp = (from x in CommunicationPackages
-                //                  where wo.DeviceLocalRequestId == x.DeviceLocalRequestId
-                //                  select x).Single();
-
-                //CommunicationPackages.Remove(cp);
                 WorkOrders.Add(wo);
-
 
                 List<int> completedWOs = WorkOrders.Select(x => x.DeviceLocalRequestId).ToList();
                 List<int> allWOs = CommunicationPackages.Select(x => x.DeviceLocalRequestId).ToList();
 
                 List<int> umcompletedItems = completedWOs.Except(allWOs).Concat(allWOs.Except(completedWOs)).ToList();
 
-
-                //TODO: Send result to the UI result handler..
                 AsyncResultTask.PostUpdate(wo, umcompletedItems.Count() == 0, umcompletedItems.Count(), allWOs.Count());
-
 
             } catch {
                 
@@ -73,13 +66,24 @@ namespace com.ComputeApps.MandelbrotApp {
 
         public static void CancelOutstandingWorkOrders() {
             //TODO: Cancel work outstanding work order algorithms
+            Intent submitIntent = new Intent(ComputeAndroidSDK.Communication.Constants.CANCEL_WORK_ORDER_INTENT);
+            submitIntent.PutExtra("localIdList", JsonConvert.SerializeObject(CommunicationPackages.Select(x => x.DeviceLocalRequestId)));
+            App.Context.SendBroadcast(submitIntent);
+            ClearState();
         }
 
-        public static Bitmap TransformWorkOrderResultsToBitmap(int imgHeight, int imgWidth) {
-            Bitmap bm = Bitmap.CreateBitmap(imgWidth, imgHeight, Bitmap.Config.Argb8888);
-            foreach (WorkOrderTrimmed wot in WorkOrders) {
-                List<CommunicationResources.PixelColour> pixels = JsonConvert.DeserializeObject<ResultPackage>(wot.WorkOrderResultJson).PixelColours;
 
+        public static void ClearState() {
+            CommunicationPackages = new List<CommPackage>();
+            WorkOrders = new List<WorkOrderTrimmed>();
+            image = null;
+            ApplicationContext = null;
+            AsyncResultTask= null;
+        }
+
+        public static Bitmap TransformWorkOrderResultsToBitmap() {
+            foreach (WorkOrderTrimmed wo in WorkOrders) {
+                List<CommunicationResources.PixelColour> pixels = JsonConvert.DeserializeObject<ResultPackage>(wo.WorkOrderResultJson).PixelColours;
 
                 foreach (CommunicationResources.PixelColour col in pixels) {
                     int r = Color.GetRedComponent(col.colour);
@@ -88,13 +92,14 @@ namespace com.ComputeApps.MandelbrotApp {
                     int a = Color.GetAlphaComponent(col.colour);
 
                     try {
-                        bm.SetPixel(col.x, col.y, Color.Rgb(r, g, b));
+                        image.SetPixel(col.x, col.y, Color.Rgb(r, g, b));
                     } catch {
 
                     }
                 }
             }
-            return bm;
+
+           return image;
         }
         
 

@@ -22,12 +22,8 @@ namespace com.ComputeApps.MandelbrotApp {
     
         public override void OnReceive(Context context, Intent intent) {
             try {
-                if (intent.Action == "com.ComputeApps.MandelbrotApp.Intents.ReceiveResult") {            
-                    WorkOrderTrimmed wo = JsonConvert.DeserializeObject<WorkOrderTrimmed>(intent.GetStringExtra("WorkOrderTrimmed"));
-
-                    // Update work order list
-
-                    WorkOrderList.SubmitWorkOrderResult(wo);
+                if (intent.Action == "com.ComputeApps.MandelbrotApp.Intents.ReceiveResult") {
+                    new SubmitResultTask().Execute(intent);
                 }
 
                 //CommPackage cp = CommPackage.DeserializeJson(intent.GetStringExtra("CommPackage"));
@@ -41,10 +37,18 @@ namespace com.ComputeApps.MandelbrotApp {
             } catch (Exception ex) {
                 Log.Error("com.ComputeApps.MandelbrotApp.Intents.ReceiveResult", ex.Message);
             }
+        }
 
-            
+        class SubmitResultTask : AsyncTask {
+            protected override Java.Lang.Object DoInBackground(params Java.Lang.Object[] @params) {
+                WorkOrderTrimmed wo = JsonConvert.DeserializeObject<WorkOrderTrimmed>(((Intent)@params[0]).GetStringExtra("WorkOrderTrimmed"));
 
-          
+                // Update work order list
+
+                WorkOrderList.SubmitWorkOrderResult(wo);
+
+                return true;
+            }
         }
     }
 }

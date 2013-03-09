@@ -12,6 +12,8 @@ using Android.Widget;
 
 using Newtonsoft.Json;
 using ComputeAndroidSDK.Communication;
+using System.Threading;
+using Android.Graphics;
 
 namespace com.ComputeApps.MandelbrotApp {
     public class AsyncGetResultsTask : AsyncTask {
@@ -36,64 +38,86 @@ namespace com.ComputeApps.MandelbrotApp {
         protected override void OnProgressUpdate(params Java.Lang.Object[] values) {
             base.OnProgressUpdate(values);
 
-            new AlertDialog.Builder(_context)
-               .SetTitle("Still working...")
-               .SetMessage("No complete: " + _noComplete + " out of " + _totalWOs)
-               .Show();
+            //new AlertDialog.Builder(_context)
+            //   .SetTitle("Still working...")
+            //   .SetMessage("No complete: " + _noComplete + " out of " + _totalWOs)
+            //   .Show();
+
+      
+            
+            _progressDialog.Progress = _noComplete;
+        
+
+
         }
 
         protected override void OnPreExecute() {
             base.OnPreExecute();
-           
-         
-            _progressDialog = ProgressDialog.Show(_context, "Mandelbrot generation in progress", "Please wait...");
+
+            _progressDialog = new ProgressDialog(_context);
+            _progressDialog.SetTitle("Mandelbrot generation in progress");
+            _progressDialog.SetMessage("Please wait...");
+            _progressDialog.SetCancelable(true);
+            _progressDialog.SetProgressStyle(ProgressDialogStyle.Horizontal);
+            _progressDialog.SetButton(-2, "Cancel", CancelClicked);
+            _progressDialog.Show();
             
         }
 
         protected override Java.Lang.Object DoInBackground(params Java.Lang.Object[] @params) {
 
             MandelbrotCalculator mc = new MandelbrotCalculator(_width, _height, _maxIterations);
-            WorkOrderList.NewRequest(this);
+            WorkOrderList.NewRequest(this, _width, _height);
             List<CommPackage> cpList = JsonConvert.DeserializeObject<List<CommPackage>>(mc.SubmitWorkOrders());
+
+            _progressDialog.Max = cpList.Count();
+            
 
             foreach (CommPackage cp in cpList) {
                 WorkOrderList.SubmitNewWorkOrder(cp);
             }
 
-          //  WorkOrderList.SubmitNewWorkOrder(JsonConvert.DeserializeObject<ComputeAndroidSDK.Communication.CommPackage>((string)@params[0]));
-
+     
             while (!_complete) {
                 // do nothing
+                Thread.Sleep(new TimeSpan(0, 0, 15));
+               
             }
 
             return true;
         }
 
+        private void CancelClicked(object sender, DialogClickEventArgs e) {
+            WorkOrderList.CancelOutstandingWorkOrders();
+            this.Dispose();
+        }
+
         protected override void OnPostExecute(Java.Lang.Object result) {
             base.OnPostExecute(result);
 
-            _progressDialog.Hide();
+          _progressDialog.Hide();
 
             new AlertDialog.Builder(_context)
                .SetTitle("Mandelbrot generated")
                .SetMessage("Success!")
                .Show();
-
-            _activity.setBitmap(WorkOrderList.TransformWorkOrderResultsToBitmap(_width, _height));
-
-           
+            Bitmap img = WorkOrderList.TransformWorkOrderResultsToBitmap();
+            _activity.setBitmap(img);
+          
         }
 
         public void PostUpdate(ComputeAndroidSDK.Communication.WorkOrderTrimmed wt, Boolean TaskIsComplete, int uncomplete, int totalWOs) {
             Java.Lang.Object[] lst = new Java.Lang.Object[1];
             lst[0] = JsonConvert.SerializeObject(wt);
-            PublishProgress(lst);
-            
             _noComplete = totalWOs - uncomplete;
             _totalWOs = totalWOs;
-           
+            PublishProgress(lst);
+            
             _complete = TaskIsComplete;
         }
 
+
     }
+
+   
 }

@@ -155,27 +155,25 @@ namespace ComputeAndroidApp.WorkOrderWS {
         
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/IWorkOrderSvc/CancelWorkOrder", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public void CancelWorkOrder([System.Xml.Serialization.XmlElementAttribute(IsNullable=true)] string at, int workOrderId, [System.Xml.Serialization.XmlIgnoreAttribute()] bool workOrderIdSpecified) {
+        public void CancelWorkOrder([System.Xml.Serialization.XmlElementAttribute(IsNullable=true)] string at, [System.Xml.Serialization.XmlArrayAttribute(IsNullable=true)] [System.Xml.Serialization.XmlArrayItemAttribute(Namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays", IsNullable=false)] int[] localDeviceIdList) {
             this.Invoke("CancelWorkOrder", new object[] {
                         at,
-                        workOrderId,
-                        workOrderIdSpecified});
+                        localDeviceIdList});
         }
         
         /// <remarks/>
-        public void CancelWorkOrderAsync(string at, int workOrderId, bool workOrderIdSpecified) {
-            this.CancelWorkOrderAsync(at, workOrderId, workOrderIdSpecified, null);
+        public void CancelWorkOrderAsync(string at, int[] localDeviceIdList) {
+            this.CancelWorkOrderAsync(at, localDeviceIdList, null);
         }
         
         /// <remarks/>
-        public void CancelWorkOrderAsync(string at, int workOrderId, bool workOrderIdSpecified, object userState) {
+        public void CancelWorkOrderAsync(string at, int[] localDeviceIdList, object userState) {
             if ((this.CancelWorkOrderOperationCompleted == null)) {
                 this.CancelWorkOrderOperationCompleted = new System.Threading.SendOrPostCallback(this.OnCancelWorkOrderOperationCompleted);
             }
             this.InvokeAsync("CancelWorkOrder", new object[] {
                         at,
-                        workOrderId,
-                        workOrderIdSpecified}, this.CancelWorkOrderOperationCompleted, userState);
+                        localDeviceIdList}, this.CancelWorkOrderOperationCompleted, userState);
         }
         
         private void OnCancelWorkOrderOperationCompleted(object arg) {

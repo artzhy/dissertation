@@ -60,14 +60,14 @@ namespace WebService {
             return wt;
         }
 
-        public void CancelWorkOrder(String at, int workOrderId) {
+        public void CancelWorkOrder(String at, List<int> localDeviceIdList) {
             BusinessLayer.AuthenticationToken oAt = new AuthSvc().AuthUser(at);
-            BusinessLayer.WorkOrder wo = BusinessLayer.WorkOrder.Populate(workOrderId);
 
-            if (wo.DeviceId != oAt.DeviceId)
-                throw new Exception("Cannot delete Work Order which you do not own");
+            foreach (int localDeviceId in localDeviceIdList) {
+                BusinessLayer.WorkOrder wo = BusinessLayer.WorkOrder.PopulateLocalDeviceId(localDeviceId, oAt.DeviceId);
 
-            CloudQueues.UpdatedWorkOrderQueueClient.Send(new BrokeredMessage(new SharedClasses.WorkOrderUpdate(workOrderId, SharedClasses.WorkOrderUpdate.UpdateType.Cancel, oAt.DeviceId, null, null)));
+                CloudQueues.UpdatedWorkOrderQueueClient.Send(new BrokeredMessage(new SharedClasses.WorkOrderUpdate(wo.WorkOrderId, SharedClasses.WorkOrderUpdate.UpdateType.Cancel, oAt.DeviceId, null, null)));
+            }
             
         }
 
