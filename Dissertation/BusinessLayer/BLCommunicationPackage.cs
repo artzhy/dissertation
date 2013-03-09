@@ -9,7 +9,7 @@ namespace BusinessLayer {
     [Serializable]
     [KnownType(typeof(WorkOrder))]
     [KnownType(typeof(marcdissertation_dbEntities))]
-    public partial class CommunicationPackage {
+    public partial class CommunicationPackage :IDisposable {
         private static IEnumerable<System.Data.Entity.Validation.DbEntityValidationResult> errors;
          
          [NonSerialized]
@@ -133,5 +133,9 @@ namespace BusinessLayer {
             return cps;
         }
 
+        public void Dispose() {
+            context.Dispose();
+        }
     }
+ 
 }

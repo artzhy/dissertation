@@ -6,3 +6,4 @@ C:\Users\Marc.COOPERSOFTWARE\Dropbox\Dissertation\Code\Dissertation\BusinessLaye
 C:\Users\Marc.COOPERSOFTWARE\Dropbox\Dissertation\Code\Dissertation\BusinessLayer\obj\Release\BusinessLayer.csprojResolveAssemblyReference.cache
 C:\Users\Marc.COOPERSOFTWARE\Dropbox\Dissertation\Code\Dissertation\BusinessLayer\obj\Release\BusinessLayer.dll
 C:\Users\Marc.COOPERSOFTWARE\Dropbox\Dissertation\Code\Dissertation\BusinessLayer\obj\Release\BusinessLayer.pdb
+C:\Users\Marc.COOPERSOFTWARE\Dropbox\Dissertation\Code\Dissertation\BusinessLayer\bin\Release\Newtonsoft.Json.dll

@@ -37,18 +37,22 @@ namespace com.ComputeApps.MandelbrotApp {
             //TODO: Split request up and into WOs
 
      
-            new AsyncGetResultsTask(this,FindViewById<ImageView>(Resource.Id.mandelbrotImgView), 180, 300, 100).Execute();
+            new AsyncGetResultsTask(this, this,FindViewById<ImageView>(Resource.Id.mandelbrotImgView), 180, 300, 100).Execute();
 
     
            // iv.SetImageBitmap();
 
 
-            int test = 0;
-
+ 
 
         }
 
-        
+        internal void setBitmap(Bitmap bm) {
+            ImageView _imgView = FindViewById<ImageView>(Resource.Id.mandelbrotImgView);
+            _imgView.SetImageBitmap(bm);
+            _imgView.RefreshDrawableState();
+        }
+
     }
 }
 

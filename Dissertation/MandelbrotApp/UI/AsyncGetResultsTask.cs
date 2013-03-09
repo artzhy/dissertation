@@ -22,13 +22,15 @@ namespace com.ComputeApps.MandelbrotApp {
         private int _totalWOs;
         private ImageView _imgView;
         private int _width, _height, _maxIterations;
-        
-        public AsyncGetResultsTask(Context context, ImageView imgV, int width, int height, int maxIterations) {
+        private MandelbrotDraw _activity;
+
+        public AsyncGetResultsTask(MandelbrotDraw act, Context context, ImageView imgV, int width, int height, int maxIterations) {
             _context = context;
             _imgView = imgV;
             _width = width;
             _height = height;
             _maxIterations = maxIterations;
+            _activity = act;
         }
 
         protected override void OnProgressUpdate(params Java.Lang.Object[] values) {
@@ -77,7 +79,7 @@ namespace com.ComputeApps.MandelbrotApp {
                .SetMessage("Success!")
                .Show();
 
-            _imgView.SetImageBitmap(WorkOrderList.TransformWorkOrderResultsToBitmap(_width, _height));
+            _activity.setBitmap(WorkOrderList.TransformWorkOrderResultsToBitmap(_width, _height));
 
            
         }

@@ -25,6 +25,10 @@ namespace WorkOrderDistributor {
         private PushCommunicator.Pusher Pusher;
         private DateTime PackageSweepLastDone;
         private Boolean PackageSweepOccuring = false;
+        private Boolean WOSweepOccuring = false;
+        private Boolean ProcessingNewWorkOrders = false;
+        private Boolean ProcessingUpdatedWorkOrders = false;
+
 
         // QueueClient is thread-safe. Recommended that you cache 
         // rather than recreating it on every request
@@ -32,6 +36,7 @@ namespace WorkOrderDistributor {
         QueueClient UpdatedWorkOrders;
         QueueClient CommunicationPackages;
         List<Task> TaskList;
+        TimeSpan ThreadSleepTime = new TimeSpan(0, 0, 15);
 
         bool IsStopped;
 
@@ -48,68 +53,103 @@ namespace WorkOrderDistributor {
             while (!IsStopped) {
                 try {
                     // Remove completed tasks.
-                   // RemoveCompletedTasks();
+                    // RemoveCompletedTasks();
 
-                    if (!PackageSweepOccuring) {
-                        DoCommPackageSweep();
-                    }
+                    if (!PackageSweepOccuring)
+                        Task.Factory.StartNew(() => DoCommPackageSweep());
+                    //if (!WOSweepOccuring)
+                    //    Task.Factory.StartNew(() => DoWOSweep());
+                    if (!ProcessingNewWorkOrders)
+                        Task.Factory.StartNew(() => ProcessNewWorkOrders());
+                    if (!ProcessingUpdatedWorkOrders)
+                        Task.Factory.StartNew(() => ProcessUpdatedWorkOrders());
+                    //if (!PackageSweepOccuring) {
+                    //    DoCommPackageSweep();
+                    //}
 
-                   
 
-                    if (TaskList.Count < 10) {
-                        var taskProcessNew = Task.Factory.StartNew(() => ProcessNewWorkOrders());
 
-                        var taskProcessUpdates = Task.Factory.StartNew(() => ProcessUpdatedWorkOrders());
-                      
-                        //var taskProcessCommunicate = Task.Factory.StartNew(() => ProcessCommunications());
-                        //TaskList.Add(taskProcessCommunicate);
-                    }
+                    //if (TaskList.Count < 10) {
+                    //    //   var taskProcessNew = Task.Factory.StartNew(() => ProcessNewWorkOrders());
+
+                    //    var taskProcessUpdates = Task.Factory.StartNew(() => ProcessUpdatedWorkOrders());
+
+                    //    //var taskProcessCommunicate = Task.Factory.StartNew(() => ProcessCommunications());
+                    //    //TaskList.Add(taskProcessCommunicate);
+                    //}
 
                     //} else {
                     //    Task.WaitAny(TaskList.ToArray());
                     //}
 
-                   
+
                 } catch (MessagingException e) {
                     if (!e.IsTransient) {
                         Trace.WriteLine(e.Message);
                         throw;
                     }
 
-                  //  Thread.Sleep(10000);
+                    //  Thread.Sleep(10000);
                 } catch (OperationCanceledException e) {
                     if (!IsStopped) {
                         Trace.WriteLine(e.Message);
                         throw;
                     }
                 }
+                Thread.Sleep(ThreadSleepTime);
             }
         }
 
         private void DoCommPackageSweep() {
-            PackageSweepOccuring = true;
+            // while (!IsStopped) {
+            if (!PackageSweepOccuring) {
+                PackageSweepOccuring = true;
 
-            List<CommunicationPackage> unAckedPackages = Scheduler.GetUnacknowledgedPackages(20);
-
-            
-            //foreach(CommunicationPackage cp in unAckedPackages.FindAll(x=>x.CommunicationType == (int) CommunicationPackage.UpdateType.FetchRequest)) {
-            //    // Mark as superseded - will create a new one.
-            //    CommunicationPackage updatableCp = CommunicationPackage.Populate(cp.CommunicationId);
-            //    updatableCp.Status = "SUPERSEDED";
-            //    updatableCp.Save();
-            //    unAckedPackages.Remove(cp);
-            //}
-
-            // Get devices that have outstanding comm packages
+                List<CommunicationPackage> unAckedPackages = Scheduler.GetUnacknowledgedPackages(20);
 
 
+                foreach (CommunicationPackage cp in unAckedPackages) {
+                    ProcessCommunication(cp);
+                }
 
-            foreach (CommunicationPackage cp in unAckedPackages) {
-                ProcessCommunication(cp);
+
+                Thread.Sleep(new TimeSpan(0, 0, 15));
+                PackageSweepOccuring = false;
+            }
+            //      Thread.Sleep(ThreadSleepTime);
+
+            //   }
+        }
+
+        private void DoWOSweep() {
+            // while (!IsStopped) {
+            if (!WOSweepOccuring) {
+                WOSweepOccuring = true;
+
+                List<WorkOrder> WosWaitingLongerThanAverage = WorkOrder.GetWorkOrdersRequiringReassignment();
+
+                // Re-arrange WOs
+
+                foreach (WorkOrder wo in WosWaitingLongerThanAverage) {
+                    // Remove device from active ids
+                    try {
+                        ActiveDevice.Populate(wo.SlaveWorkerId.Value).Delete();
+                    } catch {
+
+                    }
+                    using (WorkOrder oWO = WorkOrder.Populate(wo.WorkOrderId)) {
+                        oWO.WorkOrderStatus = "BEING_REASSIGNED";
+                        oWO.Save();
+                    }
+                    // Rearrange WO
+                    NewWorkOrders.Send(new BrokeredMessage(wo.WorkOrderId));
+                }
+
+                WOSweepOccuring = false;
             }
 
-            PackageSweepOccuring = false;
-            PackageSweepLastDone = DateTime.Now;
+            //       Thread.Sleep(ThreadSleepTime);
+            //  }
         }
 
         private void RemoveCompletedTasks() {
@@ -130,48 +170,55 @@ namespace WorkOrderDistributor {
         }
 
         private void ProcessNewWorkOrders() {
-            while (!IsStopped) {
-                BrokeredMessage newWorkOrderMessage = null;
-                newWorkOrderMessage = NewWorkOrders.Receive();
+            ProcessingNewWorkOrders = true;
+            BrokeredMessage newWorkOrderMessage = null;
+            newWorkOrderMessage = NewWorkOrders.Receive();
+            while (newWorkOrderMessage != null) {
 
-                if (newWorkOrderMessage != null) {
-                    // Process the message
-                    Trace.WriteLine("Processing", newWorkOrderMessage.SequenceNumber.ToString());
+                // Process the message
+                Trace.WriteLine("Processing", newWorkOrderMessage.SequenceNumber.ToString());
 
-                    WorkOrder wo = WorkOrder.Populate(newWorkOrderMessage.GetBody<int>());
+                using (WorkOrder wo = WorkOrder.Populate(newWorkOrderMessage.GetBody<int>())) {
+                  //  WorkOrder wo = WorkOrder.Populate(newWorkOrderMessage.GetBody<int>());
 
                     try {
+                        wo.WorkOrderStatus = "";
+
                         wo.SlaveWorkerId = BusinessLayer.Scheduler.GetAvailableSlave(wo.ApplicationId).DeviceId;
+                        wo.SlaveWorkerSubmit = DateTime.Now;
                         wo.Save();
 
-                        CommunicationPackage cp = CommunicationPackage.CreateCommunication((int)wo.SlaveWorkerId, CommunicationPackage.UpdateType.NewWorkOrder, wo.WorkOrderId);
 
+                       using(CommunicationPackage cp = CommunicationPackage.CreateCommunication((int)wo.SlaveWorkerId, CommunicationPackage.UpdateType.NewWorkOrder, wo.WorkOrderId)) {
                         ProcessCommunication(cp);
-
-
+                       }
 
                     } catch {
                         // No device available requeue the work order.
                         NewWorkOrders.Send(new BrokeredMessage(wo.WorkOrderId));
 
                     }
-
-                    newWorkOrderMessage.Complete();
                 }
+
+                newWorkOrderMessage.Complete();
+                newWorkOrderMessage = NewWorkOrders.Receive();
             }
+
+            ProcessingNewWorkOrders = false;
         }
 
         private void ProcessUpdatedWorkOrders() {
-            while (!IsStopped) {
-                BrokeredMessage updatedWorkOrderMessage = null;
-                updatedWorkOrderMessage = UpdatedWorkOrders.Receive();
-                try {
-                    if (updatedWorkOrderMessage != null) {
-                        // Process the message
-                        SharedClasses.WorkOrderUpdate wou = updatedWorkOrderMessage.GetBody<SharedClasses.WorkOrderUpdate>();
-                        WorkOrder wo = WorkOrder.Populate(wou.WorkOrderId);
+            ProcessingUpdatedWorkOrders = true;
+            BrokeredMessage updatedWorkOrderMessage = null;
+            updatedWorkOrderMessage = UpdatedWorkOrders.Receive();
 
 
+            try {
+                while (updatedWorkOrderMessage != null) {
+                    // Process the message
+                    SharedClasses.WorkOrderUpdate wou = updatedWorkOrderMessage.GetBody<SharedClasses.WorkOrderUpdate>();
+
+                    using (WorkOrder wo = WorkOrder.Populate(wou.WorkOrderId)) {
                         Trace.WriteLine("Processing Update", wou.WorkOrderId.ToString());
 
                         switch (wou.WorkOrderUpdateType) {
@@ -218,66 +265,67 @@ namespace WorkOrderDistributor {
 
                                 break;
                         }
-
-                        updatedWorkOrderMessage.Complete();
                     }
-                } catch (Exception e) {
-                    Debug.WriteLine(e.Message);
-                }
 
+                    updatedWorkOrderMessage.Complete();
+                    updatedWorkOrderMessage = UpdatedWorkOrders.Receive();
+                }
+            } catch (Exception e) {
+                Debug.WriteLine(e.Message);
             }
+            ProcessingUpdatedWorkOrders = false;
         }
 
         private void ProcessCommunication(CommunicationPackage cp) {
             try {
-             
-                  //  CommunicationPackage cp = Newtonsoft.Json.JsonConvert.DeserializeObject<CommunicationPackage>(cpSerialized);
-                    UserDevice ud = UserDevice.Populate(cp.TargetDeviceId);
 
-                    ActiveDevice ad;
-                    // Have to try and catch the exception, since might not exist in the current context
-                    try {
-                        ad = ActiveDevice.Populate(ud.DeviceId);
-                    } catch (Exception) {
-                        ad = null;
-                    }
+                //  CommunicationPackage cp = Newtonsoft.Json.JsonConvert.DeserializeObject<CommunicationPackage>(cpSerialized);
+                UserDevice ud = UserDevice.Populate(cp.TargetDeviceId);
 
-                    CommunicationPackage fetchRequest = CommunicationPackage.CreateFetchRequest(cp.TargetDeviceId);
+                ActiveDevice ad;
+                // Have to try and catch the exception, since might not exist in the current context
+                try {
+                    ad = ActiveDevice.Populate(ud.DeviceId);
+                } catch (Exception) {
+                    ad = null;
+                }
 
-                    // If last fetch from device was less than 3 mins ago, don't send GCM 
-                    if (ad != null && ad.LastFetch < DateTime.Now.AddMinutes(-1)) {
-                        // Send GCM
-                        if (fetchRequest.SendAttempts < 3 && fetchRequest.SubmitDate < DateTime.Now.AddSeconds(-30)) {
-                            Pusher.SendNotification(ud.GCMCode, fetchRequest.Serialize());
-                            fetchRequest.SubmitDate = DateTime.Now;
-                            fetchRequest.SendAttempts++;
-                            fetchRequest.Save();
+                CommunicationPackage fetchRequest = CommunicationPackage.CreateFetchRequest(cp.TargetDeviceId);
+
+                // If last fetch from device was less than 3 mins ago, don't send GCM 
+                if (ad != null && ad.LastFetch < DateTime.Now.AddMinutes(-1)) {
+                    // Send GCM
+                    if (fetchRequest.SendAttempts < 3 && fetchRequest.SubmitDate < DateTime.Now.AddSeconds(-30)) {
+                        Pusher.SendNotification(ud.GCMCode, fetchRequest.Serialize());
+                        fetchRequest.SubmitDate = DateTime.Now;
+                        fetchRequest.SendAttempts++;
+                        fetchRequest.Save();
 
 
-                        } else if (fetchRequest.SendAttempts >= 3 && fetchRequest.SubmitDate < DateTime.Now.AddSeconds(-40)) {
-                            // Device might not be active, delete it from the active device list.
-                            try {
-                                ad.Delete();
-                            } catch {
-
-                            }
-
-                            // If not results, re-arrange WO
-                            List<int?> workOrdersToBeRearranged = ud.CommunicationPackages.Where(x => x.Status == null && x.Response == null && x.CommunicationType != (int)CommunicationPackage.UpdateType.Result).Select(x => x.WorkOrderId).ToList();
-                            
-                            // Delete current Comm Packages to the device if they are requests for work.
-                            ud.DeleteOutstandingSlaveCommPackages();
-
-                            // Rearange work orders
-                            foreach (int? woId in workOrdersToBeRearranged) {
-                                if (woId.HasValue)
-                                    NewWorkOrders.Send(new BrokeredMessage(woId.Value));
-                            }
+                    } else if (fetchRequest.SendAttempts >= 3 && fetchRequest.SubmitDate < DateTime.Now.AddSeconds(-40)) {
+                        // Device might not be active, delete it from the active device list.
+                        try {
+                            ad.Delete();
+                        } catch {
 
                         }
-                    } 
 
-                    // handle if less than 10 ... etc..
+                        // If not results, re-arrange WO
+                        List<int?> workOrdersToBeRearranged = ud.CommunicationPackages.Where(x => x.Status == null && x.Response == null && x.CommunicationType != (int)CommunicationPackage.UpdateType.Result).Select(x => x.WorkOrderId).ToList();
+
+                        // Delete current Comm Packages to the device if they are requests for work.
+                        ud.DeleteOutstandingSlaveCommPackages();
+
+                        // Rearange work orders
+                        foreach (int? woId in workOrdersToBeRearranged) {
+                            if (woId.HasValue)
+                                NewWorkOrders.Send(new BrokeredMessage(woId.Value));
+                        }
+
+                    }
+                }
+
+                // handle if less than 10 ... etc..
 
             } catch (Exception e) {
                 Debug.WriteLine(e.Message);
@@ -303,7 +351,7 @@ namespace WorkOrderDistributor {
                 namespaceManager.CreateQueue(CommunicationPackagesQName);
             }
 
-                     
+
             // Initialize the connection to Service Bus Queue
             NewWorkOrders = QueueClient.CreateFromConnectionString(connectionString, NewWorkOrdersQName);
             UpdatedWorkOrders = QueueClient.CreateFromConnectionString(connectionString, UpdatedWorkOrersQName);
@@ -315,6 +363,9 @@ namespace WorkOrderDistributor {
             TaskList = new List<Task>();
 
             IsStopped = false;
+            WOSweepOccuring = false;
+            PackageSweepOccuring = false;
+
             return base.OnStart();
         }
 

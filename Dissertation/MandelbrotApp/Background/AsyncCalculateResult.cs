@@ -20,7 +20,7 @@ namespace com.ComputeApps.MandelbrotApp {
     private CommPackage _cp;
     private CommPackage _resultPackage;
 
-    public  AsyncCalculateResult(Intent i) {
+    public AsyncCalculateResult(Intent i) {
          //  _context = context;
    //        _cp = cp;
 
@@ -30,6 +30,7 @@ namespace com.ComputeApps.MandelbrotApp {
 
    
         protected override Java.Lang.Object DoInBackground(params Java.Lang.Object[] @params) {
+            Log.Error("COMPUTING", "STARTING TO COMPUTE RESULT FOR WO: " + _cp.ComputationRequestId);
             _resultPackage = WorkerClass.DoWork(_cp);
 
             return true;
@@ -42,6 +43,9 @@ namespace com.ComputeApps.MandelbrotApp {
             intent.PutExtra("CommPackage", _resultPackage.SerializeJson());
             intent.SetAction(Constants.RETURN_RESULT_INTENT);
             App.Context.SendBroadcast(intent);
+
+            this.Dispose();
+
          
         }
 

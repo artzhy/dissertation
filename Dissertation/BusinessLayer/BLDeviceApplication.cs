@@ -38,6 +38,23 @@ namespace BusinessLayer {
             }
         }
 
+        public double GetAverageComputeTime() {
+            double sum = 0;
+            int count = 0;
+
+            foreach(WorkOrder wo in context.WorkOrders.Where(x => x.WorkOrderStatus == "RESULT_RECEIVED").Take(15)) {
+                sum += wo.SlaveWorkOrderLastCommunication.Value.Subtract(wo.SlaveWorkerSubmit.Value).Seconds;
+                count++;
+            }
+
+            if (sum == 0 || count == 0) {
+                return 0;
+            }
+
+
+            return sum/count;
+        }
+
         public static WorkApplication CreateApplication(string applicationName, string applicationDescription, string applicationCreator, string applicationPackageUrl, string applicationWorkIntent, string applicationNamespace, int applicationVersion = 1) {
 
             WorkApplication wa = new WorkApplication();
