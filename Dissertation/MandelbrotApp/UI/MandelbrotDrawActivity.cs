@@ -50,7 +50,7 @@ namespace com.ComputeApps.MandelbrotApp {
         internal void setBitmap(Bitmap bm) {
             ImageView _imgView = FindViewById<ImageView>(Resource.Id.mandelbrotImgView);
             _imgView.SetImageBitmap(bm);
-            _imgView.RefreshDrawableState();
+        //    _imgView.RefreshDrawableState();
         }
 
     }
