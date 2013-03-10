@@ -20,10 +20,14 @@ namespace com.ComputeApps.MandelbrotApp {
         private int imgWidth, imgHeight, maxIterations, xChunk, yChunk;
         private double xMax, xMin, yMax, yMin;
 
-        public MandelbrotCalculator(int _imgWidth, int _imgHeight, int _maxIterations) {
+        public MandelbrotCalculator(int _imgWidth, int _imgHeight, int _maxIterations, double _xMax, double _xMin, double _yMax, double _yMin) {
             imgHeight = _imgHeight;
             imgWidth = _imgWidth;
             maxIterations = _maxIterations;
+            xMax = _xMax;
+            xMin = _xMin;
+            yMax = _yMax;
+            yMin = _yMin;
 
             // Calculate chunk
 
@@ -72,7 +76,10 @@ namespace com.ComputeApps.MandelbrotApp {
         //    return bm;
         //}
 
-        public static int GetColourOfPixel(int x, int y,double cx, double cy, int maxIterations) {
+        public static int GetColourOfPixel(int x, int y, double xMax, double xMin, double yMax, double yMin, int height, int width, int maxIterations) {
+            double cx = xMin + x * ((xMax - xMin) / width);
+            double cy = yMin + y * ((yMax - yMin) / height);
+
             double zr = cx, zi = cy;
             double tmp;
 
@@ -105,15 +112,16 @@ namespace com.ComputeApps.MandelbrotApp {
                     ComputeAndroidSDK.Communication.CommPackage cp = new ComputeAndroidSDK.Communication.CommPackage();
                     List<CommPackage.ParamListItem> parameters = new List<CommPackage.ParamListItem>();
 
-                    double cx = xMin + x * ((xMax - xMin) / imgWidth);
-                    double cy = yMin + y * ((yMax - yMin) / imgHeight);
-
                     parameters.Add(new CommPackage.ParamListItem("xStart", x));
                     parameters.Add(new CommPackage.ParamListItem("yStart", y));
                     parameters.Add(new CommPackage.ParamListItem("xChunkSize", xChunk));
                     parameters.Add(new CommPackage.ParamListItem("yChunkSize", yChunk));
-                    parameters.Add(new CommPackage.ParamListItem("cx", cx));
-                    parameters.Add(new CommPackage.ParamListItem("cy", cy));
+                    parameters.Add(new CommPackage.ParamListItem("xMax", xMax));
+                    parameters.Add(new CommPackage.ParamListItem("xMin", xMin));
+                    parameters.Add(new CommPackage.ParamListItem("yMin", yMin));
+                    parameters.Add(new CommPackage.ParamListItem("yMax", yMax));
+                    parameters.Add(new CommPackage.ParamListItem("width", imgWidth));
+                    parameters.Add(new CommPackage.ParamListItem("height", imgHeight));
                     parameters.Add(new CommPackage.ParamListItem("maxIterations", maxIterations));
                     cp.ParameterList = parameters;
                     cp.ApplicationId = 5;

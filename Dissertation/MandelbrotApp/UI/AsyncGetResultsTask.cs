@@ -65,8 +65,11 @@ namespace com.ComputeApps.MandelbrotApp {
         }
 
         protected override Java.Lang.Object DoInBackground(params Java.Lang.Object[] @params) {
-
-            MandelbrotCalculator mc = new MandelbrotCalculator(_width, _height, _maxIterations);
+            double xmin = -2;
+                        double xmax = 1.0;
+                       double ymin = -1.5;
+                       double ymax = 1.5;
+            MandelbrotCalculator mc = new MandelbrotCalculator(_width, _height, _maxIterations,xmax,xmin,ymax,ymin);
             WorkOrderList.NewRequest(this, _width, _height);
             List<CommPackage> cpList = JsonConvert.DeserializeObject<List<CommPackage>>(mc.SubmitWorkOrders());
 
