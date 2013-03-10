@@ -18,6 +18,7 @@ namespace com.ComputeApps.MandelbrotApp {
         private const int MinXChunk = 60;
         private const int MinYChunk = 60;
         private int imgWidth, imgHeight, maxIterations, xChunk, yChunk;
+        private double xMax, xMin, yMax, yMin;
 
         public MandelbrotCalculator(int _imgWidth, int _imgHeight, int _maxIterations) {
             imgHeight = _imgHeight;
@@ -45,37 +46,49 @@ namespace com.ComputeApps.MandelbrotApp {
             }
         }
 
-        public static int GetColourOfPixel(int x, int y, int maxIterations) {
-            Boolean inside = true;
+        //public static Bitmap GenMandelbrotBitmapTest(int width, int height, int maxIterations) {
+        //    Bitmap bm = Bitmap.CreateBitmap(width, height, Bitmap.Config.Argb8888);
+        //    int x = 0;
+        //    while (x < width) {
+        //        int y = 0;
+        //        while (y < height) {
+        //            double xmin = -2;
+        //            double xmax = 1.0;
+        //            double ymin = -1.5;
+        //            double ymax = 1.5;
+        //            int colour = GetColourOfPixel(x, y, xmax, xmin, width, ymax, ymin, height, maxIterations);
+                    
+        //            int r = Color.GetRedComponent(colour);
+        //            int g = Color.GetGreenComponent(colour);
+        //            int b = Color.GetBlueComponent(colour);
+        //            int a = Color.GetAlphaComponent(colour);
 
-            //Run iterations over this point
-            int iteration = 0;
+        //            bm.SetPixel(x, y, Color.Rgb(r, g, b));
+        //            y++;
+        //        }
+        //        x++;
+        //    }
 
-            int y0 = y;
-            int x0 = x;
+        //    return bm;
+        //}
 
-            for (iteration = 0; iteration < maxIterations; iteration++) {
-                // z^2 + c
-                int newx = x ^ 2 - (y * y) + x;
-                int newy = (2 * x * y) + y;
+        public static int GetColourOfPixel(int x, int y,double cx, double cy, int maxIterations) {
+            double zr = cx, zi = cy;
+            double tmp;
 
-                x = newx;
-                y = newy;
+            int i;
 
-                // Distance is > 2, escapes to infinity
-                if ((x ^ 2 + y ^ 2) > 4) {
-                    inside = false;
+            for (i = 0; i < maxIterations; i++) {
+                tmp = zr * zr - zi * zi + cx;
+                zi *= 2 * zr;
+                zi += cy;
+                zr = tmp;
+
+                if (zr * zr + zi * zi > 4.0)
                     break;
-                }
             }
 
-            int colourCodeHex;
-            if (inside)
-                colourCodeHex = Background.ColourScheme.ColourInsidePoint();
-            else
-                colourCodeHex = Background.ColourScheme.ColourOutsidePoint(iteration, maxIterations);
-
-            return colourCodeHex;
+            return Background.ColourScheme.ColourPoint(i, maxIterations);
         }
 
         public String SubmitWorkOrders() {
@@ -85,46 +98,27 @@ namespace com.ComputeApps.MandelbrotApp {
             List<CommPackage> cpList = new List<CommPackage>();
 
             Bitmap bm = Bitmap.CreateBitmap(imgWidth, imgHeight, Bitmap.Config.Argb8888);
-
             while (x < imgWidth) {
                 y = 0;
 
                 while (y < imgHeight) {
-
                     ComputeAndroidSDK.Communication.CommPackage cp = new ComputeAndroidSDK.Communication.CommPackage();
                     List<CommPackage.ParamListItem> parameters = new List<CommPackage.ParamListItem>();
 
+                    double cx = xMin + x * ((xMax - xMin) / imgWidth);
+                    double cy = yMin + y * ((yMax - yMin) / imgHeight);
 
                     parameters.Add(new CommPackage.ParamListItem("xStart", x));
                     parameters.Add(new CommPackage.ParamListItem("yStart", y));
                     parameters.Add(new CommPackage.ParamListItem("xChunkSize", xChunk));
                     parameters.Add(new CommPackage.ParamListItem("yChunkSize", yChunk));
+                    parameters.Add(new CommPackage.ParamListItem("cx", cx));
+                    parameters.Add(new CommPackage.ParamListItem("cy", cy));
                     parameters.Add(new CommPackage.ParamListItem("maxIterations", maxIterations));
                     cp.ParameterList = parameters;
                     cp.ApplicationId = 5;
                     cpList.Add(cp);
-                    //return cp.SerializeJson();
-
-               //     WorkOrderList.SubmitNewWorkOrder(cp);
-
-                    //Intent woRequestIntent = new Intent(ComputeAndroidSDK.Communication.Constants.REQUEST_WORK_ORDER_INTENT);
-                    //woRequestIntent.PutExtra("CommPackage", cp.SerializeJson());
-
-                    //App.Context.SendBroadcast(woRequestIntent);
-
-                 //   return bm;
-              
-                    //List<CommunicationResources.PixelColour> colours = ProcessRequest(x, y, xChunk, yChunk, maxIterations);
-
-                    //foreach (CommunicationResources.PixelColour col in colours) {
-                    //    int r = Color.GetRedComponent(col.colour);
-                    //    int g = Color.GetGreenComponent(col.colour);
-                    //    int b = Color.GetBlueComponent(col.colour);
-                    //    int a = Color.GetAlphaComponent(col.colour);
-
-                    //    bm.SetPixel(col.x, col.y, Color.Rgb(r, g, b));
-                    //}
-
+               
                     y += yChunk;
 
                 }

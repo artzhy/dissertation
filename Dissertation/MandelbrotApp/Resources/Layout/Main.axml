@@ -19,11 +19,6 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:text="@string/GenerateMandelbrot" />
-    <ProgressBar
-        style="?android:attr/progressBarStyleHorizontal"
-        android:layout_width="fill_parent"
-        android:layout_height="38.7dp"
-        android:id="@+id/requestProgressBar" />
     <ImageView
         android:src="@android:drawable/ic_menu_gallery"
         android:layout_width="fill_parent"

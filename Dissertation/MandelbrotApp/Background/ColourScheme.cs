@@ -20,7 +20,10 @@ namespace com.ComputeApps.MandelbrotApp.Background {
     public class ColourScheme {
         private const int COLOUR_SPACING = 30;
 
-        public static int ColourOutsidePoint(int iteration, int maxIteration) {
+        public static int ColourPoint(int iteration, int maxIteration) {
+            if (iteration == maxIteration)
+                return ColourInsidePoint();
+
             if (iteration <= 0)
                 unchecked {
                     return (int)0xFF000000;

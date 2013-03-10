@@ -12,7 +12,6 @@ namespace com.ComputeApps.MandelbrotApp {
     [Activity(Label = "App2", MainLauncher = true, Icon = "@drawable/icon")]
     public class MandelbrotDraw : Activity {
        
-
         protected override void OnCreate(Bundle bundle) {
             base.OnCreate(bundle);
 
@@ -25,14 +24,24 @@ namespace com.ComputeApps.MandelbrotApp {
             ImageView iv = FindViewById<ImageView>(Resource.Id.mandelbrotImgView);
 
 
-            iv.SetMaxWidth(300);
+            iv.SetMaxWidth(400);
             iv.SetMaxHeight(400);
 
             button.Click += button_Click;
         }
 
+        protected override void OnRestoreInstanceState(Bundle savedInstanceState) {
+            base.OnRestoreInstanceState(savedInstanceState);
+        }
+
+        protected override void OnSaveInstanceState(Bundle outState) {
+            base.OnSaveInstanceState(outState);
+
+           
+        }
+
         void button_Click(object sender, EventArgs e) {
-          new AsyncGetResultsTask(this, this,FindViewById<ImageView>(Resource.Id.mandelbrotImgView), 180, 300, 100).Execute();
+                  new AsyncGetResultsTask(this, this,FindViewById<ImageView>(Resource.Id.mandelbrotImgView), 180, 300, 100).Execute();
       
         }
 

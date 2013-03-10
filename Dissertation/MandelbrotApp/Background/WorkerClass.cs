@@ -20,12 +20,12 @@ namespace com.ComputeApps.MandelbrotApp {
 
         }
 
-        public static List<CommunicationResources.PixelColour> ProcessRequest(int xStart, int yStart, int xChunkSize, int yChunkSize, int maxIterations) {
+        public static List<CommunicationResources.PixelColour> ProcessRequest(int xStart, int yStart, double cx, double cy, int xChunkSize, int yChunkSize, int maxIterations) {
             List<CommunicationResources.PixelColour> pixels = new List<CommunicationResources.PixelColour>();
 
             for (int x = xStart; x < (xStart + xChunkSize); x++) {
                 for (int y = yStart; y < (yStart + yChunkSize); y++) {
-                    pixels.Add(new CommunicationResources.PixelColour(x, y, MandelbrotCalculator.GetColourOfPixel(x, y, maxIterations)));
+                   pixels.Add(new CommunicationResources.PixelColour(x, y, MandelbrotCalculator.GetColourOfPixel(x, y, cx, cy, maxIterations)));
                 }
             }
 
