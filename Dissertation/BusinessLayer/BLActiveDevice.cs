@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 
 namespace BusinessLayer {
-    [Serializable]
+    [Serializable()]
     public partial class ActiveDevice {
         private static IEnumerable<System.Data.Entity.Validation.DbEntityValidationResult> errors;
         [NonSerialized]

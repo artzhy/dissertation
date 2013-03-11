@@ -7,8 +7,7 @@ using System.Text;
 
 namespace BusinessLayer {
     [Serializable]
-    [KnownType(typeof(WorkOrder))]
-    [KnownType(typeof(marcdissertation_dbEntities))]
+    [KnownType(typeof(BusinessLayer.WorkOrder))]
     public partial class CommunicationPackage :IDisposable {
         private static IEnumerable<System.Data.Entity.Validation.DbEntityValidationResult> errors;
          

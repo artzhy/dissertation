@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <DiscoveryClientResultsFile xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <Results>
-    <DiscoveryClientResult referenceType="System.Web.Services.Discovery.SchemaReference" url="http://192.168.1.65/WebService/AuthSvc.svc?xsd=xsd0" filename="AuthSvc.xsd" />
-    <DiscoveryClientResult referenceType="System.Web.Services.Discovery.SchemaReference" url="http://192.168.1.65/WebService/AuthSvc.svc?xsd=xsd1" filename="AuthSvc0.xsd" />
-    <DiscoveryClientResult referenceType="System.Web.Services.Discovery.DiscoveryDocumentReference" url="http://192.168.1.65/WebService/AuthSvc.svc?disco" filename="AuthSvc.disco" />
-    <DiscoveryClientResult referenceType="System.Web.Services.Discovery.ContractReference" url="http://192.168.1.65/WebService/AuthSvc.svc?wsdl" filename="AuthSvc.wsdl" />
+    <DiscoveryClientResult referenceType="System.Web.Services.Discovery.ContractReference" url="http://c4b0eba7dae642f38a424487179f8540.cloudapp.net/AuthSvc.svc?wsdl" filename="AuthSvc.wsdl" />
+    <DiscoveryClientResult referenceType="System.Web.Services.Discovery.SchemaReference" url="http://c4b0eba7dae642f38a424487179f8540.cloudapp.net/AuthSvc.svc?xsd=xsd1" filename="AuthSvc.xsd" />
+    <DiscoveryClientResult referenceType="System.Web.Services.Discovery.SchemaReference" url="http://c4b0eba7dae642f38a424487179f8540.cloudapp.net/AuthSvc.svc?xsd=xsd0" filename="AuthSvc0.xsd" />
+    <DiscoveryClientResult referenceType="System.Web.Services.Discovery.DiscoveryDocumentReference" url="http://c4b0eba7dae642f38a424487179f8540.cloudapp.net/AuthSvc.svc?disco" filename="AuthSvc.disco" />
   </Results>
 </DiscoveryClientResultsFile>

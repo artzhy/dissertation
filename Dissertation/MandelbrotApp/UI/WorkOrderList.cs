@@ -48,6 +48,22 @@ namespace com.ComputeApps.MandelbrotApp {
             try {   
                 WorkOrders.Add(wo);
 
+
+                List<CommunicationResources.PixelColour> pixels = JsonConvert.DeserializeObject<ResultPackage>(wo.WorkOrderResultJson).PixelColours;
+
+                foreach (CommunicationResources.PixelColour col in pixels) {
+                    int r = Color.GetRedComponent(col.colour);
+                    int g = Color.GetGreenComponent(col.colour);
+                    int b = Color.GetBlueComponent(col.colour);
+                    int a = Color.GetAlphaComponent(col.colour);
+
+                    try {
+                        image.SetPixel(col.x, col.y, Color.Rgb(r, g, b));
+                    } catch {
+
+                    }
+                }
+
                 List<int> completedWOs = WorkOrders.Select(x => x.DeviceLocalRequestId).ToList();
                 List<int> allWOs = CommunicationPackages.Select(x => x.DeviceLocalRequestId).ToList();
 
@@ -82,23 +98,6 @@ namespace com.ComputeApps.MandelbrotApp {
         }
 
         public static Bitmap TransformWorkOrderResultsToBitmap() {
-            foreach (WorkOrderTrimmed wo in WorkOrders) {
-                List<CommunicationResources.PixelColour> pixels = JsonConvert.DeserializeObject<ResultPackage>(wo.WorkOrderResultJson).PixelColours;
-
-                foreach (CommunicationResources.PixelColour col in pixels) {
-                    int r = Color.GetRedComponent(col.colour);
-                    int g = Color.GetGreenComponent(col.colour);
-                    int b = Color.GetBlueComponent(col.colour);
-                    int a = Color.GetAlphaComponent(col.colour);
-
-                    try {
-                        image.SetPixel(col.x, col.y, Color.Rgb(r, g, b));
-                    } catch {
-
-                    }
-                }
-            }
-
            return image;
         }
         

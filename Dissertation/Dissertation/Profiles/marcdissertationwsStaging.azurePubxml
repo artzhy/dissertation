@@ -12,7 +12,7 @@
     <AzureHostedServiceLabel>marcdissertationws</AzureHostedServiceLabel>
     <AzureHostedServiceName>marcdissertationws</AzureHostedServiceName>
     <AzureEnableIntelliTrace>False</AzureEnableIntelliTrace>
-    <AzureEnableProfiling>False</AzureEnableProfiling>
+    <AzureEnableProfiling>True</AzureEnableProfiling>
     <AzureServiceConfiguration>Cloud</AzureServiceConfiguration>
     <AzureSolutionConfiguration>Release</AzureSolutionConfiguration>
     <AzureStorageAccountLabel>DissertationStorage</AzureStorageAccountLabel>

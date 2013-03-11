@@ -30,6 +30,7 @@
     </LocalResources>
     <ConfigurationSettings>
       <Setting name="Microsoft.ServiceBus.ConnectionString" />
+      <Setting name="CloudToolsDiagnosticAgentVersion" />
     </ConfigurationSettings>
   </WebRole>
   <WorkerRole name="Scheduler" vmsize="Small">
@@ -38,6 +39,7 @@
     </Imports>
     <ConfigurationSettings>
       <Setting name="Microsoft.ServiceBus.ConnectionString" />
+      <Setting name="CloudToolsDiagnosticAgentVersion" />
     </ConfigurationSettings>
   </WorkerRole>
 </ServiceDefinition>

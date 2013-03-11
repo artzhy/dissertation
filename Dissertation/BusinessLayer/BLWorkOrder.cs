@@ -6,7 +6,7 @@ using System.Text;
 
 namespace BusinessLayer {
     [Serializable()]
-    [KnownType(typeof(CommunicationPackage))]
+    [KnownType(typeof(BusinessLayer.CommunicationPackage))]
     public partial class WorkOrder :IDisposable {
         private static IEnumerable<System.Data.Entity.Validation.DbEntityValidationResult> errors;
         [NonSerialized]

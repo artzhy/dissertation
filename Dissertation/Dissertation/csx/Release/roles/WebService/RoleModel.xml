@@ -34,13 +34,33 @@
         <Variable name="WaRoleType" value="IISWebRole" />
       </Environment>
     </Task>
+    <Task commandLine="WindowsAzureDiagnosticsStartup.exe Profiling Sampling" executionContext="elevated" relativePath="plugins\Profiling">
+      <Environment>
+        <Variable name="RdModuleName" value="Profiling" />
+        <Variable name="WaRoleType" value="IISWebRole" />
+      </Environment>
+    </Task>
+    <Task commandLine="WindowsAzureDiagnosticsAgent.exe Profiling Sampling" executionContext="elevated" taskType="foreground" relativePath="plugins\Profiling">
+      <Environment>
+        <Variable name="RdModuleName" value="Profiling" />
+        <Variable name="WaRoleType" value="IISWebRole" />
+      </Environment>
+    </Task>
   </Startup>
   <Runtime>
+    <Environment>
+      <Variable name="_AZURE_INTELLITRACE_ENABLED_" value="1" />
+      <Variable name="COR_ENABLE_PROFILING" value="1" />
+      <Variable name="VSTS_PROFILER_NOT_CLEAR_ENVVARS" value="1" />
+      <Variable name="COR_PROFILER" value="{44a86cad-f7ee-429c-83eb-f3cde3b87b70}" />
+      <Variable name="COR_LINE_PROFILING" value="1" />
+    </Environment>
     <EntryPoint>
       <NetFxEntryPoint assemblyName="WebService.dll" targetFrameworkVersion="v3.5" />
     </EntryPoint>
   </Runtime>
   <ConfigurationSettings>
+    <Setting name="ProfilingConnectionString" nameSpace="Profiling" />
     <Setting name="ConnectionString" nameSpace="Microsoft.WindowsAzure.Plugins.Diagnostics" />
     <Setting name="Enabled" nameSpace="Microsoft.WindowsAzure.Plugins.RemoteAccess" />
     <Setting name="AccountUsername" nameSpace="Microsoft.WindowsAzure.Plugins.RemoteAccess" />
@@ -60,6 +80,7 @@
     <Property name="EntryPoint" value="WebService.dll" />
     <Property name="SourceDir" value="C:\Users\Marc.COOPERSOFTWARE\Dropbox\Dissertation\Code\Dissertation\WebService\" />
     <Property name="SitePhysicalPath" value="C:\Users\Marc.COOPERSOFTWARE\Dropbox\Dissertation\Code\Dissertation\Dissertation\obj\Release\WebService\" />
+    <Property name="RolePlugins" value="obj\\Release\Profiling" />
     <Property name="TargetRuntimeVersion" value="v4.0" />
   </Properties>
   <Sites>

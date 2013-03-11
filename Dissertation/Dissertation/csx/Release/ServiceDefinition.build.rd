@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<serviceModel xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="Dissertation" generation="1" functional="0" release="0" Id="4134c002-8716-41b6-9d2b-5fb7a1493b6c" dslVersion="1.2.0.0" xmlns="http://schemas.microsoft.com/dsltools/RDSM">
+<serviceModel xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="Dissertation" generation="1" functional="0" release="0" Id="be42b582-db95-4b80-a841-393b6693c51a" dslVersion="1.2.0.0" xmlns="http://schemas.microsoft.com/dsltools/RDSM">
   <groups>
     <group name="DissertationGroup" generation="1" functional="0" release="0">
       <componentports>
@@ -20,6 +20,11 @@
             <mapMoniker name="/Dissertation/DissertationGroup/MapCertificate|WebService:Microsoft.WindowsAzure.Plugins.RemoteAccess.PasswordEncryption" />
           </maps>
         </aCS>
+        <aCS name="Scheduler:CloudToolsDiagnosticAgentVersion" defaultValue="">
+          <maps>
+            <mapMoniker name="/Dissertation/DissertationGroup/MapScheduler:CloudToolsDiagnosticAgentVersion" />
+          </maps>
+        </aCS>
         <aCS name="Scheduler:Microsoft.ServiceBus.ConnectionString" defaultValue="">
           <maps>
             <mapMoniker name="/Dissertation/DissertationGroup/MapScheduler:Microsoft.ServiceBus.ConnectionString" />
@@ -30,9 +35,19 @@
             <mapMoniker name="/Dissertation/DissertationGroup/MapScheduler:Microsoft.WindowsAzure.Plugins.Diagnostics.ConnectionString" />
           </maps>
         </aCS>
+        <aCS name="Scheduler:Profiling.ProfilingConnectionString" defaultValue="">
+          <maps>
+            <mapMoniker name="/Dissertation/DissertationGroup/MapScheduler:Profiling.ProfilingConnectionString" />
+          </maps>
+        </aCS>
         <aCS name="SchedulerInstances" defaultValue="[1,1,1]">
           <maps>
             <mapMoniker name="/Dissertation/DissertationGroup/MapSchedulerInstances" />
+          </maps>
+        </aCS>
+        <aCS name="WebService:CloudToolsDiagnosticAgentVersion" defaultValue="">
+          <maps>
+            <mapMoniker name="/Dissertation/DissertationGroup/MapWebService:CloudToolsDiagnosticAgentVersion" />
           </maps>
         </aCS>
         <aCS name="WebService:Microsoft.ServiceBus.ConnectionString" defaultValue="">
@@ -70,6 +85,11 @@
             <mapMoniker name="/Dissertation/DissertationGroup/MapWebService:Microsoft.WindowsAzure.Plugins.RemoteForwarder.Enabled" />
           </maps>
         </aCS>
+        <aCS name="WebService:Profiling.ProfilingConnectionString" defaultValue="">
+          <maps>
+            <mapMoniker name="/Dissertation/DissertationGroup/MapWebService:Profiling.ProfilingConnectionString" />
+          </maps>
+        </aCS>
         <aCS name="WebServiceInstances" defaultValue="[1,1,1]">
           <maps>
             <mapMoniker name="/Dissertation/DissertationGroup/MapWebServiceInstances" />
@@ -99,6 +119,11 @@
             <certificateMoniker name="/Dissertation/DissertationGroup/WebService/Microsoft.WindowsAzure.Plugins.RemoteAccess.PasswordEncryption" />
           </certificate>
         </map>
+        <map name="MapScheduler:CloudToolsDiagnosticAgentVersion" kind="Identity">
+          <setting>
+            <aCSMoniker name="/Dissertation/DissertationGroup/Scheduler/CloudToolsDiagnosticAgentVersion" />
+          </setting>
+        </map>
         <map name="MapScheduler:Microsoft.ServiceBus.ConnectionString" kind="Identity">
           <setting>
             <aCSMoniker name="/Dissertation/DissertationGroup/Scheduler/Microsoft.ServiceBus.ConnectionString" />
@@ -109,9 +134,19 @@
             <aCSMoniker name="/Dissertation/DissertationGroup/Scheduler/Microsoft.WindowsAzure.Plugins.Diagnostics.ConnectionString" />
           </setting>
         </map>
+        <map name="MapScheduler:Profiling.ProfilingConnectionString" kind="Identity">
+          <setting>
+            <aCSMoniker name="/Dissertation/DissertationGroup/Scheduler/Profiling.ProfilingConnectionString" />
+          </setting>
+        </map>
         <map name="MapSchedulerInstances" kind="Identity">
           <setting>
             <sCSPolicyIDMoniker name="/Dissertation/DissertationGroup/SchedulerInstances" />
+          </setting>
+        </map>
+        <map name="MapWebService:CloudToolsDiagnosticAgentVersion" kind="Identity">
+          <setting>
+            <aCSMoniker name="/Dissertation/DissertationGroup/WebService/CloudToolsDiagnosticAgentVersion" />
           </setting>
         </map>
         <map name="MapWebService:Microsoft.ServiceBus.ConnectionString" kind="Identity">
@@ -149,6 +184,11 @@
             <aCSMoniker name="/Dissertation/DissertationGroup/WebService/Microsoft.WindowsAzure.Plugins.RemoteForwarder.Enabled" />
           </setting>
         </map>
+        <map name="MapWebService:Profiling.ProfilingConnectionString" kind="Identity">
+          <setting>
+            <aCSMoniker name="/Dissertation/DissertationGroup/WebService/Profiling.ProfilingConnectionString" />
+          </setting>
+        </map>
         <map name="MapWebServiceInstances" kind="Identity">
           <setting>
             <sCSPolicyIDMoniker name="/Dissertation/DissertationGroup/WebServiceInstances" />
@@ -166,8 +206,10 @@
               </outPort>
             </componentports>
             <settings>
+              <aCS name="CloudToolsDiagnosticAgentVersion" defaultValue="" />
               <aCS name="Microsoft.ServiceBus.ConnectionString" defaultValue="" />
               <aCS name="Microsoft.WindowsAzure.Plugins.Diagnostics.ConnectionString" defaultValue="" />
+              <aCS name="Profiling.ProfilingConnectionString" defaultValue="" />
               <aCS name="__ModelData" defaultValue="&lt;m role=&quot;Scheduler&quot; xmlns=&quot;urn:azure:m:v1&quot;&gt;&lt;r name=&quot;Scheduler&quot; /&gt;&lt;r name=&quot;WebService&quot;&gt;&lt;e name=&quot;Endpoint1&quot; /&gt;&lt;e name=&quot;Microsoft.WindowsAzure.Plugins.RemoteAccess.Rdp&quot; /&gt;&lt;e name=&quot;Microsoft.WindowsAzure.Plugins.RemoteForwarder.RdpInput&quot; /&gt;&lt;/r&gt;&lt;/m&gt;" />
             </settings>
             <resourcereferences>
@@ -193,6 +235,7 @@
               </outPort>
             </componentports>
             <settings>
+              <aCS name="CloudToolsDiagnosticAgentVersion" defaultValue="" />
               <aCS name="Microsoft.ServiceBus.ConnectionString" defaultValue="" />
               <aCS name="Microsoft.WindowsAzure.Plugins.Diagnostics.ConnectionString" defaultValue="" />
               <aCS name="Microsoft.WindowsAzure.Plugins.RemoteAccess.AccountEncryptedPassword" defaultValue="" />
@@ -200,6 +243,7 @@
               <aCS name="Microsoft.WindowsAzure.Plugins.RemoteAccess.AccountUsername" defaultValue="" />
               <aCS name="Microsoft.WindowsAzure.Plugins.RemoteAccess.Enabled" defaultValue="" />
               <aCS name="Microsoft.WindowsAzure.Plugins.RemoteForwarder.Enabled" defaultValue="" />
+              <aCS name="Profiling.ProfilingConnectionString" defaultValue="" />
               <aCS name="__ModelData" defaultValue="&lt;m role=&quot;WebService&quot; xmlns=&quot;urn:azure:m:v1&quot;&gt;&lt;r name=&quot;Scheduler&quot; /&gt;&lt;r name=&quot;WebService&quot;&gt;&lt;e name=&quot;Endpoint1&quot; /&gt;&lt;e name=&quot;Microsoft.WindowsAzure.Plugins.RemoteAccess.Rdp&quot; /&gt;&lt;e name=&quot;Microsoft.WindowsAzure.Plugins.RemoteForwarder.RdpInput&quot; /&gt;&lt;/r&gt;&lt;/m&gt;" />
             </settings>
             <resourcereferences>
@@ -233,14 +277,14 @@
     </group>
   </groups>
   <implements>
-    <implementation Id="a34cb117-1539-4d65-9a56-1385efb7dd6a" ref="Microsoft.RedDog.Contract\ServiceContract\DissertationContract@ServiceDefinition.build">
+    <implementation Id="8325bef7-0f2c-4086-827c-3847326af90a" ref="Microsoft.RedDog.Contract\ServiceContract\DissertationContract@ServiceDefinition.build">
       <interfacereferences>
-        <interfaceReference Id="4259c595-5106-4785-ae2a-dcd3c295df8e" ref="Microsoft.RedDog.Contract\Interface\WebService:Endpoint1@ServiceDefinition.build">
+        <interfaceReference Id="0bb095fd-592b-470d-81be-8d727d144875" ref="Microsoft.RedDog.Contract\Interface\WebService:Endpoint1@ServiceDefinition.build">
           <inPort>
             <inPortMoniker name="/Dissertation/DissertationGroup/WebService:Endpoint1" />
           </inPort>
         </interfaceReference>
-        <interfaceReference Id="53dbd5c1-0724-43c3-b4fb-02317e0235ad" ref="Microsoft.RedDog.Contract\Interface\WebService:Microsoft.WindowsAzure.Plugins.RemoteForwarder.RdpInput@ServiceDefinition.build">
+        <interfaceReference Id="4cd1697e-61ce-485a-ac88-7439e59c6e24" ref="Microsoft.RedDog.Contract\Interface\WebService:Microsoft.WindowsAzure.Plugins.RemoteForwarder.RdpInput@ServiceDefinition.build">
           <inPort>
             <inPortMoniker name="/Dissertation/DissertationGroup/WebService:Microsoft.WindowsAzure.Plugins.RemoteForwarder.RdpInput" />
           </inPort>
