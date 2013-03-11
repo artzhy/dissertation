@@ -151,9 +151,6 @@
     <None Include="Web References\WorkOrderWS\WorkOrderSvc3.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Web References\WorkOrderWS\WorkOrderSvc4.xsd">
-      <SubType>Designer</SubType>
-    </None>
     <None Include="Web References\WorkOrderWS\WorkOrderTrimmed.datasource">
       <DependentUpon>Reference.map</DependentUpon>
     </None>
