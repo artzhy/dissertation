@@ -13,18 +13,24 @@ using Android.Widget;
 using Newtonsoft.Json;
 using ComputeAndroidSDK.Communication;
 using Android.Util;
+using System.IO;
 
 namespace com.ComputeApps.MandelbrotApp {
+    /**
+     * This task can be called asynchronously - it runs in its own thread (i.e. not the UI thread).
+     * The task takes an intent containing a Communication Package and uses the parameters within this to calculate the result of the WO by calling the WorkerClass.DoWork function.
+     * 
+     * When the result has been computed, the task sends a RETURN_RESULT_INTENT to the Main App, which in turn returns the result to the Cloud Service.
+     * 
+     **/
+
     public class AsyncCalculateResult : AsyncTask {
     private Context _context;
     private CommPackage _cp;
     private CommPackage _resultPackage;
 
     public AsyncCalculateResult(Intent i) {
-         //  _context = context;
-   //        _cp = cp;
-
-           Log.Error("com.ComputeApps.MandelbrotApp.Intents.DoWork", "Calculating result of WO");
+           Log.Info("com.ComputeApps.MandelbrotApp.Intents.DoWork", "Calculating result of WO");
            _cp = CommPackage.DeserializeJson(i.GetStringExtra("CommPackage"));
         }
 
@@ -38,17 +44,22 @@ namespace com.ComputeApps.MandelbrotApp {
 
         protected override void OnPostExecute(Java.Lang.Object result) {
             base.OnPostExecute(result);
+
+
+            string fileName = Android.OS.Environment.ExternalStorageDirectory +
+Java.IO.File.Separator + _cp.ComputationRequestId + "-Result.txt";
+            StreamWriter fs = new StreamWriter(fileName, false);
+            fs.Write(_resultPackage.SerializeJson());
+            fs.Close();
           
             Intent intent = new Intent();
-            intent.PutExtra("CommPackage", _resultPackage.SerializeJson());
+            intent.PutExtra("FileLocation", fileName);
+
+           // intent.PutExtra("CommPackage", _resultPackage.SerializeJson());
             intent.SetAction(Constants.RETURN_RESULT_INTENT);
             App.Context.SendBroadcast(intent);
 
             this.Dispose();
-
-         
         }
-
-     
     }
 }

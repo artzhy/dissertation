@@ -12,6 +12,11 @@ using Android.Widget;
 
 using Newtonsoft.Json;
 
+/**
+ * This class is defined wholly by the user.  It is what the WorkerClass uses as its means of packaging up the result of a computation, and it is what the UI elements expects returned as result. 
+It must be serialisable.  
+**/
+
 namespace com.ComputeApps.MandelbrotApp {
     [Serializable]
     class ResultPackage {

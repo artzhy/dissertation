@@ -13,6 +13,10 @@ using Android.Widget;
 using ComputeAndroidSDK.Communication;
 using System.Threading;
 
+/**
+ * 
+ * 
+ **/
 
 namespace com.ComputeApps.MandelbrotApp {
     class WorkList {

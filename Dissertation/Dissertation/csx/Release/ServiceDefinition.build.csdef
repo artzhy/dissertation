@@ -7,6 +7,7 @@
     </LocalResources>
     <ConfigurationSettings>
       <Setting name="CloudToolsDiagnosticAgentVersion" />
+      <Setting name="IntelliTrace.IntelliTraceConnectionString" />
       <Setting name="Microsoft.ServiceBus.ConnectionString" />
       <Setting name="Microsoft.WindowsAzure.Plugins.Diagnostics.ConnectionString" />
       <Setting name="Microsoft.WindowsAzure.Plugins.RemoteAccess.AccountEncryptedPassword" />
@@ -14,7 +15,6 @@
       <Setting name="Microsoft.WindowsAzure.Plugins.RemoteAccess.AccountUsername" />
       <Setting name="Microsoft.WindowsAzure.Plugins.RemoteAccess.Enabled" />
       <Setting name="Microsoft.WindowsAzure.Plugins.RemoteForwarder.Enabled" />
-      <Setting name="Profiling.ProfilingConnectionString" />
     </ConfigurationSettings>
     <Endpoints>
       <InputEndpoint name="Endpoint1" protocol="http" port="80" localPort="80" />
@@ -33,9 +33,9 @@
     </LocalResources>
     <ConfigurationSettings>
       <Setting name="CloudToolsDiagnosticAgentVersion" />
+      <Setting name="IntelliTrace.IntelliTraceConnectionString" />
       <Setting name="Microsoft.ServiceBus.ConnectionString" />
       <Setting name="Microsoft.WindowsAzure.Plugins.Diagnostics.ConnectionString" />
-      <Setting name="Profiling.ProfilingConnectionString" />
     </ConfigurationSettings>
     <Endpoints />
     <Certificates />

@@ -63,33 +63,13 @@ namespace WorkOrderDistributor {
                         Task.Factory.StartNew(() => ProcessNewWorkOrders());
                     if (!ProcessingUpdatedWorkOrders)
                         Task.Factory.StartNew(() => ProcessUpdatedWorkOrders());
-                    //if (!PackageSweepOccuring) {
-                    //    DoCommPackageSweep();
-                    //}
-
-
-
-                    //if (TaskList.Count < 10) {
-                    //    //   var taskProcessNew = Task.Factory.StartNew(() => ProcessNewWorkOrders());
-
-                    //    var taskProcessUpdates = Task.Factory.StartNew(() => ProcessUpdatedWorkOrders());
-
-                    //    //var taskProcessCommunicate = Task.Factory.StartNew(() => ProcessCommunications());
-                    //    //TaskList.Add(taskProcessCommunicate);
-                    //}
-
-                    //} else {
-                    //    Task.WaitAny(TaskList.ToArray());
-                    //}
-
-
+                   
                 } catch (MessagingException e) {
                     if (!e.IsTransient) {
                         Trace.WriteLine(e.Message);
                         throw;
                     }
 
-                    //  Thread.Sleep(10000);
                 } catch (OperationCanceledException e) {
                     if (!IsStopped) {
                         Trace.WriteLine(e.Message);
@@ -225,8 +205,6 @@ namespace WorkOrderDistributor {
 
                                 break;
                             case SharedClasses.WorkOrderUpdate.UpdateType.Cancel:
-                                // TODO: Implement cancel procedure
-                                // Check if device is handlign WO
                                 if (wo.WorkOrderStatus == "SLAVE_ACKNOWLEDGED") {
                                     // Send message to cancel
                                     CommunicationPackage.CreateCommunication(wo.SlaveWorkerId.Value, CommunicationPackage.UpdateType.Cancel, wo.WorkOrderId);

@@ -77,6 +77,7 @@ namespace com.ComputeApps.MandelbrotApp {
         //}
 
         public static int GetColourOfPixel(int x, int y, double xMax, double xMin, double yMax, double yMin, int height, int width, int maxIterations) {
+
             double cx = xMin + x * ((xMax - xMin) / width);
             double cy = yMin + y * ((yMax - yMin) / height);
 
@@ -87,7 +88,7 @@ namespace com.ComputeApps.MandelbrotApp {
 
             for (i = 0; i < maxIterations; i++) {
                 tmp = zr * zr - zi * zi + cx;
-                zi *= 2 * zr;
+                zi = zi * 2 * zr;
                 zi += cy;
                 zr = tmp;
 

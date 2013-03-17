@@ -71,6 +71,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestApp", "TestApp\TestApp.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MandelbrotApp", "MandelbrotApp\MandelbrotApp.csproj", "{00E624BE-DF8B-47BD-A577-A5AC330E6C49}"
 EndProject
+Project("{F088123C-0E9E-452A-89E6-6BA2F21D5CAC}") = "ModelingProject1", "ModelingProject1\ModelingProject1.modelproj", "{BC9E55DA-C24B-4FF4-8D9B-92DA088AEC1C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -303,6 +305,16 @@ Global
 		{00E624BE-DF8B-47BD-A577-A5AC330E6C49}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{00E624BE-DF8B-47BD-A577-A5AC330E6C49}.Release|Mixed Platforms.Deploy.0 = Release|Any CPU
 		{00E624BE-DF8B-47BD-A577-A5AC330E6C49}.Release|x86.ActiveCfg = Release|Any CPU
+		{BC9E55DA-C24B-4FF4-8D9B-92DA088AEC1C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BC9E55DA-C24B-4FF4-8D9B-92DA088AEC1C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BC9E55DA-C24B-4FF4-8D9B-92DA088AEC1C}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{BC9E55DA-C24B-4FF4-8D9B-92DA088AEC1C}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{BC9E55DA-C24B-4FF4-8D9B-92DA088AEC1C}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{BC9E55DA-C24B-4FF4-8D9B-92DA088AEC1C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BC9E55DA-C24B-4FF4-8D9B-92DA088AEC1C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BC9E55DA-C24B-4FF4-8D9B-92DA088AEC1C}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{BC9E55DA-C24B-4FF4-8D9B-92DA088AEC1C}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{BC9E55DA-C24B-4FF4-8D9B-92DA088AEC1C}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -15,6 +15,15 @@ using ComputeAndroidSDK.Communication;
 using System.Threading;
 using Android.Graphics;
 
+/**
+ * The AsyncGetResultsTask is an asyncronous task, and runs in a thread different to the UI.
+ * It takes the parameters required to calculate all the work that needs complete, and then chunks the work up in some way, before sending these work packages to the Main App's internal receiver; from here it is then sent on to the Cloud to be computed.
+ * 
+ * While results are being computed, it shows a progress bar.
+ * 
+ * When a computation has been complete, the Incoming Receiver of the UI should call the PostUpdate function.  This function call then adds updates the progress bar.  When all computations have been received back from the cloud, it calls  OnPostExecute which should contain the code to update the UI if required.
+ **/
+
 namespace com.ComputeApps.MandelbrotApp {
     public class AsyncGetResultsTask : AsyncTask {
         private ProgressDialog _progressDialog;
@@ -38,17 +47,7 @@ namespace com.ComputeApps.MandelbrotApp {
         protected override void OnProgressUpdate(params Java.Lang.Object[] values) {
             base.OnProgressUpdate(values);
 
-            //new AlertDialog.Builder(_context)
-            //   .SetTitle("Still working...")
-            //   .SetMessage("No complete: " + _noComplete + " out of " + _totalWOs)
-            //   .Show();
-
-      
-            
             _progressDialog.Progress = _noComplete;
-        
-
-
         }
 
         protected override void OnPreExecute() {
@@ -66,9 +65,9 @@ namespace com.ComputeApps.MandelbrotApp {
 
         protected override Java.Lang.Object DoInBackground(params Java.Lang.Object[] @params) {
             double xmin = -2;
-                        double xmax = 1.0;
-                       double ymin = -1.5;
-                       double ymax = 1.5;
+            double xmax = 1.0;
+            double ymin = -1.5;
+            double ymax = 1.5;
             MandelbrotCalculator mc = new MandelbrotCalculator(_width, _height, _maxIterations,xmax,xmin,ymax,ymin);
             WorkOrderList.NewRequest(this, _width, _height);
             List<CommPackage> cpList = JsonConvert.DeserializeObject<List<CommPackage>>(mc.SubmitWorkOrders());
@@ -83,7 +82,7 @@ namespace com.ComputeApps.MandelbrotApp {
      
             while (!_complete) {
                 // do nothing
-                Thread.Sleep(new TimeSpan(0, 0, 15));
+                Thread.Sleep(new TimeSpan(0, 0, 10));
                
             }
 
@@ -118,9 +117,5 @@ namespace com.ComputeApps.MandelbrotApp {
             
             _complete = TaskIsComplete;
         }
-
-
-    }
-
-   
+    } 
 }

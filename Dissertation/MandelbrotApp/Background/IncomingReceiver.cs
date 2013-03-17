@@ -13,25 +13,20 @@ using Android.Util;
 
 using ComputeAndroidSDK.Communication;
 
+/**
+   * This broadcast receiver simply listens for the intent outlined above (which should be set in the Azure database as the WorkIntent) and creates an AsyncCalculateResult task.
+   **/
+
+
 namespace com.ComputeApps.MandelbrotApp {
     [BroadcastReceiver]
     [IntentFilter(new[] { "com.ComputeApps.MandelbrotApp.Intents.DoWork" }, Categories = new[] { Android.Content.Intent.CategoryHome} )]
 
+  
     public class BackgroundIncomingReceiver : BroadcastReceiver {
     
         public override void OnReceive(Context context, Intent intent) {
-            try {
                 new AsyncCalculateResult(intent).Execute();
-
-              //  new ReturnResultTask().Execute(context, intent);
-          
-            } catch (Exception ex) {
-                Log.Error("App1.Receiver.OnReceive", ex.Message);
-            }
-
-            
-
-          
         }
     }
 
@@ -42,11 +37,6 @@ namespace com.ComputeApps.MandelbrotApp {
             Intent intent = (Intent)@params[1];
             Log.Error("com.ComputeApps.MandelbrotApp.Intents.DoWork", "HERE!!");
             CommPackage cp = CommPackage.DeserializeJson(intent.GetStringExtra("CommPackage"));
-           
-
-
-            //ComputeApps.MandelbrotApp.WorkList.SetAppContext(c);
-            //ComputeApps.MandelbrotApp.WorkList.AddWorkItem(cp);
 
             return null;
         }

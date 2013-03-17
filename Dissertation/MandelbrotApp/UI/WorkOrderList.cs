@@ -14,6 +14,10 @@ using ComputeAndroidSDK.Communication;
 using Android.Graphics;
 using Newtonsoft.Json;
 
+/**
+ * The Work Order List contains a list of communication packages (work order computation requests) and also completed work orders.  From here new work order computations can be requested - it also handles when a result is received by updating the AsyncGetResultsTask.
+ * */
+
 namespace com.ComputeApps.MandelbrotApp {
     public class WorkOrderList {
         private static List<CommPackage> CommunicationPackages = new List<CommPackage>();

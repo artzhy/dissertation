@@ -15,6 +15,11 @@ using Newtonsoft.Json;
 
 using ComputeAndroidSDK.Communication;
 
+/**
+ * The UIIncomingReceiver simply listens for intents with the name com.ComputeApps.{AppName}.Intents.ReceiveResult and then submits this result to the WorkOrderList.
+ * 
+ **/
+
 namespace com.ComputeApps.MandelbrotApp {
     [BroadcastReceiver(Exported=true, Enabled=true)]
     [IntentFilter(new[] { "com.ComputeApps.MandelbrotApp.Intents.ReceiveResult" }, Categories = new[] { Android.Content.Intent.CategoryHome })]
@@ -25,15 +30,6 @@ namespace com.ComputeApps.MandelbrotApp {
                 if (intent.Action == "com.ComputeApps.MandelbrotApp.Intents.ReceiveResult") {
                     new SubmitResultTask().Execute(intent);
                 }
-
-                //CommPackage cp = CommPackage.DeserializeJson(intent.GetStringExtra("CommPackage"));
-                //Log.Error("com.ComputeApps.MandelbrotApp.Intents.DoWork", "HERE!!");
-            
-
-                //ComputeApps.TestApp.WorkList.SetAppContext(context);
-                //ComputeApps.TestApp.WorkList.AddWorkItem(cp);
-
-                //int test = 0;
             } catch (Exception ex) {
                 Log.Error("com.ComputeApps.MandelbrotApp.Intents.ReceiveResult", ex.Message);
             }

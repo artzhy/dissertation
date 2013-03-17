@@ -15,6 +15,7 @@ using Android.Util;
 using Newtonsoft.Json;
 using ComputeAndroidSDK.Communication;
 using System.Threading;
+using System.IO;
 
 
 namespace ComputeAndroidApp.BackgroundService {
@@ -172,11 +173,19 @@ namespace ComputeAndroidApp.BackgroundService {
         public void ReturnWORequestResult(object o) {
             Intent intent = (Intent)o;
 
+            //  intent.PutExtra("FileLocation", fileName);
+
+            StreamReader sr = new StreamReader(intent.GetStringExtra("FileLocation"));
+            String serializedJson = sr.ReadToEnd();
+            
+
+
             // Get it
-            ComputeAndroidSDK.Communication.CommPackage cp = ComputeAndroidSDK.Communication.CommPackage.DeserializeJson(intent.GetStringExtra("CommPackage"));
+         //   ComputeAndroidSDK.Communication.CommPackage cp = ComputeAndroidSDK.Communication.CommPackage.DeserializeJson(intent.GetStringExtra("CommPackage"));
+            ComputeAndroidSDK.Communication.CommPackage cp = ComputeAndroidSDK.Communication.CommPackage.DeserializeJson(serializedJson);
 
             new WorkOrderWS.WorkOrderSvc().SubmitWorkOrderResult(App.GetAuthToken(this), cp.ComputationRequestId, true, cp.ComputationResult, cp.ComputationStartTime, true, cp.ComputationEndTime, true);
-            Log.Info("ControllerService", "Result returned WO: " +cp.ComputationRequestId);
+            Log.Info("ControllerService", cp.ComputationResult.Length + "  -- Result returned WO: " +cp.ComputationRequestId);
             App.UpdateLastTransmit();
 
             intent.Dispose();

@@ -13,6 +13,12 @@ using Android.Widget;
 
 using ComputeAndroidSDK.Communication;
 
+/**
+ * This class carries out the computation given parameters.  The method that the parameters are passed to should be set against the app in the database in the BackgroundProcessFunction field.
+ * 
+ * 
+ **/
+
 namespace com.ComputeApps.MandelbrotApp {
     class WorkerClass {
 
@@ -32,6 +38,10 @@ namespace com.ComputeApps.MandelbrotApp {
             return pixels;
         }
 
+
+        /**
+         * This method should be the same across all implementations
+         **/
         public static CommPackage DoWork(CommPackage workItem) {
             Type type = typeof(WorkerClass);
             MethodInfo method = type.GetMethod(workItem.BackgroundProcessFunction);

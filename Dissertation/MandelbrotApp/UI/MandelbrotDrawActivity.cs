@@ -41,7 +41,22 @@ namespace com.ComputeApps.MandelbrotApp {
         }
 
         void button_Click(object sender, EventArgs e) {
-                  new AsyncGetResultsTask(this, this,FindViewById<ImageView>(Resource.Id.mandelbrotImgView), 180, 300, 100).Execute();
+
+            EditText maxIterations = FindViewById<EditText>(Resource.Id.maxIterations);
+
+            try {
+                int maxIterationsNo = int.Parse(maxIterations.Text);
+
+                if (maxIterationsNo > 0 && maxIterationsNo <= 100000) {
+                    new AsyncGetResultsTask(this, this, FindViewById<ImageView>(Resource.Id.mandelbrotImgView), 180, 180, maxIterationsNo).Execute();
+                } else {
+                    new AlertDialog.Builder(this).SetMessage("Max iterations must greater than 0 and less than or equal to 100,000").SetTitle("Error").Show();
+                }
+            } catch (Exception) {
+                new AlertDialog.Builder(this).SetMessage("Max iterations must be an integer").SetTitle("Error").Show();
+            }
+
+                 
       
         }
 
