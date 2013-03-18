@@ -130,7 +130,17 @@ namespace ComputeAndroidApp.BackgroundService {
             // Send to listener (intent attached to application)
             Intent newIntent = new Intent(wo.ApplicationUIResultIntentk__BackingField);
 
-            newIntent.PutExtra("WorkOrderTrimmed", JsonConvert.SerializeObject(testWo));
+
+            string fileName = Android.OS.Environment.ExternalStorageDirectory +
+Java.IO.File.Separator + testWo.WorkOrderId + "-ResultRet.txt";
+            StreamWriter fs = new StreamWriter(fileName, false);
+            fs.Write(JsonConvert.SerializeObject(testWo));
+            fs.Close();
+
+          
+            newIntent.PutExtra("FileLocation", fileName);
+
+            //newIntent.PutExtra("WorkOrderTrimmed", JsonConvert.SerializeObject(testWo));
 
             this.ApplicationContext.SendBroadcast(newIntent);
 
@@ -174,12 +184,14 @@ namespace ComputeAndroidApp.BackgroundService {
             Intent intent = (Intent)o;
 
             //  intent.PutExtra("FileLocation", fileName);
+            String serializedJson;
+            using (StreamReader sr = new StreamReader(intent.GetStringExtra("FileLocation"))) {
+                serializedJson = sr.ReadToEnd();
+            }
 
-            StreamReader sr = new StreamReader(intent.GetStringExtra("FileLocation"));
-            String serializedJson = sr.ReadToEnd();
-            
+            File.Delete(intent.GetStringExtra("FileLocation"));
 
-
+           
             // Get it
          //   ComputeAndroidSDK.Communication.CommPackage cp = ComputeAndroidSDK.Communication.CommPackage.DeserializeJson(intent.GetStringExtra("CommPackage"));
             ComputeAndroidSDK.Communication.CommPackage cp = ComputeAndroidSDK.Communication.CommPackage.DeserializeJson(serializedJson);

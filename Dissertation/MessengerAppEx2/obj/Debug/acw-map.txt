@@ -1,3 +1,0 @@
-MessengerAppEx2.Activity1;messengerappex2.Activity1
-MessengerAppEx2.Activity1.IncomingHandler;messengerappex2.Activity1_IncomingHandler
-MessengerAppEx2.ServiceConnection;messengerappex2.ServiceConnection

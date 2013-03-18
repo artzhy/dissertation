@@ -1,5 +1,0 @@
-com.MessengerAppEx.Activity1;com.messengerappex.Activity1
-com.MessengerAppEx.Activity1.IncomingHandler;com.messengerappex.Activity1_IncomingHandler
-com.MessengerAppEx.ServiceConnection;com.messengerappex.ServiceConnection
-com.MessengerAppEx.ComputeService;com.messengerappex.ComputeService
-com.MessengerAppEx.ComputeService.IncomingHandler;com.messengerappex.ComputeService_IncomingHandler

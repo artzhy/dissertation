@@ -48,7 +48,7 @@ namespace com.ComputeApps.MandelbrotApp {
                 int maxIterationsNo = int.Parse(maxIterations.Text);
 
                 if (maxIterationsNo > 0 && maxIterationsNo <= 100000) {
-                    new AsyncGetResultsTask(this, this, FindViewById<ImageView>(Resource.Id.mandelbrotImgView), 180, 180, maxIterationsNo).Execute();
+                    new AsyncGetResultsTask(this, this, FindViewById<ImageView>(Resource.Id.mandelbrotImgView), 180, 300, maxIterationsNo).Execute();
                 } else {
                     new AlertDialog.Builder(this).SetMessage("Max iterations must greater than 0 and less than or equal to 100,000").SetTitle("Error").Show();
                 }

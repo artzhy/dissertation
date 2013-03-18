@@ -48,9 +48,11 @@ namespace com.ComputeApps.MandelbrotApp {
 
             string fileName = Android.OS.Environment.ExternalStorageDirectory +
 Java.IO.File.Separator + _cp.ComputationRequestId + "-Result.txt";
-            StreamWriter fs = new StreamWriter(fileName, false);
-            fs.Write(_resultPackage.SerializeJson());
-            fs.Close();
+
+            using (StreamWriter fs = new StreamWriter(fileName, false)) {
+                fs.Write(_resultPackage.SerializeJson());
+                fs.Close();
+            }
           
             Intent intent = new Intent();
             intent.PutExtra("FileLocation", fileName);

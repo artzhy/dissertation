@@ -1,4 +1,0 @@
-AppTemplate.Activity1;apptemplate.Activity1
-AppTemplate.ComputeFunction.ComputeService;apptemplate.computefunction.ComputeService
-AppTemplate.ComputeFunction.ComputeServiceBinder;apptemplate.computefunction.ComputeServiceBinder
-AppTemplate.ComputeFunction.ServiceConnection;apptemplate.computefunction.ServiceConnection

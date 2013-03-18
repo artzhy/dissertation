@@ -6,7 +6,9 @@ C:\Users\Marc.COOPERSOFTWARE\Dropbox\Dissertation\Code\Dissertation\WebService\b
 C:\Users\Marc.COOPERSOFTWARE\Dropbox\Dissertation\Code\Dissertation\WebService\bin\Microsoft.WindowsAzure.Diagnostics.dll
 C:\Users\Marc.COOPERSOFTWARE\Dropbox\Dissertation\Code\Dissertation\WebService\bin\Microsoft.WindowsAzure.StorageClient.dll
 C:\Users\Marc.COOPERSOFTWARE\Dropbox\Dissertation\Code\Dissertation\WebService\bin\PushCommunicator.dll
+C:\Users\Marc.COOPERSOFTWARE\Dropbox\Dissertation\Code\Dissertation\WebService\bin\SharedClasses.dll
 C:\Users\Marc.COOPERSOFTWARE\Dropbox\Dissertation\Code\Dissertation\WebService\bin\EntityFramework.dll
+C:\Users\Marc.COOPERSOFTWARE\Dropbox\Dissertation\Code\Dissertation\WebService\bin\Newtonsoft.Json.dll
 C:\Users\Marc.COOPERSOFTWARE\Dropbox\Dissertation\Code\Dissertation\WebService\bin\PushSharp.dll
 C:\Users\Marc.COOPERSOFTWARE\Dropbox\Dissertation\Code\Dissertation\WebService\bin\PushSharp.Common.dll
 C:\Users\Marc.COOPERSOFTWARE\Dropbox\Dissertation\Code\Dissertation\WebService\bin\PushSharp.Android.dll
@@ -14,9 +16,9 @@ C:\Users\Marc.COOPERSOFTWARE\Dropbox\Dissertation\Code\Dissertation\WebService\b
 C:\Users\Marc.COOPERSOFTWARE\Dropbox\Dissertation\Code\Dissertation\WebService\bin\PushSharp.WindowsPhone.dll
 C:\Users\Marc.COOPERSOFTWARE\Dropbox\Dissertation\Code\Dissertation\WebService\bin\PushSharp.Blackberry.dll
 C:\Users\Marc.COOPERSOFTWARE\Dropbox\Dissertation\Code\Dissertation\WebService\bin\PushSharp.Windows.dll
-C:\Users\Marc.COOPERSOFTWARE\Dropbox\Dissertation\Code\Dissertation\WebService\bin\Newtonsoft.Json.dll
 C:\Users\Marc.COOPERSOFTWARE\Dropbox\Dissertation\Code\Dissertation\WebService\bin\BusinessLayer.pdb
 C:\Users\Marc.COOPERSOFTWARE\Dropbox\Dissertation\Code\Dissertation\WebService\bin\PushCommunicator.pdb
+C:\Users\Marc.COOPERSOFTWARE\Dropbox\Dissertation\Code\Dissertation\WebService\bin\SharedClasses.pdb
 C:\Users\Marc.COOPERSOFTWARE\Dropbox\Dissertation\Code\Dissertation\WebService\bin\Microsoft.ServiceBus.xml
 C:\Users\Marc.COOPERSOFTWARE\Dropbox\Dissertation\Code\Dissertation\WebService\bin\Microsoft.WindowsAzure.Diagnostics.xml
 C:\Users\Marc.COOPERSOFTWARE\Dropbox\Dissertation\Code\Dissertation\WebService\bin\EntityFramework.xml
@@ -30,5 +32,3 @@ C:\Users\Marc.COOPERSOFTWARE\Dropbox\Dissertation\Code\Dissertation\WebService\b
 C:\Users\Marc.COOPERSOFTWARE\Dropbox\Dissertation\Code\Dissertation\WebService\obj\Debug\WebService.csprojResolveAssemblyReference.cache
 C:\Users\Marc.COOPERSOFTWARE\Dropbox\Dissertation\Code\Dissertation\WebService\obj\Debug\WebService.dll
 C:\Users\Marc.COOPERSOFTWARE\Dropbox\Dissertation\Code\Dissertation\WebService\obj\Debug\WebService.pdb
-C:\Users\Marc.COOPERSOFTWARE\Dropbox\Dissertation\Code\Dissertation\WebService\bin\SharedClasses.dll
-C:\Users\Marc.COOPERSOFTWARE\Dropbox\Dissertation\Code\Dissertation\WebService\bin\SharedClasses.pdb

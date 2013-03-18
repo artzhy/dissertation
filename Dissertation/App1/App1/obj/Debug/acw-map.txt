@@ -1,4 +1,0 @@
-com.ComputeApps.TestApp.BackgroundIncomingReceiver;com.computeapps.testapp.BackgroundIncomingReceiver
-com.ComputeApps.TestApp.Activity1;com.computeapps.testapp.Activity1
-com.ComputeApps.TestApp.App;com.computeapps.testapp.App
-com.ComputeApps.TestApp.UIIncomingReceiver;com.computeapps.testapp.UIIncomingReceiver

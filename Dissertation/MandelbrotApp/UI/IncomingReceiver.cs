@@ -14,6 +14,7 @@ using Android.Util;
 using Newtonsoft.Json;
 
 using ComputeAndroidSDK.Communication;
+using System.IO;
 
 /**
  * The UIIncomingReceiver simply listens for intents with the name com.ComputeApps.{AppName}.Intents.ReceiveResult and then submits this result to the WorkOrderList.
@@ -37,7 +38,16 @@ namespace com.ComputeApps.MandelbrotApp {
 
         class SubmitResultTask : AsyncTask {
             protected override Java.Lang.Object DoInBackground(params Java.Lang.Object[] @params) {
-                WorkOrderTrimmed wo = JsonConvert.DeserializeObject<WorkOrderTrimmed>(((Intent)@params[0]).GetStringExtra("WorkOrderTrimmed"));
+                Intent intent = (Intent)@params[0];
+                String serializedJson;
+
+                using (StreamReader sr = new StreamReader(intent.GetStringExtra("FileLocation"))) {
+                    serializedJson = sr.ReadToEnd();
+                }
+
+                File.Delete(intent.GetStringExtra("FileLocation"));
+
+                WorkOrderTrimmed wo = JsonConvert.DeserializeObject<WorkOrderTrimmed>(serializedJson);
 
                 // Update work order list
 
