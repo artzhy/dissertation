@@ -18,7 +18,8 @@ namespace com.ComputeApps.MandelbrotApp.CommunicationResources {
         public PixelColour(int _x, int _y, int _colour) {
             x = _x;
             y = _y;
-            colour = _colour;
+          colour = _colour;
+        
         }
 
     }

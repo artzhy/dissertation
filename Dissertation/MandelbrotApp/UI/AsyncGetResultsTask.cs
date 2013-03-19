@@ -34,7 +34,9 @@ namespace com.ComputeApps.MandelbrotApp {
         private ImageView _imgView;
         private int _width, _height, _maxIterations;
         private MandelbrotDraw _activity;
-
+        private DateTime StartTime;
+        private DateTime EndTime;
+        
         public AsyncGetResultsTask(MandelbrotDraw act, Context context, ImageView imgV, int width, int height, int maxIterations) {
             _context = context;
             _imgView = imgV;
@@ -79,13 +81,15 @@ namespace com.ComputeApps.MandelbrotApp {
                 WorkOrderList.SubmitNewWorkOrder(cp);
             }
 
-     
+            StartTime = DateTime.Now;
+
             while (!_complete) {
                 // do nothing
                 Thread.Sleep(new TimeSpan(0, 0, 10));
                
             }
 
+         
             return true;
         }
 
@@ -99,11 +103,17 @@ namespace com.ComputeApps.MandelbrotApp {
 
           _progressDialog.Hide();
 
+          EndTime = DateTime.Now;
+
+          DateTime imgStart = DateTime.Now;
+            
+          Bitmap img = WorkOrderList.TransformWorkOrderResultsToBitmap();
+
             new AlertDialog.Builder(_context)
                .SetTitle("Mandelbrot generated")
-               .SetMessage("Success!")
+               .SetMessage("Success! Time taken(s) - Cloud: " + EndTime.Subtract(StartTime).TotalSeconds + ". Time taken (s) img: " + DateTime.Now.Subtract(imgStart).TotalSeconds)
                .Show();
-            Bitmap img = WorkOrderList.TransformWorkOrderResultsToBitmap();
+
             _activity.setBitmap(img);
           
         }

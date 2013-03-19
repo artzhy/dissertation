@@ -159,7 +159,7 @@ namespace WorkOrderDistributor {
                     try {
                         wo.WorkOrderStatus = "";
 
-                        wo.SlaveWorkerId = BusinessLayer.Scheduler.GetAvailableSlave(wo.ApplicationId).DeviceId;
+                        wo.SlaveWorkerId = BusinessLayer.Scheduler.GetAvailableSlave(wo.ApplicationId, wo.DeviceId).DeviceId;
                         wo.SlaveWorkerSubmit = DateTime.Now;
                         wo.Save();
 

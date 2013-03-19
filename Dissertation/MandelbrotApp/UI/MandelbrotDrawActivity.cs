@@ -11,7 +11,7 @@ using Android.Graphics;
 namespace com.ComputeApps.MandelbrotApp {
     [Activity(Label = "App2", MainLauncher = true, Icon = "@drawable/icon")]
     public class MandelbrotDraw : Activity {
-       
+
         protected override void OnCreate(Bundle bundle) {
             base.OnCreate(bundle);
 
@@ -37,7 +37,7 @@ namespace com.ComputeApps.MandelbrotApp {
         protected override void OnSaveInstanceState(Bundle outState) {
             base.OnSaveInstanceState(outState);
 
-           
+
         }
 
         void button_Click(object sender, EventArgs e) {
@@ -48,7 +48,26 @@ namespace com.ComputeApps.MandelbrotApp {
                 int maxIterationsNo = int.Parse(maxIterations.Text);
 
                 if (maxIterationsNo > 0 && maxIterationsNo <= 100000) {
-                    new AsyncGetResultsTask(this, this, FindViewById<ImageView>(Resource.Id.mandelbrotImgView), 180, 300, maxIterationsNo).Execute();
+                    if (FindViewById<RadioButton>(Resource.Id.cloudComputation).Checked) {
+                        new AsyncGetResultsTask(this, this, FindViewById<ImageView>(Resource.Id.mandelbrotImgView), 300, 300, maxIterationsNo).Execute();
+                    } else {
+                        DateTime startTime = DateTime.Now;
+                        ImageView _imgView = FindViewById<ImageView>(Resource.Id.mandelbrotImgView);
+                        double xmin = -2;
+                        double xmax = 1.0;
+                        double ymin = -1.5;
+                        double ymax = 1.5;
+
+                        _imgView.SetImageBitmap(new MandelbrotCalculator(300, 300, maxIterationsNo, xmax, xmin, ymax, ymin).GenMandelbrotBitmapTest());
+
+                        new AlertDialog.Builder(this)
+                  .SetTitle("Mandelbrot generated")
+                  .SetMessage("Success! Time taken(s) - Cloud: " + DateTime.Now.Subtract(startTime).TotalSeconds)
+                  .Show();
+                    }
+
+
+
                 } else {
                     new AlertDialog.Builder(this).SetMessage("Max iterations must greater than 0 and less than or equal to 100,000").SetTitle("Error").Show();
                 }
@@ -56,8 +75,8 @@ namespace com.ComputeApps.MandelbrotApp {
                 new AlertDialog.Builder(this).SetMessage("Max iterations must be an integer").SetTitle("Error").Show();
             }
 
-                 
-      
+
+
         }
 
         internal void setBitmap(Bitmap bm) {
@@ -65,10 +84,10 @@ namespace com.ComputeApps.MandelbrotApp {
             _imgView.SetImageBitmap(bm);
         }
 
-      
+
 
     }
 
- 
+
 }
 
