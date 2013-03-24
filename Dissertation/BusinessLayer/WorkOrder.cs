@@ -32,6 +32,8 @@ namespace BusinessLayer
         public Nullable<System.DateTime> StartComputationTime { get; set; }
         public Nullable<System.DateTime> EndComputationTime { get; set; }
         public int LocalDeviceId { get; set; }
+        public Nullable<decimal> DeserialiationTime { get; set; }
+        public Nullable<decimal> SerialisationTime { get; set; }
     
         public virtual UserDevice UserDevice { get; set; }
         public virtual UserDevice UserDevice1 { get; set; }

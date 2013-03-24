@@ -169,28 +169,28 @@
     <WebReferences Include="Web References\" />
   </ItemGroup>
   <ItemGroup>
-    <WebReferenceUrl Include="http://c4b0eba7dae642f38a424487179f8540.cloudapp.net/UserSvc.svc">
+    <WebReferenceUrl Include="http://5ea3886cd21f45ca833b87a7bff02cd8.cloudapp.net/UserSvc.svc">
       <UrlBehavior>Dynamic</UrlBehavior>
       <RelPath>Web References\UserWS\</RelPath>
-      <UpdateFromURL>http://c4b0eba7dae642f38a424487179f8540.cloudapp.net/UserSvc.svc</UpdateFromURL>
+      <UpdateFromURL>http://5ea3886cd21f45ca833b87a7bff02cd8.cloudapp.net/UserSvc.svc</UpdateFromURL>
       <ServiceLocationURL />
       <CachedDynamicPropName />
       <CachedAppSettingsObjectName />
       <CachedSettingsPropName />
     </WebReferenceUrl>
-    <WebReferenceUrl Include="http://c4b0eba7dae642f38a424487179f8540.cloudapp.net/AuthSvc.svc">
+    <WebReferenceUrl Include="http://5ea3886cd21f45ca833b87a7bff02cd8.cloudapp.net/AuthSvc.svc">
       <UrlBehavior>Dynamic</UrlBehavior>
       <RelPath>Web References\AuthWS\</RelPath>
-      <UpdateFromURL>http://c4b0eba7dae642f38a424487179f8540.cloudapp.net/AuthSvc.svc</UpdateFromURL>
+      <UpdateFromURL>http://5ea3886cd21f45ca833b87a7bff02cd8.cloudapp.net/AuthSvc.svc</UpdateFromURL>
       <ServiceLocationURL />
       <CachedDynamicPropName />
       <CachedAppSettingsObjectName />
       <CachedSettingsPropName />
     </WebReferenceUrl>
-    <WebReferenceUrl Include="http://c4b0eba7dae642f38a424487179f8540.cloudapp.net/WorkOrderSvc.svc">
+    <WebReferenceUrl Include="http://5ea3886cd21f45ca833b87a7bff02cd8.cloudapp.net/WorkOrderSvc.svc">
       <UrlBehavior>Dynamic</UrlBehavior>
       <RelPath>Web References\WorkOrderWS\</RelPath>
-      <UpdateFromURL>http://c4b0eba7dae642f38a424487179f8540.cloudapp.net/WorkOrderSvc.svc</UpdateFromURL>
+      <UpdateFromURL>http://5ea3886cd21f45ca833b87a7bff02cd8.cloudapp.net/WorkOrderSvc.svc</UpdateFromURL>
       <ServiceLocationURL>
       </ServiceLocationURL>
       <CachedDynamicPropName>

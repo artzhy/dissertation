@@ -28,10 +28,14 @@ namespace com.ComputeApps.MandelbrotApp {
     private Context _context;
     private CommPackage _cp;
     private CommPackage _resultPackage;
+    private DateTime deserialisaitonStart;
+    private DateTime deserialisationEnd;
 
     public AsyncCalculateResult(Intent i) {
            Log.Info("com.ComputeApps.MandelbrotApp.Intents.DoWork", "Calculating result of WO");
+           deserialisaitonStart = DateTime.Now;
            _cp = CommPackage.DeserializeJson(i.GetStringExtra("CommPackage"));
+           deserialisationEnd = DateTime.Now;
         }
 
    
@@ -39,18 +43,21 @@ namespace com.ComputeApps.MandelbrotApp {
             Log.Error("COMPUTING", "STARTING TO COMPUTE RESULT FOR WO: " + _cp.ComputationRequestId);
             _resultPackage = WorkerClass.DoWork(_cp);
 
+            _resultPackage.DeserialisationTime = (Decimal)deserialisationEnd.Subtract(deserialisaitonStart).TotalSeconds;
+
             return true;
         }
 
         protected override void OnPostExecute(Java.Lang.Object result) {
             base.OnPostExecute(result);
-
-
+            
             string fileName = Android.OS.Environment.ExternalStorageDirectory +
 Java.IO.File.Separator + _cp.ComputationRequestId + "-Result.txt";
 
+            string serialisedRes = _resultPackage.SerializeJson();
+
             using (StreamWriter fs = new StreamWriter(fileName, false)) {
-                fs.Write(_resultPackage.SerializeJson());
+                fs.Write(serialisedRes);
                 fs.Close();
             }
           

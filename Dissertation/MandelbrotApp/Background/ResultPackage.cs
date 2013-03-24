@@ -21,12 +21,12 @@ namespace com.ComputeApps.MandelbrotApp {
     [Serializable]
     class ResultPackage {
         // Add your own properties here!
-        public List<CommunicationResources.PixelColour> PixelColours {
+        public int[][] PixelColours {
             get;
             set;
         }
 
-        public ResultPackage(List<CommunicationResources.PixelColour> _PixelColours) {
+        public ResultPackage(int[][] _PixelColours) {
             this.PixelColours = _PixelColours;
         }
 

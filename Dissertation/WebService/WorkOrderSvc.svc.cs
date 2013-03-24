@@ -56,6 +56,8 @@ namespace WebService {
             wt.ComputeAppIntent = wa.ApplicationWorkIntent;
             wt.ApplicationUIResultIntent = wa.ApplicationUIResultIntent;
             wt.DeviceLocalRequestId = wo.LocalDeviceId;
+            wt.SerialisationTime = wo.SerialisationTime;
+            wt.DeserialisationTime = wo.DeserialiationTime;
             
             return wt;
         }
@@ -66,7 +68,7 @@ namespace WebService {
             foreach (int localDeviceId in localDeviceIdList) {
                 BusinessLayer.WorkOrder wo = BusinessLayer.WorkOrder.PopulateLocalDeviceId(localDeviceId, oAt.DeviceId);
 
-                CloudQueues.UpdatedWorkOrderQueueClient.Send(new BrokeredMessage(new SharedClasses.WorkOrderUpdate(wo.WorkOrderId, SharedClasses.WorkOrderUpdate.UpdateType.Cancel, oAt.DeviceId, null, null)));
+                CloudQueues.UpdatedWorkOrderQueueClient.Send(new BrokeredMessage(new SharedClasses.WorkOrderUpdate(wo.WorkOrderId, SharedClasses.WorkOrderUpdate.UpdateType.Cancel, oAt.DeviceId, null, null, null, null, null)));
             }
             
         }
@@ -94,14 +96,14 @@ namespace WebService {
             CloudQueues.UpdatedWorkOrderQueueClient.Send(new BrokeredMessage(new SharedClasses.WorkOrderUpdate(workOrderId, SharedClasses.WorkOrderUpdate.UpdateType.MarkBeingComputed, oAt.DeviceId, null, null)));
         }
 
-        public void SubmitWorkOrderResult(string at, int workOrderId, String resultJson, DateTime compuatationStartTime, DateTime computationEndTime) {
+        public void SubmitWorkOrderResult(string at, int workOrderId, String resultJson, DateTime compuatationStartTime, DateTime computationEndTime, decimal? resultSerialisationTime = null, decimal? requestDeserialisationTime = null) {
             BusinessLayer.AuthenticationToken oAt = new AuthSvc().AuthUser(at);
             BusinessLayer.WorkOrder wo = BusinessLayer.WorkOrder.Populate(workOrderId);
 
             //if (wo.SlaveWorkerId != oAt.DeviceId)
             //    throw new Exception("Cannot modify Work Order which you are not meant to be working on.");
 
-            CloudQueues.UpdatedWorkOrderQueueClient.Send(new BrokeredMessage(new SharedClasses.WorkOrderUpdate(workOrderId, SharedClasses.WorkOrderUpdate.UpdateType.SubmitResult, oAt.DeviceId, compuatationStartTime, computationEndTime, resultJson)));
+            CloudQueues.UpdatedWorkOrderQueueClient.Send(new BrokeredMessage(new SharedClasses.WorkOrderUpdate(workOrderId, SharedClasses.WorkOrderUpdate.UpdateType.SubmitResult, oAt.DeviceId, compuatationStartTime, computationEndTime, resultJson, requestDeserialisationTime, resultSerialisationTime)));
 
         }
 

@@ -7,6 +7,7 @@ using Android.Views;
 using Android.Widget;
 using Android.OS;
 using Android.Graphics;
+using System.Collections.Generic;
 
 namespace com.ComputeApps.MandelbrotApp {
     [Activity(Label = "App2", MainLauncher = true, Icon = "@drawable/icon")]
@@ -58,11 +59,18 @@ namespace com.ComputeApps.MandelbrotApp {
                         double ymin = -1.5;
                         double ymax = 1.5;
 
-                        _imgView.SetImageBitmap(new MandelbrotCalculator(300, 300, maxIterationsNo, xmax, xmin, ymax, ymin).GenMandelbrotBitmapTest());
+                       MandelbrotCalculator mc = new MandelbrotCalculator(300, 300, maxIterationsNo, xmax, xmin, ymax, ymin);
+                        
+
+                       List<CommunicationResources.PixelColour> pixColList = mc.GenPixelColourList();
+                       DateTime colourGenEndTime = DateTime.Now;
+
+                        _imgView.SetImageBitmap(mc.GetBitmap(pixColList));
+
 
                         new AlertDialog.Builder(this)
                   .SetTitle("Mandelbrot generated")
-                  .SetMessage("Success! Time taken(s) - Cloud: " + DateTime.Now.Subtract(startTime).TotalSeconds)
+                  .SetMessage("Success! Time taken(s) - Col Gen: " + colourGenEndTime.Subtract(startTime).TotalSeconds + " Draw time: " + DateTime.Now.Subtract(colourGenEndTime).TotalSeconds)
                   .Show();
                     }
 

@@ -59,6 +59,7 @@
   </ItemGroup>
   <ItemGroup>
     <PublishProfile Include="Profiles\marcdissertationwsStaging.azurePubxml" />
+    <PublishProfile Include="Profiles\marcdissertationwsStaging1.azurePubxml" />
   </ItemGroup>
   <!-- Import the target files for this project template -->
   <PropertyGroup>

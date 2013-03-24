@@ -14,7 +14,6 @@
     <Imports>
       <Import moduleName="Diagnostics" />
       <Import moduleName="RemoteAccess" />
-      <Import moduleName="RemoteForwarder" />
     </Imports>
     <LocalResources>
       <LocalStorage name="WebService.svclog" sizeInMB="1000" cleanOnRoleRecycle="false" />
@@ -22,10 +21,14 @@
     <ConfigurationSettings>
       <Setting name="Microsoft.ServiceBus.ConnectionString" />
     </ConfigurationSettings>
+    <Certificates>
+    </Certificates>
   </WebRole>
   <WorkerRole name="Scheduler" vmsize="Small">
     <Imports>
       <Import moduleName="Diagnostics" />
+      <Import moduleName="RemoteAccess" />
+      <Import moduleName="RemoteForwarder" />
     </Imports>
     <ConfigurationSettings>
       <Setting name="Microsoft.ServiceBus.ConnectionString" />

@@ -53,7 +53,7 @@ namespace ComputeAndroidApp.UserWS {
         
         /// <remarks/>
         public UserSvc() {
-            this.Url = "http://c4b0eba7dae642f38a424487179f8540.cloudapp.net/UserSvc.svc";
+            this.Url = "http://5ea3886cd21f45ca833b87a7bff02cd8.cloudapp.net/UserSvc.svc";
             if ((this.IsLocalFileSystemWebService(this.Url) == true)) {
                 this.UseDefaultCredentials = true;
                 this.useDefaultCredentialsSetExplicitly = false;

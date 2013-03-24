@@ -49,7 +49,7 @@ namespace ComputeAndroidApp.WorkOrderWS {
         
         /// <remarks/>
         public WorkOrderSvc() {
-            this.Url = "http://c4b0eba7dae642f38a424487179f8540.cloudapp.net/WorkOrderSvc.svc";
+            this.Url = "http://5ea3886cd21f45ca833b87a7bff02cd8.cloudapp.net/WorkOrderSvc.svc";
             if ((this.IsLocalFileSystemWebService(this.Url) == true)) {
                 this.UseDefaultCredentials = true;
                 this.useDefaultCredentialsSetExplicitly = false;
@@ -255,7 +255,7 @@ namespace ComputeAndroidApp.WorkOrderWS {
         
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/IWorkOrderSvc/SubmitWorkOrderResult", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public void SubmitWorkOrderResult([System.Xml.Serialization.XmlElementAttribute(IsNullable=true)] string at, int workOrderId, [System.Xml.Serialization.XmlIgnoreAttribute()] bool workOrderIdSpecified, [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)] string resultJson, System.DateTime compuatationStartTime, [System.Xml.Serialization.XmlIgnoreAttribute()] bool compuatationStartTimeSpecified, System.DateTime computationEndTime, [System.Xml.Serialization.XmlIgnoreAttribute()] bool computationEndTimeSpecified) {
+        public void SubmitWorkOrderResult([System.Xml.Serialization.XmlElementAttribute(IsNullable=true)] string at, int workOrderId, [System.Xml.Serialization.XmlIgnoreAttribute()] bool workOrderIdSpecified, [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)] string resultJson, System.DateTime compuatationStartTime, [System.Xml.Serialization.XmlIgnoreAttribute()] bool compuatationStartTimeSpecified, System.DateTime computationEndTime, [System.Xml.Serialization.XmlIgnoreAttribute()] bool computationEndTimeSpecified, [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)] System.Nullable<decimal> resultSerialisationTime, [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)] [System.Xml.Serialization.XmlIgnoreAttribute()] bool resultSerialisationTimeSpecified, [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)] System.Nullable<decimal> requestDeserialisationTime, [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)] [System.Xml.Serialization.XmlIgnoreAttribute()] bool requestDeserialisationTimeSpecified) {
             this.Invoke("SubmitWorkOrderResult", new object[] {
                         at,
                         workOrderId,
@@ -264,16 +264,20 @@ namespace ComputeAndroidApp.WorkOrderWS {
                         compuatationStartTime,
                         compuatationStartTimeSpecified,
                         computationEndTime,
-                        computationEndTimeSpecified});
+                        computationEndTimeSpecified,
+                        resultSerialisationTime,
+                        resultSerialisationTimeSpecified,
+                        requestDeserialisationTime,
+                        requestDeserialisationTimeSpecified});
         }
         
         /// <remarks/>
-        public void SubmitWorkOrderResultAsync(string at, int workOrderId, bool workOrderIdSpecified, string resultJson, System.DateTime compuatationStartTime, bool compuatationStartTimeSpecified, System.DateTime computationEndTime, bool computationEndTimeSpecified) {
-            this.SubmitWorkOrderResultAsync(at, workOrderId, workOrderIdSpecified, resultJson, compuatationStartTime, compuatationStartTimeSpecified, computationEndTime, computationEndTimeSpecified, null);
+        public void SubmitWorkOrderResultAsync(string at, int workOrderId, bool workOrderIdSpecified, string resultJson, System.DateTime compuatationStartTime, bool compuatationStartTimeSpecified, System.DateTime computationEndTime, bool computationEndTimeSpecified, System.Nullable<decimal> resultSerialisationTime, bool resultSerialisationTimeSpecified, System.Nullable<decimal> requestDeserialisationTime, bool requestDeserialisationTimeSpecified) {
+            this.SubmitWorkOrderResultAsync(at, workOrderId, workOrderIdSpecified, resultJson, compuatationStartTime, compuatationStartTimeSpecified, computationEndTime, computationEndTimeSpecified, resultSerialisationTime, resultSerialisationTimeSpecified, requestDeserialisationTime, requestDeserialisationTimeSpecified, null);
         }
         
         /// <remarks/>
-        public void SubmitWorkOrderResultAsync(string at, int workOrderId, bool workOrderIdSpecified, string resultJson, System.DateTime compuatationStartTime, bool compuatationStartTimeSpecified, System.DateTime computationEndTime, bool computationEndTimeSpecified, object userState) {
+        public void SubmitWorkOrderResultAsync(string at, int workOrderId, bool workOrderIdSpecified, string resultJson, System.DateTime compuatationStartTime, bool compuatationStartTimeSpecified, System.DateTime computationEndTime, bool computationEndTimeSpecified, System.Nullable<decimal> resultSerialisationTime, bool resultSerialisationTimeSpecified, System.Nullable<decimal> requestDeserialisationTime, bool requestDeserialisationTimeSpecified, object userState) {
             if ((this.SubmitWorkOrderResultOperationCompleted == null)) {
                 this.SubmitWorkOrderResultOperationCompleted = new System.Threading.SendOrPostCallback(this.OnSubmitWorkOrderResultOperationCompleted);
             }
@@ -285,7 +289,11 @@ namespace ComputeAndroidApp.WorkOrderWS {
                         compuatationStartTime,
                         compuatationStartTimeSpecified,
                         computationEndTime,
-                        computationEndTimeSpecified}, this.SubmitWorkOrderResultOperationCompleted, userState);
+                        computationEndTimeSpecified,
+                        resultSerialisationTime,
+                        resultSerialisationTimeSpecified,
+                        requestDeserialisationTime,
+                        requestDeserialisationTimeSpecified}, this.SubmitWorkOrderResultOperationCompleted, userState);
         }
         
         private void OnSubmitWorkOrderResultOperationCompleted(object arg) {
@@ -431,6 +439,8 @@ namespace ComputeAndroidApp.WorkOrderWS {
         
         private CommunicationPackage[] communicationPackagesk__BackingFieldField;
         
+        private System.Nullable<decimal> deserialiationTimek__BackingFieldField;
+        
         private int deviceIdk__BackingFieldField;
         
         private System.Nullable<System.DateTime> endComputationTimek__BackingFieldField;
@@ -438,6 +448,8 @@ namespace ComputeAndroidApp.WorkOrderWS {
         private int localDeviceIdk__BackingFieldField;
         
         private System.DateTime receiveTimek__BackingFieldField;
+        
+        private System.Nullable<decimal> serialisationTimek__BackingFieldField;
         
         private System.Nullable<System.DateTime> slaveWorkOrderLastCommunicationk__BackingFieldField;
         
@@ -493,6 +505,17 @@ namespace ComputeAndroidApp.WorkOrderWS {
         }
         
         /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("<DeserialiationTime>k__BackingField", IsNullable=true)]
+        public System.Nullable<decimal> DeserialiationTimek__BackingField {
+            get {
+                return this.deserialiationTimek__BackingFieldField;
+            }
+            set {
+                this.deserialiationTimek__BackingFieldField = value;
+            }
+        }
+        
+        /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute("<DeviceId>k__BackingField")]
         public int DeviceIdk__BackingField {
             get {
@@ -533,6 +556,17 @@ namespace ComputeAndroidApp.WorkOrderWS {
             }
             set {
                 this.receiveTimek__BackingFieldField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("<SerialisationTime>k__BackingField", IsNullable=true)]
+        public System.Nullable<decimal> SerialisationTimek__BackingField {
+            get {
+                return this.serialisationTimek__BackingFieldField;
+            }
+            set {
+                this.serialisationTimek__BackingFieldField = value;
             }
         }
         
@@ -789,6 +823,8 @@ namespace ComputeAndroidApp.WorkOrderWS {
         
         private string computeAppIntentk__BackingFieldField;
         
+        private System.Nullable<decimal> deserialisationTimek__BackingFieldField;
+        
         private int deviceIdk__BackingFieldField;
         
         private int deviceLocalRequestIdk__BackingFieldField;
@@ -796,6 +832,8 @@ namespace ComputeAndroidApp.WorkOrderWS {
         private string deviceUIRefk__BackingFieldField;
         
         private System.DateTime receiveTimek__BackingFieldField;
+        
+        private System.Nullable<decimal> serialisationTimek__BackingFieldField;
         
         private System.Nullable<System.DateTime> slaveWorkOrderLastCommunicationk__BackingFieldField;
         
@@ -854,6 +892,17 @@ namespace ComputeAndroidApp.WorkOrderWS {
         }
         
         /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("<DeserialisationTime>k__BackingField", IsNullable=true)]
+        public System.Nullable<decimal> DeserialisationTimek__BackingField {
+            get {
+                return this.deserialisationTimek__BackingFieldField;
+            }
+            set {
+                this.deserialisationTimek__BackingFieldField = value;
+            }
+        }
+        
+        /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute("<DeviceId>k__BackingField")]
         public int DeviceIdk__BackingField {
             get {
@@ -894,6 +943,17 @@ namespace ComputeAndroidApp.WorkOrderWS {
             }
             set {
                 this.receiveTimek__BackingFieldField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("<SerialisationTime>k__BackingField", IsNullable=true)]
+        public System.Nullable<decimal> SerialisationTimek__BackingField {
+            get {
+                return this.serialisationTimek__BackingFieldField;
+            }
+            set {
+                this.serialisationTimek__BackingFieldField = value;
             }
         }
         

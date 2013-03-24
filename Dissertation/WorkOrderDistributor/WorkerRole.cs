@@ -36,7 +36,7 @@ namespace WorkOrderDistributor {
         QueueClient UpdatedWorkOrders;
         QueueClient CommunicationPackages;
         List<Task> TaskList;
-        TimeSpan ThreadSleepTime = new TimeSpan(0, 0, 15);
+        TimeSpan ThreadSleepTime = new TimeSpan(0, 0, 3); // Was 15
 
         bool IsStopped;
 
@@ -91,7 +91,7 @@ namespace WorkOrderDistributor {
                     ProcessCommunication(cp);
                 }
 
-                Thread.Sleep(new TimeSpan(0, 0, 15));
+        //        Thread.Sleep(ThreadSleepTime);
                 PackageSweepOccuring = false;
             }
 
@@ -123,9 +123,6 @@ namespace WorkOrderDistributor {
 
                 WOSweepOccuring = false;
             }
-
-            //       Thread.Sleep(ThreadSleepTime);
-            //  }
         }
 
         private void RemoveCompletedTasks() {
@@ -237,6 +234,8 @@ namespace WorkOrderDistributor {
                                 wo.WorkOrderStatus = "RESULT_RECEIVED";
                                 wo.StartComputationTime = wou.ComputationStartTime;
                                 wo.EndComputationTime = wou.ComputationEndTime;
+                                wo.DeserialiationTime = wou.RequestDeserialisationTime;
+                                wo.SerialisationTime = wou.ResultSerialisationTime;
 
                                 wo.Save();
 

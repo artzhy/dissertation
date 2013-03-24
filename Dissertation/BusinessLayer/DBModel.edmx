@@ -167,6 +167,8 @@
           <Property Name="StartComputationTime" Type="datetime" />
           <Property Name="EndComputationTime" Type="datetime" />
           <Property Name="LocalDeviceId" Type="int" Nullable="false" />
+          <Property Name="DeserialiationTime" Type="decimal" />
+          <Property Name="SerialisationTime" Type="decimal" />
         </EntityType>
         <Association Name="FK_AuthenticationToken_0">
           <End Role="User" Type="marcdissertation_dbModel.Store.User" Multiplicity="1">
@@ -574,6 +576,8 @@
           <NavigationProperty Name="WorkApplication" Relationship="marcdissertation_dbModel.FKApplicationId" FromRole="WorkOrder" ToRole="WorkApplication" />
           <Property Type="Int32" Name="LocalDeviceId" Nullable="false" />
           <NavigationProperty Name="CommunicationPackages" Relationship="marcdissertation_dbModel.FKWorkOrderID" FromRole="WorkOrder" ToRole="CommunicationPackage" />
+          <Property Type="Decimal" Name="DeserialiationTime" Precision="18" Scale="0" />
+          <Property Type="Decimal" Name="SerialisationTime" Precision="18" Scale="0" />
         </EntityType>
         <Association Name="FKDeviceId">
           <End Type="marcdissertation_dbModel.UserDevice" Role="UserDevice" Multiplicity="1" />
@@ -737,6 +741,8 @@
           <EntitySetMapping Name="WorkOrders">
             <EntityTypeMapping TypeName="marcdissertation_dbModel.WorkOrder">
               <MappingFragment StoreEntitySet="WorkOrder">
+                <ScalarProperty Name="SerialisationTime" ColumnName="SerialisationTime" />
+                <ScalarProperty Name="DeserialiationTime" ColumnName="DeserialiationTime" />
                 <ScalarProperty Name="LocalDeviceId" ColumnName="LocalDeviceId" />
                 <ScalarProperty Name="EndComputationTime" ColumnName="EndComputationTime" />
                 <ScalarProperty Name="StartComputationTime" ColumnName="StartComputationTime" />

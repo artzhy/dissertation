@@ -83,6 +83,8 @@
     <EntitySetMapping Name="WorkOrders">
       <EntityTypeMapping TypeName="marcdissertation_dbModel.WorkOrder">
         <MappingFragment StoreEntitySet="WorkOrder">
+          <ScalarProperty Name="SerialisationTime" ColumnName="SerialisationTime" />
+          <ScalarProperty Name="DeserialiationTime" ColumnName="DeserialiationTime" />
           <ScalarProperty Name="LocalDeviceId" ColumnName="LocalDeviceId" />
           <ScalarProperty Name="EndComputationTime" ColumnName="EndComputationTime" />
           <ScalarProperty Name="StartComputationTime" ColumnName="StartComputationTime" />

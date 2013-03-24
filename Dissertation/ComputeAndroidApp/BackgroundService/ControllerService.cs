@@ -56,49 +56,53 @@ namespace ComputeAndroidApp.BackgroundService {
             string authToken = App.GetAuthToken(this);
             // get comms and handle them
             int noSecsNoComms = 0;
+            try {
 
-            while (noSecsNoComms < 180) {
-                Log.Info("ControllerService", "Fetching outstanding comms");
-                List<WorkOrderWS.CommunicationPackage> cps = new WorkOrderWS.WorkOrderSvc().GetOutstandingCommunications(authToken, deviceId, true).ToList();
+                while (noSecsNoComms < 120) {
+                    Log.Info("ControllerService", "Fetching outstanding comms");
+                    List<WorkOrderWS.CommunicationPackage> cps = new WorkOrderWS.WorkOrderSvc().GetOutstandingCommunications(authToken, deviceId, true).ToList();
 
 
-                if (cps.Count() == 0) {
-                    noSecsNoComms += 10;
-                } else {
-                    // Handle all the comms
-                    noSecsNoComms = 0;
-                    Log.Info("ControllerService", "Got some outstanding comms");
+                    if (cps.Count() == 0) {
+                        noSecsNoComms += 5; // Was 10
+                    } else {
+                        // Handle all the comms
+                        noSecsNoComms = 0;
+                        Log.Info("ControllerService", "Got some outstanding comms");
 
-                    foreach (WorkOrderWS.CommunicationPackage cp in cps) {
-                        UpdateType ut = (UpdateType)cp.CommunicationTypek__BackingField;
-                        int? workOrderId = cp.WorkOrderIdk__BackingField;
-                        int commId = cp.CommunicationIdk__BackingField;
+                        foreach (WorkOrderWS.CommunicationPackage cp in cps) {
+                            UpdateType ut = (UpdateType)cp.CommunicationTypek__BackingField;
+                            int? workOrderId = cp.WorkOrderIdk__BackingField;
+                            int commId = cp.CommunicationIdk__BackingField;
 
-                        Log.Info(BroadcastReceiver.TAG, "Handling comm id: " + commId);
+                            Log.Info(BroadcastReceiver.TAG, "Handling comm id: " + commId);
 
-                        new WorkOrderWS.WorkOrderSvc().AcknowledgeCommunication(authToken, commId, true, DateTime.Now, true);
+                            new WorkOrderWS.WorkOrderSvc().AcknowledgeCommunication(authToken, commId, true, DateTime.Now, true);
 
-                        App.UpdateLastTransmit();
+                            App.UpdateLastTransmit();
 
-                        if (ut == UpdateType.NewWorkOrder) {
-                            AddSlaveWorkItem(workOrderId.Value);
-                            Log.Info(BroadcastReceiver.TAG, "Handling new work order id: " + workOrderId);
-                        } else if (ut == UpdateType.Result) {
-                            ReceiveWorkOrderResult(workOrderId.Value);
-                            Log.Info(BroadcastReceiver.TAG, "Handling result work order id: " + workOrderId);
-                        } else if (ut == UpdateType.UpdateRequest) {
-                            //TODO: Handle update request
+                            if (ut == UpdateType.NewWorkOrder) {
+                                AddSlaveWorkItem(workOrderId.Value);
+                                Log.Info(BroadcastReceiver.TAG, "Handling new work order id: " + workOrderId);
+                            } else if (ut == UpdateType.Result) {
+                                ReceiveWorkOrderResult(workOrderId.Value);
+                                Log.Info(BroadcastReceiver.TAG, "Handling result work order id: " + workOrderId);
+                            } else if (ut == UpdateType.UpdateRequest) {
+                                //TODO: Handle update request
 
-                        } else if (ut == UpdateType.Cancel) {
-                            //TODO: Handle cancel request
+                            } else if (ut == UpdateType.Cancel) {
+                                //TODO: Handle cancel request
 
-                        } else if (ut == UpdateType.FetchRequest) {
+                            } else if (ut == UpdateType.FetchRequest) {
 
+                            }
                         }
                     }
+                    // Sleep before checking again.
+                    Thread.Sleep(new TimeSpan(0, 0, 5)); // Was 10
                 }
-                // Sleep before checking again.
-                Thread.Sleep(new TimeSpan(0, 0, 10));
+            } catch (Exception e) {
+                Log.Error("ControllerService", e.InnerException.Message);
             }
 
             hasCommPackageGetThreadRunning = false;
@@ -196,7 +200,7 @@ Java.IO.File.Separator + testWo.WorkOrderId + "-ResultRet.txt";
          //   ComputeAndroidSDK.Communication.CommPackage cp = ComputeAndroidSDK.Communication.CommPackage.DeserializeJson(intent.GetStringExtra("CommPackage"));
             ComputeAndroidSDK.Communication.CommPackage cp = ComputeAndroidSDK.Communication.CommPackage.DeserializeJson(serializedJson);
 
-            new WorkOrderWS.WorkOrderSvc().SubmitWorkOrderResult(App.GetAuthToken(this), cp.ComputationRequestId, true, cp.ComputationResult, cp.ComputationStartTime, true, cp.ComputationEndTime, true);
+            new WorkOrderWS.WorkOrderSvc().SubmitWorkOrderResult(App.GetAuthToken(this), cp.ComputationRequestId, true, cp.ComputationResult, cp.ComputationStartTime, true, cp.ComputationEndTime, true, cp.SerialisationTime, true, cp.DeserialisationTime, true);
             Log.Info("ControllerService", cp.ComputationResult.Length + "  -- Result returned WO: " +cp.ComputationRequestId);
             App.UpdateLastTransmit();
 

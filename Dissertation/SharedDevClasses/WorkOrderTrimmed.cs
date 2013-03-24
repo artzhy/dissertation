@@ -12,17 +12,15 @@ using Android.Widget;
 
 namespace ComputeAndroidSDK.Communication {
    public class WorkOrderTrimmed {
-        public int WorkOrderId {
-            get;
-            set;
-        }
-
+       public int WorkOrderId {
+           get;
+           set;
+       }
 
         public int DeviceLocalRequestId {
             get;
             set;
         }
-
 
         public int DeviceId {
             get;
@@ -73,6 +71,16 @@ namespace ComputeAndroidSDK.Communication {
         }
 
         public string ApplicationUIResultIntent {
+            get;
+            set;
+        }
+
+        public decimal? SerialisationTime {
+            get;
+            set;
+        }
+
+        public decimal? DeserialisationTime {
             get;
             set;
         }

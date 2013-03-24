@@ -3,5 +3,8 @@
   <PropertyGroup>
     <RemoteDesktopMoreOptions>True</RemoteDesktopMoreOptions>
     <ActivePublishProfile>marcdissertationwsStaging</ActivePublishProfile>
+    <PackageProfile>Cloud</PackageProfile>
+    <PackageSolutionConfiguration>Debug</PackageSolutionConfiguration>
+    <PackageEnableRemoteDesktop>False</PackageEnableRemoteDesktop>
   </PropertyGroup>
 </Project>

@@ -26,16 +26,17 @@ namespace com.ComputeApps.MandelbrotApp {
 
         }
 
-        public static List<CommunicationResources.PixelColour> ProcessRequest(int xStart, int yStart, double xMax, double xMin, double yMax, double yMin, int height, int width, int xChunkSize, int yChunkSize, int maxIterations) {
-            List<CommunicationResources.PixelColour> pixels = new List<CommunicationResources.PixelColour>();
-
+        public static int[][] ProcessRequest(int xStart, int yStart, double xMax, double xMin, double yMax, double yMin, int height, int width, int xChunkSize, int yChunkSize, int maxIterations) {
+            int[][] pixelColours = new int[xChunkSize][];
+            
             for (int x = xStart; x < (xStart + xChunkSize); x++) {
+                pixelColours[x - xStart] = new int[yChunkSize];
                 for (int y = yStart; y < (yStart + yChunkSize); y++) {
-                   pixels.Add(new CommunicationResources.PixelColour(x, y, MandelbrotCalculator.GetColourOfPixel(x, y, xMax, xMin, yMax, yMin, height, width, maxIterations)));
+                    pixelColours[x-xStart][y-yStart] = MandelbrotCalculator.GetColourOfPixel(x, y, xMax, xMin, yMax, yMin, height, width, maxIterations);           
                 }
             }
 
-            return pixels;
+            return pixelColours;
         }
 
 
@@ -72,11 +73,16 @@ namespace com.ComputeApps.MandelbrotApp {
 
            // DateTime
             workItem.ComputationStartTime = DateTime.Now;
-            List<CommunicationResources.PixelColour> result = (List<CommunicationResources.PixelColour>)method.Invoke(c, arr);
+            int[][] result = (int[][])method.Invoke(c, arr);
             workItem.ComputationEndTime = DateTime.Now;
+
+
+            DateTime serialisationStart = DateTime.Now;
 
             workItem.ComputationResult = new ResultPackage(result).SerializeJson();
 
+            workItem.SerialisationTime = (Decimal)DateTime.Now.Subtract(serialisationStart).TotalSeconds;
+            
             return workItem;
         }
 

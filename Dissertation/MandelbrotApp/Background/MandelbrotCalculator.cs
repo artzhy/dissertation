@@ -50,29 +50,40 @@ namespace com.ComputeApps.MandelbrotApp {
             }
         }
 
-        public Bitmap GenMandelbrotBitmapTest() {
-            Bitmap bm = Bitmap.CreateBitmap(imgWidth, imgHeight, Bitmap.Config.Argb8888);
+        public List<CommunicationResources.PixelColour> GenPixelColourList() {
+         //   Bitmap bm = Bitmap.CreateBitmap(imgWidth, imgHeight, Bitmap.Config.Argb8888);
             double xmin = -2;
             double xmax = 1.0;
             double ymin = -1.5;
             double ymax = 1.5;
 
             int x = 0;
+
+            List<CommunicationResources.PixelColour> pixelColours = new List<CommunicationResources.PixelColour>();
+
             while (x < imgWidth) {
                 int y = 0;
                 while (y < imgHeight) {
-
                     int colour = GetColourOfPixel(x, y, xmax, xmin, ymax, ymin, imgWidth, imgHeight, maxIterations);
+                    pixelColours.Add(new CommunicationResources.PixelColour(x, y, colour));
 
-                    int r = Color.GetRedComponent(colour);
-                    int g = Color.GetGreenComponent(colour);
-                    int b = Color.GetBlueComponent(colour);
-                    int a = Color.GetAlphaComponent(colour);
-
-                    bm.SetPixel(x, y, Color.Rgb(r, g, b));
                     y++;
                 }
                 x++;
+            }
+
+            return pixelColours;
+        }
+
+        public Bitmap GetBitmap(List<CommunicationResources.PixelColour> pixelColours) {
+            Bitmap bm = Bitmap.CreateBitmap(imgWidth, imgHeight, Bitmap.Config.Argb8888);
+            foreach (CommunicationResources.PixelColour colour in pixelColours) {
+                int r = Color.GetRedComponent(colour.colour);
+                int g = Color.GetGreenComponent(colour.colour);
+                int b = Color.GetBlueComponent(colour.colour);
+               
+                 bm.SetPixel(colour.x, colour.y, Color.Rgb(r, g, b));
+
             }
 
             return bm;

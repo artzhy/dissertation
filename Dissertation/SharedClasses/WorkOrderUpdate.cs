@@ -45,13 +45,25 @@ namespace SharedClasses
             set;
         }
 
-        public WorkOrderUpdate(int _workOrderId, UpdateType _updateType, int _modifiedBy, DateTime? _compStartTime, DateTime? _compEndTime, String _resultJson = "") {
+        public decimal? RequestDeserialisationTime {
+            get;
+            set;
+        }
+
+        public decimal? ResultSerialisationTime {
+            get;
+            set;
+        }
+
+        public WorkOrderUpdate(int _workOrderId, UpdateType _updateType, int _modifiedBy, DateTime? _compStartTime, DateTime? _compEndTime, String _resultJson = "", decimal? _requestDeserialisation = null, decimal? _resultSerialisation = null) {
             this.WorkOrderId = _workOrderId;
             this.WorkOrderUpdateType = _updateType;
             this.ModifiedBy = _modifiedBy;
             this.ResultJson = _resultJson;
             this.ComputationStartTime = _compStartTime;
             this.ComputationEndTime = _compEndTime;
+            this.RequestDeserialisationTime = _requestDeserialisation;
+            this.ResultSerialisationTime = _resultSerialisation;
         }
     }
 }

@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <DiscoveryClientResultsFile xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <Results>
-    <DiscoveryClientResult referenceType="System.Web.Services.Discovery.SchemaReference" url="http://c4b0eba7dae642f38a424487179f8540.cloudapp.net/UserSvc.svc?xsd=xsd0" filename="UserSvc.xsd" />
-    <DiscoveryClientResult referenceType="System.Web.Services.Discovery.SchemaReference" url="http://c4b0eba7dae642f38a424487179f8540.cloudapp.net/UserSvc.svc?xsd=xsd1" filename="UserSvc0.xsd" />
-    <DiscoveryClientResult referenceType="System.Web.Services.Discovery.SchemaReference" url="http://c4b0eba7dae642f38a424487179f8540.cloudapp.net/UserSvc.svc?xsd=xsd2" filename="UserSvc1.xsd" />
-    <DiscoveryClientResult referenceType="System.Web.Services.Discovery.ContractReference" url="http://c4b0eba7dae642f38a424487179f8540.cloudapp.net/UserSvc.svc?wsdl" filename="UserSvc.wsdl" />
-    <DiscoveryClientResult referenceType="System.Web.Services.Discovery.DiscoveryDocumentReference" url="http://c4b0eba7dae642f38a424487179f8540.cloudapp.net/UserSvc.svc?disco" filename="UserSvc.disco" />
+    <DiscoveryClientResult referenceType="System.Web.Services.Discovery.ContractReference" url="http://5ea3886cd21f45ca833b87a7bff02cd8.cloudapp.net/UserSvc.svc?wsdl" filename="UserSvc.wsdl" />
+    <DiscoveryClientResult referenceType="System.Web.Services.Discovery.SchemaReference" url="http://5ea3886cd21f45ca833b87a7bff02cd8.cloudapp.net/UserSvc.svc?xsd=xsd1" filename="UserSvc.xsd" />
+    <DiscoveryClientResult referenceType="System.Web.Services.Discovery.SchemaReference" url="http://5ea3886cd21f45ca833b87a7bff02cd8.cloudapp.net/UserSvc.svc?xsd=xsd0" filename="UserSvc0.xsd" />
+    <DiscoveryClientResult referenceType="System.Web.Services.Discovery.SchemaReference" url="http://5ea3886cd21f45ca833b87a7bff02cd8.cloudapp.net/UserSvc.svc?xsd=xsd2" filename="UserSvc1.xsd" />
+    <DiscoveryClientResult referenceType="System.Web.Services.Discovery.DiscoveryDocumentReference" url="http://5ea3886cd21f45ca833b87a7bff02cd8.cloudapp.net/UserSvc.svc?disco" filename="UserSvc.disco" />
   </Results>
 </DiscoveryClientResultsFile>

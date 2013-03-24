@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xs:schema xmlns:ser="http://schemas.microsoft.com/2003/10/Serialization/" xmlns:tns="http://schemas.datacontract.org/2004/07/BusinessLayer" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/BusinessLayer" xmlns:xs="http://www.w3.org/2001/XMLSchema">
-  <xs:import schemaLocation="http://c4b0eba7dae642f38a424487179f8540.cloudapp.net/UserSvc.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+  <xs:import schemaLocation="http://5ea3886cd21f45ca833b87a7bff02cd8.cloudapp.net/UserSvc.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
   <xs:complexType name="User">
     <xs:sequence>
       <xs:element name="_x003C_AuthenticationTokens_x003E_k__BackingField" nillable="true" type="tns:ArrayOfAuthenticationToken" />

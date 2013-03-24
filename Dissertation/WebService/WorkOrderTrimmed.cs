@@ -69,5 +69,15 @@ namespace WebService {
             set;
         }
 
+        public decimal? SerialisationTime {
+            get;
+            set;
+        }
+
+        public decimal? DeserialisationTime {
+            get;
+            set;
+        }
+
     }
 }

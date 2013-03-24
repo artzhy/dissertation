@@ -85,11 +85,10 @@ namespace com.ComputeApps.MandelbrotApp {
 
             while (!_complete) {
                 // do nothing
-                Thread.Sleep(new TimeSpan(0, 0, 10));
+                Thread.Sleep(new TimeSpan(0, 0, 1));
                
             }
-
-         
+            EndTime = DateTime.Now;
             return true;
         }
 
@@ -103,15 +102,13 @@ namespace com.ComputeApps.MandelbrotApp {
 
           _progressDialog.Hide();
 
-          EndTime = DateTime.Now;
-
           DateTime imgStart = DateTime.Now;
             
           Bitmap img = WorkOrderList.TransformWorkOrderResultsToBitmap();
 
             new AlertDialog.Builder(_context)
                .SetTitle("Mandelbrot generated")
-               .SetMessage("Success! Time taken(s) - Cloud: " + EndTime.Subtract(StartTime).TotalSeconds + ". Time taken (s) img: " + DateTime.Now.Subtract(imgStart).TotalSeconds)
+               .SetMessage("Success! Time taken(s) - Cloud Computation: " + EndTime.Subtract(StartTime).TotalSeconds + ". \nTime taken (s) img: " + DateTime.Now.Subtract(imgStart).TotalSeconds + ". \n  Deserialisation time: " + (WorkOrderList.deserialiseSecs - WorkOrderList.setPixelSecs) + ". \n Set Pixel Secs: " + WorkOrderList.setPixelSecs)
                .Show();
 
             _activity.setBitmap(img);

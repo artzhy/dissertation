@@ -57,6 +57,16 @@ namespace ComputeAndroidSDK.Communication {
             set;
         }
 
+        public decimal? SerialisationTime {
+            get;
+            set;
+        }
+
+        public decimal? DeserialisationTime {
+            get;
+            set;
+        }
+
         public String SerializeParamList() {
             return JsonConvert.SerializeObject(ParameterList);
         }
