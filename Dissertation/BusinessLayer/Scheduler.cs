@@ -10,12 +10,13 @@ namespace BusinessLayer {
             try {
                 marcdissertation_dbEntities ctxt = new marcdissertation_dbEntities();
 
+                //TODO: change this from commm package to work order
                 IQueryable<UserDevice> uds = (from x in ctxt.ActiveDevices
-                                 where (x.UserDevice.DeviceAppInstallations.Count(z => z.ApplicationId == appId) > 0) && x.UserDevice.CommunicationPackages.Count(y => y.Status == null && y.Response == null) < App.MAX_COMMS_SLAVE_QUEUED && x.DeviceId != deviceId orderby x.LastFetch ascending
+                                 where (x.UserDevice.DeviceAppInstallations.Count(z => z.ApplicationId == appId) > 0) && x.UserDevice.WorkOrders1.Count(y => y.WorkOrderStatus != "RESULT_RECEIVED") < App.MAX_COMMS_SLAVE_QUEUED && x.DeviceId != deviceId orderby x.LastFetch ascending
                                  select x.UserDevice);
 
                 return uds.First();
-            } catch (Exception e) {
+            } catch (Exception) {
                 throw new Exception("No Device Available");
             }
         }
